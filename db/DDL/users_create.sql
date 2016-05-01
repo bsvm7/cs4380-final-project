@@ -1,7 +1,7 @@
 #
 #	Group #:			9
 #
-#	Group Members:		Anthony Forsythe, Songjie Wang, Weijin Li, Anjana Ramnath
+#	Group Members:		Anthony Forsythe, Songjie Wang, Weijian Li, Anjana Ramnath
 #
 #	Class:				CS4380 (Spring 2016)
 #
