@@ -320,7 +320,7 @@
 							"user_info" => $ret_user_info
 						);
 						
-						echo json_encode($ret_arr);
+						echo json_encode($ret_arr)."\n";
 			
 					}
 						
