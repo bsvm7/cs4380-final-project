@@ -237,8 +237,6 @@ CREATE TABLE photograph
 	thumb_url			VARCHAR(2083),
 	date_taken			DATE,
 	date_conf			BOOLEAN NOT NULL DEFAULT FALSE,
-	l_id				BIGINT UNSIGNED,
-	FOREIGN KEY (l_id) REFERENCES location(l_id) ON DELETE NO ACTION,
 	PRIMARY KEY (p_id)	
 );
 
@@ -389,3 +387,19 @@ CREATE TABLE user_repo
 	FOREIGN KEY (ps_id) REFERENCES person (ps_id) ON DELETE CASCADE,
 	FOREIGN KEY (r_id) REFERENCES repository (r_id) ON DELETE CASCADE
 )
+
+
+#
+#	25) photo location 		(photo_loc)
+#
+DROP TABLE IF EXISTS photo_loc;
+CREATE TABLE photo_loc 
+(
+	l_id			BIGINT UNSIGNED,	
+	p_id 			BIGINT UNSIGNED,
+	PRIMARY KEY (p_id, l_id),
+	FOREIGN KEY (p_id) REFERENCES Photograph (p_id) ON DELETE CASCADE,
+	FOREIGN KEY (l_id) REFERENCES location (l_id) ON DELETE CASCADE
+)
+
+
