@@ -122,7 +122,7 @@
 
 				echo "name check worked"."\n";
 
-/*	
+	
 				//	Check to see if the username is already taken
 				
 				$username_check_sql = "SELECT * FROM user WHERE username = ?";
@@ -130,7 +130,7 @@
 				$username_check_stmt = $db_conn->stmt_init();
 				echo "username check statement works"."\n";
 
-
+/*
 				if (!($username_check_stmt = $db_conn->prepare($username_check_sql))) {
 					set_error_response( 201, "SQL Error -> " . $insert_new_person_stmt->error);
 					break;
