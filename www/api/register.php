@@ -226,7 +226,7 @@
 		return $ret_array;
 	}
 
-/*
+
 	function generate_64_char_random_string() {
 		
 		$length = 64;
@@ -253,6 +253,7 @@
 		
 	}
 	
+	/*
 	function print_result_values( $result ) {
 		
 		$num_fields = $result->field_count;
