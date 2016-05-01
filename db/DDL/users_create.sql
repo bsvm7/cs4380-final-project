@@ -65,4 +65,7 @@ GRANT UPDATE, INSERT, SELECT, DELETE ON photoarchiving.log TO 'web_user'@'localh
 GRANT UPDATE, INSERT, SELECT, DELETE ON photoarchiving.session_log TO 'web_user'@'localhost' ;
 GRANT UPDATE, INSERT, SELECT, DELETE ON photoarchiving.activity_log TO 'web_user'@'localhost' ;
 GRANT UPDATE, INSERT, SELECT, DELETE ON photoarchiving.photo_repo TO 'web_user'@'localhost' ;
+GRANT UPDATE, INSERT, SELECT, DELETE ON photoarchiving.user_auth_token TO 'web_user'@'localhost' ;
+GRANT UPDATE, INSERT, SELECT, DELETE ON photoarchiving.user_repo TO 'web_user'@'localhost' ;
+GRANT UPDATE, INSERT, SELECT, DELETE ON photoarchiving.photo_loc TO 'web_user'@'localhost' ;
 

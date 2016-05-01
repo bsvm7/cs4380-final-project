@@ -36,7 +36,9 @@
 #	22) Photo repository 		( photo_repo)
 #	23) User Authorization Token ( user_auth_token)
 #	24) User Repository 		(user_repo)
+#	25) photo location 		(photo_loc)
 #
+
 DROP TABLE IF EXISTS era;
 CREATE TABLE era
 (
