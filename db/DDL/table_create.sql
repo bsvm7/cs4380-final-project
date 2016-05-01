@@ -37,8 +37,6 @@
 #	23) User Authorization Token ( user_auth_token)
 #	24) User Repository 		(user_repo)
 #
-#	1)	Era ( era )
-#
 DROP TABLE IF EXISTS era;
 CREATE TABLE era
 (
