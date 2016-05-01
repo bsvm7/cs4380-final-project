@@ -122,6 +122,199 @@
 
 				echo "name check worked"."\n";
 
+	
+				//	Check to see if the username is already taken
+				
+				$username_check_sql = "SELECT * FROM user WHERE username = ?";
+				
+				$username_check_stmt = $db_conn->stmt_init();
+				echo "username check statement works"."\n";
+
+
+				if (!($username_check_stmt = $db_conn->prepare($username_check_sql))) {
+					set_error_response( 201, "SQL Error -> " . $insert_new_person_stmt->error);
+					break;
+				}
+								echo "username check statement prepare works"."\n";
+
+				if (!($username_check_stmt->bind_param("s",  $req_username)) {
+					set_error_response( 201, "SQL Error -> " . $username_check_stmt->error);
+					break;
+				}
+						echo "username check statement param binding works"."\n";
+
+				$username_is_valid = true;
+				
+				if ($username_check_stmt->execute()) {
+					
+						echo "username check statement execution works"."\n";
+
+					if ($username_check_result = $username_check_stmt->get_result()) {
+						
+						if ($username_check_result->num_rows > 0) {
+							$username_is_valid = false;
+						}
+					}
+					else {
+						
+						set_error_response( 201, "SQL Error -> " . $username_check_stmt->error);
+					}
+					
+				}
+				else {
+					
+					set_error_response( 201, "SQL Error -> " . $db_conn->error);
+					break;
+				}
+	
+				$username_check_stmt->close();
+	
+				if (!$username_is_valid) {
+				
+					set_error_response( 203 , "The username is already taken");
+					break;
+				}
+	
+				//	If the information is valid then enter it into the database
+			
+				// insert the person into person table first
+				$insert_new_person_sql = 'INSERT INTO person (fname, mname,	lname, maiden_name, gender, birthdate) VALUES (?, ?, ?, ?, ?, ?)';
+	
+	
+				if (!($insert_new_person_stmt = $db_conn->prepare($insert_new_person_sql))) {
+					set_error_response( 201, "SQL Error -> " . $insert_new_person_stmt->error);
+					break;
+				}
+				
+				if (!($insert_new_person_stmt->bind_param("ssssss", $req_fname, $req_mname, $req_lname, $req_maiden_name, $req_gender, $req_birthdate))) {
+					set_error_response( 201, "SQL Error -> " . $insert_new_person_stmt->error);
+					break;
+				}
+	
+				$last_insert_id;
+	
+				if ($insert_new_person_stmt->execute()) {
+					
+					$last_insert_id = $insert_new_person_stmt->insert_id;
+					
+				}
+				else {
+					
+					set_error_response( 201, "SQL Error -> " . $insert_new_person_stmt->error);
+					
+				}
+				
+				$insert_new_person_stmt->close();											
+				
+				$saved_last_insert_id = $last_insert_id;
+	
+	
+				//insert the user information into user table						
+				$insert_new_user_sql = "INSERT INTO user (ps_id, username, email) VALUES (?, ? , ? )";
+									
+				$insert_new_user_stmt = $db_conn->prepare($insert_new_user_sql);
+				
+				$insert_new_user_stmt->bind_param("iss" , $last_insert_id, $req_username , $req_email);
+	
+				if (!($insert_new_user_stmt = $db_conn->prepare($insert_new_user_sql))) {
+					
+					set_error_response( 201, "SQL Error -> " . $insert_new_user_stmt->error);
+					
+					break;
+				}
+					
+				if (!($insert_new_user_stmt->bind_param("iss" , $last_insert_id, $req_username , $req_email))) {
+					
+					set_error_response( 201, "SQL Error -> " . $insert_new_user_stmt->error);
+					
+					break;
+				}
+	
+	
+				if ($insert_new_user_stmt->execute()) {
+					
+	
+					//	Set that users salt and password
+					
+					$salt = sha1( mt_rand() );
+					
+					$hash = sha1( $salt . $req_password );
+					
+					$insert_user_auth_sql = "INSERT INTO user_authentication (ps_id , password_hash, salt) VALUES ('$saved_last_insert_id' , '$hash' , '$salt' )";
+					
+					if ($db_conn->query($insert_user_auth_sql)) {
+						
+						if ($db_conn->affected_rows == 1) {
+							
+						}
+						else {
+							set_error_response( 201, "SQL Error 2 -> " . $db_conn->error);
+							break;
+						}
+						
+					}
+					else {
+						set_error_response( 201, "SQL Error 1 -> " . $db_conn->error);
+						break;
+					}
+					
+					
+					
+					$issued_to = $saved_last_insert_id;
+					$auth_token = generate_64_char_random_string();
+					
+					
+					$insert_auth_token_query = "INSERT INTO user_auth_tokens (issued_to, token) VALUES ('$issued_to', '$auth_token')";
+					
+					if ($db_conn->query($insert_auth_token_query)) {
+	
+						//	Return the persons information
+					
+						http_response_code(200);
+					
+						$ret_auth_info = array(
+							"uid" => $issued_to,
+							"auth_token" => $auth_token,
+							"expires_in" => 15
+						);
+						
+						$ret_user_info = array(
+							
+							"ps_id" => $saved_last_insert_id,
+							"username" => $req_username,
+							"email" => $req_email,
+							"first_name" => $req_fname,
+							"middle_name" => $req_mname,
+							"last_name" => $req_lname,
+							"maiden_name" => $req_maiden_name,
+							"birth_date" => $req_birthdate,
+							"gender" => $req_gender
+						);
+						
+						$ret_arr = array(
+							"auth_info" => $ret_auth_info,
+							"user_info" => $ret_user_info
+						);
+						
+						echo json_encode($ret_arr);
+					}
+	
+					else {
+						set_error_response( 201, "SQL Error -> " . $db_conn->error);
+					}
+					
+				}
+	
+				else {
+					
+					set_error_response( 201, "SQL Error -> " . $insert_new_user_stmt->error);
+					
+				}
+				
+				$insert_new_user_stmt->close();
+
+
+
 			}
 	
 			else {
