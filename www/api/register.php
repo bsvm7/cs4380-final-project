@@ -38,7 +38,8 @@
 			
 			if ($decoded_json = json_decode($json_raw, true)) {
 				
-				echo json_encode($decoded_json);
+				
+				echo "\nThe firstname of the user is " . $decoded_json["firstname"] . "\n";
 				
 	
 			}
