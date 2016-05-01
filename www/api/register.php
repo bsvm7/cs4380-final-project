@@ -54,7 +54,7 @@
 				echo "\nThe firstname of the user is " . $decoded_json["firstname"] . "\n";
 
 				//	Clean birthdate data
-				
+				/*
 				$clean_birthdate_info = clean_date( $birthdate );
 				
 				if(!$clean_birthdate_info["isValidDate"]) {
@@ -64,9 +64,9 @@
 				else {
 					$birthdate = $clean_birthdate_info["validDateString"];
 				}
-				
+				*/
 
-/*
+
 				// check to see if the person is already in the person table
 				$person_name_check_sql = 'SELECT * FROM person where person.fname= ? AND person.mname= ? AND person.lname= ?';
 	
@@ -117,7 +117,7 @@
 					set_error_response( 203 , "The person with the same name already exists in the database");
 					break;
 				}
-*/		
+		
 			}
 	
 			else {
