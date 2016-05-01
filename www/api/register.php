@@ -144,7 +144,7 @@
 						echo "username check statement param binding works"."\n";
 
 				$username_is_valid = true;
-				
+/*				
 				if ($username_check_stmt->execute()) {
 					
 						echo "username check statement execution works"."\n";
@@ -166,7 +166,7 @@
 					set_error_response( 201, "SQL Error -> " . $db_conn->error);
 					break;
 				}
-/*	
+	
 				$username_check_stmt->close();
 	
 				if (!$username_is_valid) {
