@@ -132,7 +132,7 @@
 
 
 				if (!($username_check_stmt = $db_conn->prepare($username_check_sql))) {
-					set_error_response( 201, "SQL Error -> " . $insert_new_person_stmt->error);
+					set_error_response( 201, "SQL Error -> " . $username_check_stmt->error);
 					break;
 				}
 								echo "username check statement prepare works"."\n";
