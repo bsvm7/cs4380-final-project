@@ -36,3 +36,11 @@ IGNORE 1 LINES
 SET
 	birthdate = STR_TO_DATE(@birth_date, '%c-%e-%Y')
 ;
+
+#	Load data for the user table
+LOAD DATA LOCAL INFILE '../input_data/user.csv' INTO TABLE user
+FIELDS TERMINATED BY ','
+OPTIONALLY ENCLOSED BY '"'
+LINES TERMINATED BY '\n'
+IGNORE 1 LINES
+( ps_id , username, email );
