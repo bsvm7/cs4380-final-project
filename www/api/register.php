@@ -65,7 +65,7 @@
 					$birthdate = $clean_birthdate_info["validDateString"];
 					echo "birthdate clean works"."\n";
 				}
-				/*
+				
 				// check to see if the person is already in the person table
 				$person_name_check_sql = 'SELECT * FROM person where person.fname= ? AND person.mname= ? AND person.lname= ?';
 	
@@ -75,9 +75,11 @@
 	
 				if (!($person_name_check_stmt = $db_conn->prepare($person_name_check_sql))) {
 					set_error_response( 201, "SQL Error -> " . $person_name_check_stmt->error);
+
 					break;
-				}
-				
+				}	
+
+
 				if (!($person_name_check_stmt->bind_param("ss", $req_fname, $rea_lname))) {
 					set_error_response( 201, "SQL Error -> " . $person_name_check_stmt->error);
 					break;
@@ -86,7 +88,7 @@
 				$person_name_is_valid = true;
 				
 				echo "name check worked"."\n";
-
+/*
 				if ($person_name_check_stmt->execute()) {
 	
 					if($person_name_check_result = $person_name_check_stmt->get_result()) {
