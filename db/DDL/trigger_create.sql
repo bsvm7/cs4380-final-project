@@ -35,7 +35,7 @@ delimiter ;
 DROP TRIGGER IF EXISTS photo_title_string_insert;
 
 DELIMITER //
-CREATE TRIGGER photo_title_string_insert BEFORE INSERT ON photo
+CREATE TRIGGER photo_title_string_insert BEFORE INSERT ON photograph
 FOR EACH ROW
 BEGIN
 	IF NEW.title = '' THEN
