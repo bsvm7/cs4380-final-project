@@ -32,7 +32,7 @@ FIELDS TERMINATED BY ','
 OPTIONALLY ENCLOSED BY '"'
 LINES TERMINATED BY '\n'
 IGNORE 1 LINES
-( fname, mname, lname, gender, @birth_date )
+( fname, mname, lname, maiden_name, gender, @birth_date )
 SET
 	birthdate = STR_TO_DATE(@birth_date, '%c-%e-%Y')
 ;
