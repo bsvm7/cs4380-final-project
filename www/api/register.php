@@ -75,16 +75,20 @@
 					break;
 				}	
 
+				echo "name check statement works"."\n";
 
 				if (!($person_name_check_stmt->bind_param("ss", $req_fname, $req_mname, $rea_lname))) {
 					set_error_response( 201, "SQL Error -> " . $person_name_check_stmt->error);
 					break;
 				}
-	
+				echo "name check param binding works"."\n";
+
 				$person_name_is_valid = true;
 				
 
 				if ($person_name_check_stmt->execute()) {
+
+					echo "name check statement execution works"."\n";
 	
 					if($person_name_check_result = $person_name_check_stmt->get_result()) {
 	
