@@ -60,4 +60,4 @@ FIELDS TERMINATED BY ','
 ENCLOSED BY '"'
 LINES TERMINATED BY '\n'
 IGNORE 1 LINES
-( title, description, large_url, thumb_url, date_taken, date_conf, l_id );
+( title, description, large_url, thumb_url, date_taken, date_conf );
