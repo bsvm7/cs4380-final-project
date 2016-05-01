@@ -136,8 +136,8 @@
 					break;
 				}
 								echo "username check statement prepare works"."\n";
-/*
-				if (!($username_check_stmt->bind_param("s",  $req_username)) {
+
+				if (!($username_check_stmt->bind_param("s",  $req_username))) {
 					set_error_response( 201, "SQL Error -> " . $username_check_stmt->error);
 					break;
 				}
