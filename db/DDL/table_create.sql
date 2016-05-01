@@ -233,7 +233,7 @@ DROP TABLE IF EXISTS photograph;
 CREATE TABLE photograph
 (
 	p_id				SERIAL,
-	title				VARCHAR(200),
+	title				VARCHAR(200) NOT NULL DEFAULT "untitled",
 	description			TEXT,
 	large_url			VARCHAR(2083),
 	thumb_url			VARCHAR(2083),

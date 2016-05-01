@@ -18,12 +18,15 @@ USE photoarchiving;
 */
 SOURCE ./table_create.sql;
 
+/*
+	TRIGGER CREATION
+*/
+SOURCE ./tigger_create.sql;
 
 /*
 	INPUT DATA
 */
 SOURCE ./input_data.sql;
-
 
 /*
 	USERS CREATION
@@ -36,7 +39,3 @@ SOURCE ./users_create.sql;
 # SOURCE ./view_create.sql;
 
 
-/*
-	TRIGGER CREATION
-*/
-# SOURCE ./tigger_create.sql;
