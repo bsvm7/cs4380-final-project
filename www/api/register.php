@@ -166,7 +166,7 @@
 					set_error_response( 201, "SQL Error -> " . $db_conn->error);
 					break;
 				}
-	
+	/*
 				$username_check_stmt->close();
 	
 				if (!$username_is_valid) {
