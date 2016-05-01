@@ -53,7 +53,7 @@ GRANT UPDATE, INSERT, SELECT, DELETE ON photoarchiving.user_pref TO 'web_user'@'
 GRANT UPDATE, INSERT, SELECT, DELETE ON photoarchiving.repository TO 'web_user'@'localhost' ;
 GRANT UPDATE, INSERT, SELECT, DELETE ON photoarchiving.family_repository TO 'web_user'@'localhost' ;
 GRANT UPDATE, INSERT, SELECT, DELETE ON photoarchiving.location_repository TO 'web_user'@'localhost'  ;
-GRANT UPDATE, INSERT, SELECT, DELETE ON photoarchiving.user_repo TO 'web_user'@'localhost'  ;
+GRANT UPDATE, INSERT, SELECT, DELETE ON photoarchiving.community_repository TO 'web_user'@'localhost'  ;
 GRANT UPDATE, INSERT, SELECT, DELETE ON photoarchiving.person_relation TO 'web_user'@'localhost' ;
 GRANT UPDATE, INSERT, SELECT, DELETE ON photoarchiving.location TO 'web_user'@'localhost' ;
 GRANT UPDATE, INSERT, SELECT, DELETE ON photoarchiving.photograph TO 'web_user'@'localhost' ;

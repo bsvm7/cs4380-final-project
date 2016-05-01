@@ -22,7 +22,7 @@
 #	8)	Repository			( repository )
 #	9)	Family Repository		( family_repository )
 #	10)	Location Repository		( location_repository )
-#	11)	Community Repository		( user_repo )
+#	11)	Community Repository		( community_repository )
 #	12)	Person Relation			( person_relation )
 #	13)	Location			( location )
 #	14)	Photograph 			( photograph )
