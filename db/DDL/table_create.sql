@@ -267,7 +267,7 @@ DROP TABLE IF EXISTS story;
 CREATE TABLE story
 (
 	s_id				SERIAL,
-	title				VARCHAR(200),
+	title				VARCHAR(200) NOT NULL DEFAULT "untitled",
 	description			TEXT,
 	recording_url			VARCHAR(2083),
 	recording_text			TEXT,
