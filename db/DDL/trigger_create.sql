@@ -12,12 +12,30 @@
 
 USE photoarchiving;
 
-#	A trigger to set all empty strings to untitled
 
+
+#	A trigger to set all empty strings to untitled in the story table on insert
 DROP TRIGGER IF EXISTS story_title_string_insert;
 
 DELIMITER //
 CREATE TRIGGER story_title_string_insert BEFORE INSERT ON story
+FOR EACH ROW
+BEGIN
+	IF NEW.title = '' THEN
+		SET NEW.title = 'untitled';
+	ELSEIF NEW.title = ' ' THEN
+		SET NEW.title = 'untitled';
+	END IF;
+END;//
+delimiter ;
+
+
+
+#	A trigger to set all empty strings to untitled in the photograph table on insert
+DROP TRIGGER IF EXISTS photo_title_string_insert;
+
+DELIMITER //
+CREATE TRIGGER photo_title_string_insert BEFORE INSERT ON photo
 FOR EACH ROW
 BEGIN
 	IF NEW.title = '' THEN
