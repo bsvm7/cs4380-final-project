@@ -536,5 +536,5 @@
 		
 	}
 */
-	
+	echo "everything worked and now its time to close database and everything"."\n";
 ?>
