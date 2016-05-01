@@ -38,7 +38,7 @@
 			
 			if ($decoded_json = json_decode($json_raw, true)) {
 				
-				echo $decoded_json;
+				echo json_encode($decoded_json);
 				
 	
 			}
