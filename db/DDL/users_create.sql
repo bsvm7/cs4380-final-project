@@ -31,7 +31,7 @@ GRANT INSERT, UPDATE, DELETE, SELECT ON photoarchiving.* TO weijian WITH GRANT O
 
 #	Cleanup - Delete all of the web_users privileges ( if the web_user exists )
 
-#	REVOKE ALL privileges FROM USER 'web_user'@'localhost';
+REVOKE ALL privileges FROM USER 'web_user'@'localhost';
 
 #	Cleanup - Delete the web_user ( if the web_user exists )
 
