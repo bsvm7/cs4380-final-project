@@ -242,10 +242,11 @@
 	
 					echo "insert new user statement param binding finished"."\n";
 
-/*
+
 				if ($insert_new_user_stmt->execute()) {
 					
-					
+					echo "insert new user statement execution finished"."\n";
+
 					//	Set that users salt and password
 					
 					$salt = sha1( mt_rand() );
@@ -256,6 +257,7 @@
 					
 					if ($db_conn->query($insert_user_auth_sql)) {
 						
+
 						if ($db_conn->affected_rows == 1) {
 							
 						}
@@ -270,8 +272,9 @@
 						break;
 					}
 					
-					
-					
+					echo "insert into new user authentication finished"."\n";
+
+		/*			
 					$issued_to = $saved_last_insert_id;
 					$auth_token = generate_64_char_random_string();
 					
