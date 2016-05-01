@@ -274,11 +274,12 @@
 					
 					echo "insert into new user authentication finished"."\n";
 
-		/*			
+			
 					$issued_to = $saved_last_insert_id;
 					$auth_token = generate_64_char_random_string();
 					
-					
+					echo "auth token generated "."\n";
+
 					$insert_auth_token_query = "INSERT INTO user_auth_tokens (issued_to, token) VALUES ('$issued_to', '$auth_token')";
 					
 					if ($db_conn->query($insert_auth_token_query)) {
@@ -313,11 +314,13 @@
 						
 						echo json_encode($ret_arr);
 					}
-	
+						
+						echo "auth token inserted "."\n";
+
 					else {
 						set_error_response( 201, "SQL Error -> " . $db_conn->error);
 					}
-	*/
+	
 
 				}
 	
