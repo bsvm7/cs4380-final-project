@@ -83,8 +83,7 @@
 	
 				$person_name_is_valid = true;
 				
-				echo "name check worked"."\n";
-/*
+
 				if ($person_name_check_stmt->execute()) {
 	
 					if($person_name_check_result = $person_name_check_stmt->get_result()) {
@@ -116,7 +115,9 @@
 					set_error_response( 203 , "The person with the same name already exists in the database");
 					break;
 				}
-*/		
+
+				echo "name check worked"."\n";
+
 			}
 	
 			else {
