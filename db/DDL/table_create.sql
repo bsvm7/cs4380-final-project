@@ -388,7 +388,7 @@ CREATE TABLE user_repo
 	PRIMARY KEY (ps_id, r_id),
 	FOREIGN KEY (ps_id) REFERENCES person (ps_id) ON DELETE CASCADE,
 	FOREIGN KEY (r_id) REFERENCES repository (r_id) ON DELETE CASCADE
-)
+);
 
 
 #
@@ -402,6 +402,6 @@ CREATE TABLE photo_loc
 	PRIMARY KEY (p_id, l_id),
 	FOREIGN KEY (p_id) REFERENCES photograph (p_id) ON DELETE CASCADE,
 	FOREIGN KEY (l_id) REFERENCES location (l_id) ON DELETE CASCADE
-)
+);
 
 
