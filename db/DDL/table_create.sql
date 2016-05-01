@@ -400,7 +400,7 @@ CREATE TABLE photo_loc
 	l_id			BIGINT UNSIGNED,	
 	p_id 			BIGINT UNSIGNED,
 	PRIMARY KEY (p_id, l_id),
-	FOREIGN KEY (p_id) REFERENCES Photograph (p_id) ON DELETE CASCADE,
+	FOREIGN KEY (p_id) REFERENCES photograph (p_id) ON DELETE CASCADE,
 	FOREIGN KEY (l_id) REFERENCES location (l_id) ON DELETE CASCADE
 )
 
