@@ -130,13 +130,13 @@
 				$username_check_stmt = $db_conn->stmt_init();
 				echo "username check statement works"."\n";
 
-/*
+
 				if (!($username_check_stmt = $db_conn->prepare($username_check_sql))) {
 					set_error_response( 201, "SQL Error -> " . $insert_new_person_stmt->error);
 					break;
 				}
 								echo "username check statement prepare works"."\n";
-
+/*
 				if (!($username_check_stmt->bind_param("s",  $req_username)) {
 					set_error_response( 201, "SQL Error -> " . $username_check_stmt->error);
 					break;
