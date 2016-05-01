@@ -280,7 +280,7 @@
 					
 					echo "auth token generated "."\n";
 
-					$insert_auth_token_query = "INSERT INTO user_auth_tokens (issued_to, token) VALUES ('$issued_to', '$auth_token')";
+					$insert_auth_token_query = "INSERT INTO user_auth_token (issued_to, token) VALUES ('$issued_to', '$auth_token')";
 											
 					echo "auth token insertion statement prepared "."\n";
 
