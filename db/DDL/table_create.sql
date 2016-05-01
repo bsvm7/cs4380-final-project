@@ -376,7 +376,7 @@ CREATE TABLE user_auth_token
 	PRIMARY KEY (token_id),
 	FOREIGN KEY (issued_to) REFERENCES person (ps_id) ON DELETE CASCADE,
 	UNIQUE (token)
-)
+);
 
 #
 #	24) User Repository 		(user_repo)
