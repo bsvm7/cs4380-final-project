@@ -66,7 +66,7 @@
 				}
 				*/
 
-
+/*
 				// check to see if the person is already in the person table
 				$person_name_check_sql = 'SELECT * FROM person where person.fname= ? AND person.mname= ? AND person.lname= ?';
 	
@@ -117,7 +117,7 @@
 					set_error_response( 203 , "The person with the same name already exists in the database");
 					break;
 				}
-		
+*/		
 			}
 	
 			else {
