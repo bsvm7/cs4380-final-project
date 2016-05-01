@@ -279,13 +279,13 @@
 					$auth_token = generate_64_char_random_string();
 					
 					echo "auth token generated "."\n";
-
+/*
 					$insert_auth_token_query = "INSERT INTO user_auth_tokens (issued_to, token) VALUES ('$issued_to', '$auth_token')";
 											
 					echo "auth token insertion statement prepared "."\n";
 
 
-/*
+
 					if ($db_conn->query($insert_auth_token_query)) {
 
 
