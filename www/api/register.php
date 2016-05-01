@@ -63,6 +63,7 @@
 				}
 				else {
 					$birthdate = $clean_birthdate_info["validDateString"];
+					echo "birthdate clean works"."\n";
 				}
 				
 
