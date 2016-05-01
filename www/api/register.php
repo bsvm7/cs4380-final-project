@@ -66,8 +66,6 @@
 					echo "birthdate clean works"."\n";
 				}
 				
-
-/*
 				// check to see if the person is already in the person table
 				$person_name_check_sql = 'SELECT * FROM person where person.fname= ? AND person.mname= ? AND person.lname= ?';
 	
@@ -86,7 +84,9 @@
 				}
 	
 				$person_name_is_valid = true;
-	
+				
+				echo "name check worked"."\n";
+
 				if ($person_name_check_stmt->execute()) {
 	
 					if($person_name_check_result = $person_name_check_stmt->get_result()) {
