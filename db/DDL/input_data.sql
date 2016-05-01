@@ -45,6 +45,7 @@ LINES TERMINATED BY '\n'
 IGNORE 1 LINES
 ( ps_id , username, email );
 
+
 #	Load data into the story table
 LOAD DATA LOCAL INFILE '../input_data/story.csv' INTO TABLE story
 FIELDS TERMINATED BY ','
@@ -52,3 +53,11 @@ ENCLOSED BY '"'
 LINES TERMINATED BY '\n'
 IGNORE 1 LINES
 ( title , description, recording_url, recording_text );
+
+#	Load data into the photograph table
+LOAD DATA LOCAL INFILE '../input_data/photograph.csv' INTO TABLE photograph
+FIELDS TERMINATED BY ','
+ENCLOSED BY '"'
+LINES TERMINATED BY '\n'
+IGNORE 1 LINES
+( title, description, large_url, thumb_url, date_taken, date_conf, l_id );
