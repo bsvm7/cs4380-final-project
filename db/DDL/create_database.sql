@@ -21,7 +21,7 @@ SOURCE ./table_create.sql;
 /*
 	TRIGGER CREATION
 */
-SOURCE ./tigger_create.sql;
+SOURCE ./trigger_create.sql;
 
 /*
 	INPUT DATA
