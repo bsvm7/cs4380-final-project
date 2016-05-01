@@ -117,7 +117,7 @@
 					set_error_response( 203 , "The person with the same name already exists in the database");
 					break;
 				}
-	
+*/		
 			}
 	
 			else {
@@ -126,7 +126,7 @@
 			
 			}
 
-	*/	
+
 		
 		break;
 		
