@@ -3,7 +3,7 @@
 -	3) person as PS
 -	4) non_user as NU
 -	5) user as U
--	6) user_authentication as UAU
+-	6) user_authentication as UA
 -	7) user_preferences as UP
 -	8) repository as R
 -	9) family_repository as FR
@@ -20,4 +20,5 @@
 -	20) log as L
 -	21) session_log as SL
 -	22) activity_log as AL
--	23) photo_repo as PHR
+-	23) User Authorization Token as UAT ( user_auth_token)
+-	24) Photo repository as PHR

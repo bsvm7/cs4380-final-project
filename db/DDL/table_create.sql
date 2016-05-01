@@ -33,8 +33,9 @@
 #	19)	Log				( log )
 #	20)	Session Log			( session_log )
 #	21)	Activity Log			( activity_log )
-#	22) 	Photo repository 		( photo_repo)
-
+#	22) Photo repository 		( photo_repo)
+#	23) User Authorization Token ( user_auth_token)
+#	24) User Repository 		(user_repo)
 #
 #	1)	Era ( era )
 #
@@ -359,3 +360,32 @@ CREATE TABLE photo_repo
 	FOREIGN KEY (r_id) REFERENCES repository(r_id) ON DELETE CASCADE,
 	PRIMARY KEY (p_id, r_id)
 );
+
+#
+#	23) User Authorization Token ( user_auth_token)
+#
+DROP TABLE IF EXISTS user_auth_token;
+CREATE TABLE user_auth_token
+(
+	token_id			serial,
+	token 				CHAR(64),
+	issued_to 			BIGINT UNSIGNED,
+	issue_time			TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	expire_time			TIMESTAMP,
+	PRIMARY KEY (token_id),
+	FOREIGN KEY (issued_to) REFERENCES person (ps_id) ON DELETE CASCADE,
+	UNIQUE (token)
+)
+
+#
+#	24) User Repository 		(user_repo)
+#
+DROP TABLE IF EXISTS user_repo;
+CREATE TABLE user_repo 
+(
+	ps_id			BIGINT UNSIGNED,	
+	r_id 			BIGINT UNSIGNED,
+	PRIMARY KEY (ps_id, r_id),
+	FOREIGN KEY (ps_id) REFERENCES person (ps_id) ON DELETE CASCADE,
+	FOREIGN KEY (r_id) REFERENCES repository (r_id) ON DELETE CASCADE
+)
