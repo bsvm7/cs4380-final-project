@@ -226,7 +226,7 @@
 		return $ret_array;
 	}
 
-
+/*
 	function generate_64_char_random_string() {
 		
 		$length = 64;
@@ -239,6 +239,8 @@
 	    }
 	    return $randomString;
 	}
+
+*/
 	function set_error_response( $error_code , $error_message ) {
 		
 		
