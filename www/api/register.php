@@ -291,7 +291,7 @@
 						echo "auth token insertion statement finished "."\n";
 
 
-/*
+
 						//	Return the persons information
 					
 						http_response_code(200);
@@ -321,7 +321,7 @@
 						);
 						
 						echo json_encode($ret_arr);
-*/					
+			
 					}
 						
 					else {
