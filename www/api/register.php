@@ -282,10 +282,14 @@
 
 					$insert_auth_token_query = "INSERT INTO user_auth_tokens (issued_to, token) VALUES ('$issued_to', '$auth_token')";
 					
+
+
 					if ($db_conn->query($insert_auth_token_query)) {
-	
+
+						echo "auth token inserted into table "."\n";
+
 						//	Return the persons information
-					
+					/*
 						http_response_code(200);
 					
 						$ret_auth_info = array(
@@ -313,6 +317,7 @@
 						);
 						
 						echo json_encode($ret_arr);
+					*/
 					}
 						
 						echo "auth token inserted "."\n";
