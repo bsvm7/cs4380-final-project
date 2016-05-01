@@ -253,7 +253,7 @@
 					
 					$hash = sha1( $salt . $req_password );
 					
-					$insert_user_auth_sql = "INSERT INTO user_authentication (ps_id , password_hash, salt) VALUES ('$saved_last_insert_id' , '$hash' , '$salt' )";
+					$insert_user_auth_sql = "INSERT INTO user_auth (ps_id , password_hash, salt) VALUES ('$saved_last_insert_id' , '$hash' , '$salt' )";
 					
 					if ($db_conn->query($insert_user_auth_sql)) {
 						
@@ -318,7 +318,7 @@
 						set_error_response( 201, "SQL Error -> " . $db_conn->error);
 					}
 	*/
-					
+
 				}
 	
 				else {
