@@ -29,7 +29,7 @@ IGNORE 1 LINES
 #	Load data for the person table
 LOAD DATA LOCAL INFILE '../input_data/person.csv' INTO TABLE person
 FIELDS TERMINATED BY ','
-OPTIONALLY ENCLOSED BY '"'
+ENCLOSED BY '"'
 LINES TERMINATED BY '\n'
 IGNORE 1 LINES
 ( fname, mname, lname, maiden_name, gender, @birth_date )
