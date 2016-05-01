@@ -122,7 +122,7 @@
 
 				echo "name check worked"."\n";
 
-	
+/*	
 				//	Check to see if the username is already taken
 				
 				$username_check_sql = "SELECT * FROM user WHERE username = ?";
@@ -144,7 +144,7 @@
 						echo "username check statement param binding works"."\n";
 
 				$username_is_valid = true;
-/*				
+				
 				if ($username_check_stmt->execute()) {
 					
 						echo "username check statement execution works"."\n";
