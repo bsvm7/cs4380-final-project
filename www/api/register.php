@@ -147,7 +147,6 @@
 				
 				if ($username_check_stmt->execute()) {
 					
-						echo "username check statement execution works"."\n";
 
 					if ($username_check_result = $username_check_stmt->get_result()) {
 						
@@ -166,7 +165,11 @@
 					set_error_response( 201, "SQL Error -> " . $db_conn->error);
 					break;
 				}
-	/*
+
+				echo "username check statement execution works"."\n";
+
+
+
 				$username_check_stmt->close();
 	
 				if (!$username_is_valid) {
@@ -174,7 +177,9 @@
 					set_error_response( 203 , "The username is already taken");
 					break;
 				}
-	
+				
+				echo "username is valid"."\n";
+
 				//	If the information is valid then enter it into the database
 			
 				// insert the person into person table first
@@ -185,7 +190,7 @@
 					set_error_response( 201, "SQL Error -> " . $insert_new_person_stmt->error);
 					break;
 				}
-				
+				echo "insert new person statement prepare  is valid"."\n";
 				if (!($insert_new_person_stmt->bind_param("ssssss", $req_fname, $req_mname, $req_lname, $req_maiden_name, $req_gender, $req_birthdate))) {
 					set_error_response( 201, "SQL Error -> " . $insert_new_person_stmt->error);
 					break;
@@ -194,7 +199,8 @@
 				$last_insert_id;
 	
 				if ($insert_new_person_stmt->execute()) {
-					
+								echo "insert new person statement execution  is valid"."\n";
+	
 					$last_insert_id = $insert_new_person_stmt->insert_id;
 					
 				}
@@ -205,7 +211,11 @@
 				}
 				
 				$insert_new_person_stmt->close();											
-				
+								
+				echo "insert new person finished"."\n";
+
+
+/*
 				$saved_last_insert_id = $last_insert_id;
 	
 	
