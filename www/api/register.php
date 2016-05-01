@@ -68,11 +68,7 @@
 				
 				// check to see if the person is already in the person table
 				$person_name_check_sql = 'SELECT * FROM person where person.fname= ? AND person.mname= ? AND person.lname= ?';
-	/*
-				$person_name_check_stmt = $db_conn->prepare($check_person_name_sql);
-	
-				$person_name_check_stmt->bind_param("ss", $req_fname, $req_mname, $req_lname);
-	*/
+
 				if (!($person_name_check_stmt = $db_conn->prepare($person_name_check_sql))) {
 					set_error_response( 201, "SQL Error -> " . $person_name_check_stmt->error);
 
@@ -80,7 +76,7 @@
 				}	
 
 
-				if (!($person_name_check_stmt->bind_param("ss", $req_fname, $rea_lname))) {
+				if (!($person_name_check_stmt->bind_param("ss", $req_fname, $req_mname, $rea_lname))) {
 					set_error_response( 201, "SQL Error -> " . $person_name_check_stmt->error);
 					break;
 				}
