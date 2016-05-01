@@ -50,6 +50,7 @@
 				$req_password 	 = $decoded_json["password"];
 				$req_email		 = $decoded_json["email"];
 				$req_username	 = $decoded_json["username"];
+
 				echo "\nThe firstname of the user is " . $decoded_json["firstname"] . "\n";
 
 				//	Clean birthdate data
@@ -64,7 +65,8 @@
 					$birthdate = $clean_birthdate_info["validDateString"];
 				}
 				
-						
+
+/*
 				// check to see if the person is already in the person table
 				$person_name_check_sql = 'SELECT * FROM person where person.fname= ? AND person.mname= ? AND person.lname= ?';
 	
@@ -124,7 +126,7 @@
 			
 			}
 
-		
+	*/	
 		
 		break;
 		
