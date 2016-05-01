@@ -212,10 +212,10 @@
 				
 				$insert_new_person_stmt->close();											
 								
-				echo "insert new person finished"."\n";
+				echo "insert new person into person table finished"."\n";
 
 
-/*
+
 				$saved_last_insert_id = $last_insert_id;
 	
 	
@@ -240,10 +240,12 @@
 					break;
 				}
 	
-	
+					echo "insert new user statement param binding finished"."\n";
+
+/*
 				if ($insert_new_user_stmt->execute()) {
 					
-	
+					
 					//	Set that users salt and password
 					
 					$salt = sha1( mt_rand() );
