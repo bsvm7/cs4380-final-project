@@ -77,7 +77,7 @@
 
 				echo "name check statement works"."\n";
 
-				if (!($person_name_check_stmt->bind_param("ss", $req_fname, $req_mname, $rea_lname))) {
+				if (!($person_name_check_stmt->bind_param("sss", $req_fname, $req_mname, $rea_lname))) {
 					set_error_response( 201, "SQL Error -> " . $person_name_check_stmt->error);
 					break;
 				}
