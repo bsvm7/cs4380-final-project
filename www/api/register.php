@@ -275,10 +275,10 @@
 					echo "insert into new user authentication finished"."\n";
 
 			
-					$issued_to = $saved_last_insert_id;
-					$auth_token = generate_64_char_random_string();
-					
-					echo "auth token generated "."\n";
+		//			$issued_to = $saved_last_insert_id;
+		//			$auth_token = generate_64_char_random_string();
+		//			
+		//			echo "auth token generated "."\n";
 /*
 					$insert_auth_token_query = "INSERT INTO user_auth_tokens (issued_to, token) VALUES ('$issued_to', '$auth_token')";
 											
