@@ -317,6 +317,7 @@
 					else {
 						set_error_response( 201, "SQL Error -> " . $db_conn->error);
 					}
+	*/
 					
 				}
 	
@@ -328,7 +329,7 @@
 				
 				$insert_new_user_stmt->close();
 
-*/
+
 
 			}
 	
