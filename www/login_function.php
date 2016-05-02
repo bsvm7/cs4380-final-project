@@ -196,7 +196,7 @@
 
 						echo "ps_id retrieved "."\n";
 
-						$update_token_sql = "UPDATE user_auth_token SET access_token= ? WHERE ps_id=? AND refresh_token= ?";								
+						$update_token_sql = "UPDATE user_auth_token SET access_token= ? WHERE issued_to=? AND refresh_token= ?";								
 		
 						if( !$update_token_statement = $db_conn->stmt_init()){
 						
