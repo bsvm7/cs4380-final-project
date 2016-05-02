@@ -60,6 +60,8 @@
 		set_error_response( 203 , $error_str );
 	}
 	
+	echo $get_user_info_stmt->error;
+	
 	if($result->num_rows != 1) {
 		$error_str = "There was something off about the number of rows..." . " The number of rows was -> " . $result->num_rows . "\n";
 		
