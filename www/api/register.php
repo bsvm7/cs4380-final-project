@@ -49,8 +49,6 @@
 				$req_email		 = $decoded_json["email"];
 				$req_username	 = $decoded_json["username"];
 
-				echo "\nThe firstname of the user is " . $decoded_json["firstname"] . "\n";
-
 				//	Clean birthdate data
 				
 				$clean_birthdate_info = clean_date( $birthdate );
@@ -120,7 +118,6 @@
 				$username_check_sql = "SELECT * FROM user WHERE username = ?";
 				
 				$username_check_stmt = $db_conn->stmt_init();
-				echo "username check statement works"."\n";
 
 
 				if (!($username_check_stmt = $db_conn->prepare($username_check_sql))) {
