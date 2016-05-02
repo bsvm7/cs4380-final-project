@@ -18,7 +18,9 @@
 		die("The connection to the database failed: " . $db_conn->connect_error);
 	}
 		
-	
+	echo "database connected" . "\n";
+
+
 	/*
 		REQUEST HANDLING
 	*/	
