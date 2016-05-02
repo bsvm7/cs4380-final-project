@@ -70,121 +70,80 @@
 						echo "Error" . " " . $stmt->error;
 				
 					}
+
+					echo "user hash retrieve statement executed"."\n";
+
 					
-					if ($hash_retrieve_result = $hash_retrieve_stmt->get_result())
-						{
-							if($hash_retrieve_stmt->num_rows != 1) {
+					if ($hash_retrieve_result = $hash_retrieve_stmt->get_result()) {
 
-								set_error_response( 201, "SQL Error -> " . $hash_retrieve_stmt->error);	
+						/*
+						if($hash_retrieve_stmt->num_rows != 1) {
 
-								break;
+							set_error_response( 201, "SQL Error -> " . $hash_retrieve_stmt->error);	
 
-							}
-
-							$row = $hash_retrieve_result->fetch_array(MYSQLI_NUM);
-							
-							$result_ps_id = $row[0];
-							$result_username = $row[1];
-							$result_hash = $row[2];
-							$result_salt = $row[3];
-							
-							$computed_hash = sha1($result_salt.$password);
-							
-							if ($computed_hash == $result_hash) {								
-								
-								$random_string = generate_255_char_random_string();								
-								
-								$insert_token_sql = "INSERT INTO user_auth_token (issued_to, token) VALUES ( ? , ? )";								
-				
-								$insert_token_statement = $db_conn->stmt_init();
-								
-								$insert_token_statement->prepare($insert_token_sql);
-								
-								$insert_token_statement->bind_param("is", $result_ps_id, $random_string);
-								
-								if ($insert_token_statement->execute()) {									
-									
-									$resp_array = array();							
-							
-									$resp_array["ps_id"] = $result_ps_id;
-									$resp_array["username"] = $result_username;
-									$resp_array["auth_token"] = $random_string;
-									$resp_array["expires_in"] = 10;									
-									
-									http_response_code(200);
-									
-									echo json_encode($resp_array);
-								}
-								else
-								{
-									set_error_response( 13, "SQL Error" . $insert_token_statement->error);
-								}
-								
-							}							
-						}
-						else
-						{
-							set_error_response( 11, "SQL Error");
 							break;
+
 						}
 
+						echo "only one user record found"."\n";
+						*/
 
+						$row = $hash_retrieve_result->fetch_array(MYSQLI_NUM);
+						
+						$result_ps_id = $row[0];
+						$result_username = $row[1];
+						$result_hash = $row[2];
+						$result_salt = $row[3];
+						
+						$computed_hash = sha1($result_salt.$password);
+						
+						echo $computed_hash."\n";
+						echo $result_hash."\n";
 
+						if ($computed_hash == $result_hash) {
 
-
-
-					// check to see if username and user hash are valid
-					$user_check_sql='SELECT U.username, UA.pass_hash FROM user U, user_auth UA WHERE user.username= ? AND user.pass_hash= ?';
-				
-					$username_check_stmt = $db_conn->stmt_init();
-
-					if (!($user_check_stmt = $db_conn->prepare($user_check_sql))) {
-						set_error_response( 201, "SQL Error -> " . $user_check_stmt->error);
-
-						break;
-					}							
-
-					echo "user check statement works"."\n";
-
-					if (!($user_check_stmt->bind_param("sss", $username, $password))) {
-						set_error_response( 201, "SQL Error -> " . $user_check_stmt->error);
-						break;
-					}
-					echo "user check param binding works"."\n";
-
-					$user_is_valid = false;
-
-					if ($user_check_stmt->execute()) {
-
-						echo "user check statement execution works"."\n";
-		
-						if($user_check_result = $user_check_stmt->get_result() ){
-
-							if($user_check_result->num_rows == 1) {
-		
-								$user_is_valid = true;
-		
-							}
-
-							else {
-								$error = "Username or Password is invalid";
-							}
-						}
-
-						else {
+							echo "user hash matched to stored hash"."\n";
 							
-							set_error_response( 201, "SQL Error -> " . $user_check_stmt->error);
-						}
-
-					}
-
-					else {
 							
-						set_error_response( 201, "SQL Error -> " . $db_conn->error);
-						break;
-					}
+							$random_string1 = generate_255_char_random_string();								
+	
+							$random_string2 = generate_255_char_random_string();	
+
+							$insert_token_sql = "INSERT INTO user_auth_token (issued_to, access_token, refresh_token) VALUES ( ? , ? , ?)";								
 			
-					$user_check_stmt->close();
+							$insert_token_statement = $db_conn->stmt_init();
+							
+							$insert_token_statement->prepare($insert_token_sql);
+							
+							$insert_token_statement->bind_param("iss", $result_ps_id, $random_string1, $random_string2);
+							
+							if ($insert_token_statement->execute()) {									
+								
+								$resp_array = array();							
+						
+								$resp_array["ps_id"] = $result_ps_id;
+								$resp_array["username"] = $result_username;
+								$resp_array["access_token"] = $random_string1;
+								$resp_array["expires_in"] = 86400;	
+								$resp_array["refresh_token"] = $random_string2;
+								$resp_array["expires_in"] = 86400;																	
+								
+								http_response_code(200);
+								
+								echo json_encode($resp_array);
+							}
+							else
+							{
+								set_error_response( 13, "SQL Error" . $insert_token_statement->error);
+							}
+							
+						}							
+					}
+					else
+					{
+						set_error_response( 11, "SQL Error");
+						break;
+					}
 
 					$db_conn->close; // Closing Connection
 			

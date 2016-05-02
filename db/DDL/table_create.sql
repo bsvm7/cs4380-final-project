@@ -367,13 +367,15 @@ DROP TABLE IF EXISTS user_auth_token;
 CREATE TABLE user_auth_token
 (
 	token_id			serial,
-	token 				CHAR(64),
+	access_token		CHAR(64),
+	refresh_token		CHAR(64),
 	issued_to 			BIGINT UNSIGNED,
 	issue_time			TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	expire_time			TIMESTAMP,
 	PRIMARY KEY (token_id),
 	FOREIGN KEY (issued_to) REFERENCES person (ps_id) ON DELETE CASCADE,
-	UNIQUE (token)
+	UNIQUE (access_token),
+	UNIQUE (refresh_token)
 );
 
 #
