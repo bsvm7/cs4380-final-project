@@ -70,7 +70,6 @@ SET
 set foreign_key_checks = 0;
 LOAD DATA LOCAL INFILE '../input_data/photo_story.csv' INTO TABLE photo_story
 FIELDS TERMINATED BY ','
-OPTIONALLY ENCLOSED BY '"'
 LINES TERMINATED BY '\n'
 IGNORE 1 LINES
 ( p_id, s_id );
