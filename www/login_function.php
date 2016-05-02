@@ -126,7 +126,6 @@
 								$resp_array["access_token"] = $random_string1;
 								$resp_array["expires_in"] = 86400;	
 								$resp_array["refresh_token"] = $random_string2;
-								$resp_array["expires_in"] = 86400;																	
 								
 								http_response_code(200);
 								
@@ -145,7 +144,7 @@
 						break;
 					}
 
-					$db_conn->close; // Closing Connection
+					$db_conn->close; 
 			
 				}
 
