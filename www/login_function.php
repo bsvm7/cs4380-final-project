@@ -87,7 +87,7 @@
 
 						echo "only one user record found"."\n";
 						*/
-						
+
 						$row = $hash_retrieve_result->fetch_array(MYSQLI_NUM);
 						
 						$result_ps_id = $row[0];
@@ -97,6 +97,9 @@
 						
 						$computed_hash = sha1($result_salt.$password);
 						
+						echo $computed_hash;
+						echo $result_hash;
+
 						if ($computed_hash == $result_hash) {
 
 							echo "user hash matched to stored hash"."\n";
