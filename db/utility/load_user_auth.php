@@ -24,7 +24,7 @@
 	
 	//	Create the SQL to grab people IDs from the database that
 	//	are not already in the user table
-	$non_user_sql = "SELECT P.p_id FROM person P WHERE P.p_id NOT IN ( SELECT U.p_id FROM user U)";
+	$non_user_sql = "SELECT P.ps_id FROM person P WHERE P.ps_id NOT IN ( SELECT U.ps_id FROM user U)";
 	
 	if(!($result = $db_conn->query($non_user_sql))) {
 		
