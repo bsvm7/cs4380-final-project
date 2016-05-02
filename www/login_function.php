@@ -4,6 +4,7 @@ include("../../db_security/security.php");
 //include('./api/authorizate.php');
 //$error=''; // Variable To Store Error Message
 if (isset($_POST['submit'])) {
+
 	if (empty($_POST['username']) || empty($_POST['password'])) {
 		//$error = "Username or Password is empty";
 		echo "Username or Password is empty"."\n";
@@ -17,7 +18,7 @@ if (isset($_POST['submit'])) {
 
 		echo "username is ".$username."\n";
 		echo "password is ".$password."\n";
-		
+
 	/*	
 		// Establishing Connection with Server by passing server_name, user_id and password as a parameter
 		//$connection = mysql_connect("localhost", "root", "");
@@ -53,6 +54,9 @@ if (isset($_POST['submit'])) {
 	*/
 	}
 }
+else {
 
+	echo "no input from user"."\n";
+}
 
 ?>
