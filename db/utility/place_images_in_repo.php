@@ -146,10 +146,52 @@
 			Now that the family repository has been created we can add all the pictures to it
 		*/
 		
-		//	For debug purposes echo the repository ID
+		//	Grab all the photographs from the photograph table
 		
-		echo "\nThe repository id is -> " . $last_rep_insert_id . "\n";
+		$get_all_photos_sql = "SELECT P.p_id FROM photograph P";
 		
+		$all_photo_ids = array();
+		
+		if($result = $db_conn->query($get_all_photos_sql)) {
+			
+			while($result_row = $result->fetch_array(MYSQLI_ASSOC)) {
+				
+				$photo_id = $result_row["p_id"];
+				
+				array_push($all_photo_ids, $photo_id);
+			}
+		}
+		
+		
+		$repository_id = $last_rep_insert_id;
+		
+		
+		//	Insert all the photographs into the repository
+		
+		$insert_photographs_for_repo_sql = "INSERT INTO photo_repo ( r_id , p_id ) VALUES ( ? , ? )";
+		
+		if(!($insert_photographs_for_repo_stmt = $db_conn->prepare($insert_photographs_for_repo_sql))) {
+			
+			$error_str = error_string_for_statement_prepare( $insert_photographs_for_repo_sql, $db_conn->error );
+			
+			set_error_response( 203 , $error_str );
+		}
+		
+		foreach( $all_photo_ids as $the_photo_id ) {
+			
+			$repo_id = $repository_id;
+			$p_id = $the_photo_id;
+			
+			if($insert_photographs_for_repo_stmt->bind_param("ii", $repo_id, $p_id)) {
+				
+				if($insert_photographs_for_repo_stmt->execute()) {
+					echo "\n I successfully inserted the photo with photo id -> $photo_id into the repository with r_id -> $repo_id !\n";					
+				}
+				else {
+					echo "\n I couldn't insert the photo with photo id -> $photo_id into the repository with r_id -> $repo_id \n";
+				}
+			}
+		}
 	}
 	
 	
