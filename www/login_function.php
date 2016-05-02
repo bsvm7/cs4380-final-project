@@ -39,17 +39,13 @@
 					$password=$decoded_json['password'];
 
 
-					if (empty($_POST['username']) || empty($_POST['password'])) {
+					if (empty($username) || empty($password)) {
 						//$error = "Username or Password is empty";
 						echo "Username or Password is empty"."\n";
 					}
 
 					else {
-
-						// Define $username and $password
-						$username=$_POST['username'];
-						$password=$_POST['password'];
-
+						
 						echo "username is ".$username."\n";
 						echo "password is ".$password."\n";
 
