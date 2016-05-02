@@ -178,11 +178,11 @@
 						$ps_id_retrieve_stmt->prepare($ps_id_retrieve_sql);
 						$ps_id_retrieve_stmt->bind_param("s", $username);
 
-						if ($insert_token_statement->execute()) {
+						if ($ps_id_retrieve_stmt->execute()) {
 
-							if($insert_token_result= $insert_token_statement->get_result()) {
+							if($ps_id_retrieve_sql= $ps_id_retrieve_stmt->get_result()) {
 
-								$row = $insert_token_result->fetch_array(MYSQLI_NUM);
+								$row = $ps_id_retrieve_sql->fetch_array(MYSQLI_NUM);
 
 								$ps_id_return = $row[0]; 
 
@@ -191,9 +191,10 @@
 						}
 
 						else {
-							set_error_response( 13, "SQL Error" . $insert_token_statement->error);
+							set_error_response( 13, "SQL Error" . $ps_id_retrieve_stmt->error);
 						}
 
+						echo "ps_id retrieved "."\n";
 
 						$update_token_sql = "UPDATE user_auth_token SET access_token= ? WHERE username=? AND refresh_token= ?";								
 		
