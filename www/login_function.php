@@ -198,14 +198,33 @@
 
 						$update_token_sql = "UPDATE user_auth_token SET access_token= ? WHERE username=? AND refresh_token= ?";								
 		
-						$update_token_statement = $db_conn->stmt_init();
+						if( !$update_token_statement = $db_conn->stmt_init()){
 						
-						$update_token_statement->prepare($update_token_sql);
+							set_error_response( 13, "SQL Error" . $update_token_statement->error);
+
+						}
 						
-						$update_token_statement->bind_param("sss", $random_string, $username, $refresh_token);
+						echo "update_token_statement initiated"."\n";
+
+						if(! $update_token_statement->prepare($update_token_sql)){
+
+							set_error_response( 13, "SQL Error" . $update_token_statement->error);
+
+
+						}
 						
-						if ($insert_token_statement->execute()) {									
-							
+						echo "update_token_statement prepared"."\n";
+
+						if(! $update_token_statement->bind_param("sss", $random_string, $username, $refresh_token)) {
+
+							set_error_response( 13, "SQL Error" . $update_token_statement->error);
+
+						}
+						
+						echo "update_token_statement executed"."\n";
+
+						if ($insert_token_statement->execute()) {
+
 							$resp_array = array();							
 					
 							$resp_array["ps_id"] = $ps_id_return;
@@ -215,11 +234,13 @@
 							$resp_array["refresh_token"] = $refresh_token;
 							
 							http_response_code(200);
+
+							echo "insert token statement finished"."\n";
 							
 							echo json_encode($resp_array);
 						}
 						else {
-							set_error_response( 13, "SQL Error" . $update_token_statement->error);
+							set_error_response( 13, "SQL Error" . $insert_token_statement->error);
 						}
 						
 					}							
