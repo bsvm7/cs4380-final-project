@@ -196,7 +196,7 @@
 
 						echo "ps_id retrieved "."\n";
 
-						$update_token_sql = "UPDATE user_auth_token SET access_token= ? WHERE username=? AND refresh_token= ?";								
+						$update_token_sql = "UPDATE user_auth_token SET access_token= ? WHERE ps_id=? AND refresh_token= ?";								
 		
 						if( !$update_token_statement = $db_conn->stmt_init()){
 						
@@ -215,7 +215,7 @@
 						
 						echo "update_token_statement prepared"."\n";
 
-						if(! $update_token_statement->bind_param("sss", $random_string, $username, $refresh_token)) {
+						if(! $update_token_statement->bind_param("sss", $random_string, $ps_id_return, $refresh_token)) {
 
 							set_error_response( 13, "SQL Error" . $update_token_statement->error);
 
