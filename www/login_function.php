@@ -305,5 +305,5 @@
 		
 	}
 
-	echo "everything worked and now its time to close database and everything"."\n";
+	echo "\n\n\n"."everything worked and now its time to close database and everything"."\n";
 ?>
