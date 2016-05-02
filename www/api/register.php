@@ -17,16 +17,12 @@
 		set_error_response( 400 , "I couldn't connect to the database -> " . $db_conn->connect_error);
 		die("The connection to the database failed: " . $db_conn->connect_error);
 	}
-	
-	
-	
-	
+		
 	
 	/*
 		REQUEST HANDLING
 	*/	
-	$req_method = $_SERVER['REQUEST_METHOD'];
-		
+	$req_method = $_SERVER['REQUEST_METHOD'];		
 	
 	switch ($req_method) {
 		
@@ -326,8 +322,7 @@
 						
 					else {
 						set_error_response( 201, "SQL Error -> " . $db_conn->error);
-					}
-	
+					}	
 
 				}
 	
@@ -339,8 +334,6 @@
 				
 				$insert_new_user_stmt->close();
 
-
-
 			}
 	
 			else {
@@ -348,12 +341,8 @@
 				echo "info package decode error";
 			
 			}
-
-
 		
 		break;
-		
-		
 		
 		
 		default:
@@ -362,8 +351,6 @@
 		
 		break;
 	}	
-	
-	
 	
 	
 	/*
@@ -531,10 +518,10 @@
 	//	Error Handling
 	//
 
-	function handle_request_error() {	
-		
+	function handle_request_error() {			
 		
 	}
 */
 	echo "everything worked and now its time to close database and everything"."\n";
+	
 ?>
