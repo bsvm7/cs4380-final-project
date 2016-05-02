@@ -272,7 +272,9 @@
 					
 					echo "insert into new user authentication finished"."\n";
 
-			
+			/*
+					// I think auth tokens are not needed in registration process, am I right?
+						
 					$issued_to = $saved_last_insert_id;
 					$auth_token = generate_64_char_random_string();
 					
@@ -300,6 +302,7 @@
 							"expires_in" => 15
 						);
 						
+			*/			
 						$ret_user_info = array(
 							
 							"ps_id" => $saved_last_insert_id,
@@ -312,7 +315,9 @@
 							"birth_date" => $req_birthdate,
 							"gender" => $req_gender
 						);
-						
+
+						echo json_encode($ret_user_info)."\n";	
+			/*			
 						$ret_arr = array(
 							"auth_info" => $ret_auth_info,
 							"user_info" => $ret_user_info
@@ -325,7 +330,7 @@
 					else {
 						set_error_response( 201, "SQL Error -> " . $db_conn->error);
 					}	
-
+			*/
 				}
 	
 				else {
@@ -434,7 +439,7 @@
 		return $ret_array;
 	}
 
-
+/*
 	function generate_64_char_random_string() {
 		
 		$length = 64;
@@ -448,7 +453,7 @@
 	    return $randomString;
 	}
 
-
+*/
 	function set_error_response( $error_code , $error_message ) {
 		
 		
