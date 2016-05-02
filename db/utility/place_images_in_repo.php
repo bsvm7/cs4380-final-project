@@ -60,7 +60,7 @@
 		set_error_response( 203 , $error_str );
 	}
 	
-	if($result->num_rows !== 1) {
+	if($result->num_rows != 1) {
 		$error_str = "There was something off about the number of rows...";
 		
 		set_error_response( 203 , $error_str );
