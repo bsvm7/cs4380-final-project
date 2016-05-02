@@ -49,8 +49,6 @@
 				$req_email		 = $decoded_json["email"];
 				$req_username	 = $decoded_json["username"];
 
-				echo "\nThe firstname of the user is " . $decoded_json["firstname"] . "\n";
-
 				//	Clean birthdate data
 				
 				$clean_birthdate_info = clean_date( $birthdate );
@@ -61,7 +59,6 @@
 				}
 				else {
 					$birthdate = $clean_birthdate_info["validDateString"];
-					echo "birthdate clean works"."\n";
 				}
 				
 				// check to see if the person is already in the person table
@@ -73,20 +70,17 @@
 					break;
 				}	
 
-				echo "name check statement works"."\n";
 
 				if (!($person_name_check_stmt->bind_param("sss", $req_fname, $req_mname, $rea_lname))) {
 					set_error_response( 201, "SQL Error -> " . $person_name_check_stmt->error);
 					break;
 				}
-				echo "name check param binding works"."\n";
 
 				$person_name_is_valid = true;
 				
 
 				if ($person_name_check_stmt->execute()) {
 
-					echo "name check statement execution works"."\n";
 	
 					if($person_name_check_result = $person_name_check_stmt->get_result()) {
 	
@@ -118,28 +112,23 @@
 					break;
 				}
 
-				echo "name check worked"."\n";
-
 	
 				//	Check to see if the username is already taken
 				
 				$username_check_sql = "SELECT * FROM user WHERE username = ?";
 				
 				$username_check_stmt = $db_conn->stmt_init();
-				echo "username check statement works"."\n";
 
 
 				if (!($username_check_stmt = $db_conn->prepare($username_check_sql))) {
 					set_error_response( 201, "SQL Error -> " . $username_check_stmt->error);
 					break;
 				}
-								echo "username check statement prepare works"."\n";
 
 				if (!($username_check_stmt->bind_param("s",  $req_username))) {
 					set_error_response( 201, "SQL Error -> " . $username_check_stmt->error);
 					break;
 				}
-						echo "username check statement param binding works"."\n";
 
 				$username_is_valid = true;
 				
@@ -164,9 +153,6 @@
 					break;
 				}
 
-				echo "username check statement execution works"."\n";
-
-
 
 				$username_check_stmt->close();
 	
@@ -176,7 +162,6 @@
 					break;
 				}
 				
-				echo "username is valid"."\n";
 
 				//	If the information is valid then enter it into the database
 			
@@ -188,7 +173,7 @@
 					set_error_response( 201, "SQL Error -> " . $insert_new_person_stmt->error);
 					break;
 				}
-				echo "insert new person statement prepare  is valid"."\n";
+
 				if (!($insert_new_person_stmt->bind_param("ssssss", $req_fname, $req_mname, $req_lname, $req_maiden_name, $req_gender, $req_birthdate))) {
 					set_error_response( 201, "SQL Error -> " . $insert_new_person_stmt->error);
 					break;
@@ -197,7 +182,6 @@
 				$last_insert_id;
 	
 				if ($insert_new_person_stmt->execute()) {
-								echo "insert new person statement execution  is valid"."\n";
 	
 					$last_insert_id = $insert_new_person_stmt->insert_id;
 					
@@ -210,9 +194,6 @@
 				
 				$insert_new_person_stmt->close();											
 								
-				echo "insert new person into person table finished"."\n";
-
-
 
 				$saved_last_insert_id = $last_insert_id;
 	
@@ -238,13 +219,9 @@
 					break;
 				}
 	
-					echo "insert new user statement param binding finished"."\n";
-
 
 				if ($insert_new_user_stmt->execute()) {
 					
-					echo "insert new user statement execution finished"."\n";
-
 					//	Set that users salt and password
 					
 					$salt = sha1( mt_rand() );
@@ -270,39 +247,7 @@
 						break;
 					}
 					
-					echo "insert into new user authentication finished"."\n";
 
-			/*
-					// I think auth tokens are not needed in registration process, am I right?
-						
-					$issued_to = $saved_last_insert_id;
-					$auth_token = generate_64_char_random_string();
-					
-					echo "auth token generated "."\n";
-
-					$insert_auth_token_query = "INSERT INTO user_auth_token (issued_to, token) VALUES ('$issued_to', '$auth_token')";
-											
-					echo "auth token insertion statement prepared "."\n";
-
-
-
-					if ($db_conn->query($insert_auth_token_query)) {
-
-						echo "auth token insertion statement finished "."\n";
-
-
-
-						//	Return the persons information
-					
-						http_response_code(200);
-					
-						$ret_auth_info = array(
-							"uid" => $issued_to,
-							"auth_token" => $auth_token,
-							"expires_in" => 15
-						);
-						
-			*/			
 						$ret_user_info = array(
 							
 							"ps_id" => $saved_last_insert_id,
@@ -317,20 +262,7 @@
 						);
 
 						echo json_encode($ret_user_info)."\n";	
-			/*			
-						$ret_arr = array(
-							"auth_info" => $ret_auth_info,
-							"user_info" => $ret_user_info
-						);
-						
-						echo json_encode($ret_arr)."\n";
-			
-					}
-						
-					else {
-						set_error_response( 201, "SQL Error -> " . $db_conn->error);
-					}	
-			*/
+
 				}
 	
 				else {
@@ -468,67 +400,6 @@
 		
 	}
 	
-	/*
-	function print_result_values( $result ) {
-		
-		$num_fields = $result->field_count;
-		
-		while ($row = $result->fetch_row()) {
-			
-			echo "\n";
-			for ($i = 0; $i < $num_fields; $i++) {
-				
-				echo $row[$i] . "\t\t";
-			}	
-		}
-		
-		echo "\n";
-	}
-	
-	function print_result_headers( $result ) {
-		
-		echo "\n";
-		
-		$num_fields = $result->field_count;
-		
-		$fields = $result->fetch_fields();
-		
-		for ($i = 0; $i < $num_fields; $i++) {
-			echo $fields[$i]->name . "\t\t";
-		}	
-	}
-	function print_result_all( $result ) {
-		
-		print_result_headers( $result );
-		print_result_values( $result );
-	}
-	//
-	//	Random Utility Functions
-	//
-	function execute_placeholder_query( $db_conn ) {
-		
-		//	First prepare the SQL query
-		$query_string = "SELECT * FROM user";
-		
-		if ($result = $db_conn->query($query_string)) {
-		
-			
-			print_result_all( $result );
-			
-			
-		}
-		else {
-			echo "Couldn't prepare the statement";
-		}
-	}	
-	//
-	//	Error Handling
-	//
-
-	function handle_request_error() {			
-		
-	}
-*/
 	echo "everything worked and now its time to close database and everything"."\n";
 	
 ?>

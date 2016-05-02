@@ -51,10 +51,6 @@
 
 					else {
 						
-						echo "username is ".$username."\n";
-						echo "password is ".$password."\n";
-
-
 						$hash_retrieve_sql = 'SELECT U.ps_id, U.username, UA.pass_hash, UA.pass_salt FROM user U, user_auth UA WHERE U.ps_id=UA.ps_id AND U.username= ?';
 
 						$hash_retrieve_stmt = $db_conn->stmt_init();
@@ -66,8 +62,6 @@
 							break;
 						}							
 
-						echo "user hash retrieve statement prepared"."\n";
-
 						$hash_retrieve_stmt->bind_param("s" , $username);
 					
 						if (!$hash_retrieve_stmt->execute()) {
@@ -76,9 +70,7 @@
 					
 						}
 
-						echo "user hash retrieve statement executed"."\n";
-
-						
+					
 						if ($hash_retrieve_result = $hash_retrieve_stmt->get_result()) {
 
 							/*
@@ -103,14 +95,9 @@
 							
 							$computed_hash = sha1($result_salt.$password);
 							
-							echo $computed_hash."\n";
-							echo $result_hash."\n";
-
 							if ($computed_hash == $result_hash) {
 
-								echo "user hash matched to stored hash"."\n";
-								
-								
+				
 								$random_string1 = generate_255_char_random_string();								
 		
 								$random_string2 = generate_255_char_random_string();	
@@ -168,9 +155,6 @@
 
 					else {
 						
-						echo "username is ".$username."\n";
-						echo "refresh token is ".$refresh_token."\n";
-
 						$random_string = generate_255_char_random_string();																
 
 						$ps_id_retrieve_sql = "SELECT U.ps_id FROM user U WHERE U.username = ? ";
@@ -194,8 +178,6 @@
 							set_error_response( 13, "SQL Error" . $ps_id_retrieve_stmt->error);
 						}
 
-						echo "ps_id retrieved "."\n";
-
 						$update_token_sql = "UPDATE user_auth_token SET access_token= ? WHERE issued_to=? AND refresh_token= ?";								
 		
 						if( !$update_token_statement = $db_conn->stmt_init()){
@@ -204,8 +186,6 @@
 
 						}
 						
-						echo "update_token_statement initiated"."\n";
-
 						if(! $update_token_statement->prepare($update_token_sql)){
 
 							set_error_response( 13, "SQL Error" . $update_token_statement->error);
@@ -213,16 +193,12 @@
 
 						}
 						
-						echo "update_token_statement prepared"."\n";
-
 						if(! $update_token_statement->bind_param("sss", $random_string, $ps_id_return, $refresh_token)) {
 
 							set_error_response( 13, "SQL Error" . $update_token_statement->error);
 
 						}
 						
-						echo "update_token_statement param bind finished"."\n";
-
 						if ($update_token_statement->execute()) {
 
 							$resp_array = array();							
@@ -235,8 +211,6 @@
 							
 							http_response_code(200);
 
-							echo "insert token statement finished"."\n";
-							
 							echo json_encode($resp_array);
 						}
 						else {
