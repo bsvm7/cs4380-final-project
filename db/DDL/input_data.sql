@@ -64,3 +64,12 @@ IGNORE 1 LINES
 SET
 	date_taken = STR_TO_DATE(@date_taken, '%c-%e-%Y')
 ;
+
+
+#	Load data into the photo_story table
+LOAD DATA LOCAL INFILE '../input_data/photo_story.csv' INTO TABLE photo_story
+FIELDS TERMINATED BY ','
+ENCLOSED BY '"'
+LINES TERMINATED BY '\n'
+IGNORE 1 LINES
+( p_id, s_id );
