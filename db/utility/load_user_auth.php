@@ -32,17 +32,20 @@
 		
 		set_error_response( 201 , $error_str );	
 	}
+	else {
+		$non_user_ids = array();
 	
-	
-	$non_user_ids = array();
-	
-	while( $result_row = $result->fetch_array(MYSQLI_ASSOC)) {
+		while( $result_row = $result->fetch_array(MYSQLI_ASSOC)) {
 		
-		echo "\n";
-		echo json_encode($result_row);
-		echo "\n";
+			echo "\n";
+			echo json_encode($result_row);
+			echo "\n";
+		}
+
 	}
 	
+	
+		
 	
 	
 	
