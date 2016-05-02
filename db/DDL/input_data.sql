@@ -83,4 +83,4 @@ LINES TERMINATED BY '\n'
 IGNORE 1 LINES
 ( p_id , ps_id );
 SET foreign_key_checks = 1;
-\g;
+SHOW WARNINGS\G;
