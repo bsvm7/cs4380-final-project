@@ -279,12 +279,11 @@ CREATE TABLE story
 DROP TABLE IF EXISTS photo_story;
 CREATE TABLE photo_story
 (
-	ps_id				SERIAL,
 	p_id				BIGINT UNSIGNED,
 	s_id				BIGINT UNSIGNED,
 	FOREIGN KEY (p_id) REFERENCES photograph(p_id) ON DELETE CASCADE,
 	FOREIGN KEY (s_id) REFERENCES story(s_id) ON DELETE CASCADE,
-	PRIMARY KEY (ps_id)
+	PRIMARY KEY (p_id, s_id)
 );
 
 
