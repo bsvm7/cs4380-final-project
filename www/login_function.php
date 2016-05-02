@@ -3,7 +3,7 @@
 include("../../db_security/security.php");
 //include('./api/authorizate.php');
 //$error=''; // Variable To Store Error Message
-if (isset($_POST['submit'])) {
+//if (isset($_POST['submit'])) {
 
 	if (empty($_POST['username']) || empty($_POST['password'])) {
 		//$error = "Username or Password is empty";
@@ -53,10 +53,12 @@ if (isset($_POST['submit'])) {
 		$db_conn->close; // Closing Connection
 	*/
 	}
-}
+//}
+
+/*
 else {
 
 	echo "no input from user"."\n";
 }
-
+*/
 ?>
