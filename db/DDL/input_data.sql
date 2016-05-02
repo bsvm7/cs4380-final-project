@@ -65,7 +65,6 @@ SET
 	date_taken = STR_TO_DATE(@date_taken, '%c-%e-%Y')
 ;
 
-
 #	Load data into the photo_story table
 set foreign_key_checks = 0;
 LOAD DATA LOCAL INFILE '../input_data/photo_story.csv' INTO TABLE photo_story
@@ -73,4 +72,14 @@ FIELDS TERMINATED BY ','
 LINES TERMINATED BY '\n'
 IGNORE 1 LINES
 ( p_id, s_id );
+SET foreign_key_checks = 1;
+
+
+#	Load data into the photo_tag table
+set foreign_key_checks = 0;
+LOAD DATA LOCAL INFILE '../input_data/photo_tag.csv' INTO TABLE photo_tag
+FIELDS TERMINATED BY ','
+LINES TERMINATED BY '\n'
+IGNORE 1 LINES
+( p_id , ps_id );
 SET foreign_key_checks = 1;
