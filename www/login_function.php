@@ -221,9 +221,9 @@
 
 						}
 						
-						echo "update_token_statement executed"."\n";
+						echo "update_token_statement param bind finished"."\n";
 
-						if ($insert_token_statement->execute()) {
+						if ($update_token_statement->execute()) {
 
 							$resp_array = array();							
 					
