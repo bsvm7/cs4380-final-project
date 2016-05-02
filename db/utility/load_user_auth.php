@@ -38,22 +38,49 @@
 	
 	while( $result_row = $result->fetch_array(MYSQLI_ASSOC)) {
 	
-		echo "\n";
-		echo json_encode($result_row);
-		echo "\n";
+		//	Grab the ps_id
+		$res_ps_id = $result_row["ps_id"];
+		
+		//	Add the ps_id to the array
+		array_push($non_user_ids, $res_ps_id);
+		
 	}
 		
 	
+	/*
+		LOAD ALL THE NON USER PERSONS INTO THE non_user TABLE
+	*/
 	
+	$load_non_user_sql = "INSERT INTO non_user (ps_id) VALUES ( ? )";
 	
+	if (!($load_non_user_stmt = $db_conn->prepare($load_non_user_sql))) {
+		
+		$error_str = "Failed to prepare the statement with the following SQL -> " . $load_non_user_sql . "... With the following error -> " . $db_conn->error;
+		
+		set_error_response( 201 , $error_str );
+	}
 	
-	
-	
-	
-	
-	
-	
-	
+	foreach($non_user_ids as $non_user_id) {
+		
+		if(!($load_non_user_stmt->bind_param("i", $non_user_id))) {
+			
+			$error_str = "I failed to bind the parameters ... SQL Error -> " . $db_conn->error;
+			
+			set_error_response( 202 , $error_str );
+		}
+		
+		if(!($load_non_user_stmt->execute())) {
+			
+			$error_str = "I failed to execute the prepared statement with the following SQL -> " . $load_non_user_sql . "... With error code -> " . $db_conn->error;
+			
+			set_error_response( 202 , $error_str);
+		}
+		else {
+			
+			echo "\nI successfully inserted the user with the ps_id -> $non_user_id into the non_user table...\n";
+		}
+		
+	}
 	
 	/*
 		CUSTOM FUNCTIONS
@@ -69,6 +96,8 @@
 		);
 				echo json_encode($response_array);
 		http_response_code($error_code);
+		
+		exit(-1);
 		
 	}
 	
