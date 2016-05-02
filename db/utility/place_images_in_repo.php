@@ -37,8 +37,9 @@
 	*/
 	$user_info;
 	
-	$get_user_info_sql = "SELECT U.ps_id, U.username, U.email FROM user U WHERE U.username = ?";
+	$get_user_info_sql = "SELECT U.ps_id, U.username, U.email FROM user U WHERE U.username = '$username'";
 	
+/*
 	if(!($get_user_info_stmt = $db_conn->prepare($get_user_info_sql))) {
 		
 		$error_str = "I couldn't prepare the statement with the SQL -> " . $get_user_info_sql . "... SQL Error -> " . $db_conn->error;
@@ -52,17 +53,13 @@
 		
 		set_error_response( 202 , $error_str );
 	}
-	
-	$result;
-	
-	if(!($result = $get_user_info_stmt->execute())) {
+*/
+	if(!($result = $db_conn->query($get_user_info_sql))) {
 		
 		$error_str = "I couldn't execute the statement with the SQL -> " . $get_user_info_sql . "... SQL Error -> " . $db_conn->error;
 		
 		set_error_response( 203 , $error_str );
 	}
-	
-	echo $get_user_info_stmt->error;
 	
 	if($result->num_rows != 1) {
 		$error_str = "There was something off about the number of rows..." . " The number of rows was -> " . $result->num_rows . "\n";
