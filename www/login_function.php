@@ -76,6 +76,7 @@
 					
 					if ($hash_retrieve_result = $hash_retrieve_stmt->get_result()) {
 
+						/*
 						if($hash_retrieve_stmt->num_rows != 1) {
 
 							set_error_response( 201, "SQL Error -> " . $hash_retrieve_stmt->error);	
@@ -85,7 +86,8 @@
 						}
 
 						echo "only one user record found"."\n";
-
+						*/
+						
 						$row = $hash_retrieve_result->fetch_array(MYSQLI_NUM);
 						
 						$result_ps_id = $row[0];
