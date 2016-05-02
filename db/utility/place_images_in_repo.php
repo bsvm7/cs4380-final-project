@@ -53,6 +53,8 @@
 		set_error_response( 202 , $error_str );
 	}
 	
+	$result;
+	
 	if(!($result = $get_user_info_stmt->execute())) {
 		
 		$error_str = "I couldn't execute the statement with the SQL -> " . $get_user_info_sql . "... SQL Error -> " . $db_conn->error;
