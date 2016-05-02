@@ -26,25 +26,22 @@
 	//	are not already in the user table
 	$non_user_sql = "SELECT P.p_id FROM person P WHERE P.p_id NOT IN ( SELECT U.p_id FROM user U)";
 	
-	if(($result = $db_conn->query($non_user_sql))) {
+	if(!($result = $db_conn->query($non_user_sql))) {
 		
 		$error_str = "There was a SQL error -> " . $db_conn->error;
 		
 		set_error_response( 201 , $error_str );	
 	}
-	else {
-		$non_user_ids = array();
 	
-		while( $result_row = $result->fetch_array(MYSQLI_ASSOC)) {
-		
-			echo "\n";
-			echo json_encode($result_row);
-			echo "\n";
-		}
-
+	
+	$non_user_ids = array();
+	
+	while( $result_row = $result->fetch_array(MYSQLI_ASSOC)) {
+	
+		echo "\n";
+		echo json_encode($result_row);
+		echo "\n";
 	}
-	
-	
 		
 	
 	
