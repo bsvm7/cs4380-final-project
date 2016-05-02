@@ -26,77 +26,102 @@
 	
 	$req_method = $_SERVER['REQUEST_METHOD'];		
 		
-		switch ($req_method) {
-			
-			case 'POST':
+	switch ($req_method) {
+		
+		case 'POST':
 
-				//	Get the raw post database
-				$json_raw = file_get_contents("php://input");
+			//	Get the raw post database
+			$json_raw = file_get_contents("php://input");
 
-				if ($decoded_json = json_decode($json_raw, true)) {	
+			if ($decoded_json = json_decode($json_raw, true)) {	
 
-					$username=$decoded_json['username'];
-					$password=$decoded_json['password'];
+				$username=$decoded_json['username'];
+				$password=$decoded_json['password'];
 
 
-					if (empty($username) || empty($password)) {
-						//$error = "Username or Password is empty";
-						echo "Username or Password is empty"."\n";
+				if (empty($username) || empty($password)) {
+					//$error = "Username or Password is empty";
+					echo "Username or Password is empty"."\n";
+				}
+
+				else {
+					
+					echo "username is ".$username."\n";
+					echo "password is ".$password."\n";
+
+
+					// check to see if username and password are valid
+					$user_check_sql='SELECT * FROM user WHERE user.username= ? AND user.password= ?';
+				
+					$username_check_stmt = $db_conn->stmt_init();
+
+					if (!($user_check_stmt = $db_conn->prepare($user_check_sql))) {
+						set_error_response( 201, "SQL Error -> " . $user_check_stmt->error);
+
+						break;
+					}							
+
+					echo "user check statement works"."\n";
+
+					if (!($user_check_stmt->bind_param("sss", $username, $password))) {
+						set_error_response( 201, "SQL Error -> " . $user_check_stmt->error);
+						break;
+					}
+					echo "user check param binding works"."\n";
+
+					$user_is_valid = false;
+
+					if ($user_check_stmt->execute()) {
+
+						echo "user check statement execution works"."\n";
+		
+						if($user_check_result = $user_check_stmt->get_result() ){
+
+							if($user_check_result->num_rows == 1) {
+		
+								$user_is_valid = true;
+		
+							}
+
+							else {
+								$error = "Username or Password is invalid";
+							}
+						}
+
+						else {
+							
+							set_error_response( 201, "SQL Error -> " . $user_check_stmt->error);
+						}
+
 					}
 
 					else {
-						
-						echo "username is ".$username."\n";
-						echo "password is ".$password."\n";
-
-					/*	
-						// Establishing Connection with Server by passing server_name, user_id and password as a parameter
-						//$connection = mysql_connect("localhost", "root", "");
-						$db_conn = new mysqli(constant("DB_HOST"), constant("DB_USERNAME"), constant("DB_PASSWORD"), constant("DB_DATABASE"));
 							
-							if ($db_conn->error_code) {
-								
-								//	This should be replace PHP that sets the HTTP status code to 500 and
-								//	sets the body to the JSON object that contains the error_code and
-								//	error_string as defined by the API
-								die("The connection to the database failed: " . $db_conn->connect_error);
-							}
-						// To protect MySQL injection for Security purpose
-						$username = stripslashes($username);
-						$password = stripslashes($password);
-						$username = mysql_real_escape_string($username);
-						$password = mysql_real_escape_string($password);
-						// Selecting Database
-						$db = mysql_select_db("users", $db_conn);
-						define('CSV_PATH','../db/input_data/');
-						$csv_file = CSV_PATH . "user.csv"; 
-						// SQL query to fetch information of registerd users and finds user match.
-						$query = mysql_query("select * from login where username='$username'", $db);
-						$rows = mysql_num_rows($query);
-						if ($rows == 1) {
-							$_SESSION['login_user']=$username; // Initializing Session
-							header("location: user.php"); // Redirecting To Other Page
-						} 
-						else {
-							$error = "Username or Password is invalid";
-						}
-						$db_conn->close; // Closing Connection
-					*/
+						set_error_response( 201, "SQL Error -> " . $db_conn->error);
+						break;
 					}
+			
+					$user_check_stmt->close();
+
+					$db_conn->close; // Closing Connection
+			
 				}
 
-			break;
+			}
+
 			
-			default:
+			else {
 
-			break;	
-		}
+				echo "no input from user"."\n";
+			}
+		
+		break;
+		
+		default:
+
+		break;	
+	
+	}	
 
 
-	/*
-	else {
-
-		echo "no input from user"."\n";
-	}
-	*/
 ?>
