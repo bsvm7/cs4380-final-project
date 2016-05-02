@@ -97,8 +97,8 @@
 						
 						$computed_hash = sha1($result_salt.$password);
 						
-						echo $computed_hash;
-						echo $result_hash;
+						echo $computed_hash."\n";
+						echo $result_hash."\n";
 
 						if ($computed_hash == $result_hash) {
 
