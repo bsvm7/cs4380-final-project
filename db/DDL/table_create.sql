@@ -239,6 +239,7 @@ CREATE TABLE photograph
 	thumb_url			VARCHAR(2083),
 	date_taken			DATE,
 	date_conf			BOOLEAN NOT NULL DEFAULT FALSE,
+	date_uploaded		TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	PRIMARY KEY (p_id)	
 );
 
@@ -366,7 +367,7 @@ CREATE TABLE photo_repo
 DROP TABLE IF EXISTS user_auth_token;
 CREATE TABLE user_auth_token
 (
-	token_id			serial,
+	token_id			SERIAL,
 	access_token		CHAR(64),
 	refresh_token		CHAR(64),
 	issued_to 			BIGINT UNSIGNED,
