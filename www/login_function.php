@@ -126,53 +126,25 @@
 									echo json_encode($resp_array);
 
 
+									// record login information into activity log table
 
-									// record log in information into log table
-
-									$insert_log_sql = "INSERT INTO log (ps_id) VALUES (?)";
+									$insert_log_sql = "INSERT INTO activity_log (ps_id, ac_type) VALUES (?, ?)";
 
 									$insert_log_stmt = $db_conn->stmt_init();
 
 									$insert_log_stmt->prepare($insert_log_sql);
 
-									$insert_log_stmt->bind_param("i", $result_ps_id);
-
-									$last_insert_id;
+									$insert_log_stmt->bind_param("is", $result_ps_id, 'login');
 
 									if($insert_log_stmt->execute()) {
 
-										$last_insert_id =$insert_log_stmt->insert_id;
-
+										echo "login activity has been logged"."\n";
 									}
 									else {
 
 										set_error_response( 201, "SQL Error -> " . $insert_new_person_stmt->error);
 
 									}
-
-									$insert_log_stmt->close();
-
-									// insert login record into session log table
-
-									$insert_session_log_sql = "INSERT INTO session_log (lo_id, login_time) VALUES (?, ?)";
-									$insert_session_log_stmt = $db_conn->stmt_init();
-
-									$insert_session_log_stmt->prepare($insert_session_log_sql);
-
-									$insert_session_log_stmt->bind_param("is", $last_insert_id, CURRENT_TIMESTAMP);
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 								}
