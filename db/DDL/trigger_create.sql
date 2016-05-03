@@ -54,10 +54,32 @@ DELIMITER //
 CREATE TRIGGER archive_photographs BEFORE DELETE ON photograph
 FOR EACH ROW
 BEGIN
+	DECLARE arch_photo_url_large 	VARCHAR(2083);
+	DECLARE arch_photo_url_thumb 	VARCHAR(2083);
+	DECLARE arch_photo_title 		VARCHAR(200);
+	DECLARE arch_repo_title			VARCHAR(200);
+	DECLARE arch_photo_date_uploaded TIMESTAMP;
+	
 	SET arch_photo_url_large = OLD.large_url;
 	SET arch_photo_url_thumb = OLD.thumb_url;
 	SET arch_photo_title = OLD.title;
 	SET arch_repo_title = (SELECT R.name FROM repository R, photo_repo PR WHERE PR.p_id = OLD.p_id AND PR.r_id = R.r_id LIMIT 1);
 	SET arch_photo_date_uploaded = OLD.date_uploaded;
+	
+	INSERT INTO photograph_archive ( 
+										photo_url_large , 
+										photo_url_thumb, 
+										photo_title, 
+										repo_title, 
+										date_uploaded 
+									) 
+								VALUES 
+								( 
+									arch_photo_url_large , 
+									arch_photo_url_thumb, 
+									arch_photo_title, 
+									arch_repo_title, 
+									arch_photo_date_uploaded 
+								);
 END;//
 delimiter ;
