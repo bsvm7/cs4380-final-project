@@ -33,10 +33,10 @@
 #	19)	Log				( log )
 #	20)	Session Log			( session_log )
 #	21)	Activity Log			( activity_log )
-#	22) Photo repository 		( photo_repo)
-#	23) User Authorization Token ( user_auth_token)
-#	24) User Repository 		(user_repo)
-#	25) photo location 		(photo_loc)
+#	22)	Photo repository 		( photo_repo)
+#	23)	User Authorization Token ( user_auth_token)
+#	24)	User Repository 		(user_repo)
+#	25)	Photo location 		(photo_loc)
 #
 
 DROP TABLE IF EXISTS era;
