@@ -406,4 +406,18 @@ CREATE TABLE photo_loc
 	FOREIGN KEY (l_id) REFERENCES location (l_id) ON DELETE CASCADE
 );
 
-
+#
+#	26)	Photograph Archive
+#
+DROP TABLE IF EXISTS photograph_archive;
+CREATE TABLE photograph_archive
+(
+	pa_id				SERIAL,
+	photo_url_large		VARCHAR(2083),
+	photo_url_thumb		VARCHAR(2083),
+	photo_title			VARCHAR(200),
+	repo_title			VARCHAR(200),
+	date_archived		TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	date_uploaded		TIMESTAMP,
+	PRIMARY KEY (pa_id)
+);
