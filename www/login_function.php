@@ -97,7 +97,8 @@
 							
 							if ($computed_hash == $result_hash) {
 
-				
+								$log_in_time = 
+
 								$random_string1 = generate_255_char_random_string();								
 		
 								$random_string2 = generate_255_char_random_string();	
@@ -123,6 +124,57 @@
 									http_response_code(200);
 									
 									echo json_encode($resp_array);
+
+
+
+									// record log in information into log table
+
+									$insert_log_sql = "INSERT INTO log (ps_id) VALUES (?)";
+
+									$insert_log_stmt = $db_conn->stmt_init();
+
+									$insert_log_stmt->prepare($insert_log_sql);
+
+									$insert_log_stmt->bind_param("i", $result_ps_id);
+
+									$last_insert_id;
+
+									if($insert_log_stmt->execute()) {
+
+										$last_insert_id =$insert_log_stmt->insert_id;
+
+									}
+									else {
+
+										set_error_response( 201, "SQL Error -> " . $insert_new_person_stmt->error);
+
+									}
+
+									$insert_log_stmt->close();
+
+									// insert login record into session log table
+
+									$insert_session_log_sql = "INSERT INTO session_log (lo_id, login_time) VALUES (?, ?)";
+									$insert_session_log_stmt = $db_conn->stmt_init();
+
+									$insert_session_log_stmt->prepare($insert_session_log_sql);
+
+									$insert_session_log_stmt->bind_param("is", $last_insert_id, CURRENT_TIMESTAMP);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 								}
 								else
 								{
