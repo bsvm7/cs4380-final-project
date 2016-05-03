@@ -30,13 +30,11 @@
 #	16)	Story				( story )
 #	17)	Photo Story			( photo_story )
 #	18)	User Activity			( user_activity )
-#	19)	Log				( log )
-#	20)	Session Log			( session_log )
-#	21)	Activity Log			( activity_log )
-#	22)	Photo repository 		( photo_repo)
-#	23)	User Authorization Token 	( user_auth_token)
-#	24)	User Repository 		(user_repo)
-#	25)	Photo location 			(photo_loc)
+#	19)	Activity Log			( activity_log )
+#	20)	Photo repository 		( photo_repo)
+#	21)	User Authorization Token 	( user_auth_token)
+#	22)	User Repository 		(user_repo)
+#	23)	Photo location 			(photo_loc)
 #
 
 DROP TABLE IF EXISTS era;
@@ -299,49 +297,20 @@ CREATE TABLE user_activity
 	PRIMARY KEY (ac_id)	
 );
 
-
-
 #
-#	19) Log	( log )
-#
-DROP TABLE IF EXISTS log;
-CREATE TABLE log
-(
-	lo_id				SERIAL,
-	ps_id				BIGINT UNSIGNED,
-	time_logged			TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-	FOREIGN KEY (ps_id) REFERENCES person(ps_id) ON DELETE NO ACTION,
-	PRIMARY KEY (lo_id)	
-);
-
-
-#
-#	20) Session Log	( session_log )
-#
-DROP TABLE IF EXISTS session_log;
-CREATE TABLE session_log
-(
-	lo_id				BIGINT UNSIGNED,
-	login_time			TIMESTAMP,
-	logout_time			TIMESTAMP,
-	FOREIGN KEY (lo_id) REFERENCES log(lo_id) ON DELETE CASCADE,
-	PRIMARY KEY (lo_id)	
-);
-
-
-#
-#	21) Activity Log	( activity_log )
+#	19) Activity Log	( activity_log )
 #
 DROP TABLE IF EXISTS activity_log;
 CREATE TABLE activity_log
 (
 	lo_id				BIGINT UNSIGNED,
+	ps_id				BIGINT UNSIGNED,
 	ac_type				BIGINT UNSIGNED,
 	s_id				BIGINT UNSIGNED,
 	p_id				BIGINT UNSIGNED,
 	r_id				BIGINT UNSIGNED,
-	FOREIGN KEY (lo_id) REFERENCES log(lo_id) ON DELETE CASCADE,
-	FOREIGN KEY (ac_type) REFERENCES user_activity(ac_id) ON DELETE NO ACTION,
+	time_logged			TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	FOREIGN KEY (ps_id) REFERENCES person(ps_id) ON DELETE NO ACTION,
 	FOREIGN KEY (s_id) REFERENCES story(s_id) ON DELETE NO ACTION,
 	FOREIGN KEY (p_id) REFERENCES photograph(p_id) ON DELETE NO ACTION,
 	FOREIGN KEY (r_id) REFERENCES repository(r_id) ON DELETE NO ACTION,
@@ -349,7 +318,7 @@ CREATE TABLE activity_log
 );
 
 #
-#	22) Photo Repository	( photo_repo)
+#	20) Photo Repository	( photo_repo)
 #
 DROP TABLE IF EXISTS photo_repo;
 CREATE TABLE photo_repo
@@ -362,7 +331,7 @@ CREATE TABLE photo_repo
 );
 
 #
-#	23) User Authorization Token ( user_auth_token)
+#	21) User Authorization Token ( user_auth_token)
 #
 DROP TABLE IF EXISTS user_auth_token;
 CREATE TABLE user_auth_token
@@ -380,7 +349,7 @@ CREATE TABLE user_auth_token
 );
 
 #
-#	24) User Repository 		(user_repo)
+#	22) User Repository 		(user_repo)
 #
 DROP TABLE IF EXISTS user_repo;
 CREATE TABLE user_repo 
@@ -395,7 +364,7 @@ CREATE TABLE user_repo
 
 
 #
-#	25) photo location 		(photo_loc)
+#	23) photo location 		(photo_loc)
 #
 DROP TABLE IF EXISTS photo_loc;
 CREATE TABLE photo_loc 
@@ -408,7 +377,7 @@ CREATE TABLE photo_loc
 );
 
 #
-#	26)	Photograph Archive
+#	24)	Photograph Archive
 #
 DROP TABLE IF EXISTS photograph_archive;
 CREATE TABLE photograph_archive
