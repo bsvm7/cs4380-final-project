@@ -30,7 +30,7 @@
 #	16)	Story				( story )
 #	17)	Photo Story			( photo_story )
 #	18)	User Activity			( user_activity )
-#	19)	Activity Log				( activity_log )
+#	19)	Activity Log			( activity_log )
 #	20)	Photo repository 		( photo_repo )
 #	21)	User Authorization Token 	( user_auth_token )
 #	22)	User Repository 		( user_repo )
