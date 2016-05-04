@@ -31,7 +31,8 @@
 	
 	if(!($db_conn->query($set_user_reg_date_sql))) {
 		
-		$error_str = "I couldn't set the registration date of the specified user with user information -> " . json_encode($user_info) . "\n";
+		$error_str = "I couldn't set the registration date of the specified user with user information -> " . json_encode($user_info) . "\n 
+						And the following SQL -> " . $set_user_reg_date_sql . "\n";
 		
 		set_error_response( 201 , $error_str );
 	}
