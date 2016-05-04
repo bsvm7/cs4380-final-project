@@ -265,13 +265,17 @@
 
 						// record register information into activity log table
 
+						echo "last insert_id is ".$last_insert_id; 
+
 						$insert_log_sql = "INSERT INTO activity_log (ps_id, ac_type) VALUES (?, ?)";
 
 						$insert_log_stmt = $db_conn->stmt_init();
 
 						$insert_log_stmt->prepare($insert_log_sql);
 
-						$insert_log_stmt->bind_param("is", $last_insert_id, 'registration');
+						$ac_type= "user-register";
+
+						$insert_log_stmt->bind_param("is", $last_insert_id, $ac_type);
 
 						if($insert_log_stmt->execute()) {
 
@@ -300,6 +304,8 @@
 				echo "info package decode error";
 			
 			}
+
+			$db_conn->close();
 		
 		break;
 		
@@ -307,7 +313,8 @@
 		default:
 		
 			set_error_response( 303, "Wrong request method...");
-		
+			$db_conn->close();
+
 		break;
 	}	
 	
