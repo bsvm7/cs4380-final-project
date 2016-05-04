@@ -245,7 +245,8 @@
 					*/
 
 					$insert_user_auth_sql = "INSERT INTO user_auth (ps_id , pass_hash, pass_salt) VALUES (?, ?, ?)";
-					
+											echo "user auth sql worked "."\n"; 
+
 					$insert_user_auth_stmt = $db_conn->init();
 					
 					if(!$insert_user_auth_stmt->prepare($insert_user_auth_sql)){
@@ -255,6 +256,7 @@
 						break;
 
 					}
+						echo "user auth stmt prepare worked "."\n"; 
 
 					if(!$insert_user_auth_stmt->bind_param("iss", $last_insert_id, $hash, $salt)){
 
@@ -262,6 +264,7 @@
 
 						break;
 					}
+						echo "user auth stmt param bind worked "."\n"; 
 
 					if(!$insert_user_auth_stmt->execute()){
 						
@@ -270,6 +273,9 @@
 						break;
 
 					}
+
+						echo "user auth stmt execution worked "."\n"; 
+
 					/*
 					if ($db_conn->affected_rows == 1) {							
 					}
@@ -280,6 +286,7 @@
 					*/
 					if($insert_user_auth_result = $insert_user_auth_stmt->get_result()) {
 
+						echo "user auth inserted "."\n"; 
 
 						$ret_user_info = array(
 							
