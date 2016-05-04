@@ -80,7 +80,7 @@
 					echo "token retrieve statement execution worked"."\n";
 
 					// compare the access token provided and the one retrived from database
-					if ($token_retrieve_result == $token_retrieve_stmt->get_result()) {
+					if ($token_retrieve_result = $token_retrieve_stmt->get_result()) {
 
 						/*
 						// this has not worked out yet
@@ -100,6 +100,8 @@
 						$result_ps_id = $row[0];						
 						$result_access_token = $row[1];
 						//$result_refresh_token = $row[2];
+					
+						echo "token need to be compared"."\n";
 
 					
 						if ($result_access_token == $access_token) {
