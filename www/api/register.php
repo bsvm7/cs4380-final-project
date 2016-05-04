@@ -94,7 +94,7 @@
 	
 					else {
 							
-							set_error_response( 201, "SQL Error -> " . $username_check_stmt->error);
+							set_error_response( 201, "SQL Error -> " . $person_name_check_stmt->error);
 					}	
 				}	
 	
@@ -108,7 +108,7 @@
 	
 				if (!$person_name_is_valid) {
 					
-					set_error_response( 203 , "The person with the same name already exists in the database");
+					set_error_response( 203 , "The person with the same name already exists in the database, sorry!"."\n");
 					break;
 				}
 
@@ -158,7 +158,7 @@
 	
 				if (!$username_is_valid) {
 				
-					set_error_response( 203 , "The username is already taken");
+					set_error_response( 203 , "The username is already taken, please try another one.......");
 					break;
 				}
 				
@@ -228,25 +228,58 @@
 					
 					$hash = sha1( $salt . $req_password );
 					
+					/* bad programming here
 					$insert_user_auth_sql = "INSERT INTO user_auth (ps_id , pass_hash, pass_salt) VALUES ('$saved_last_insert_id' , '$hash' , '$salt' )";
-					
 					if ($db_conn->query($insert_user_auth_sql)) {
-						
-
-						if ($db_conn->affected_rows == 1) {
-							
+						if ($db_conn->affected_rows == 1) {							
 						}
 						else {
 							set_error_response( 201, "SQL Error 2 -> " . $db_conn->error);
 							break;
-						}
-						
+						}						
 					}
 					else {
 						set_error_response( 201, "SQL Error 1 -> " . $db_conn->error);
 						break;
 					}
+					*/
+
+					$insert_user_auth_sql = "INSERT INTO user_auth (ps_id , pass_hash, pass_salt) VALUES (?, ?, ?)";
 					
+					$insert_user_auth_stmt = $db_conn->init();
+					
+					if(!$insert_user_auth_stmt->prepare($insert_user_auth_sql)){
+						
+						set_error_response( 201, "SQL Error -> " . $insert_user_auth_stmt->error);
+
+						break;
+
+					}
+
+					if(!$insert_user_auth_stmt->bind_param("iss", $last_insert_id, $hash, $salt)){
+
+						set_error_response( 201, "SQL Error -> " . $insert_user_auth_stmt->error);
+
+						break;
+					}
+
+					if(!$insert_user_auth_stmt->execute()){
+						
+						set_error_response( 201, "SQL Error -> " . $insert_user_auth_stmt->error);
+
+						break;
+
+					}
+
+					if ($db_conn->affected_rows == 1) {							
+					}
+					else {
+						set_error_response( 201, "SQL Error 2 -> " . $db_conn->error);
+						break;
+					}						
+
+					if($insert_user_auth_result = $insert_user_auth_stmt->get_result()) {
+
 
 						$ret_user_info = array(
 							
@@ -262,6 +295,8 @@
 						);
 
 						echo json_encode($ret_user_info)."\n";	
+
+						$insert_user_auth_stmt->close();
 
 						// record register information into activity log table
 
@@ -280,12 +315,18 @@
 						if($insert_log_stmt->execute()) {
 
 							echo "registration activity has been logged"."\n";
+
+							$insert_log_stmt->execute();
+
 						}
+
 						else {
 
-							set_error_response( 201, "SQL Error -> " . $insert_new_person_stmt->error);
+							set_error_response( 201, "SQL Error -> " . $insert_log_stmt->error);
 
 						}
+
+					}
 
 				}
 	
@@ -301,7 +342,7 @@
 	
 			else {
 	
-				echo "info package decode error";
+				echo "info package decode error....";
 			
 			}
 
@@ -312,7 +353,7 @@
 		
 		default:
 		
-			set_error_response( 303, "Wrong request method...");
+			set_error_response( 303, "Wrong request method....");
 			$db_conn->close();
 
 		break;
@@ -404,12 +445,12 @@
 		$length = 64;
 		
 		$characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-	    $charactersLength = strlen($characters);
-	    $randomString = '';
-	    for ($i = 0; $i < $length; $i++) {
-	        $randomString .= $characters[rand(0, $charactersLength - 1)];
-	    }
-	    return $randomString;
+		$charactersLength = strlen($characters);
+		$randomString = '';
+		for ($i = 0; $i < $length; $i++) {
+			$randomString .= $characters[rand(0, $charactersLength - 1)];
+		}
+		return $randomString;
 	}
 
 */

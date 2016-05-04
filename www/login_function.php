@@ -73,9 +73,9 @@
 					
 						if ($hash_retrieve_result = $hash_retrieve_stmt->get_result()) {
 
-							/*
+							
 							// this has not worked out yet
-							if($hash_retrieve_stmt->num_rows != 1) {
+							if($hash_retrieve_result->num_rows > 1) {
 
 								set_error_response( 201, "SQL Error -> " . $hash_retrieve_stmt->error);	
 
@@ -83,8 +83,14 @@
 
 							}
 
-							echo "only one user record found"."\n";
-							*/
+							if($hash_retrieve_result->num_rows == 0) {
+
+								echo "The username does not exist in our system, please try again....."."\n";
+
+								break;
+
+							}
+
 
 							$row = $hash_retrieve_result->fetch_array(MYSQLI_NUM);
 							
@@ -144,7 +150,7 @@
 									}
 									else {
 
-										set_error_response( 201, "SQL Error -> " . $insert_new_person_stmt->error);
+										set_error_response( 201, "SQL Error -> " . $insert_log_stmt->error);
 
 									}
 
@@ -155,11 +161,18 @@
 									set_error_response( 13, "SQL Error" . $insert_token_statement->error);
 								}
 								
-							}							
+							}
+							else {
+
+								set_error_response( 11, "Your password does not match to our record, please try again......"."\n");
+								break;
+
+							}
+
 						}
 						else
 						{
-							set_error_response( 11, "SQL Error");
+							set_error_response( 11, "SQL Error"."\n");
 							break;
 						}
 
@@ -219,7 +232,7 @@
 
 						}
 						
-						if(! $update_token_statement->bind_param("sss", $random_string, $ps_id_return, $refresh_token)) {
+						if(! $update_token_statement->bind_param("sis", $random_string, $ps_id_return, $refresh_token)) {
 
 							set_error_response( 13, "SQL Error" . $update_token_statement->error);
 
