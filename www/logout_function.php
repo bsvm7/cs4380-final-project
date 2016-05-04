@@ -107,7 +107,7 @@
 						if ($result_access_token == $access_token) {
 
 							echo "access token matched ";
-							
+
 							// insert logout activity in activity log table
 							$insert_log_sql = "INSERT INTO activity_log (ps_id, ac_type) VALUES ( ? , ?)";	
 			
@@ -162,6 +162,10 @@
 								set_error_response( 13, "SQL Error" . $insert_token_statement->error);
 							}
 							
+						}
+						else{
+
+							echo "tokens do not match! .....";
 						}							
 					}
 					else
