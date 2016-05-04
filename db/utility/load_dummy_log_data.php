@@ -32,7 +32,6 @@
 	echo "\nThe formatted timestamp is -> $month_ago_date and the raw timestamp is -> $mont_ago_timestamp\n";
 	
 	
-	if(false) {
 	$set_user_reg_date_sql = "INSERT INTO activity_log ( ps_id , ac_type , time_logged ) VALUES ( " . $user_info["user_id"] . " , 'user-register', '$month_ago_date');";
 	
 	if(!($db_conn->query($set_user_reg_date_sql))) {
@@ -67,8 +66,7 @@
 			$photo_id = $result_row["p_id"];
 			
 			$insert_arr = array(
-				"photo_id"		=> $photo_id,
-				"story_ids"		=> array()
+				"photo_id"		=> $photo_id
 			);
 			
 			array_push($photo_ids, $insert_arr);
@@ -127,11 +125,96 @@
 		Now grab all the stories for each array
 	*/
 	
-	
+	foreach ( $photo_ids as $curr_photo_info ) {
+		
+		$curr_photo_id = $curr_photo_info["photo_id"];
+		$curr_photo_upload_date = $curr_photo_info["rand_date"];
+		
+		//	The SQL for grabbing all the story IDs
+		
+		$get_all_photo_ids_sql = "SELECT PS.s_id FROM photo_story PS WHERE PS.p_id = " . $curr_photo_id . ";";
+		
+		if($result = $db_conn->query($get_all_photo_ids_sql)) {
+			
+			$all_story_info = array();
+			
+			while($result_array = $result->fetch_array(MYSQLI_ASSOC)) {
+				
+				$story_id = $result_array["s_id"];
+				$story_rand_date = get_date_between_now_and_date( $curr_photo_upload_date );
+				
+				$story_info = array(
+					"story_id"	=> $story_id,
+					"rand_date" => $story_rand_date
+				);
+				
+				array_push($all_story_ids, $story_info);
+			}
+			
+			
+			$curr_photo_info["stories"] = $all_story_info;
+		}
+		else {
+			$error_str = "I couldn't get all the stories for the photo with id -> " . $curr_photo_id . "... SQL Error -> " . $db_conn->error;
+			echo_in_newlines( $error_str );
+		}
+
 	}
 	
 	
 	
+	/*
+		Set the story upload time in the log database
+	*/
+	
+	//	SQL for inserting a story upload into the log table
+	$insert_story_into_log_sql = "INSERT INTO activity_log ( ps_id , ac_type , s_id , p_id , time_logged ) "
+									. "VALUES ( " . $user_info["user_id"] . " , 'photo-upload' , ? , ? , ? )";
+									
+	//	Prepare the statement for inserting a story upload into the activity log
+	if(!($insert_story_into_log_stmt = $db_conn->prepare($insert_story_into_log_sql))) {
+		$error_str = error_string_for_statement_prepare( $insert_story_into_log_sql , $db_conn->error );
+		set_error_response( 0 , $error_str );
+	}
+	
+	foreach( $photo_ids as $curr_photo_info ) {
+		
+		$curr_photo_id = $curr_photo_info["photo_id"];
+		
+		$all_stories = $curr_photo_info["stories"];
+		
+		
+		foreach( $all_stories as $story_info ) {
+			
+			$story_upload_timestamp = $story_info["rand_date"];
+			$story_id = $story_info["story_id"];
+			
+			//	Bind the parameters to the previously created prepared statement
+			if(!($insert_story_into_log_stmt->bind_param("iis", $story_id , $curr_photo_id , $story_upload_timestamp))) {
+				
+				$error_str = error_string_for_param_bind( $insert_story_into_log_sql , $db_conn->error );
+				set_error_response( 0 , $error_str );
+			}
+			else {
+				
+				$success_values = array(
+					"story_id" => $story_id,
+					"photo_id" => $curr_photo_id,
+					"story_timestamp" => $story_upload_timestamp 
+				);
+				
+				echo_in_newlines( "Success! -> " . json_encode($success_values) );
+			}
+			
+			
+			
+		}
+		
+		
+		
+		
+		
+	}
 	
 	
 	
@@ -145,6 +228,20 @@
 	/*
 		CUSTOM FUNCTIONS
 	*/
+	function echo_in_newlines( $str ) {
+		echo "\n$str\n";
+	}
+	
+	function get_date_between_now_and_date( $date ) {
+		
+		$todays_timestamp = time();
+		$dates_timestamp = strtotime( $date );
+		
+		$rand_timestamp = mt_rand($dates_timestamp, $todays_timestamp );
+		
+		return convert_timestamp_to_proper_date( $rand_timestamp );
+	}
+	
 	function get_timestamp_for_days_age( $days_ago ) {
 		
 		$days_ago_timestamp = time() - convert_days_to_seconds( $days_ago );
