@@ -60,11 +60,67 @@
 			
 			$photo_id = $result_row["p_id"];
 			
-			array_push($photo_ids, $photo_id);
+			$insert_arr = array(
+				"photo_id"		=> $photo_id,
+				"story_ids"		=> array()
+			);
+			
+			array_push($photo_ids, $insert_arr);
 		}
 	}
 	
-	echo "\n\n " . json_encode( $photo_ids ) . "\n\n";
+	/*
+		Insert photo uploads into the log
+	*/
+	
+	//	First create the SQL for the statement
+	$insert_photo_to_log_sql = "INSERT INTO activity_log ( ps_id , ac_type , p_id , time_logged ) "
+								. "VALUES ( " . $user_info["user_id"] . " , 'photo-upload' , ? , ? )";
+								
+	//	Now prepare the statement
+	if(!($insert_photo_to_log_stmt = $db_conn->prepare($insert_photo_to_log_sql))) {
+		$error_message = error_string_for_statement_prepare( $insert_photo_to_log_sql , $db_conn->error );
+		
+		set_error_response( 0 , $error_message );
+	}
+	
+	//	Loop through all the photographs
+	foreach( $photo_ids as $curr_photo_info) {
+		
+		$rand_date = get_random_date_between_now_and_month_ago();
+		
+		$curr_photo_info["rand_date"] = $rand_date;
+		
+		$curr_photo_id = $curr_photo_info["photo_id"];
+		
+		
+		//	Bind the parameters
+		if(!($insert_photo_to_log_stmt->bind_param("is", $curr_photo_id, $rand_date))) {
+			
+			$error_str = error_string_for_param_bind( $insert_photo_to_log_sql , $db_conn->error );
+			set_error_response( 0, $error_str );
+		}
+		
+		if($insert_photo_to_log_stmt->execute()) {
+			$success_str = "\nI successfully inserted the photo with information -> " . json_encode($curr_photo_info) . " to the database...\n";
+			echo $success_str;
+		}
+		else {
+			$error_str = error_string_for_statement_execute( $insert_photo_to_log_sql , $db_conn->error);
+			set_error_response( 0 , $error_str);
+		}
+	}
+	
+	
+	
+	
+	
+	/*
+		
+	/*
+		Now grab all the stories for each array
+	*/
+	
 	
 	
 	
@@ -111,7 +167,25 @@
 		
 		return ($days * 24 * 60 * 60 );
 	}
+	function error_string_for_param_bind( $sql_statement , $db_error ) {
+		
+		$error_str = "There was an error binding the parameters for the SQL statement -> ' " . $sql_statement . " ' ... SQL Error -> " . $db_error;
+		
+		return $error_str;
+	}
 	
+	function error_string_for_statement_execute( $sql_statement, $db_error ) {
+		
+		$error_str = "There was an error executing the statement with the SQL -> " . $sql_statement . "... SQL Error -> " . $db_error;
+		return $error_str;
+	}
+	
+	function error_string_for_statement_prepare( $sql_statement , $db_error ) {
+		
+		$error_str = "There was an error preparing the statement with the SQL -> " . $sql_statement . "... SQL Error -> " . $db_error;
+		return $error_str;
+	}
+
 	function set_error_response( $error_code , $error_message ) {
 		
 		
