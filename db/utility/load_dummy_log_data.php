@@ -55,7 +55,7 @@
 		Now grab all the photo IDs
 	*/
 	
-	$photo_ids = array();
+	$photo_information = array();
 	
 	$get_all_photo_ids_sql = "SELECT P.p_id FROM photograph P";
 	
@@ -65,11 +65,11 @@
 			
 			$photo_id = $result_row["p_id"];
 			
-			$insert_arr = array(
-				"photo_id"		=> $photo_id
-			);
+			$new_photo_information = new PhotoInfo();
 			
-			array_push($photo_ids, $insert_arr);
+			$new_photo_information->photo_id = $photo_id;
+					
+			array_push($photo_information, $new_photo_information);
 		}
 	}
 	
@@ -89,16 +89,15 @@
 	}
 	
 	//	Loop through all the photographs
-	for( $i = 0; $i < count($photo_ids); $i++) {
+	for( $i = 0; $i < count($photo_information); $i++) {
 		
-		$curr_photo_info = $photo_ids[$i];
+		$curr_photo_info = $photo_information[$i];
 		
 		$rand_date = get_random_date_between_now_and_month_ago();
-		echo_in_newlines( json_encode($curr_photo_info) );
 		
-		$curr_photo_info["rand_date"] = $rand_date;
+		$curr_photo_info->random_date = $rand_date;
 		
-		$curr_photo_id = $curr_photo_info["photo_id"];
+		$curr_photo_id = $curr_photo_info->photo_id;
 		
 		
 		//	Bind the parameters
@@ -116,12 +115,13 @@
 			$error_str = error_string_for_statement_execute( $insert_photo_to_log_sql , $db_conn->error);
 			set_error_response( 0 , $error_str);
 		}
-		
-		
-		
+
 	}
 	
-	echo_in_newlines( json_encode($photo_ids[0]));
+	foreach( $photo_information as $curr_photo_info) {
+		
+		$curr_photo_info->print_values();
+	}
 	
 	
 	
@@ -313,4 +313,47 @@
 		
 	}
 	
+	
+	/*
+		Custom classes
+	*/
+	
+	class StoryInfo {
+		
+		public $story_id;
+		public $story_date;
+		
+		
+		
+		
+	}
+	
+	class PhotoInfo {
+		
+		public $photo_id;
+		public $random_date;
+		public $stories;
+		
+		
+		public function add_story( $new_story ) {
+			
+			if(!(isset($this->stories))) {
+				$this->stories = array();
+			}
+			
+			array_push($this->stories, $new_story );
+			
+		}
+		
+		public function print_values() {
+			
+			$echo_values = array(
+				"photo_id"	=> $this->photo_id,
+				"random_date" => $this->random_date,
+				"stories" => $this->stories
+			);
+			
+			echo_in_newlines( json_encode($echo_values) );
+		}
+	}
 ?>
