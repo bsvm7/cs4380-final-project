@@ -121,7 +121,7 @@
 		
 	}
 	
-	
+	json_encode($photo_ids[0]);
 	
 	
 	
@@ -131,6 +131,7 @@
 		Now grab all the stories for each array
 	*/
 	
+	if(false){
 	foreach ( $photo_ids as $curr_photo_info ) {
 		
 		echo_in_newlines( json_encode($curr_photo_info));
@@ -168,7 +169,6 @@
 		}
 
 	}
-	
 	
 	
 	/*
@@ -224,7 +224,7 @@
 		
 	}
 	
-	
+	}
 	
 	
 	
