@@ -197,13 +197,20 @@
 			}
 			else {
 				
-				$success_values = array(
-					"story_id" => $story_id,
-					"photo_id" => $curr_photo_id,
-					"story_timestamp" => $story_upload_timestamp 
-				);
+				if($insert_story_into_log_stmt->execute()) {
+					$success_values = array(
+						"story_id" => $story_id,
+						"photo_id" => $curr_photo_id,
+						"story_timestamp" => $story_upload_timestamp 
+					);
 				
-				echo_in_newlines( "Success! -> " . json_encode($success_values) );
+					echo_in_newlines( "Success! -> " . json_encode($success_values) );	
+				}
+				else {
+					$error_str = error_string_for_statement_execute( $insert_story_into_log_sql, $db_conn->error );
+					set_error_response( 0 , $error_str );
+				}
+				
 			}
 			
 			
