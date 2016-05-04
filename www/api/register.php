@@ -245,9 +245,12 @@
 					*/
 
 					$insert_user_auth_sql = "INSERT INTO user_auth (ps_id , pass_hash, pass_salt) VALUES (?, ?, ?)";
+											echo "user auth sql worked "."\n"; 
+
+					$insert_user_auth_stmt = $db_conn->stmt_init();
 					
-					$insert_user_auth_stmt = $db_conn->init();
-					
+						echo "user auth sql worked "."\n"; 
+
 					if(!$insert_user_auth_stmt->prepare($insert_user_auth_sql)){
 						
 						set_error_response( 201, "SQL Error -> " . $insert_user_auth_stmt->error);
@@ -255,6 +258,7 @@
 						break;
 
 					}
+						echo "user auth stmt prepare worked "."\n"; 
 
 					if(!$insert_user_auth_stmt->bind_param("iss", $last_insert_id, $hash, $salt)){
 
@@ -262,6 +266,7 @@
 
 						break;
 					}
+						echo "user auth stmt param bind worked "."\n"; 
 
 					if(!$insert_user_auth_stmt->execute()){
 						
@@ -271,15 +276,16 @@
 
 					}
 
+						echo "user auth stmt execution worked "."\n"; 
+
+					/*
 					if ($db_conn->affected_rows == 1) {							
 					}
 					else {
 						set_error_response( 201, "SQL Error 2 -> " . $db_conn->error);
 						break;
 					}						
-
-					if($insert_user_auth_result = $insert_user_auth_stmt->get_result()) {
-
+					*/
 
 						$ret_user_info = array(
 							
@@ -316,8 +322,6 @@
 
 							echo "registration activity has been logged"."\n";
 
-							$insert_log_stmt->execute();
-
 						}
 
 						else {
@@ -326,7 +330,7 @@
 
 						}
 
-					}
+					
 
 				}
 	

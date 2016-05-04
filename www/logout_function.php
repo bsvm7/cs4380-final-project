@@ -36,6 +36,8 @@
 
 				$access_token=$decoded_json['access_token'];
 
+				echo "access token is ".$access_token;
+
 				if (empty($access_token)) {
 
 					echo "access_token is needed"."\n";
@@ -48,7 +50,7 @@
 					// retrieve the access token for the current user from database
 					$token_retrieve_sql = 'SELECT * FROM user_auth_token UAT WHERE UAT.access_token = ?';
 
-					$token_retrieve_sql = $db_conn->stmt_init();
+					$token_retrieve_stmt = $db_conn->stmt_init();
 
 					if (!($token_retrieve_stmt = $db_conn->prepare($token_retrieve_sql))) {
 
@@ -57,6 +59,8 @@
 						break;
 					}							
 
+					echo "token retrieve statement prepared"."\n";
+
 					if (!$token_retrieve_stmt->bind_param("s" , $access_token)) {
 
 						set_error_response( 201, "SQL Error -> " . $token_retrieve_stmt->error);
@@ -64,15 +68,19 @@
 						break;
 					}
 				
+					echo "token retrieve statement param bind worked"."\n";
+
+
 					if (!$token_retrieve_stmt->execute()) {
 				
 						set_error_response( 201, "SQL Error -> " . $token_retrieve_stmt->error);
 
 						break;				
 					}
+					echo "token retrieve statement execution worked"."\n";
 
 					// compare the access token provided and the one retrived from database
-					if ($token_retrieve_result = $token_retrieve_stmt->get_result()) {
+					if ($token_retrieve_result == $token_retrieve_stmt->get_result()) {
 
 						/*
 						// this has not worked out yet
@@ -123,7 +131,7 @@
 
 								if ($delete_token_stmt->execute()) {
 									
-									header('Location: ');
+									//header('Location: ');
 									echo "You have successfully logged out"."\n";
 
 								}
