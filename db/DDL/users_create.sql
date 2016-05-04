@@ -63,9 +63,12 @@ GRANT UPDATE, INSERT, SELECT, DELETE ON photoarchiving.photo_story TO 'web_user'
 GRANT UPDATE, INSERT, SELECT, DELETE ON photoarchiving.user_activity TO 'web_user'@'localhost' ;
 
 
+#
 #	The web user should only be able to insert and select from the log
+#
 #	It should not be able to delete or update any log reacords once they
-#	have been created.
+#	have been created
+#
 GRANT INSERT, SELECT ON photoarchiving.activity_log TO 'web_user'@'localhost' ;
 
 GRANT UPDATE, INSERT, SELECT, DELETE ON photoarchiving.photo_repo TO 'web_user'@'localhost' ;
