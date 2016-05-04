@@ -121,7 +121,7 @@
 		
 	}
 	
-	json_encode($photo_ids[0]);
+	echo_in_newlines( json_encode($photo_ids[0]));
 	
 	
 	
