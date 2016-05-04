@@ -103,8 +103,10 @@
 							$insert_log_stmt = $db_conn->stmt_init();
 							
 							$insert_log_stmt->prepare($insert_log_sql);
+
+							$ac_type="logout";
 							
-							$insert_log_stmt->bind_param("is", $result_ps_id, "logout");
+							$insert_log_stmt->bind_param("is", $result_ps_id, $ac_type);
 							
 							if ($insert_log_stmt->execute()) {	
 
