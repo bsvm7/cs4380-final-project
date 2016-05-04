@@ -106,6 +106,7 @@ CREATE TABLE user
 	username		VARCHAR(250) NOT NULL,
 	email			VARCHAR(500),
 	date_joined		TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	user_level		TINYINT UNSIGNED DEFAULT 0, 
 	FOREIGN KEY 	(ps_id) REFERENCES person(ps_id) ON DELETE CASCADE,
 	PRIMARY KEY 	(ps_id)	
 );
@@ -131,8 +132,8 @@ CREATE TABLE user_auth
 DROP TABLE IF EXISTS user_pref;
 CREATE TABLE user_pref
 (
-	ps_id			BIGINT UNSIGNED,
-	text_size		SMALLINT UNSIGNED,
+	ps_id				BIGINT UNSIGNED,
+	text_size			SMALLINT UNSIGNED,
 	hearing_impaired	BOOLEAN NOT NULL DEFAULT FALSE,
 	preferred_name		VARCHAR(200),
 	FOREIGN KEY (ps_id) REFERENCES person(ps_id) ON DELETE CASCADE,
@@ -302,49 +303,20 @@ CREATE TABLE user_activity
 	PRIMARY KEY (ac_id)	
 );
 
-
-
 #
-#	19) Log	( log )
-#
-DROP TABLE IF EXISTS log;
-CREATE TABLE log
-(
-	lo_id				SERIAL,
-	ps_id				BIGINT UNSIGNED,
-	time_logged			TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-	FOREIGN KEY (ps_id) REFERENCES person(ps_id) ON DELETE NO ACTION,
-	PRIMARY KEY (lo_id)	
-);
-
-
-#
-#	20) Session Log	( session_log )
-#
-DROP TABLE IF EXISTS session_log;
-CREATE TABLE session_log
-(
-	lo_id				BIGINT UNSIGNED,
-	login_time			TIMESTAMP,
-	logout_time			TIMESTAMP,
-	FOREIGN KEY (lo_id) REFERENCES log(lo_id) ON DELETE CASCADE,
-	PRIMARY KEY (lo_id)	
-);
-
-
-#
-#	21) Activity Log	( activity_log )
+#	19) Activity Log	( activity_log )
 #
 DROP TABLE IF EXISTS activity_log;
 CREATE TABLE activity_log
 (
 	lo_id				BIGINT UNSIGNED,
+	ps_id				BIGINT UNSIGNED,
 	ac_type				BIGINT UNSIGNED,
 	s_id				BIGINT UNSIGNED,
 	p_id				BIGINT UNSIGNED,
 	r_id				BIGINT UNSIGNED,
-	FOREIGN KEY (lo_id) REFERENCES log(lo_id) ON DELETE CASCADE,
-	FOREIGN KEY (ac_type) REFERENCES user_activity(ac_id) ON DELETE NO ACTION,
+	time_logged			TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	FOREIGN KEY (ps_id) REFERENCES person(ps_id) ON DELETE NO ACTION,
 	FOREIGN KEY (s_id) REFERENCES story(s_id) ON DELETE NO ACTION,
 	FOREIGN KEY (p_id) REFERENCES photograph(p_id) ON DELETE NO ACTION,
 	FOREIGN KEY (r_id) REFERENCES repository(r_id) ON DELETE NO ACTION,
@@ -352,7 +324,7 @@ CREATE TABLE activity_log
 );
 
 #
-#	22) Photo Repository	( photo_repo)
+#	20) Photo Repository	( photo_repo)
 #
 DROP TABLE IF EXISTS photo_repo;
 CREATE TABLE photo_repo
@@ -365,7 +337,7 @@ CREATE TABLE photo_repo
 );
 
 #
-#	23) User Authorization Token ( user_auth_token)
+#	21) User Authorization Token ( user_auth_token)
 #
 DROP TABLE IF EXISTS user_auth_token;
 CREATE TABLE user_auth_token
@@ -383,22 +355,23 @@ CREATE TABLE user_auth_token
 );
 
 #
-#	24) User Repository 		(user_repo)
+#	22) User Repository 		(user_repo)
 #
 DROP TABLE IF EXISTS user_repo;
 CREATE TABLE user_repo 
 (
-	ps_id			BIGINT UNSIGNED,	
-	r_id 			BIGINT UNSIGNED,
-	date_joined		TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	ps_id				BIGINT UNSIGNED,	
+	r_id 			 	BIGINT UNSIGNED,
+	date_joined		 	TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	permission_level 	TINYINT UNSIGNED DEFAULT 0,
 	PRIMARY KEY (ps_id, r_id),
 	FOREIGN KEY (ps_id) REFERENCES person (ps_id) ON DELETE CASCADE,
-	FOREIGN KEY (r_id) REFERENCES repository (r_id) ON DELETE CASCADE
+	FOREIGN KEY (r_id) 	REFERENCES repository (r_id) ON DELETE CASCADE
 );
 
 
 #
-#	25) photo location 		(photo_loc)
+#	23) photo location 		(photo_loc)
 #
 DROP TABLE IF EXISTS photo_loc;
 CREATE TABLE photo_loc 
@@ -412,7 +385,7 @@ CREATE TABLE photo_loc
 
 
 #
-#	26)	Photograph Archive
+#	24)	Photograph Archive
 #
 DROP TABLE IF EXISTS photograph_archive;
 CREATE TABLE photograph_archive
@@ -427,6 +400,7 @@ CREATE TABLE photograph_archive
 	PRIMARY KEY (pa_id)
 );
 
+<<<<<<< HEAD
 
 #
 #	27)	Story Archive
@@ -442,3 +416,5 @@ CREATE TABLE story_archive
 	archive_date		TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	PRIMARY KEY (sa_id)
 );
+=======
+>>>>>>> 746422ba262168466660d47a5c5d47c70fd91e85

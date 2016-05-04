@@ -97,7 +97,8 @@
 							
 							if ($computed_hash == $result_hash) {
 
-				
+								$log_in_time = 
+
 								$random_string1 = generate_255_char_random_string();								
 		
 								$random_string2 = generate_255_char_random_string();	
@@ -123,6 +124,29 @@
 									http_response_code(200);
 									
 									echo json_encode($resp_array);
+
+
+									// record login information into activity log table
+
+									$insert_log_sql = "INSERT INTO activity_log (ps_id, ac_type) VALUES (?, ?)";
+
+									$insert_log_stmt = $db_conn->stmt_init();
+
+									$insert_log_stmt->prepare($insert_log_sql);
+
+									$insert_log_stmt->bind_param("is", $result_ps_id, 'login');
+
+									if($insert_log_stmt->execute()) {
+
+										echo "login activity has been logged"."\n";
+									}
+									else {
+
+										set_error_response( 201, "SQL Error -> " . $insert_new_person_stmt->error);
+
+									}
+
+
 								}
 								else
 								{
