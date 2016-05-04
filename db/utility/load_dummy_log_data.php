@@ -131,37 +131,29 @@
 		Now grab all the stories for each array
 	*/
 	
-	if(false){
-	foreach ( $photo_ids as $curr_photo_info ) {
+	foreach (  $photo_information as $curr_photo_info ) {
 		
-		echo_in_newlines( json_encode($curr_photo_info));
-		
-		$curr_photo_id = $curr_photo_info["photo_id"];
-		$curr_photo_upload_date = $curr_photo_info["rand_date"];
+		$curr_photo_id 			= $curr_photo_info->photo_id;
+		$curr_photo_upload_date = $curr_photo_info->random_date;
 		
 		//	The SQL for grabbing all the story IDs
 		
 		$get_all_photo_ids_sql = "SELECT PS.s_id FROM photo_story PS WHERE PS.p_id = " . $curr_photo_id . ";";
 		
 		if($result = $db_conn->query($get_all_photo_ids_sql)) {
-			
-			$all_story_info = array();
-			
+
 			while($result_array = $result->fetch_array(MYSQLI_ASSOC)) {
 				
 				$story_id = $result_array["s_id"];
 				$story_rand_date = get_date_between_now_and_date( $curr_photo_upload_date );
 				
-				$story_info = array(
-					"story_id"	=> $story_id,
-					"rand_date" => $story_rand_date
-				);
+				$new_story_info = new StoryInfo();
 				
-				array_push($all_story_info, $story_info);
+				$new_story_info->story_id = $story_id;
+				$new_story_info->set_random_date_with_date( $curr_photo_upload_date );
+				
+				$curr_photo_info->add_story( $new_story_info );
 			}
-			
-			
-			$curr_photo_info["stories"] = $all_story_info;
 		}
 		else {
 			$error_str = "I couldn't get all the stories for the photo with id -> " . $curr_photo_id . "... SQL Error -> " . $db_conn->error;
@@ -185,17 +177,17 @@
 		set_error_response( 0 , $error_str );
 	}
 	
-	foreach( $photo_ids as $curr_photo_info ) {
+	foreach( $photo_information as $curr_photo_info ) {
 		
-		$curr_photo_id = $curr_photo_info["photo_id"];
+		$curr_photo_id = $curr_photo_info->photo_id;
 		
-		$all_stories = $curr_photo_info["stories"];
+		$all_stories = $curr_photo_info->stories;
 		
 		
 		foreach( $all_stories as $story_info ) {
 			
-			$story_upload_timestamp = $story_info["rand_date"];
-			$story_id = $story_info["story_id"];
+			$story_upload_timestamp = $story_info->random_date;
+			$story_id = $story_info->story_id;
 			
 			//	Bind the parameters to the previously created prepared statement
 			if(!($insert_story_into_log_stmt->bind_param("iis", $story_id , $curr_photo_id , $story_upload_timestamp))) {
@@ -224,7 +216,6 @@
 		
 	}
 	
-	}
 	
 	
 	
@@ -321,10 +312,12 @@
 	class StoryInfo {
 		
 		public $story_id;
-		public $story_date;
+		public $random_date;
 		
 		
-		
+		public function set_random_date_with_date( $date ) {
+			$this->random_date = get_date_between_now_and_date( $date );
+		}
 		
 	}
 	
