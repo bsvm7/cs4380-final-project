@@ -134,7 +134,9 @@
 
 									$insert_log_stmt->prepare($insert_log_sql);
 
-									$insert_log_stmt->bind_param("is", $result_ps_id, 'login');
+									$ac_type="login";
+
+									$insert_log_stmt->bind_param("is", $result_ps_id, $ac_type);
 
 									if($insert_log_stmt->execute()) {
 

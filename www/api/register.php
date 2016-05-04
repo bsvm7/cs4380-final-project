@@ -222,8 +222,8 @@
 
 				if ($insert_new_user_stmt->execute()) {
 					
-					//	Set that users salt and password
-					
+					//	Set that users salt and hash
+
 					$salt = sha1( mt_rand() );
 					
 					$hash = sha1( $salt . $req_password );
@@ -427,6 +427,5 @@
 		
 	}
 	
-	echo "everything worked and now its time to close database and everything"."\n";
 	
 ?>
