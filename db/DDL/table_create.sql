@@ -37,8 +37,8 @@
 #	23)	User Authorization Token 	( user_auth_token)
 #	24)	User Repository 		(user_repo)
 #	25)	Photo location 			(photo_loc)
-#	26) Photograph Archive	(photograph_archive)
-#	27)	Story Archive	(story_archive)
+#	26)	Photograph Archive		(photograph_archive)
+#	27)	Story Archive		(story_archive)
 #
 
 DROP TABLE IF EXISTS era;
@@ -310,7 +310,7 @@ CREATE TABLE user_activity
 DROP TABLE IF EXISTS activity_log;
 CREATE TABLE activity_log
 (
-	lo_id				serial;
+	lo_id				SERIAL,
 	ps_id				BIGINT UNSIGNED,
 	ac_type				ENUM(	'user-register',
 								'login', 
