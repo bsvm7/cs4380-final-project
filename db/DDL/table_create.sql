@@ -325,7 +325,7 @@ CREATE TABLE activity_log
 								'story-delete', 
 								'story-update', 
 								'story-view',
-								'story-create'
+								'story-upload'
 							),
 	s_id				BIGINT UNSIGNED,
 	p_id				BIGINT UNSIGNED,
