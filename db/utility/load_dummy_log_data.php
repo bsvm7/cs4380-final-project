@@ -27,6 +27,12 @@
 	
 	$month_ago_date = convert_timestamp_to_proper_date(get_timestamp_for_days_age( 33 ));
 	
+	$mont_ago_timestamp = strtotime($month_ago_date);
+	
+	echo "\nThe formatted timestamp is -> $month_ago_date and the raw timestamp is -> $mont_ago_timestamp\n";
+	
+	
+	if(false) {
 	$set_user_reg_date_sql = "INSERT INTO activity_log ( ps_id , ac_type , time_logged ) VALUES ( " . $user_info["user_id"] . " , 'user-register', '$month_ago_date');";
 	
 	if(!($db_conn->query($set_user_reg_date_sql))) {
@@ -122,7 +128,7 @@
 	*/
 	
 	
-	
+	}
 	
 	
 	
