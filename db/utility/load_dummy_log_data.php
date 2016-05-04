@@ -169,7 +169,7 @@
 	
 	//	SQL for inserting a story upload into the log table
 	$insert_story_into_log_sql = "INSERT INTO activity_log ( ps_id , ac_type , s_id , p_id , time_logged ) "
-									. "VALUES ( " . $user_info["user_id"] . " , 'photo-upload' , ? , ? , ? )";
+									. "VALUES ( " . $user_info["user_id"] . " , 'story-upload' , ? , ? , ? )";
 									
 	//	Prepare the statement for inserting a story upload into the activity log
 	if(!($insert_story_into_log_stmt = $db_conn->prepare($insert_story_into_log_sql))) {
