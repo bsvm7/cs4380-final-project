@@ -2,7 +2,7 @@
 
 
 	//session_start(); // Starting Session
-	include("../../db_security/security.php");
+	include("../../../db_security/security.php");
 	//include('./api/authorize.php');
 	//$error=''; // Variable To Store Error Message
 
@@ -13,15 +13,15 @@
 	
 	// connect to the database 
 	$db_conn = new mysqli($db_host, $db_user, $db_pass, $db_database);					
-	echo "database connected" . "\n";
-
+	
 	if ($db_conn->error_code) {
 		
 		set_error_response( 400 , "I couldn't connect to the database -> " . $db_conn->connect_error);
 
 		die("The connection to the database failed: " . $db_conn->connect_error);
 	}
-					
+			
+	echo "database connected" . "\n";		
 
 	$req_method = $_SERVER['REQUEST_METHOD'];		
 		
@@ -36,7 +36,7 @@
 
 				$access_token=$decoded_json['access_token'];
 
-				echo "access token is ".$access_token;
+				echo "access token you entered is ".$access_token."\n";
 
 				if (empty($access_token)) {
 
@@ -48,7 +48,7 @@
 				else {
 
 					// retrieve the access token for the current user from database
-					$token_retrieve_sql = 'SELECT * FROM user_auth_token UAT WHERE UAT.access_token = ?';
+					$token_retrieve_sql = 'SELECT * FROM user_auth_token UAT WHERE access_token = ?';
 
 					$token_retrieve_stmt = $db_conn->stmt_init();
 
