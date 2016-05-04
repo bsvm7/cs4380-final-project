@@ -247,8 +247,10 @@
 					$insert_user_auth_sql = "INSERT INTO user_auth (ps_id , pass_hash, pass_salt) VALUES (?, ?, ?)";
 											echo "user auth sql worked "."\n"; 
 
-					$insert_user_auth_stmt = $db_conn->init();
+					$insert_user_auth_stmt = $db_conn->stmt_init();
 					
+						echo "user auth sql worked "."\n"; 
+
 					if(!$insert_user_auth_stmt->prepare($insert_user_auth_sql)){
 						
 						set_error_response( 201, "SQL Error -> " . $insert_user_auth_stmt->error);

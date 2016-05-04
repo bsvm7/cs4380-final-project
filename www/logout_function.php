@@ -48,7 +48,7 @@
 					// retrieve the access token for the current user from database
 					$token_retrieve_sql = 'SELECT * FROM user_auth_token UAT WHERE UAT.access_token = ?';
 
-					$token_retrieve_sql = $db_conn->stmt_init();
+					$token_retrieve_stmt = $db_conn->stmt_init();
 
 					if (!($token_retrieve_stmt = $db_conn->prepare($token_retrieve_sql))) {
 
