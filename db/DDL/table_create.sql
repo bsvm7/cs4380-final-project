@@ -359,14 +359,13 @@ CREATE TABLE photo_repo
 DROP TABLE IF EXISTS user_auth_token;
 CREATE TABLE user_auth_token
 (
-	token_id			SERIAL,
+	ps_id 				BIGINT UNSIGNED,
 	access_token		CHAR(64),
 	refresh_token		CHAR(64),
-	issued_to 			BIGINT UNSIGNED,
 	issue_time			TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	expire_time			TIMESTAMP,
-	PRIMARY KEY (token_id),
-	FOREIGN KEY (issued_to) REFERENCES person (ps_id) ON DELETE CASCADE,
+	PRIMARY KEY (ps_id),
+	FOREIGN KEY (ps_id) REFERENCES person (ps_id) ON DELETE CASCADE,
 	UNIQUE (access_token),
 	UNIQUE (refresh_token)
 );

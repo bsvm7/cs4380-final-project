@@ -102,7 +102,7 @@
 		
 								$random_string2 = generate_255_char_random_string();	
 
-								$insert_token_sql = "INSERT INTO user_auth_token (issued_to, access_token, refresh_token) VALUES ( ? , ? , ?)";								
+								$insert_token_sql = "INSERT INTO user_auth_token (ps_id, access_token, refresh_token) VALUES ( ? , ? , ?)";								
 				
 								$insert_token_statement = $db_conn->stmt_init();
 								
@@ -178,7 +178,7 @@
 							set_error_response( 13, "SQL Error" . $ps_id_retrieve_stmt->error);
 						}
 
-						$update_token_sql = "UPDATE user_auth_token SET access_token= ? WHERE issued_to=? AND refresh_token= ?";								
+						$update_token_sql = "UPDATE user_auth_token SET access_token= ? WHERE ps_id=? AND refresh_token= ?";								
 		
 						if( !$update_token_statement = $db_conn->stmt_init()){
 						

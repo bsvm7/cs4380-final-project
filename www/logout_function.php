@@ -11,26 +11,23 @@
 	$db_pass = constant("DB_PASS");
 	$db_database = constant("DB_DATABASE");
 	
-	//	First connect to the database using values from the included file
-	$db_conn = new mysqli($db_host, $db_user, $db_pass, $db_database);
-	
+	// connect to the database 
+	$db_conn = new mysqli($db_host, $db_user, $db_pass, $db_database);					
 	echo "database connected" . "\n";
-
 
 	if ($db_conn->error_code) {
 		
 		set_error_response( 400 , "I couldn't connect to the database -> " . $db_conn->connect_error);
+
 		die("The connection to the database failed: " . $db_conn->connect_error);
 	}
-		
-	
+					
+
 	$req_method = $_SERVER['REQUEST_METHOD'];		
 		
 	switch ($req_method) {
 		
 		case 'POST':
-
-			//if ($_POST['authtype'] == "initial") {
 
 			//	Get the raw post database
 			$json_raw = file_get_contents("php://input");
@@ -40,12 +37,15 @@
 				$access_token=$decoded_json['access_token'];
 
 				if (empty($access_token)) {
-					//$error = "Username or Password is empty";
+
 					echo "access_token is needed"."\n";
+
+					break;
 				}
 
 				else {
-					
+
+					// retrieve the access token for the current user from database
 					$token_retrieve_sql = 'SELECT * FROM user_auth_token UAT WHERE UAT.access_token = ?';
 
 					$token_retrieve_sql = $db_conn->stmt_init();
@@ -57,15 +57,21 @@
 						break;
 					}							
 
-					$token_retrieve_stmt->bind_param("s" , $access_token);
+					if (!$token_retrieve_stmt->bind_param("s" , $access_token)) {
+
+						set_error_response( 201, "SQL Error -> " . $token_retrieve_stmt->error);
+
+						break;
+					}
 				
-					if (!$hash_retrieve_stmt->execute()) {
+					if (!$token_retrieve_stmt->execute()) {
 				
-						echo "Error" . " " . $stmt->error;
-				
+						set_error_response( 201, "SQL Error -> " . $token_retrieve_stmt->error);
+
+						break;				
 					}
 
-				
+					// compare the access token provided and the one retrived from database
 					if ($token_retrieve_result = $token_retrieve_stmt->get_result()) {
 
 						/*
@@ -82,57 +88,43 @@
 						*/
 
 						$row = $token_retrieve_result->fetch_array(MYSQLI_NUM);
-						
+
+						$result_ps_id = $row[0];						
 						$result_access_token = $row[1];
-						$result_refresh_token = $row[2];
-						$result_ps_id = $row[3];
+						//$result_refresh_token = $row[2];
+
 					
 						if ($result_access_token == $access_token) {
 
 
-							$insert_log_sql = "INSERT INTO activity_log (ps_id, ac_type) VALUES ( ? , ?)";								
+							// insert logout activity in activity log table
+							$insert_log_sql = "INSERT INTO activity_log (ps_id, ac_type) VALUES ( ? , ?)";	
 			
-							$insert_token_statement = $db_conn->stmt_init();
+							$insert_log_stmt = $db_conn->stmt_init();
 							
-							$insert_token_statement->prepare($insert_token_sql);
+							$insert_log_stmt->prepare($insert_log_sql);
 							
-							$insert_token_statement->bind_param("iss", $result_ps_id, $random_string1, $random_string2);
+							$insert_log_stmt->bind_param("is", $result_ps_id, "logout");
 							
-							if ($insert_token_statement->execute()) {									
+							if ($insert_log_stmt->execute()) {	
+
+
+								// delete access token and refresh token from user_auth_token table
+
+								$delete_token_sql = "DELETE * FROM user_auth_token UAT WHERE UAT.ps_id = ?";	
+				
+								$delete_token_stmt = $db_conn->stmt_init();
 								
-								$resp_array = array();							
-						
-								$resp_array["ps_id"] = $result_ps_id;
-								$resp_array["username"] = $result_username;
-								$resp_array["access_token"] = $random_string1;
-								$resp_array["expires_in"] = 86400;	
-								$resp_array["refresh_token"] = $random_string2;
+								$delete_token_stmt->prepare($delete_token_sql);
 								
-								http_response_code(200);
-								
-								echo json_encode($resp_array);
+								$delete_token_stmt->bind_param("i", $result_ps_id);
 
-
-								// record login information into activity log table
-
-								$insert_log_sql = "INSERT INTO activity_log (ps_id, ac_type) VALUES (?, ?)";
-
-								$insert_log_stmt = $db_conn->stmt_init();
-
-								$insert_log_stmt->prepare($insert_log_sql);
-
-								$insert_log_stmt->bind_param("is", $result_ps_id, 'login');
-
-								if($insert_log_stmt->execute()) {
-
-									echo "login activity has been logged"."\n";
-								}
-								else {
-
-									set_error_response( 201, "SQL Error -> " . $insert_new_person_stmt->error);
+								if ($delete_token_stmt->execute()) {
+									
+									header('Location: ');
+									echo "You have successfully logged out"."\n";
 
 								}
-
 
 							}
 							else
@@ -147,94 +139,9 @@
 						set_error_response( 11, "SQL Error");
 						break;
 					}
-
-					$db_conn->close; 
 			
 				}
-
-				//if ($_POST['authtype'] == "refresh") {
-				else if ($auth_type="refresh") {
-
-
-					if (empty($username) || empty($refresh_token)) {
-						//$error = "Username or Password is empty";
-						echo "Username or refresh token is empty"."\n";
-					}
-
-					else {
-						
-						$random_string = generate_255_char_random_string();																
-
-						$ps_id_retrieve_sql = "SELECT U.ps_id FROM user U WHERE U.username = ? ";
-						$ps_id_retrieve_stmt = $db_conn->stmt_init();
-						$ps_id_retrieve_stmt->prepare($ps_id_retrieve_sql);
-						$ps_id_retrieve_stmt->bind_param("s", $username);
-
-						if ($ps_id_retrieve_stmt->execute()) {
-
-							if($ps_id_retrieve_sql= $ps_id_retrieve_stmt->get_result()) {
-
-								$row = $ps_id_retrieve_sql->fetch_array(MYSQLI_NUM);
-
-								$ps_id_return = $row[0]; 
-
-							}
-
-						}
-
-						else {
-							set_error_response( 13, "SQL Error" . $ps_id_retrieve_stmt->error);
-						}
-
-						$update_token_sql = "UPDATE user_auth_token SET access_token= ? WHERE issued_to=? AND refresh_token= ?";								
-		
-						if( !$update_token_statement = $db_conn->stmt_init()){
-						
-							set_error_response( 13, "SQL Error" . $update_token_statement->error);
-
-						}
-						
-						if(! $update_token_statement->prepare($update_token_sql)){
-
-							set_error_response( 13, "SQL Error" . $update_token_statement->error);
-
-
-						}
-						
-						if(! $update_token_statement->bind_param("sss", $random_string, $ps_id_return, $refresh_token)) {
-
-							set_error_response( 13, "SQL Error" . $update_token_statement->error);
-
-						}
-						
-						if ($update_token_statement->execute()) {
-
-							$resp_array = array();							
-					
-							$resp_array["ps_id"] = $ps_id_return;
-							$resp_array["username"] = $username;
-							$resp_array["access_token"] = $random_string;
-							$resp_array["expires_in"] = 86400;	
-							$resp_array["refresh_token"] = $refresh_token;
-							
-							http_response_code(200);
-
-							echo json_encode($resp_array);
-						}
-						else {
-							set_error_response( 13, "SQL Error" . $insert_token_statement->error);
-						}
-						
-					}							
-				}
-
-				else {
-					set_error_response( 11, "SQL Error");
-					break;
-				}
-
-				$db_conn->close; 
-				
+								
 			}
 
 			else {
@@ -243,10 +150,14 @@
 			
 			}
 
+			$db_conn->close; 
+
 		
 		break;
 		
 		default:
+
+			$db_conn->close; 
 
 		break;	
 	
@@ -254,8 +165,7 @@
 
 	/*
 		UTILITY FUNCTIONS
-	*/
-	
+	*/	
 	
 	function generate_255_char_random_string() {
 		
