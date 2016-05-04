@@ -3,7 +3,7 @@
 
 	//session_start(); // Starting Session
 	include("../../db_security/security.php");
-	//include('./api/authorizate.php');
+	//include('./api/authorize.php');
 	//$error=''; // Variable To Store Error Message
 
 	$db_user = constant("DB_USER");
