@@ -148,7 +148,7 @@
 					"rand_date" => $story_rand_date
 				);
 				
-				array_push($all_story_ids, $story_info);
+				array_push($all_story_info, $story_info);
 			}
 			
 			
