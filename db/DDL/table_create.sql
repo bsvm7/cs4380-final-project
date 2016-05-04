@@ -400,7 +400,6 @@ CREATE TABLE photograph_archive
 	PRIMARY KEY (pa_id)
 );
 
-<<<<<<< HEAD
 
 #
 #	27)	Story Archive
@@ -416,5 +415,3 @@ CREATE TABLE story_archive
 	archive_date		TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	PRIMARY KEY (sa_id)
 );
-=======
->>>>>>> 746422ba262168466660d47a5c5d47c70fd91e85
