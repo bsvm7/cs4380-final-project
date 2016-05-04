@@ -73,7 +73,7 @@ GRANT UPDATE, INSERT, SELECT, DELETE ON photoarchiving.user_auth_token TO 'web_u
 GRANT UPDATE, INSERT, SELECT, DELETE ON photoarchiving.user_repo TO 'web_user'@'localhost' ;
 GRANT UPDATE, INSERT, SELECT, DELETE ON photoarchiving.photo_loc TO 'web_user'@'localhost' ;
 GRANT UPDATE, INSERT, SELECT, DELETE ON photoarchiving.photograph_archive TO 'web_user'@'localhost' ;
-GRANT UPDATE, INSERT, SELECT, DELETE ON photoarchiving.photograph_loc TO 'web_user'@'localhost' ;
+GRANT UPDATE, INSERT, SELECT, DELETE ON photoarchiving.photo_loc TO 'web_user'@'localhost' ;
 
 
 
