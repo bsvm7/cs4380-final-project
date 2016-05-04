@@ -133,7 +133,7 @@
 
 								// delete access token and refresh token from user_auth_token table
 
-								$delete_token_sql = "DELETE FROM user_auth_token UAT WHERE UAT.ps_id = ?";	
+								$delete_token_sql = "DELETE FROM user_auth_token WHERE ps_id = ?";	
 	
 								$delete_token_stmt = $db_conn->stmt_init();
 								
