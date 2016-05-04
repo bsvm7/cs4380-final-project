@@ -89,7 +89,9 @@
 	}
 	
 	//	Loop through all the photographs
-	foreach( $photo_ids as $curr_photo_info) {
+	for( $i = 0; $i < count($photo_ids); $i++) {
+		
+		$curr_photo_info = $photo_ids[$i];
 		
 		$rand_date = get_random_date_between_now_and_month_ago();
 		
@@ -113,6 +115,9 @@
 			$error_str = error_string_for_statement_execute( $insert_photo_to_log_sql , $db_conn->error);
 			set_error_response( 0 , $error_str);
 		}
+		
+		
+		
 	}
 	
 	
