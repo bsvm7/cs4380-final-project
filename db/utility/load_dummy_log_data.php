@@ -52,7 +52,7 @@
 	
 	$photo_ids = array();
 	
-	$get_all_photo_ids_sql = "SELECT P.p_id FROM photograph";
+	$get_all_photo_ids_sql = "SELECT P.p_id FROM photograph P";
 	
 	if($result = $db_conn->query($get_all_photo_ids_sql)) {
 		
