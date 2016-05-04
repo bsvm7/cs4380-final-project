@@ -310,7 +310,7 @@ CREATE TABLE user_activity
 DROP TABLE IF EXISTS activity_log;
 CREATE TABLE activity_log
 (
-	lo_id				BIGINT UNSIGNED,
+	lo_id				serial;
 	ps_id				BIGINT UNSIGNED,
 	ac_type				ENUM(	'user-register',
 								'login', 
