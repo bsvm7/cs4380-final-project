@@ -311,7 +311,21 @@ CREATE TABLE activity_log
 (
 	lo_id				BIGINT UNSIGNED,
 	ps_id				BIGINT UNSIGNED,
-	ac_type				BIGINT UNSIGNED,
+	ac_type				ENUM(	'user-register',
+								'login', 
+								'logout', 
+								'photo-upload', 
+								'photo-update', 
+								'photo-delete', 
+								'photo-view', 
+								'repo-create', 
+								'repo-delete', 
+								'repo-join', 
+								'story-delete', 
+								'story-update', 
+								'story-view',
+								'story-create'
+							),
 	s_id				BIGINT UNSIGNED,
 	p_id				BIGINT UNSIGNED,
 	r_id				BIGINT UNSIGNED,
@@ -391,6 +405,7 @@ DROP TABLE IF EXISTS photograph_archive;
 CREATE TABLE photograph_archive
 (
 	pa_id				SERIAL,
+	p_id				BIGINT UNSIGNED,
 	photo_url_large		VARCHAR(2083),
 	photo_url_thumb		VARCHAR(2083),
 	photo_title			VARCHAR(200),
@@ -407,6 +422,7 @@ DROP TABLE IF EXISTS story_archive;
 CREATE TABLE story_archive
 (
 	sa_id				SERIAL,
+	s_id				BIGINT UNSIGNED,
 	recording_url		VARCHAR(2083),
 	recording_title		VARCHAR(200),
 	p_id				BIGINT UNSIGNED,
