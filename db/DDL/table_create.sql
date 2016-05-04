@@ -303,6 +303,7 @@ CREATE TABLE user_activity
 	PRIMARY KEY (ac_id)	
 );
 
+
 #
 #	19) Activity Log	( activity_log )
 #
@@ -337,6 +338,7 @@ CREATE TABLE activity_log
 	PRIMARY KEY (lo_id)	
 );
 
+
 #
 #	20) Photo Repository	( photo_repo)
 #
@@ -349,6 +351,7 @@ CREATE TABLE photo_repo
 	FOREIGN KEY (r_id) REFERENCES repository(r_id) ON DELETE CASCADE,
 	PRIMARY KEY (p_id, r_id)
 );
+
 
 #
 #	21) User Authorization Token ( user_auth_token)
