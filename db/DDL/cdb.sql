@@ -19,6 +19,16 @@ USE photoarchiving;
 SOURCE ./table_create.sql;
 
 /*
+	PROCEDURE CREATION
+*/
+SOURCE ./procedure_create.sql;
+
+/*
+	INDEX CREATION
+*/
+SOURCE ./index_create.sql;
+
+/*
 	TRIGGER CREATION
 */
 SOURCE ./trigger_create.sql;
