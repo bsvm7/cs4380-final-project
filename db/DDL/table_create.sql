@@ -102,6 +102,7 @@ CREATE TABLE user
 	username		VARCHAR(250) NOT NULL,
 	email			VARCHAR(500),
 	date_joined		TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	user_level		TINYINT UNSIGNED DEFAULT 0, 
 	FOREIGN KEY 	(ps_id) REFERENCES person(ps_id) ON DELETE CASCADE,
 	PRIMARY KEY 	(ps_id)	
 );
@@ -127,8 +128,8 @@ CREATE TABLE user_auth
 DROP TABLE IF EXISTS user_pref;
 CREATE TABLE user_pref
 (
-	ps_id			BIGINT UNSIGNED,
-	text_size		SMALLINT UNSIGNED,
+	ps_id				BIGINT UNSIGNED,
+	text_size			SMALLINT UNSIGNED,
 	hearing_impaired	BOOLEAN NOT NULL DEFAULT FALSE,
 	preferred_name		VARCHAR(200),
 	FOREIGN KEY (ps_id) REFERENCES person(ps_id) ON DELETE CASCADE,
@@ -354,12 +355,13 @@ CREATE TABLE user_auth_token
 DROP TABLE IF EXISTS user_repo;
 CREATE TABLE user_repo 
 (
-	ps_id			BIGINT UNSIGNED,	
-	r_id 			BIGINT UNSIGNED,
-	date_joined		TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	ps_id				BIGINT UNSIGNED,	
+	r_id 			 	BIGINT UNSIGNED,
+	date_joined		 	TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	permission_level 	TINYINT UNSIGNED DEFAULT 0,
 	PRIMARY KEY (ps_id, r_id),
 	FOREIGN KEY (ps_id) REFERENCES person (ps_id) ON DELETE CASCADE,
-	FOREIGN KEY (r_id) REFERENCES repository (r_id) ON DELETE CASCADE
+	FOREIGN KEY (r_id) 	REFERENCES repository (r_id) ON DELETE CASCADE
 );
 
 
@@ -391,3 +393,4 @@ CREATE TABLE photograph_archive
 	date_uploaded		TIMESTAMP,
 	PRIMARY KEY (pa_id)
 );
+
