@@ -46,6 +46,37 @@
 	
 	
 	
+	/*
+		Now grab all the photo IDs
+	*/
+	
+	$photo_ids = array();
+	
+	$get_all_photo_ids_sql = "SELECT P.p_id FROM photograph";
+	
+	if($result = $db_conn->query($get_all_photo_ids_sql)) {
+		
+		while($result_row = $result->fetch_array(MYSQLI_ASSOC)) {
+			
+			$photo_id = $result_row["p_id"];
+			
+			array_push($photo_ids, $photo_id);
+		}
+	}
+	
+	echo "\n\n " . json_encode( $photo_ids ) . "\n\n";
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	
