@@ -30,17 +30,19 @@
 #	16)	Story				( story )
 #	17)	Photo Story			( photo_story )
 #	18)	User Activity			( user_activity )
-#	19)	Log				( log )
-#	20)	Session Log			( session_log )
-#	21)	Activity Log			( activity_log )
-#	22)	Photo repository 		( photo_repo )
-#	23)	User Authorization Token 	( user_auth_token )
-#	24)	User Repository 		( user_repo )
-#	25)	Photo location 			( photo_loc )
-#	26)	Photograph Archive		( photograph_archive )
-#	27)	Story Archive			( story_archive )
+#	19)	Activity Log				( activity_log )
+#	20)	Photo repository 		( photo_repo )
+#	21)	User Authorization Token 	( user_auth_token )
+#	22)	User Repository 		( user_repo )
+#	23)	Photo location 			( photo_loc )
+#	24)	Photograph Archive		( photograph_archive )
+#	25)	Story Archive			( story_archive )
 #
 
+
+#
+#	1)	Era	( era )
+#
 DROP TABLE IF EXISTS era;
 CREATE TABLE era
 (
@@ -388,7 +390,7 @@ CREATE TABLE user_repo
 
 
 #
-#	23) photo location 		(photo_loc)
+#	23) Photo Location 		(photo_loc)
 #
 DROP TABLE IF EXISTS photo_loc;
 CREATE TABLE photo_loc 
@@ -402,7 +404,7 @@ CREATE TABLE photo_loc
 
 
 #
-#	24)	Photograph Archive
+#	24)	Photograph Archive	( photograph_archive )
 #
 DROP TABLE IF EXISTS photograph_archive;
 CREATE TABLE photograph_archive
@@ -420,7 +422,8 @@ CREATE TABLE photograph_archive
 
 
 #
-#	27)	Story Archive
+#	25)	Story Archive	( story_archive )
+#
 DROP TABLE IF EXISTS story_archive;
 CREATE TABLE story_archive
 (
