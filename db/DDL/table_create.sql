@@ -312,7 +312,8 @@ CREATE TABLE activity_log
 (
 	lo_id				SERIAL,
 	ps_id				BIGINT UNSIGNED,
-	ac_type				ENUM(	'user-register',
+	ac_type				ENUM(	
+								'user-register',
 								'login', 
 								'logout', 
 								'photo-upload', 
