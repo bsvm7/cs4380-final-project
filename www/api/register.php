@@ -322,8 +322,6 @@
 
 							echo "registration activity has been logged"."\n";
 
-							$insert_log_stmt->execute();
-
 						}
 
 						else {

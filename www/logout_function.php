@@ -36,6 +36,8 @@
 
 				$access_token=$decoded_json['access_token'];
 
+				echo "access token is ".$access_token;
+
 				if (empty($access_token)) {
 
 					echo "access_token is needed"."\n";
@@ -57,6 +59,8 @@
 						break;
 					}							
 
+					echo "token retrieve statement prepared"."\n";
+
 					if (!$token_retrieve_stmt->bind_param("s" , $access_token)) {
 
 						set_error_response( 201, "SQL Error -> " . $token_retrieve_stmt->error);
@@ -64,6 +68,9 @@
 						break;
 					}
 				
+					echo "token retrieve statement param bind"."\n";
+
+
 					if (!$token_retrieve_stmt->execute()) {
 				
 						set_error_response( 201, "SQL Error -> " . $token_retrieve_stmt->error);
@@ -123,7 +130,7 @@
 
 								if ($delete_token_stmt->execute()) {
 									
-									header('Location: ');
+									//header('Location: ');
 									echo "You have successfully logged out"."\n";
 
 								}
