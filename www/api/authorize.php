@@ -2,8 +2,8 @@
 
 
 	//session_start(); // Starting Session
-	include("../../db_security/security.php");
-	//include('./api/authorizate.php');
+	include("../../../db_security/security.php");
+	//include('./api/authorize.php');
 	//$error=''; // Variable To Store Error Message
 
 	$db_user = constant("DB_USER");
@@ -73,9 +73,9 @@
 					
 						if ($hash_retrieve_result = $hash_retrieve_stmt->get_result()) {
 
-							/*
+							
 							// this has not worked out yet
-							if($hash_retrieve_stmt->num_rows != 1) {
+							if($hash_retrieve_result->num_rows > 1) {
 
 								set_error_response( 201, "SQL Error -> " . $hash_retrieve_stmt->error);	
 
@@ -83,8 +83,14 @@
 
 							}
 
-							echo "only one user record found"."\n";
-							*/
+							if($hash_retrieve_result->num_rows == 0) {
+
+								echo "The username does not exist in our system, please try again....."."\n";
+
+								break;
+
+							}
+
 
 							$row = $hash_retrieve_result->fetch_array(MYSQLI_NUM);
 							
@@ -97,7 +103,8 @@
 							
 							if ($computed_hash == $result_hash) {
 
-				
+								$log_in_time = 
+
 								$random_string1 = generate_255_char_random_string();								
 		
 								$random_string2 = generate_255_char_random_string();	
@@ -123,17 +130,49 @@
 									http_response_code(200);
 									
 									echo json_encode($resp_array);
+
+
+									// record login information into activity log table
+
+									$insert_log_sql = "INSERT INTO activity_log (ps_id, ac_type) VALUES (?, ?)";
+
+									$insert_log_stmt = $db_conn->stmt_init();
+
+									$insert_log_stmt->prepare($insert_log_sql);
+
+									$ac_type="login";
+
+									$insert_log_stmt->bind_param("is", $result_ps_id, $ac_type);
+
+									if($insert_log_stmt->execute()) {
+
+										echo "login activity has been logged"."\n";
+									}
+									else {
+
+										set_error_response( 201, "SQL Error -> " . $insert_log_stmt->error);
+
+									}
+
+
 								}
 								else
 								{
 									set_error_response( 13, "SQL Error" . $insert_token_statement->error);
 								}
 								
-							}							
+							}
+							else {
+
+								set_error_response( 11, "Your password does not match to our record, please try again......"."\n");
+								break;
+
+							}
+
 						}
 						else
 						{
-							set_error_response( 11, "SQL Error");
+							set_error_response( 11, "SQL Error"."\n");
 							break;
 						}
 
@@ -193,7 +232,7 @@
 
 						}
 						
-						if(! $update_token_statement->bind_param("sss", $random_string, $ps_id_return, $refresh_token)) {
+						if(! $update_token_statement->bind_param("sis", $random_string, $ps_id_return, $refresh_token)) {
 
 							set_error_response( 13, "SQL Error" . $update_token_statement->error);
 

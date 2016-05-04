@@ -41,9 +41,9 @@
 		    
 		    //	Next redirect to the login page
 	
-		    var redirect_url = "/login.php";
+		    //var redirect_url = "/login.php";
 		    
-		    window.location.replace( redirect_url );
+		    //window.location.replace( redirect_url );
 		    
 		    
 		</script>

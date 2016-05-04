@@ -2,7 +2,7 @@
 
 
 	//session_start(); // Starting Session
-	include("../../db_security/security.php");
+	include("../../../db_security/security.php");
 	//include('./api/authorize.php');
 	//$error=''; // Variable To Store Error Message
 
