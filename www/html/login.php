@@ -68,7 +68,7 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
   </head>
-  <body ng-app="linkedinApp">
+  <body ng-app="Eldertech_app">
 	  
   	<script type="text/javascript" src="js/controllers/loginController.js"></script>
   	
@@ -83,13 +83,13 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="/index.php">LinkedIn</a>
+          <a class="navbar-brand" href="../index.php">Eldertech</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
           </ul>
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="/register.php">Register</a></li>
+            <li><a href="../api/register.php">Register</a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
