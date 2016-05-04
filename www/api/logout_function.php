@@ -124,7 +124,7 @@
 							$ac_type="logout";
 							
 							$insert_log_stmt->bind_param("is", $result_ps_id, $ac_type);
-							
+
 							
 							if ($insert_log_stmt->execute()) {	
 
@@ -133,7 +133,7 @@
 
 								// delete access token and refresh token from user_auth_token table
 
-								$delete_token_sql = "DELETE FROM user_auth_token UAT WHERE ps_id = ?";	
+								$delete_token_sql = "DELETE FROM user_auth_token UAT WHERE UAT.ps_id = ?";	
 	
 								$delete_token_stmt = $db_conn->stmt_init();
 								
