@@ -286,9 +286,6 @@
 						break;
 					}						
 					*/
-					if($insert_user_auth_result = $insert_user_auth_stmt->get_result()) {
-
-						echo "user auth inserted "."\n"; 
 
 						$ret_user_info = array(
 							
@@ -335,7 +332,7 @@
 
 						}
 
-					}
+					
 
 				}
 	
