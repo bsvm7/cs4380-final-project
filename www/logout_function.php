@@ -106,7 +106,8 @@
 					
 						if ($result_access_token == $access_token) {
 
-
+							echo "access token matched ";
+							
 							// insert logout activity in activity log table
 							$insert_log_sql = "INSERT INTO activity_log (ps_id, ac_type) VALUES ( ? , ?)";	
 			
