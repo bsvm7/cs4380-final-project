@@ -76,9 +76,9 @@
 
 						/*
 						// this has not worked out yet
-						if($hash_retrieve_stmt->num_rows != 1) {
+						if($token_retrieve_result->num_rows != 1) {
 
-							set_error_response( 201, "SQL Error -> " . $hash_retrieve_stmt->error);	
+							set_error_response( 201, "SQL Error -> " . $token_retrieve_stmt->error);	
 
 							break;
 
