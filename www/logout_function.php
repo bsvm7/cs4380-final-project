@@ -106,13 +106,20 @@
 					
 						if ($result_access_token == $access_token) {
 
+							echo "access token matched ";
 
 							// insert logout activity in activity log table
 							$insert_log_sql = "INSERT INTO activity_log (ps_id, ac_type) VALUES ( ? , ?)";	
 			
+									echo "insert log sql worked"."\n";
+
 							$insert_log_stmt = $db_conn->stmt_init();
+
 							
 							$insert_log_stmt->prepare($insert_log_sql);
+
+							echo "insert log stmt prepared"."\n";
+
 
 							$ac_type="logout";
 							
@@ -120,16 +127,27 @@
 							
 							if ($insert_log_stmt->execute()) {	
 
+								echo "insert log stmt executed"."\n";
+
 
 								// delete access token and refresh token from user_auth_token table
 
 								$delete_token_sql = "DELETE * FROM user_auth_token UAT WHERE UAT.ps_id = ?";	
+
+																	echo "delete token sql worked"."\n";
+
 				
 								$delete_token_stmt = $db_conn->stmt_init();
 								
 								$delete_token_stmt->prepare($delete_token_sql);
+
+															echo "delete tokenstmt prepared"."\n";
+
 								
 								$delete_token_stmt->bind_param("i", $result_ps_id);
+
+										echo "delete tokenstmt param bind worked"."\n";
+
 
 								if ($delete_token_stmt->execute()) {
 									
@@ -144,6 +162,10 @@
 								set_error_response( 13, "SQL Error" . $insert_token_statement->error);
 							}
 							
+						}
+						else{
+
+							echo "tokens do not match! .....";
 						}							
 					}
 					else
