@@ -94,6 +94,7 @@
 		$curr_photo_info = $photo_ids[$i];
 		
 		$rand_date = get_random_date_between_now_and_month_ago();
+		echo_in_newlines( json_encode($curr_photo_info) );
 		
 		$curr_photo_info["rand_date"] = $rand_date;
 		
