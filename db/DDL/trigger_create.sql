@@ -76,7 +76,7 @@ BEGIN
 									) 
 								VALUES 
 								( 
-									OLD.p_id
+									OLD.p_id,
 									arch_photo_url_large , 
 									arch_photo_url_thumb, 
 									arch_photo_title, 
@@ -85,6 +85,7 @@ BEGIN
 								);
 END;//
 delimiter ;
+
 
 
 #	A trigger to archive all the deleted stories in the archived_stories table
