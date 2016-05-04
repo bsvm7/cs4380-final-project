@@ -25,9 +25,24 @@
 		"user_id" 	=> 1
 	);
 	
-	$some_date = get_random_date_between_now_and_month_ago();
+	$month_ago_date = get_timestamp_for_days_age( 33 );
 	
-	echo "\nThe random date that I found is -> " . $some_date . "\n";
+	$set_user_reg_date_sql = "INSERT INTO activity_log ( ps_id , ac_type , time_logged ) VALUES ( " . $user_info["user_id"] . " , 'user-register', '$month_ago_date'";
+	
+	if(!($db_conn->query($set_user_reg_date_sql))) {
+		
+		$error_str = "I couldn't set the registration date of the specified user with user information -> " . json_encode($user_info) . "\n";
+		
+		set_error_response( 201 , $error_str );
+	}
+	else {
+		
+		$success_str = "I successfully set the registration date of the user with user info -> " . json_encode($user_info);
+		
+		echo "\n$success_str\n";
+	}
+	
+	
 	
 	
 	
@@ -36,6 +51,20 @@
 	/*
 		CUSTOM FUNCTIONS
 	*/
+	function get_timestamp_for_days_age( $days_ago ) {
+		
+		$days_ago_timestamp = time() - convert_days_to_seconds( $days_ago );
+		
+		return $days_ago_timestamp;
+		
+	}
+	function convert_timestamp_to_proper_date( $timestamp ) {
+		
+		$date = date("Y-m-d H:i:s", $timestamp);
+		
+		return $date;
+	}
+	
 	function get_random_date_between_now_and_month_ago() {
 		
 		$todays_timestamp = time();
@@ -43,9 +72,7 @@
 		
 		$rand_timestamp = mt_rand($last_months_timestamp, $todays_timestamp);
 		
-		$date = date("Y-m-d H:i:s", $rand_timestamp);
-		
-		return $date;
+		return convert_timestamp_to_proper_date( $rand_timestamp );
 	}
 	
 	function convert_days_to_seconds( $days ) {
