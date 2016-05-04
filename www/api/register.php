@@ -270,14 +270,14 @@
 						break;
 
 					}
-
+					/*
 					if ($db_conn->affected_rows == 1) {							
 					}
 					else {
 						set_error_response( 201, "SQL Error 2 -> " . $db_conn->error);
 						break;
 					}						
-
+					*/
 					if($insert_user_auth_result = $insert_user_auth_stmt->get_result()) {
 
 
