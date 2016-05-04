@@ -68,7 +68,7 @@
 						break;
 					}
 				
-					echo "token retrieve statement param bind"."\n";
+					echo "token retrieve statement param bind worked"."\n";
 
 
 					if (!$token_retrieve_stmt->execute()) {
@@ -77,9 +77,10 @@
 
 						break;				
 					}
+					echo "token retrieve statement execution worked"."\n";
 
 					// compare the access token provided and the one retrived from database
-					if ($token_retrieve_result = $token_retrieve_stmt->get_result()) {
+					if ($token_retrieve_result == $token_retrieve_stmt->get_result()) {
 
 						/*
 						// this has not worked out yet
