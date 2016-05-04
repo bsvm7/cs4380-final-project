@@ -83,3 +83,24 @@ BEGIN
 								);
 END;//
 delimiter ;
+
+
+#	A trigger to archive all the deleted stories in the archived_stories table
+DROP TRIGGER IF EXISTS archive_stories;
+
+DELIMITER //
+CREATE TRIGGER archive_stories BEFORE DELETE ON story
+FOR EACH ROW
+BEGIN
+	DECLARE arch_rec_url	VARCHAR(2083);
+	DECLARE arch_rec_title	varchar(200);
+	DECLARE arch_p_id		BIGINT UNSIGNED;
+	
+
+
+
+
+
+
+END;//
+delimiter ;

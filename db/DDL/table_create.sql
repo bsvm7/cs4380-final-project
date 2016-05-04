@@ -37,6 +37,8 @@
 #	23)	User Authorization Token 	( user_auth_token)
 #	24)	User Repository 		(user_repo)
 #	25)	Photo location 			(photo_loc)
+#	26) Photograph Archive	(photograph_archive)
+#	27)	Story Archive	(story_archive)
 #
 
 DROP TABLE IF EXISTS era;
@@ -270,6 +272,7 @@ CREATE TABLE story
 	description			TEXT,
 	recording_url			VARCHAR(2083),
 	recording_text			TEXT,
+	date_uploaded			TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	PRIMARY KEY (s_id)
 );
 
@@ -407,6 +410,7 @@ CREATE TABLE photo_loc
 	FOREIGN KEY (l_id) REFERENCES location (l_id) ON DELETE CASCADE
 );
 
+
 #
 #	26)	Photograph Archive
 #
@@ -421,4 +425,20 @@ CREATE TABLE photograph_archive
 	date_archived		TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	date_uploaded		TIMESTAMP,
 	PRIMARY KEY (pa_id)
+);
+
+
+#
+#	27)	Story Archive
+DROP TABLE IF EXISTS story_archive;
+CREATE TABLE story_archive
+(
+	sa_id				SERIAL,
+	recording_url		VARCHAR(2083),
+	recording_title		VARCHAR(200),
+	p_id				BIGINT UNSIGNED,
+	p_title				BIGINT UNSIGNED,
+	upload_date			TIMESTAMP,
+	archive_date		TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	PRIMARY KEY (sa_id)
 );
