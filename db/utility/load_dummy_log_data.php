@@ -133,6 +133,8 @@
 	
 	foreach ( $photo_ids as $curr_photo_info ) {
 		
+		echo_in_newlines( json_encode($curr_photo_info));
+		
 		$curr_photo_id = $curr_photo_info["photo_id"];
 		$curr_photo_upload_date = $curr_photo_info["rand_date"];
 		
