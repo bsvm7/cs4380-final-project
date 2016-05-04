@@ -43,7 +43,7 @@ FIELDS TERMINATED BY ','
 OPTIONALLY ENCLOSED BY '"'
 LINES TERMINATED BY '\n'
 IGNORE 1 LINES
-( ps_id , username, email );
+( ps_id , username, email, user_level );
 
 
 #	Load data into the story table
