@@ -245,7 +245,9 @@ CREATE TABLE photograph
 	date_taken			DATE,
 	date_conf			BOOLEAN NOT NULL DEFAULT FALSE,
 	date_uploaded		TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	uploaded_by 		BIGINT,
 	PRIMARY KEY (p_id)	
+	FOREITN KEY (uploaded_by) REFERENCES person (ps_id);
 );
 
 
