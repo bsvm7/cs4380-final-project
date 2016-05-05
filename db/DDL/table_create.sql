@@ -12,32 +12,31 @@
 
 #	TABLES LIST
 #	
-#	1)	Era 				( era )
+#	1)	Era 					( era )
 #	2)	Life Period 			( life_period )
-#	3)	Person				( person )
-#	4)	Non-User			( non_user )
-#	5)	User				( user )
+#	3)	Person					( person )
+#	4)	Non-User				( non_user )
+#	5)	User					( user )
 #	6)	User Authentication		( user_auth )
 #	7)	User Preferences		( user_pref )
-#	8)	Repository			( repository )
+#	8)	Repository				( repository )
 #	9)	Family Repository		( family_repository )
 #	10)	Location Repository		( location_repository )
-#	11)	Community Repository		( community_repository )
+#	11)	Community Repository	( community_repository )
 #	12)	Person Relation			( person_relation )
-#	13)	Location			( location )
-#	14)	Photograph 			( photograph )
+#	13)	Location				( location )
+#	14)	Photograph 				( photograph )
 #	15)	Photograph Tag			( photo_tag )
-#	16)	Story				( story )
-#	17)	Photo Story			( photo_story )
-#	18)	User Activity			( user_activity )
-#	19)	Activity Log			( activity_log )
-#	20)	Photo repository 		( photo_repo )
-#	21)	User Authorization Token 	( user_auth_token )
-#	22)	User Repository 		( user_repo )
-#	23)	Photo location 			( photo_loc )
-#	24)	Photograph Archive		( photograph_archive )
-#	25)	Story Archive			( story_archive )
-#
+#	16)	Story					( story )
+#	17)	Photo Story				( photo_story )
+#	18)	Photo repository 		( photo_repo )
+#	19)	User Authorization Token( user_auth_token )
+#	20)	User Repository 		( user_repo )
+#	21)	Photo location 			( photo_loc )
+#	22)	Photograph Archive		( photograph_archive )
+#	23)	Story Archive			( story_archive )
+#	24)	Activity Log			( activity_log )
+
 
 
 #
@@ -293,21 +292,105 @@ CREATE TABLE photo_story
 	PRIMARY KEY (p_id, s_id)
 );
 
-/*
-#
-#	18) User Activity	( user_activity )
-#
-DROP TABLE IF EXISTS user_activity;
-CREATE TABLE user_activity
-(
-	ac_id				SERIAL,
-	ac_type				VARCHAR(200) NOT NULL,
-	PRIMARY KEY (ac_id)	
-);
-*/
 
 #
-#	18) Activity Log	( activity_log )
+#	18) Photo Repository	( photo_repo)
+#
+DROP TABLE IF EXISTS photo_repo;
+CREATE TABLE photo_repo
+(
+	p_id 				BIGINT UNSIGNED,
+	r_id 				BIGINT UNSIGNED,
+	FOREIGN KEY (p_id) REFERENCES photograph(p_id) ON DELETE CASCADE,
+	FOREIGN KEY (r_id) REFERENCES repository(r_id) ON DELETE CASCADE,
+	PRIMARY KEY (p_id, r_id)
+);
+
+
+#
+#	19) User Authorization Token ( user_auth_token)
+#
+DROP TABLE IF EXISTS user_auth_token;
+CREATE TABLE user_auth_token
+(
+	ps_id 				BIGINT UNSIGNED,
+	access_token		CHAR(64),
+	refresh_token		CHAR(64),
+	issue_time			TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	expire_time			TIMESTAMP,
+	PRIMARY KEY (ps_id),
+	FOREIGN KEY (ps_id) REFERENCES person (ps_id) ON DELETE CASCADE,
+	UNIQUE (access_token),
+	UNIQUE (refresh_token)
+);
+
+#
+#	20) User Repository 		(user_repo)
+#
+DROP TABLE IF EXISTS user_repo;
+CREATE TABLE user_repo 
+(
+	ps_id				BIGINT UNSIGNED,	
+	r_id 			 	BIGINT UNSIGNED,
+	date_joined		 	TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	permission_level 	TINYINT UNSIGNED NOT NULL DEFAULT 0,
+	PRIMARY KEY (ps_id, r_id),
+	FOREIGN KEY (ps_id) REFERENCES person (ps_id) ON DELETE CASCADE,
+	FOREIGN KEY (r_id) 	REFERENCES repository (r_id) ON DELETE CASCADE
+);
+
+
+#
+#	21) Photo Location 		(photo_loc)
+#
+DROP TABLE IF EXISTS photo_loc;
+CREATE TABLE photo_loc 
+(
+	l_id			BIGINT UNSIGNED,	
+	p_id 			BIGINT UNSIGNED,
+	PRIMARY KEY (p_id, l_id),
+	FOREIGN KEY (p_id) REFERENCES photograph (p_id) ON DELETE CASCADE,
+	FOREIGN KEY (l_id) REFERENCES location (l_id) ON DELETE CASCADE
+);
+
+
+#
+#	22)	Photograph Archive	( photograph_archive )
+#
+DROP TABLE IF EXISTS photograph_archive;
+CREATE TABLE photograph_archive
+(
+	pa_id				SERIAL,
+	p_id				BIGINT UNSIGNED,
+	photo_url_large		VARCHAR(2083),
+	photo_url_thumb		VARCHAR(2083),
+	photo_title			VARCHAR(200),
+	repo_title			VARCHAR(200),
+	date_archived		TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	date_uploaded		TIMESTAMP,
+	PRIMARY KEY (pa_id)
+);
+
+
+#
+#	23	Story Archive	( story_archive )
+#
+DROP TABLE IF EXISTS story_archive;
+CREATE TABLE story_archive
+(
+	sa_id				SERIAL,
+	s_id				BIGINT UNSIGNED,
+	recording_url		VARCHAR(2083),
+	recording_title		VARCHAR(200),
+	p_id				BIGINT UNSIGNED,
+	p_title				BIGINT UNSIGNED,
+	upload_date			TIMESTAMP,
+	archive_date		TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	PRIMARY KEY (sa_id)
+);
+
+#
+#	24) Activity Log	( activity_log )
 #
 DROP TABLE IF EXISTS activity_log;
 CREATE TABLE activity_log
@@ -339,101 +422,4 @@ CREATE TABLE activity_log
 	FOREIGN KEY (p_id) REFERENCES photograph(p_id) ON DELETE NO ACTION,
 	FOREIGN KEY (r_id) REFERENCES repository(r_id) ON DELETE NO ACTION,
 	PRIMARY KEY (lo_id)	
-);
-
-
-#
-#	19) Photo Repository	( photo_repo)
-#
-DROP TABLE IF EXISTS photo_repo;
-CREATE TABLE photo_repo
-(
-	p_id 				BIGINT UNSIGNED,
-	r_id 				BIGINT UNSIGNED,
-	FOREIGN KEY (p_id) REFERENCES photograph(p_id) ON DELETE CASCADE,
-	FOREIGN KEY (r_id) REFERENCES repository(r_id) ON DELETE CASCADE,
-	PRIMARY KEY (p_id, r_id)
-);
-
-
-#
-#	20) User Authorization Token ( user_auth_token)
-#
-DROP TABLE IF EXISTS user_auth_token;
-CREATE TABLE user_auth_token
-(
-	ps_id 				BIGINT UNSIGNED,
-	access_token		CHAR(64),
-	refresh_token		CHAR(64),
-	issue_time			TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-	expire_time			TIMESTAMP,
-	PRIMARY KEY (ps_id),
-	FOREIGN KEY (ps_id) REFERENCES person (ps_id) ON DELETE CASCADE,
-	UNIQUE (access_token),
-	UNIQUE (refresh_token)
-);
-
-#
-#	21) User Repository 		(user_repo)
-#
-DROP TABLE IF EXISTS user_repo;
-CREATE TABLE user_repo 
-(
-	ps_id				BIGINT UNSIGNED,	
-	r_id 			 	BIGINT UNSIGNED,
-	date_joined		 	TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-	permission_level 	TINYINT UNSIGNED NOT NULL DEFAULT 0,
-	PRIMARY KEY (ps_id, r_id),
-	FOREIGN KEY (ps_id) REFERENCES person (ps_id) ON DELETE CASCADE,
-	FOREIGN KEY (r_id) 	REFERENCES repository (r_id) ON DELETE CASCADE
-);
-
-
-#
-#	22) Photo Location 		(photo_loc)
-#
-DROP TABLE IF EXISTS photo_loc;
-CREATE TABLE photo_loc 
-(
-	l_id			BIGINT UNSIGNED,	
-	p_id 			BIGINT UNSIGNED,
-	PRIMARY KEY (p_id, l_id),
-	FOREIGN KEY (p_id) REFERENCES photograph (p_id) ON DELETE CASCADE,
-	FOREIGN KEY (l_id) REFERENCES location (l_id) ON DELETE CASCADE
-);
-
-
-#
-#	23)	Photograph Archive	( photograph_archive )
-#
-DROP TABLE IF EXISTS photograph_archive;
-CREATE TABLE photograph_archive
-(
-	pa_id				SERIAL,
-	p_id				BIGINT UNSIGNED,
-	photo_url_large		VARCHAR(2083),
-	photo_url_thumb		VARCHAR(2083),
-	photo_title			VARCHAR(200),
-	repo_title			VARCHAR(200),
-	date_archived		TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-	date_uploaded		TIMESTAMP,
-	PRIMARY KEY (pa_id)
-);
-
-
-#
-#	24)	Story Archive	( story_archive )
-#
-DROP TABLE IF EXISTS story_archive;
-CREATE TABLE story_archive
-(
-	sa_id				SERIAL,
-	s_id				BIGINT UNSIGNED,
-	recording_url		VARCHAR(2083),
-	recording_title		VARCHAR(200),
-	p_id				BIGINT UNSIGNED,
-	p_title				BIGINT UNSIGNED,
-	upload_date			TIMESTAMP,
-	archive_date		TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-	PRIMARY KEY (sa_id)
 );
