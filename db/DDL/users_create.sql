@@ -60,9 +60,6 @@ GRANT UPDATE, INSERT, SELECT, DELETE ON photoarchiving.photograph TO 'web_user'@
 GRANT UPDATE, INSERT, SELECT, DELETE ON photoarchiving.photo_tag TO 'web_user'@'localhost' ;
 GRANT UPDATE, INSERT, SELECT, DELETE ON photoarchiving.story TO 'web_user'@'localhost' ;
 GRANT UPDATE, INSERT, SELECT, DELETE ON photoarchiving.photo_story TO 'web_user'@'localhost' ;
-GRANT UPDATE, INSERT, SELECT, DELETE ON photoarchiving.user_activity TO 'web_user'@'localhost' ;
-
-
 #
 #	The web user should only be able to insert and select from the log
 #
@@ -76,7 +73,8 @@ GRANT UPDATE, INSERT, SELECT, DELETE ON photoarchiving.user_auth_token TO 'web_u
 GRANT UPDATE, INSERT, SELECT, DELETE ON photoarchiving.user_repo TO 'web_user'@'localhost' ;
 GRANT UPDATE, INSERT, SELECT, DELETE ON photoarchiving.photo_loc TO 'web_user'@'localhost' ;
 GRANT UPDATE, INSERT, SELECT, DELETE ON photoarchiving.photograph_archive TO 'web_user'@'localhost' ;
-GRANT UPDATE, INSERT, SELECT, DELETE ON photoarchiving.photo_loc TO 'web_user'@'localhost' ;
+GRANT UPDATE, INSERT, SELECT, DELETE ON photoarchiving.story_archive TO 'web_user'@'localhost' ;
+
 
 
 
