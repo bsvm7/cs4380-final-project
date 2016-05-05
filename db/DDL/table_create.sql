@@ -293,7 +293,7 @@ CREATE TABLE photo_story
 	PRIMARY KEY (p_id, s_id)
 );
 
-
+/*
 #
 #	18) User Activity	( user_activity )
 #
@@ -304,10 +304,10 @@ CREATE TABLE user_activity
 	ac_type				VARCHAR(200) NOT NULL,
 	PRIMARY KEY (ac_id)	
 );
-
+*/
 
 #
-#	19) Activity Log	( activity_log )
+#	18) Activity Log	( activity_log )
 #
 DROP TABLE IF EXISTS activity_log;
 CREATE TABLE activity_log
@@ -343,7 +343,7 @@ CREATE TABLE activity_log
 
 
 #
-#	20) Photo Repository	( photo_repo)
+#	19) Photo Repository	( photo_repo)
 #
 DROP TABLE IF EXISTS photo_repo;
 CREATE TABLE photo_repo
@@ -357,7 +357,7 @@ CREATE TABLE photo_repo
 
 
 #
-#	21) User Authorization Token ( user_auth_token)
+#	20) User Authorization Token ( user_auth_token)
 #
 DROP TABLE IF EXISTS user_auth_token;
 CREATE TABLE user_auth_token
@@ -374,7 +374,7 @@ CREATE TABLE user_auth_token
 );
 
 #
-#	22) User Repository 		(user_repo)
+#	21) User Repository 		(user_repo)
 #
 DROP TABLE IF EXISTS user_repo;
 CREATE TABLE user_repo 
@@ -390,7 +390,7 @@ CREATE TABLE user_repo
 
 
 #
-#	23) Photo Location 		(photo_loc)
+#	22) Photo Location 		(photo_loc)
 #
 DROP TABLE IF EXISTS photo_loc;
 CREATE TABLE photo_loc 
@@ -404,7 +404,7 @@ CREATE TABLE photo_loc
 
 
 #
-#	24)	Photograph Archive	( photograph_archive )
+#	23)	Photograph Archive	( photograph_archive )
 #
 DROP TABLE IF EXISTS photograph_archive;
 CREATE TABLE photograph_archive
@@ -422,7 +422,7 @@ CREATE TABLE photograph_archive
 
 
 #
-#	25)	Story Archive	( story_archive )
+#	24)	Story Archive	( story_archive )
 #
 DROP TABLE IF EXISTS story_archive;
 CREATE TABLE story_archive
