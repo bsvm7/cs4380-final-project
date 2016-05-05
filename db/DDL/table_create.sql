@@ -79,8 +79,8 @@ CREATE TABLE person
 	mname		VARCHAR(100),
 	lname		VARCHAR(100),
 	maiden_name	VARCHAR(100),
-	gender		VARCHAR(50),
-	birthdate	DATE,
+	gender		VARCHAR(50) NOT NULL,
+	birthdate	DATE NOT NULL,
 	PRIMARY KEY (ps_id)
 );
 
