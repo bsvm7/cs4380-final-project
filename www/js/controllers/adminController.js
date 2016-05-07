@@ -20,55 +20,52 @@ var app = angular.module('photoarchiving_app', ["highcharts-ng"])
 	//console.log( $scope.user_info );
 	
 	$scope.chartConfig = {
-            chart: {
-                plotBackgroundColor: null,
-                plotBorderWidth: null,
-                plotShadow: false,
-                type: 'pie'
-            },
-            title: {
-                text: 'Browser market shares January, 2015 to May, 2015'
-            },
-            tooltip: {
-                pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-            },
-            plotOptions: {
-                pie: {
-                    allowPointSelect: true,
-                    cursor: 'pointer',
-                    dataLabels: {
-                        enabled: false
-                    },
-                    showInLegend: true
-                }
-            },
-            series: [{
-                name: 'Brands',
-                colorByPoint: true,
-                data: [{
-                    name: 'Microsoft Internet Explorer',
-                    y: 56.33
-                }, {
-                    name: 'Chrome',
-                    y: 24.03,
-                    sliced: true,
-                    selected: true
-                }, {
-                    name: 'Firefox',
-                    y: 10.38
-                }, {
-                    name: 'Safari',
-                    y: 4.77
-                }, {
-                    name: 'Opera',
-                    y: 0.91
-                }, {
-                    name: 'Proprietary or Undetectable',
-                    y: 0.2
-                }]
-            }]
-        };
 
+  options: {
+      //This is the Main Highcharts chart config. Any Highchart options are valid here.
+      //will be overriden by values specified below.
+      chart: {
+          type: 'bar'
+      },
+      tooltip: {
+          style: {
+              padding: 10,
+              fontWeight: 'bold'
+          }
+      }
+  },
+  //The below properties are watched separately for changes.
+
+  //Series object (optional) - a list of series using normal Highcharts series options.
+  series: [{
+     data: [10, 15, 12, 8, 7]
+  }],
+  //Title configuration (optional)
+  title: {
+     text: 'Hello'
+  },
+  //Boolean to control showing loading status on chart (optional)
+  //Could be a string if you want to show specific loading text.
+  loading: false,
+  //Configuration for the xAxis (optional). Currently only one x axis can be dynamically controlled.
+  //properties currentMin and currentMax provided 2-way binding to the chart's maximum and minimum
+  xAxis: {
+  currentMin: 0,
+  currentMax: 20,
+  title: {text: 'values'}
+  },
+  //Whether to use Highstocks instead of Highcharts (optional). Defaults to false.
+  useHighStocks: false,
+  //size (optional) if left out the chart will default to size of the div or something sensible.
+  size: {
+   width: 400,
+   height: 300
+  },
+  //function (optional)
+  func: function (chart) {
+   //setup some logic for the chart
+  }
+};
 
 
 
