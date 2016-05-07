@@ -226,7 +226,7 @@
 
 					$salt = sha1( mt_rand() );
 					
-					$hash = sha1( $salt . $req_password );
+					$hash = sha1( $req_password.$salt );
 					
 					/* bad programming here
 					$insert_user_auth_sql = "INSERT INTO user_auth (ps_id , pass_hash, pass_salt) VALUES ('$saved_last_insert_id' , '$hash' , '$salt' )";
