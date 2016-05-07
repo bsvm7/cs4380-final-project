@@ -48,7 +48,7 @@
 
 					if (empty($username) || empty($password)) {
 						//$error = "Username or Password is empty";
-						echo "Username or Password is empty"."\n";
+						//echo "Username or Password is empty"."\n";
 					}
 
 					else {
@@ -149,33 +149,33 @@
 
 									if($insert_log_stmt->execute()) {
 
- 										echo "login activity has been logged"."\n";
+ 										//echo "login activity has been logged"."\n";
 
  										// check user level 
 										$user_level_check_sql = "SELECT U.user_level FROM user U WHERE U.ps_id= ?";
 
 										if(!($user_level_check_stmt = $db_conn->stmt_init()) ){
-											echo "user_level_check_stmt init failed"."\n";
+											//echo "user_level_check_stmt init failed"."\n";
 											break;
 
 										}
 
 										if(!($user_level_check_stmt->prepare($user_level_check_sql)) ){
-											echo "user_level_check_stmt prepare stmt failed"."\n";
+											//echo "user_level_check_stmt prepare stmt failed"."\n";
 											break;
 	
 										}
 
 										if(!($user_level_check_stmt -> bind_param ("i", $result_ps_id)) ){
 
-											echo "user_level_check_stmt bind param failed"."\n";
+											//echo "user_level_check_stmt bind param failed"."\n";
 											break;
 										}
 
 										if ($user_level_check_stmt->execute()) {
 
 
-											echo "user level check executed"."\n";
+											//echo "user level check executed"."\n";
 
 											$user_level_check_result = $user_level_check_stmt->get_result();
 
@@ -189,7 +189,7 @@
 
 											if($user_level_check_result->num_rows == 0) {
 
-												echo "user level check failed, please try again....."."\n";
+												//echo "user level check failed, please try again....."."\n";
 
 												break;
 
@@ -200,7 +200,7 @@
 
 											$user_level = $row["user_level"];
 											
-											echo "returned user leve is ".$user_level."\n";
+											//echo "returned user leve is ".$user_level."\n";
 
 											if ($user_level == 0) {
 
@@ -208,7 +208,7 @@
 
 												//header ("Location: ../html/home.php");
 
-												echo "we are going to home page now......"."\n";
+												//echo "we are going to home page now......"."\n";
 
 											}
 											if ($user_level == 1) {
@@ -216,7 +216,7 @@
 												// user is an admin of some repository
 
 												//header ("Location: ../html/admin.php");			
-												echo "we are going to admin page now......"."\n";
+												//echo "we are going to admin page now......"."\n";
 
 											}
 
@@ -271,7 +271,7 @@
 
 					if (empty($username) || empty($refresh_token)) {
 						//$error = "Username or Password is empty";
-						echo "Username or refresh token is empty"."\n";
+						//echo "Username or refresh token is empty"."\n";
 					}
 
 					else {
@@ -356,13 +356,13 @@
 				}
 
 				$db_conn->close(); 
-				echo "database disconnected successfully"."\n";
+				//echo "database disconnected successfully"."\n";
 
 			}
 
 			else {
 
-				echo "no input from user"."\n";
+				//echo "no input from user"."\n";
 				break;
 			
 			}
