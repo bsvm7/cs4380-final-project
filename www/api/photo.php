@@ -185,7 +185,7 @@
 					
 					if($result = $user_repo_check_stmt->get_result()) {
 						if($result->num_rows != 1) {
-							set_error_response( 0 , "The number of rows was off -> " . $db_conn->error );
+							set_error_response( 0 , "The number of rows was off -> " . $user_repo_check_stmt->error );
 							break;
 						}
 					}
