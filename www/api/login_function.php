@@ -186,7 +186,7 @@
 
 												// user is a regular user 
 
-												header ("Location: ../html/home.php");
+												header ("Location: ./../html/home.php");
 
 
 
@@ -196,7 +196,7 @@
 
 												// user is an admin of some repository
 
-												header ("Location: ../html/admin.php");			
+												header ("Location: ./../html/admin.php");			
 
 
 											}
@@ -339,7 +339,7 @@
 			}
 
 			else {
-				
+
 				echo "no input from user"."\n";
 				break;
 			
