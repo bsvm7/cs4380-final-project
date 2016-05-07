@@ -58,7 +58,7 @@ var app = angular.module('photoarchiving_app', ["highcharts-ng"])
 	    yAxis: {
 		    currentMin: 0,
 		    currentMax: 1
-	    }
+	    },
 	    //Whether to use Highstocks instead of Highcharts (optional). Defaults to false.
 	    useHighStocks: false,
 	    //size (optional) if left out the chart will default to size of the div or something sensible.
