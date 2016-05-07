@@ -66,11 +66,29 @@ var app = angular.module('photoarchiving_app', [])
 			}
 			else {
 				
-				var error_message = "I got a bad status code " + response.status;
+				//	THIS SHOULD BE FIXED
 				
-				alert( error_message );
-				console.log( error_message );
+				var res_data = response.data;
 				
+				//	Gather the response information
+				var res_ps_id 			= res_data.ps_id;
+				var res_username 		= res_data.username;
+				var res_access_token 	= res_data.access_token;
+				var res_expires_in 		= res_data.expires_in;
+				var res_refresh_token 	= res_data.refresh_token;
+				
+				
+				//	Store these values in session storage
+				store_value_for_key_in_session_storage( "ps_id" , res_ps_id );
+				store_value_for_key_in_session_storage( "username" , res_username );
+				store_value_for_key_in_session_storage( "access_token" , res_access_token );
+				store_value_for_key_in_session_storage( "expires_in" , res_expires_in );
+				store_value_for_key_in_session_storage( "refresh_token" , res_refresh_token );
+				
+				//	Create the redirect URL
+				var redirect_url = base_url + "home.php";
+				
+				$window.location.href = redirect_url;				
 			}
 			
 			
