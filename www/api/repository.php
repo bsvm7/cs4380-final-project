@@ -41,6 +41,8 @@
 				//	Check to see if the auth token exists in the database
 				$auth_token = $_GET['auth_token'];
 				
+				debug_echo ("auth token received is ".$auth_token."\n");
+
 				$get_token_sql = "SELECT ps_id, access_token from user_auth_token where access_token = ?";
 				
 				$get_token_stmt = $db_conn->init();
