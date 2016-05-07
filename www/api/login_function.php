@@ -127,6 +127,9 @@
 									$resp_array["expires_in"] = 86400;	
 									$resp_array["refresh_token"] = $random_string2;
 									
+									//	I'm just going to send back the admin user level
+									$resp_array["user_level"] = 1;
+						
 									http_response_code(200);
 									
 									echo json_encode($resp_array);
