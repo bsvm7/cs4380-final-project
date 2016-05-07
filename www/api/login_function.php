@@ -146,7 +146,7 @@
 
 									if($insert_log_stmt->execute()) {
 
-										echo "login activity has been logged"."\n";
+// 										echo "login activity has been logged"."\n";
 									}
 									else {
 
