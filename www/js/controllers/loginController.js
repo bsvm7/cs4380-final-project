@@ -79,7 +79,7 @@ var app = angular.module('photoarchiving_app', [])
 			
 			var error_string = "There was some error posting the registration data";
 			
-			alert( error_string + response.data );
+			alert( error_string + JSON.stringify(response.data) );
 			console.log( error_string );
 			
 		});
