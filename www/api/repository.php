@@ -18,11 +18,11 @@
 		debug_echo ("Could not connect to server"."\n");
 
 		break;
-	}		
-
-	$req_method = $_SERVER['REQUEST_METHOD'];	
+	}	
 
 	debug_echo ("server connected successfully"."\n");
+
+	$req_method = $_SERVER['REQUEST_METHOD'];	
 
 		
 	switch ($req_method) {
@@ -75,7 +75,7 @@
 					
 					switch ($req_type) {
 
-						case: 'user_repos'
+						case 'user_repos':
 
 
 
@@ -86,7 +86,7 @@
 
 						break;
 
-						case: 'all_repos'
+						case 'all_repos':
 
 
 
@@ -95,7 +95,7 @@
 						break;
 
 
-						case: 'repo_info' :
+						case 'repo_info':
 
 							if(isset($_GET["rid"])) {
 
