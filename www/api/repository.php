@@ -32,7 +32,7 @@
 			debug_echo ("required method is GET "."\n");
 
 			$valid_auth_token = false;
-			$result_ps_id;
+			//$result_ps_id;
 			
 			if (isset($_GET['auth_token'])) {
 				
@@ -112,7 +112,7 @@
 									if($result_row = $result->fetch_array(MYSQLI_ASSOC)){
 
 										http_response_code(200);
-										//echo json_encode($result_row);
+										echo json_encode($result_row);
 									}	
 									else{
 										set_error_response( 203, "SQL Error -> " . $db_conn->error);
