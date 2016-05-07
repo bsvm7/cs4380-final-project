@@ -207,14 +207,17 @@
 
 												// user is a regular user 
 
-												header ("Location: ../html/home.php");
+												//header ("Location: ../html/home.php");
+
+												echo "we are going to home page now......";
 
 											}
 											if ($user_level == 1) {
 
 												// user is an admin of some repository
 
-												header ("Location: ../html/admin.php");			
+												//header ("Location: ../html/admin.php");			
+												echo "we are going to admin page now......";
 
 
 											}
