@@ -36,153 +36,165 @@
 			
 			if (isset($_GET['auth_token'])) {
 				
-				debug_echo ("auth_token received..."."\n");
-
 				//	Check to see if the auth token exists in the database
 				$auth_token = $_GET['auth_token'];
 				
-				$get_token_sql = "SELECT ps_id, access_token from user_auth_token where access_token = " . $auth_token;
+				debug_echo ("auth token received is ".$auth_token."\n");
+
+				$get_token_sql = "SELECT ps_id, access_token from user_auth_token where access_token = ?";
 				
-				if ($result = $db_conn->query($get_token_sql))
-				{
+				
+				
+				if(!($get_token_stmt = $db_conn->prepare($get_token_sql))){
+					set_error_response( 21 , "SQL statement could not prepare " . $db_conn->error);
+					break;
+
+				}
+
+				if(!($get_token_stmt->bind_param("s", $auth_token)) ) {
+					set_error_response( 21 , "SQL statement could not bind param " . $db_conn->error);
+					break;
+				}
+
+				if(!($get_token_stmt->execute())) {
+					set_error_response( 21 , "SQL statement could not execute " . $db_conn->error);
+					break;
+				}
+
+ 				if ($result = $get_token_stmt->get_result()) {
+
 					if ($result->num_rows == 1) {
 						debug_echo ("get token succeded..."."\n");
 						$valid_auth_token = true;
-						$result_ps_id = ($result->fetch_array(MYSQLI_ASSOC))["ps_id"];
 					}
+				
+					else 
+					{
+						set_error_response( 21 , "SQL statement could not prepare " . $db_conn->error);
+						debug_echo ("get token error..."."\n");
+						break;
+
+					}
+								
 				}
 				else 
 				{
-					set_error_response( 21 , "SQL statement could not prepare " . $db_conn->error);
-					debug_echo ("get token error..."."\n");
-
+					set_error_response( 4, "The auth parameter was not properly set");
+					debug_echo ("auth token can not be empty..."."\n");
+					break;
 				}
-								
-			}
-			else 
-			{
-				set_error_response( 4, "The auth parameter was not properly set");
-				debug_echo ("auth token can not be empty..."."\n");
-			}
 
 			
 
-			if ($valid_auth_token) {
-				
-				if (isset($_REQUEST['req_type'])) {
-
-					$req_type = $_GET['req_type'];
+				if ($valid_auth_token) {
 					
-					switch ($req_type) {
+					if (isset($_REQUEST['req_type'])) {
 
-						case 'user_repos':
+						$req_type = $_GET['req_type'];
+						
+						switch ($req_type) {
 
-
-
-
-
-
+							case 'user_repos':
 
 
-						break;
+							break;
 
-						case 'all_repos':
+							case 'all_repos':
 
-
-
-
-
-						break;
+							break;
 
 
-						case 'repo_info':
+							case 'repo_info':
 
-							if(isset($_GET["rid"])) {
+								if(isset($_GET["rid"])) {
 
-								$repo_id=$_GET["rid"]; 
+									$repo_id=$_GET["rid"]; 
 
-								$get_repo_info_sql= "SELECT * FROM repository R WHERE R.rid= ".$repo_id;
+									$get_repo_info_sql= "SELECT * FROM repository R WHERE R.rid= ".$repo_id;
 
-								debug_echo ("rid is ".$repo_id."\n");
+									debug_echo ("rid is ".$repo_id."\n");
 
 
 
-								if($result= $db_conn->query($get_repo_info_sql)) {
+									if($result= $db_conn->query($get_repo_info_sql)) {
 
-									if($result_row = $result->fetch_array(MYSQLI_ASSOC)){
+										if($result_row = $result->fetch_array(MYSQLI_ASSOC)){
 
-										http_response_code(200);
-										echo json_encode($result_row);
+											http_response_code(200);
+											echo json_encode($result_row);
+										}	
+										else{
+											set_error_response( 203, "SQL Error -> " . $db_conn->error);
+											debug_echo ("SQL Error -> "."\n");
+											break;
+										}							
+
 									}	
 									else{
-										set_error_response( 203, "SQL Error -> " . $db_conn->error);
-										debug_echo ("SQL Error -> "."\n");
+										set_error_response( 203, "multiple repositories are returned....");
+										debug_echo ("multiple repositories are returned...."."\n");
 										break;
-									}							
+									}	
 
-								}	
+
+								}
 								else{
-									set_error_response( 203, "multiple repositories are returned....");
-									debug_echo ("multiple repositories are returned...."."\n");
-									break;
-								}	
-
-
-							}
-							else{
-								set_error_response( 13, "rid can not be empty..."."\n");
-								debug_echo ("rid can not be empty..."."\n");
-					
-								break;
-							}
-
-						break;
-
-						case: 'analytics'
-
-							if (isset($_GET["graph-type"])) {
-
-								$graph_type = $_GET["graph-type"];
+									set_error_response( 13, "rid can not be empty..."."\n");
+									debug_echo ("rid can not be empty..."."\n");
 						
-								switch ($graph_type) {
-									
-									case "top-visit-bar-chart":
-
-										// first get the rid of all the repositories
-
-
-
-
-
-										// then return the visit numbers 
-
-
-
-
-
 									break;
+								}
 
-								
+							break;
+	/*
+							case: 'analytics'
 
-								}	
+								if (isset($_GET["graph-type"])) {
 
-							}		
+									$graph_type = $_GET["graph-type"];
+							
+									switch ($graph_type) {
+										
+										case "top-visit-bar-chart":
 
-						break;
+											// first get the rid of all the repositories
 
-						default:
 
+
+
+
+											// then return the visit numbers 
+
+
+
+
+
+										break;
+
+									
+
+									}	
+
+								}		
+
+							break;
+
+							default:
+
+							break;
+	*/
+						}
+					}
+					else{
+						set_error_response( 13, "rid can not be empty..."."\n");
+						debug_echo ("req_type error...."."\n");
 						break;
 					}
 				}
 				else{
-					set_error_response( 13, "rid can not be empty..."."\n");
-					debug_echo ("req_type error...."."\n");
+					debug_echo ("auth token does not match to our record ... ");
 					break;
 				}
-			}
-			else{
-				debug_echo ("auth token does not match to our record ... ");
 			}
 
 		break;
