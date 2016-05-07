@@ -155,28 +155,25 @@
 										$user_level_check_sql = "SELECT U.user_level FROM user U WHERE U.ps_id= ?";
 
 										if(!($user_level_check_stmt = $db_conn->stmt_init()) ){
-											echo "user_level_check_stmt init failed";
+											echo "user_level_check_stmt init failed"."\n";
 
 										}
-											echo "user_level_check_stmt init done";
 
 										if(!($user_level_check_stmt->prepare($user_level_check_sql)) ){
-											echo "user_level_check_stmt prepare stmt failed";
+											echo "user_level_check_stmt prepare stmt failed"."\n";
 											
 										}
-											echo "user_level_check_stmt prepare stmt done";
 
 										if(!($user_level_check_stmt -> bind_param ("i", $result_ps_id)) ){
 
-											echo "user_level_check_stmt bind param failed";
+											echo "user_level_check_stmt bind param failed"."\n";
 											
 										}
-											echo "user_level_check_stmt bind param done";
 
 										if ($user_level_check_stmt->execute()) {
 
 
-											echo "user level check executed";
+											echo "user level check executed"."\n";
 
 											$user_level_check_result = $user_level_check_stmt->get_result();
 
@@ -209,7 +206,7 @@
 
 												//header ("Location: ../html/home.php");
 
-												echo "we are going to home page now......";
+												echo "we are going to home page now......"."\n";
 
 											}
 											if ($user_level == 1) {
@@ -217,7 +214,7 @@
 												// user is an admin of some repository
 
 												//header ("Location: ../html/admin.php");			
-												echo "we are going to admin page now......";
+												echo "we are going to admin page now......"."\n";
 
 
 											}
