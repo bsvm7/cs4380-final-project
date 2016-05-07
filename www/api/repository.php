@@ -159,11 +159,6 @@
 									break;	
 								}
 
-								if(!($user_repo_request_stmt->bind_param("i", $ps_id))){
-									set_error_response( 0 , $db_conn->error );
-									break;		
-								}
-
 								if(!($user_repo_request_stmt->execute())) {
 									set_error_response( 0 , $db_conn->error );
 									break;	
@@ -260,7 +255,6 @@
 								}
 
 							break;
-	
 							
 
 							default:
