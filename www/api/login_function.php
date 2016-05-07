@@ -182,7 +182,7 @@
 
 											$user_level = $row[0];
 
-											if ($user_level == 0) {
+											if ($user_level == '0') {
 
 												// user is a regular user 
 
@@ -192,7 +192,7 @@
 
 
 											}
-											if ($user_level ==1) {
+											if ($user_level =='1') {
 
 												// user is an admin of some repository
 
