@@ -16,6 +16,12 @@
     <!-- Bootstrap -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 
+
+	<!-- Highcharts -->
+	<script src="http://code.highcharts.com/stock/highstock.src.js"></script>
+    <script src="bower_components/highcharts-ng/dist/highcharts-ng.min.js"></script>
+    <script src="js/controllers/adminController.js"></script>
+    
     <!-- CUSTOM STYLES
     –––––––––––––––––––––––––––––––––––––––––––––––––– -->
     
@@ -68,7 +74,7 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
   </head>
-  <body ng-app="photoarchiving_app" ng-controller="HomeController as homeCtrl">
+  <body ng-app="photoarchiving_app" ng-controller="AdminController as adminCtrl">
 	  
   	<script type="text/javascript" src="js/controllers/homeController.js"></script>
   	
@@ -95,6 +101,40 @@
         </div><!--/.nav-collapse -->
       </div>
     </nav>  
+
+
+
+
+
+	<div class="row">
+		<div class="span9">
+			<div class="row">
+				<highchart class="chart" config="chartConfig" class="span9" ></highchart>
+			</div>
+		</div>
+	</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
