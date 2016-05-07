@@ -21,7 +21,7 @@
 		die("The connection to the database failed: " . $db_conn->connect_error);
 	}
 			
-	echo "database connected" . "\n";		
+	//echo "database connected" . "\n";		
 
 	$req_method = $_SERVER['REQUEST_METHOD'];		
 		
@@ -40,7 +40,7 @@
 
 				if (empty($access_token)) {
 
-					echo "access_token is needed"."\n";
+					//echo "access_token is needed"."\n";
 
 					break;
 				}
@@ -59,7 +59,7 @@
 						break;
 					}							
 
-					echo "token retrieve statement prepared"."\n";
+					//echo "token retrieve statement prepared"."\n";
 
 					if (!$token_retrieve_stmt->bind_param("s" , $access_token)) {
 
@@ -68,7 +68,7 @@
 						break;
 					}
 				
-					echo "token retrieve statement param bind worked"."\n";
+					//echo "token retrieve statement param bind worked"."\n";
 
 
 					if (!$token_retrieve_stmt->execute()) {
@@ -77,7 +77,7 @@
 
 						break;				
 					}
-					echo "token retrieve statement execution worked"."\n";
+					//echo "token retrieve statement execution worked"."\n";
 
 					// compare the access token provided and the one retrived from database
 					if ($token_retrieve_result = $token_retrieve_stmt->get_result()) {
@@ -101,24 +101,24 @@
 						$result_access_token = $row[1];
 						//$result_refresh_token = $row[2];
 					
-						echo "token need to be compared"."\n";
+						//echo "token need to be compared"."\n";
 
 					
 						if ($result_access_token == $access_token) {
 
-							echo "access token matched ";
+							//echo "access token matched ";
 
 							// insert logout activity in activity log table
 							$insert_log_sql = "INSERT INTO activity_log (ps_id, ac_type) VALUES ( ? , ?)";	
 			
-									echo "insert log sql worked"."\n";
+									//echo "insert log sql worked"."\n";
 
 							$insert_log_stmt = $db_conn->stmt_init();
 
 							
 							$insert_log_stmt->prepare($insert_log_sql);
 
-							echo "insert log stmt prepared"."\n";
+							//echo "insert log stmt prepared"."\n";
 
 
 							$ac_type="logout";
@@ -128,7 +128,7 @@
 							
 							if ($insert_log_stmt->execute()) {	
 
-								echo "insert log stmt executed"."\n";
+								//echo "insert log stmt executed"."\n";
 
 
 								// delete access token and refresh token from user_auth_token table
@@ -144,7 +144,7 @@
 									break;
 								}
 
-									echo "delete tokenstmt prepared"."\n";
+									//echo "delete tokenstmt prepared"."\n";
 
 								
 								if(!$delete_token_stmt->bind_param("i", $result_ps_id)){
@@ -155,7 +155,7 @@
 
 								}
 
-									echo "delete tokenstmt param bind worked"."\n";
+									//echo "delete tokenstmt param bind worked"."\n";
 
 
 								if (!$delete_token_stmt->execute()) {
@@ -168,7 +168,7 @@
 								else{
 									
 									//header('Location: ');
-									echo "You have successfully logged out"."\n";
+									//echo "You have successfully logged out"."\n";
 
 								}		
 							}
@@ -180,7 +180,7 @@
 						}
 						else{
 
-							echo "tokens do not match! .....";
+							//echo "tokens do not match! .....";
 						}							
 					}
 					else
@@ -195,7 +195,7 @@
 
 			else {
 
-				echo "no input from user"."\n";
+				//echo "no input from user"."\n";
 			
 			}
 
@@ -246,5 +246,4 @@
 		
 	}
 
-	echo "\n\n\n"."everything worked and now its time to close database and everything"."\n";
 ?>

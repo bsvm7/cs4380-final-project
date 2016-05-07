@@ -30,7 +30,6 @@
 		
 		case 'POST':
 
-
 			//	Get the raw post database
 			$json_raw = file_get_contents("php://input");
 
