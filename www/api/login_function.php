@@ -186,7 +186,7 @@
 
 												// user is a regular user 
 
-												header ("location: ../home.php");
+												header ("Location: ../html/home.php");
 
 
 
@@ -196,12 +196,7 @@
 
 												// user is an admin of some repository
 
-												header ("location: ../admin.php");
-
-												
-
-
-
+												header ("Location: ../html/admin.php");			
 
 
 											}
