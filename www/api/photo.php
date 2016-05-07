@@ -40,7 +40,7 @@
 				Pull out all the query parameters
 			*/
 			if(!(isset($_GET["auth_token"]))) {
-				$error_str = "The auth token was not set"
+				$error_str = "The auth token was not set";
 				set_error_response( 0 , $error_str );
 			}
 			
