@@ -36,6 +36,8 @@
 		
 		case 'GET':
 			
+			debug_echo( "hello" );
+			
 			/*
 				Pull out all the query parameters
 			*/
@@ -107,7 +109,7 @@
 			
 			
 			
-			debug_echo( "Now I'm for sure the authentication token ($auth_token) is valid for the user with the id ($ps_id)" );
+// 			debug_echo( "Now I'm for sure the authentication token ($auth_token) is valid for the user with the id ($ps_id)" );
 			
 			
 			
