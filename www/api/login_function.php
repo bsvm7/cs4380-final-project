@@ -239,7 +239,7 @@
 							break;
 						}
 
-						$db_conn->close; 
+						$db_conn->close(); 
 				
 					}
 
@@ -329,8 +329,9 @@
 					break;
 				}
 
-				$db_conn->close; 
-				
+				$db_conn->close(); 
+				echo "database disconnected successfully"."\n";
+
 			}
 
 			else {
