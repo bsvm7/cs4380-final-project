@@ -46,6 +46,11 @@ var app = angular.module('photoarchiving_app', [])
 			if (response.status == 200 ) {
 				
 				console.log(response);
+				var res_data = response.data;
+				
+				console.log( res_data );
+				console.log( res_data["ps_id"] );
+				
 				//	Gather the response information
 				var res_ps_id 			= response.data.ps_id;
 				var res_username 		= response.data.username;
@@ -55,7 +60,7 @@ var app = angular.module('photoarchiving_app', [])
 				
 				
 				var debug_array = [ res_ps_id , res_username , res_access_token , res_expires_in , res_refresh_token ];
-				
+
 				console.log( debug_array );
 			}
 			else {
