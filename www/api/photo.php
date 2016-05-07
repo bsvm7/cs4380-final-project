@@ -51,7 +51,7 @@
 				set_error_response( 0 , $error_str );
 			}
 			
-			if(!(isset($_GET["req_typ"]))) {
+			if(!(isset($_GET["request_type"]))) {
 				$error_str = "You didn't set the request type";
 				set_error_response( 0 , $error_str );
 			}
