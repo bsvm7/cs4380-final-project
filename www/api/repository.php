@@ -21,7 +21,6 @@
 
 	debug_echo ("server connected successfully"."\n");
 
-/*
 
 	$req_method = $_SERVER['REQUEST_METHOD'];	
 
@@ -193,9 +192,6 @@
 		break;
 
 	}	
-
-*/	
-
 
 	
 	function debug_echo( $str ) {
