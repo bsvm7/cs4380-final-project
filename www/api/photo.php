@@ -156,7 +156,6 @@
 				
 				case 'repo-photos':
 				
-					/*
 					//	Make sure the r_id value is set
 					if(!(isset($_GET["r_id"]))) {
 						set_error_response( 0 , "You didn't set the r_id value...");
@@ -190,7 +189,6 @@
 							break;
 						}
 					}
-					*/
 					
 					debug_echo( "The number of rows was right!" );
 					
