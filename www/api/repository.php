@@ -15,10 +15,11 @@
 	if ($db_conn->error_code) {
 		
 		set_error_response( 400 , "I couldn't connect to the database -> " . $db_conn->connect_error);
-		die("The connection to the database failed: " . $db_conn->connect_error);
 	}		
 
-	$req_method = $_SERVER['REQUEST_METHOD'];		
+	$req_method = $_SERVER['REQUEST_METHOD'];	
+
+
 		
 	switch ($req_method) {
 		
@@ -48,6 +49,7 @@
 			else 
 			{
 				set_error_response( 4, "The auth parameter was not properly set");
+				debug_echo ("auth token can not be empty..."."\n");
 			}
 
 			
@@ -78,12 +80,14 @@
 									}	
 									else{
 										set_error_response( 203, "SQL Error -> " . $db_conn->error);
+										debug_echo ("SQL Error -> "."\n");
 										break;
 									}							
 
 								}	
 								else{
 									set_error_response( 203, "multiple repositories are returned....");
+									debug_echo ("multiple repositories are returned...."."\n");
 									break;
 								}	
 
@@ -91,6 +95,8 @@
 							}
 							else{
 								set_error_response( 13, "rid can not be empty..."."\n");
+								debug_echo ("rid can not be empty..."."\n");
+					
 								break;
 							}
 
@@ -131,7 +137,25 @@
 						default:
 
 						break;
+					}
+				}
+				else{
+					set_error_response( 13, "rid can not be empty..."."\n");
+					debug_echo ("req_type error...."."\n");
+					break;
+				}
+			}
+			else{
+				debug_echo ("auth token does not match to our record ... ");
+			}
 
+		break;
+		
+		default:
+
+		break;
+
+	}	
 
 
 function set_error_response( $error_code , $error_message ) {
@@ -151,12 +175,6 @@ function set_error_response( $error_code , $error_message ) {
 }
 
 
-
-	debug_echo( "database connected" . "\n" );
-
-
-	
-	
 	
 	/*
 		UTILITY FUNCTIONS
