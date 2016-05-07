@@ -177,12 +177,12 @@
 						set_error_response( 0 , "I couldn't bind the params -> " . $db_conn->error );
 						break;
 					}
-					
+					/*
 					if(!($user_repo_check_stmt->execute())) {
 						set_error_response( 0 , "I couldn't execute -> " . $db_conn->error );
 						break;
 					}
-					/*
+					
 					if($result = $user_repo_check_stmt->get_result()) {
 						if($result->num_rows != 1) {
 							set_error_response( 0 , "The number of rows was off -> " . $db_conn->error );
