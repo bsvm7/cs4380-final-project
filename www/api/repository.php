@@ -110,7 +110,7 @@
 
 									$repo_id=$_GET["rid"]; 
 
-									$get_repo_info_sql= "SELECT * FROM repository R WHERE R.rid= ?";
+									$get_repo_info_sql= "SELECT * FROM repository R WHERE R.r_id= ?";
 
 									debug_echo ("rid is ".$repo_id."\n");
 
