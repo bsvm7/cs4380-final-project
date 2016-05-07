@@ -101,11 +101,9 @@
 							$result_hash = $row[2];
 							$result_salt = $row[3];
 							
-							$computed_hash = sha1($result_salt.$password);
+							$computed_hash = sha1($password . $result_salt);
 							
 							if ($computed_hash == $result_hash) {
-
-								$log_in_time = 
 
 								$random_string1 = generate_255_char_random_string();								
 		
