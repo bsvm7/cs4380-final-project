@@ -15,6 +15,9 @@
 	if ($db_conn->error_code) {
 		
 		set_error_response( 400 , "I couldn't connect to the database -> " . $db_conn->connect_error);
+		debug_echo ("Could not connect to server"."\n");
+
+		break;
 	}		
 
 	$req_method = $_SERVER['REQUEST_METHOD'];	
