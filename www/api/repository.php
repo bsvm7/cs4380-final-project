@@ -44,9 +44,17 @@
 				$get_token_sql = "SELECT ps_id, access_token from user_auth_token where access_token = ?";
 				
 				$get_token_stmt = $db_conn->init();
-				$get_token_stmt->prepare($get_token_sql);
+				
+				if(!$get_token_stmt->prepare($get_token_sql)){
+					set_error_response( 21 , "SQL statement could not prepare " . $db_conn->error);
+					break;
 
-				$get_token_stmt->bind_param("i", $auth_token);
+				}
+
+				if(!$get_token_stmt->bind_param("i", $auth_token)){
+					set_error_response( 21 , "SQL statement could not bind param " . $db_conn->error);
+					break;
+				}
 
 				if(!($get_token_stmt->execute())) {
 					set_error_response( 21 , "SQL statement could not execute " . $db_conn->error);
@@ -188,7 +196,7 @@
 					break;
 				}
 			}
-			
+
 		break;
 		
 		default:
