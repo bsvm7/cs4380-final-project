@@ -20,7 +20,6 @@
 	<!-- Highcharts -->
 	<script src="http://code.highcharts.com/stock/highstock.src.js"></script>
     <script src="bower_components/highcharts-ng/dist/highcharts-ng.min.js"></script>
-    <script src="js/controllers/adminController.js"></script>
     
     <!-- CUSTOM STYLES
     –––––––––––––––––––––––––––––––––––––––––––––––––– -->
@@ -76,7 +75,7 @@
   </head>
   <body ng-app="photoarchiving_app" ng-controller="AdminController as adminCtrl">
 	  
-  	<script type="text/javascript" src="js/controllers/homeController.js"></script>
+  	<script type="text/javascript" src="js/controllers/adminController.js"></script>
   	
     <!-- NAVBAR
     –––––––––––––––––––––––––––––––––––––––––––––––––– -->
