@@ -172,7 +172,7 @@
 						set_error_response( 0 , $db_conn->error );
 						break;
 					}
-					
+					/*
 					if(!($user_repo_check_stmt->bind_params("ii", $ps_id, $r_id))) {
 						set_error_response( 0 , "I couldn't bind the params -> " . $db_conn->error );
 						break;
@@ -189,7 +189,7 @@
 							break;
 						}
 					}
-					
+					*/
 					debug_echo( "The number of rows was right!" );
 					
 				
