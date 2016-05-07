@@ -68,7 +68,7 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
   </head>
-  <body ng-app="linkedinApp">
+  <body ng-app="photoarchiving_app">
 	  
   	<script type="text/javascript" src="js/controllers/loginController.js"></script>
   	
@@ -83,7 +83,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="/index.php">LinkedIn</a>
+          <a class="navbar-brand" href="/index.php">Photoarchiving</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
@@ -100,7 +100,7 @@
     <div class="container" ng-controller="LoginController as loginctrl">
       <div class="row">
         <div class="col-md-6 text-center col-md-offset-3 box">
-          <h1 class="company-name">LinkedIn</h1>
+          <h1 class="company-name">Photoarchiving</h1>
           <h2 class="lead location">Login To Your Account</h2>
           
           <div class="col-md-10 col-md-offset-1 text-left">
