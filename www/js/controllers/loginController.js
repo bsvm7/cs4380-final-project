@@ -2,10 +2,7 @@ var app = angular.module('photoarchiving_app', [])
   .controller('LoginController', function($scope, $http, $window) {
   	
 	//	CONSTANTS
-	var base_url_main = "http://40.86.85.30/cs4380/";
-	var base_url = base_url_main;
-
-
+	var base_url = "http://40.86.85.30/cs4380/";
 	
 	$scope.credentials = {
 		'username' : '',
@@ -45,23 +42,27 @@ var app = angular.module('photoarchiving_app', [])
 						
 			if (response.status == 200 ) {
 				
-				console.log(response);
 				var res_data = response.data;
 				
-				console.log( res_data );
-				console.log( res_data["ps_id"] );
-				
 				//	Gather the response information
-				var res_ps_id 			= response.data.ps_id;
-				var res_username 		= response.data.username;
-				var res_access_token 	= response.data.access_token;
-				var res_expires_in 		= response.data.expires_in;
-				var res_refresh_token 	= response.data.refresh_token;
+				var res_ps_id 			= res_data.ps_id;
+				var res_username 		= res_data.username;
+				var res_access_token 	= res_data.access_token;
+				var res_expires_in 		= res_data.expires_in;
+				var res_refresh_token 	= res_data.refresh_token;
 				
 				
-				var debug_array = [ res_ps_id , res_username , res_access_token , res_expires_in , res_refresh_token ];
-
-				console.log( debug_array );
+				//	Store these values in session storage
+				store_value_for_key_in_session_storage( "ps_id" , res_ps_id );
+				store_value_for_key_in_session_storage( "username" , res_username );
+				store_value_for_key_in_session_storage( "access_token" , res_access_token );
+				store_value_for_key_in_session_storage( "expires_in" , res_expires_in );
+				store_value_for_key_in_session_storage( "refresh_token" , res_refresh_token );
+				
+				//	Create the redirect URL
+				var redirect_url = base_url + "home.php";
+				
+				$window.location.href = redirect_url;
 			}
 			else {
 				
@@ -82,45 +83,6 @@ var app = angular.module('photoarchiving_app', [])
 			console.log( error_string );
 			
 		});
-
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		/*
-		$http({
-			method : 'GET',
-			url : auth_url
-		}).then(function successCallBack(response) {
-			
-			//	Pull auth_token data from the response
-			var auth_token = response.data.auth_token;
-			var expires_in = response.data.expires_in;
-			
-			console.log( "The auth_token (1) is -> " + auth_token);
-			//	Set the auth token data in storage
-			if (typeof(Storage) !== "undefined") {
-				sessionStorage.auth_token = auth_token;
-				sessionStorage.expires_in = expires_in;
-			}
-			
-			//	Redirect the user to the home page
-			var redirect_url = base_url + "company.php?cid=2";
-			
-			$window.location.href = redirect_url;
-			
-		}, function errorCallback(response) {
-			
-			console.log("There was an error");
-			
-		});
-		
-		*/
 		
 	}
 	
@@ -134,5 +96,19 @@ var app = angular.module('photoarchiving_app', [])
 		}
 	}
 
+	function store_value_for_key_in_session_storage( key , value ) {
+		
+		if(typeof(Storage) !== "undefined" ) {
+			
+			sessionStorage.setItem( key , value );
+			
+			return true;
+		}
+		else {
+			return false;
+		}
+		
+		
+	}
 	
   });
