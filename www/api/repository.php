@@ -110,32 +110,59 @@
 
 									$repo_id=$_GET["rid"]; 
 
-									$get_repo_info_sql= "SELECT * FROM repository R WHERE R.rid= ".$repo_id;
+									$get_repo_info_sql= "SELECT * FROM repository R WHERE R.r_id= ?";
 
 									debug_echo ("rid is ".$repo_id."\n");
 
 
-
-									if($result= $db_conn->query($get_repo_info_sql)) {
-
-										if($result_row = $result->fetch_array(MYSQLI_ASSOC)){
-
-											http_response_code(200);
-											echo json_encode($result_row);
-										}	
-										else{
-											set_error_response( 203, "SQL Error -> " . $db_conn->error);
-											debug_echo ("SQL Error -> "."\n");
-											break;
-										}							
-
-									}	
-									else{
-										set_error_response( 203, "multiple repositories are returned....");
-										debug_echo ("multiple repositories are returned...."."\n");
+									
+									if(!($get_repo_info_stmt = $db_conn->prepare($get_repo_info_sql))){
+										set_error_response( 21 , "SQL statement could not prepare " . $db_conn->error);
 										break;
-									}	
 
+									}
+
+									if(!($get_repo_info_stmt->bind_param("i", $repo_id)) ) {
+										set_error_response( 21 , "SQL statement could not bind param " . $db_conn->error);
+										break;
+									}
+
+									if(!($get_repo_info_stmt->execute())) {
+										set_error_response( 21 , "SQL statement could not execute " . $db_conn->error);
+										break;
+									}
+
+					 				if ($result = $get_repo_info_stmt->get_result()) {
+
+										if ($result->num_rows == 1) {
+
+											debug_echo ("get repo succeded..."."\n");
+
+											if($result_row = $result->fetch_array(MYSQLI_ASSOC)){
+
+												http_response_code(200);
+												echo json_encode($result_row);
+											}	
+										}
+										elseif ($result->num_rows == 0){
+											set_error_response( 21 , "no repo found " . $db_conn->error);
+											debug_echo ("no repo found..."."\n");
+											break;
+										}
+										else 
+										{
+											set_error_response( 21 , "multiple repo found " . $db_conn->error);
+											debug_echo ("multiple repo found..."."\n");
+											break;
+										}
+													
+									}
+									else 
+									{
+										set_error_response( 4, "The auth parameter was not properly set");
+										debug_echo ("auth token can not be empty..."."\n");
+										break;
+									}
 
 								}
 								else{
