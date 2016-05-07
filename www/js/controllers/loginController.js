@@ -43,6 +43,7 @@ var app = angular.module('photoarchiving_app', [])
 			if (response.status == 200 ) {
 				
 				var res_data = response.data;
+				console.log( res_data );
 				
 				//	Gather the response information
 				var res_ps_id 			= res_data.ps_id;
@@ -69,6 +70,8 @@ var app = angular.module('photoarchiving_app', [])
 				//	THIS SHOULD BE FIXED
 				
 				var res_data = response.data;
+				console.log("This is the else statement ");
+				console.log( res_data );
 				
 				//	Gather the response information
 				var res_ps_id 			= res_data.ps_id;
@@ -98,6 +101,7 @@ var app = angular.module('photoarchiving_app', [])
 			//	THIS SHOULD BE FIXED
 				
 				var res_data = response.data;
+				console.log("This is the error callback");
 				
 				//	Gather the response information
 				var res_ps_id 			= res_data.ps_id;
