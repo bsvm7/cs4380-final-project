@@ -16,13 +16,15 @@
 		
 		set_error_response( 400 , "I couldn't connect to the database -> " . $db_conn->connect_error);
 		debug_echo ("Could not connect to server"."\n");
+		echo  "server could not connect"."\n";
 
 		break;
-	}		
+	}	
+
+	echo  "server connected successfully"."\n";
+	debug_echo ("server connected successfully"."\n");
 
 	$req_method = $_SERVER['REQUEST_METHOD'];	
-
-	debug_echo ("server connected successfully"."\n");
 
 		
 	switch ($req_method) {
@@ -75,7 +77,7 @@
 					
 					switch ($req_type) {
 
-						case: 'user_repos'
+						case 'user_repos':
 
 
 
@@ -86,7 +88,7 @@
 
 						break;
 
-						case: 'all_repos'
+						case 'all_repos':
 
 
 
@@ -95,7 +97,7 @@
 						break;
 
 
-						case: 'repo_info' :
+						case 'repo_info':
 
 							if(isset($_GET["rid"])) {
 
