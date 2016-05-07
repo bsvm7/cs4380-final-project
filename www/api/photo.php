@@ -139,11 +139,15 @@
 				
 				if($result_row = $result->fetch_array(MYSQLI_ASSOC)) {
 					
-					debug_echo( json_encode($result_row) );
-					
+					//	Echo the results
+					http_response_code(200);
+					echo json_encode( $result_row );
+					break;
 				}
-				
-				
+				else {
+					set_error_response( 0 , "3" , $db_conn->error );
+					break;
+				}
 				
 				
 				break;
