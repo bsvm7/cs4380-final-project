@@ -103,12 +103,16 @@
 
 								$get_repo_info_sql= "SELECT * FROM repository R WHERE R.rid= ".$repo_id;
 
+								debug_echo ("rid is ".$repo_id."\n");
+
+
+
 								if($result= $db_conn->query($get_repo_info_sql)) {
 
 									if($result_row = $result->fetch_array(MYSQLI_ASSOC)){
 
 										http_response_code(200);
-										echo json_encode($result_row);
+										//echo json_encode($result_row);
 									}	
 									else{
 										set_error_response( 203, "SQL Error -> " . $db_conn->error);
