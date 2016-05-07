@@ -152,13 +152,23 @@
  										echo "login activity has been logged"."\n";
 
 
-										$user_level_check_sql = 'SELECT user_level FROM user WHERE ps_id= ?';
+										$user_level_check_sql = "SELECT user_level FROM user WHERE ps_id= ?";
 
-										$user_level_check_stmt = $db_conn->stmt_init();
+										if(!$user_level_check_stmt = $db_conn->stmt_init()){
+											echo "user_level_check_stmt init failed";
+
+										}
 										
-										$user_level_check_stmt = prepare($user_level_check_sql);
+										if(!$user_level_check_stmt = prepare($user_level_check_sql)){
+											echo "user_level_check_stmt prepare stmt failed";
+											
+										}
 										
-										$user_level_check_stmt -> bind_param ("i", $result_ps_id);
+										if(!$user_level_check_stmt -> bind_param ("i", $result_ps_id)){
+
+											echo "user_level_check_stmt bind param failed";
+											
+										}
 
 										if ($user_level_check_stmt->execute()) {
 
