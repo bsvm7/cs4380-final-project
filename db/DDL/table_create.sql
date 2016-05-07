@@ -247,7 +247,7 @@ CREATE TABLE photograph
 	date_uploaded		TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	uploaded_by 		BIGINT,
 	PRIMARY KEY (p_id)	
-	FOREITN KEY (uploaded_by) REFERENCES person (ps_id);
+	FOREIGN KEY (uploaded_by) REFERENCES person (ps_id);
 );
 
 

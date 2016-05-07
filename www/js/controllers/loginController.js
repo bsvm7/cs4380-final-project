@@ -2,7 +2,7 @@ var app = angular.module('photoarchiving_app', [])
   .controller('LoginController', function($scope, $http, $window) {
   	
 	//	CONSTANTS
-	var base_url_main = "http://www.cs4380-group9.tech/final_project/";
+	var base_url_main = "http://40.86.85.30/cs4380/";
 	var base_url = base_url_main;
 
 
@@ -30,13 +30,63 @@ var app = angular.module('photoarchiving_app', [])
 
 	$scope.authenticate = function() {
 		
-		var auth_url = base_url + "api/authorization.php";
+		var auth_url = base_url + "api/login_function.php";
 		
-		var auth_url = auth_url + "?authtype=initial&" + "username=" + $scope.credentials.username + "&password=" + $scope.credentials.password;
+		var post_body = {
+			"auth_type"		: "initial",
+			"username" 		: $scope.credentials.username,
+			"password"		: $scope.credentials.password,
+			"refresh_token"	: ""
+		};
 		
-		console.log("The auth url was -> " + auth_url);
 		
 		
+		$http.post( reg_url , post_body ).then( function successCallback( response ) {
+						
+			if (response.status == 200 ) {
+				
+				//	Gather the response information
+				var res_ps_id 			= response.data.ps_id;
+				var res_username 		= response.data.username;
+				var res_access_token 	= response.data.access_token;
+				var res_expires_in 		= response.data.expires_in;
+				var res_refresh_token 	= response.data.refresh_token;
+				
+				
+				var debug_array = [ res_ps_id , res_username , res_access_token , res_expires_in , res_refresh_token ];
+				
+				console.log( debug_array );
+			}
+			else {
+				
+				var error_message = "I got a bad status code " + response.status;
+				
+				alert( error_message );
+				console.log( error_message );
+				
+			}
+			
+			
+			
+		}, function errorCallback( response ) {
+			
+			var error_string = "There was some error posting the registration data";
+			
+			alert( error_string );
+			console.log( error_string );
+			
+		});
+
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		/*
 		$http({
 			method : 'GET',
 			url : auth_url
@@ -64,7 +114,7 @@ var app = angular.module('photoarchiving_app', [])
 			
 		});
 		
-		
+		*/
 		
 	}
 	
