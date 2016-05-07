@@ -45,7 +45,7 @@
 				
 				if ($result = $db_conn->query($get_token_sql))
 				{
-					if ($result->num_rows == 1) {
+					if ($result->num_rows() == 1) {
 						debug_echo ("get token succeded..."."\n");
 						$valid_auth_token = true;
 						$result_ps_id = ($result->fetch_array(MYSQLI_ASSOC))["ps_id"];
