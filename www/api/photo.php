@@ -122,7 +122,7 @@
 					break;
 				}
 				
-				if(!($get_photo_stmt->bind_param($p_id))) {
+				if(!($get_photo_stmt->bind_param("i", $p_id))) {
 					set_error_response( 0 , "2" . $db_conn->error );
 					break;
 				}
