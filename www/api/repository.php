@@ -19,11 +19,14 @@
 
 	$req_method = $_SERVER['REQUEST_METHOD'];	
 
+	debug_echo ("server connected successfully"."\n");
 
 		
 	switch ($req_method) {
 		
 		case 'GET':
+
+			debug_echo ("required method is GET "."\n");
 
 			$valid_auth_token = false;
 			$result_ps_id;
