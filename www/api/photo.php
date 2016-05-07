@@ -91,6 +91,7 @@
 			
 			if ($result->num_rows != 1) {
 				set_error_response( 0 , "Auth token: The number of rows was off.");
+				break;
 			}
 			
 			
@@ -153,6 +154,45 @@
 				break;
 				
 				
+				case 'repo-photos':
+				
+					//	Make sure the r_id value is set
+					if(!(isset($_GET["r_id"]))) {
+						set_error_response( 0 , "You didn't set the r_id value...");
+						break;
+					}
+					
+					$r_id = $_GET["r_id"];
+					
+					
+					//	First make sure the user belongs to the repository
+					$user_repo_check_sql = "SELECT * FROM user_repo WHERE ps_id = ? AND r_id = ?";
+					
+					if(!($user_repo_check_stmt = $db_conn->prepare($user_repo_check_sql))) {
+						set_error_response( 0 , $db_conn->error );
+						break;
+					}
+					
+					if(!($user_repo_check_stmt->bind_params("ii", $ps_id, $r_id))) {
+						set_error_response( 0 , "I couldn't bind the params -> " . $db_conn->error );
+						break;
+					}
+					
+					if(!($user_repo_check_stmt->execute())) {
+						set_error_response( 0 , "I couldn't execute -> " . $db_conn->error );
+						break;
+					}
+					
+					if($result = $user_repo_check_stmt->get_result()) {
+						if($result->num_rows != 1) {
+							set_error_response( 0 , "The number of rows was off -> " . $db_conn->error );
+							break;
+						}
+					}
+					
+					
+				
+				break;
 				
 				
 				
