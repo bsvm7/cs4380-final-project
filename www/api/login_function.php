@@ -160,11 +160,11 @@
 										}
 											echo "user_level_check_stmt init done";
 
-										if(!($user_level_check_stmt = prepare($user_level_check_sql)) ){
+										if(!($user_level_check_stmt->prepare($user_level_check_sql)) ){
 											echo "user_level_check_stmt prepare stmt failed";
 											
 										}
-																					echo "user_level_check_stmt prepare stmt done";
+											echo "user_level_check_stmt prepare stmt done";
 
 										if(!($user_level_check_stmt -> bind_param ("i", $result_ps_id)) ){
 
