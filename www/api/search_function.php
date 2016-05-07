@@ -28,44 +28,72 @@
 		
 	switch ($req_method) {
 		
-		case 'POST':
+		case 'GET':
 
-			//	Get the raw post database
-			$json_raw = file_get_contents("php://input");
+			if(isset($_GET["username"])) {
 
-			if ($decoded_json = json_decode($json_raw, true)) {	
+				$username = $_GET["username"];
 
-				$access_token=$decoded_json['access_token'];
-				$search_method=$decoded_json['search_method'];
-				$keyword = $decoded_json['keyword'];
+				if(isset($_GET["access_token"])) {
 
-				if(!empty($search_method)) {
+					$access_token= $_GET["access_token"]; 
 
-					if($search_method = 'repository') {
-
-						$repo_search = ''
-
-
+					if(isset($_GET["repo_id"])) {
 
 
 					}
-
-
-
-
-
-
+					else{
+						set_error_response( 13, "repo id can not be empty..."."\n");
+						break;
+					}	
 
 
 				}
 				else{
-					header ("Location: ../search.php");
+					set_error_response( 13, "access token can not be empty..."."\n");
+					break;
 				}
 
+			}
+			else{
+				set_error_response( 13, "username can not be empty..."."\n");
+				break;
+			}
 
 
 
 
+
+
+
+
+
+
+
+
+		break;
+
+		default:
+
+		break;
+
+
+
+function set_error_response( $error_code , $error_message ) {
+	
+	
+	$http_response_code = 500;
+	
+	$response_array = array(
+		"error_code" => $error_code,
+		"error_message" => $error_message
+	);
+	
+	echo json_encode($response_array);
+	
+	http_response_code($error_code);
+	
+}
 
 
 ?>
