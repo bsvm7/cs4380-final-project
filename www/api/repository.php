@@ -28,7 +28,7 @@
 
 		
 	switch ($req_method) {
-		
+		/*
 		case 'GET':
 
 			debug_echo ("required method is GET "."\n");
@@ -188,7 +188,7 @@
 		default:
 
 		break;
-
+*/
 	}	
 
 
