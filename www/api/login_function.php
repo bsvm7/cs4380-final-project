@@ -34,7 +34,9 @@
 
 			//	Get the raw post database
 			$json_raw = file_get_contents("php://input");
-
+			
+			echo $json_raw;
+			
 			if ($decoded_json = json_decode($json_raw, true)) {	
 
 				$auth_type=$decoded_json['auth_type'];
