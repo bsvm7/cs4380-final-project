@@ -182,7 +182,7 @@
 
 											$user_level = $row[0];
 
-											if ($user_level == 0) {
+											if ($user_level == '0') {
 
 												// user is a regular user 
 
@@ -192,7 +192,7 @@
 
 
 											}
-											if ($user_level ==1) {
+											if ($user_level =='1') {
 
 												// user is an admin of some repository
 
@@ -214,14 +214,17 @@
 									else {
 
 										set_error_response( 201, "SQL Error -> " . $insert_log_stmt->error);
+										break;
+
 
 									}
 
 
 								}
-								else
-								{
+								else {
 									set_error_response( 13, "SQL Error" . $insert_token_statement->error);
+									break;
+
 								}
 								
 							}
@@ -233,14 +236,11 @@
 							}
 
 						}
-						else
-						{
+						else {
 							set_error_response( 11, "SQL Error"."\n");
 							break;
 						}
 
-						$db_conn->close(); 
-				
 					}
 
 				}
@@ -278,6 +278,8 @@
 
 						else {
 							set_error_response( 13, "SQL Error" . $ps_id_retrieve_stmt->error);
+							break;
+
 						}
 
 						$update_token_sql = "UPDATE user_auth_token SET access_token= ? WHERE ps_id=? AND refresh_token= ?";								
@@ -319,6 +321,8 @@
 						}
 						else {
 							set_error_response( 13, "SQL Error" . $insert_token_statement->error);
+							break;
+
 						}
 						
 					}							
@@ -337,6 +341,7 @@
 			else {
 
 				echo "no input from user"."\n";
+				break;
 			
 			}
 
