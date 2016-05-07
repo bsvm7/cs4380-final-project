@@ -148,7 +148,7 @@
 
 	function debug_echo( $str ) {
 		
-		$echo_debug = true;
+		$echo_debug = false;
 		
 		if ($echo_debug) {
 			echo $str;
