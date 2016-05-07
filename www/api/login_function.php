@@ -319,6 +319,8 @@
 							http_response_code(200);
 
 							echo json_encode($resp_array);
+							
+							break;
 						}
 						else {
 							set_error_response( 13, "SQL Error" . $insert_token_statement->error);
