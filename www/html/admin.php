@@ -1,3 +1,6 @@
 
+<?php
 
-This is the home page for the admin page
+	echo "This is the home page for the admin page";
+
+?>

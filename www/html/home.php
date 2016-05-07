@@ -1,3 +1,5 @@
+<?php
+	echo "This is the home page for a regular user.";
+?>
 
 
-This is the home page for a regular user
