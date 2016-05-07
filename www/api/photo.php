@@ -39,6 +39,7 @@
 			/*
 				Pull out all the query parameters
 			*/
+			/*
 			if(!(isset($_GET["auth_token"]))) {
 				$error_str = "The auth token was not set";
 				set_error_response( 0 , $error_str );
@@ -60,7 +61,7 @@
 			$req_type 	= $_GET["request_type"];
 			
 			debug_echo( "Everything was set" );
-			
+			*/
 			
 			
 			
@@ -97,7 +98,7 @@
 				set_error_response( 0 , "Auth token: The number of rows was off.");
 			}
 			
-			debug_echo( "Now I'm for sure the authentication token ($auth_token) is valid for the user with the id ($ps_id)" );
+			
 			
 			
 			
@@ -106,7 +107,7 @@
 			
 			
 			
-			
+			debug_echo( "Now I'm for sure the authentication token ($auth_token) is valid for the user with the id ($ps_id)" );
 			
 			
 			
