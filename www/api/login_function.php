@@ -156,18 +156,20 @@
 
 										if(!($user_level_check_stmt = $db_conn->stmt_init()) ){
 											echo "user_level_check_stmt init failed"."\n";
+											break;
 
 										}
 
 										if(!($user_level_check_stmt->prepare($user_level_check_sql)) ){
 											echo "user_level_check_stmt prepare stmt failed"."\n";
-											
+											break;
+	
 										}
 
 										if(!($user_level_check_stmt -> bind_param ("i", $result_ps_id)) ){
 
 											echo "user_level_check_stmt bind param failed"."\n";
-											
+											break;
 										}
 
 										if ($user_level_check_stmt->execute()) {
@@ -198,7 +200,7 @@
 
 											$user_level = $row["user_level"];
 											
-											echo "returned user leve is ".$user_level;
+											echo "returned user leve is ".$user_level."\n";
 
 											if ($user_level == 0) {
 
@@ -215,7 +217,6 @@
 
 												//header ("Location: ../html/admin.php");			
 												echo "we are going to admin page now......"."\n";
-
 
 											}
 
