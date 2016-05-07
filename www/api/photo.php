@@ -144,7 +144,7 @@
 			
 		break;
 		
-		case default:
+		default:
 		
 		break;
 		
