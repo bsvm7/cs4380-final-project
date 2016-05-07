@@ -59,6 +59,7 @@
 			$ps_id 		= $_GET["ps_id"];
 			$req_type 	= $_GET["request_type"];
 			
+			debug_echo( "Everything was set" );
 			
 			
 			
@@ -68,6 +69,7 @@
 			/*
 				Check to make sure the authentication token is valid
 			*/
+			/*
 			$auth_token_check_sql = "SELECT * FROM user_auth_token WHERE ps_id = ? LIMIT 1";
 			
 			if (!($auth_token_check_stmt = $db_conn->prepare($auth_token_check_sql))) {
@@ -100,7 +102,7 @@
 			
 			
 			
-			
+			*/
 			
 			
 			
