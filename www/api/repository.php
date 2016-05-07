@@ -55,6 +55,7 @@
 				{
 					set_error_response( 21 , "SQL statement could not prepare " . $db_conn->error);
 					debug_echo ("get token error..."."\n");
+					break;
 
 				}
 								
@@ -63,6 +64,7 @@
 			{
 				set_error_response( 4, "The auth parameter was not properly set");
 				debug_echo ("auth token can not be empty..."."\n");
+				break;
 			}
 
 			
@@ -78,19 +80,9 @@
 						case 'user_repos':
 
 
-
-
-
-
-
-
 						break;
 
 						case 'all_repos':
-
-
-
-
 
 						break;
 
@@ -137,7 +129,7 @@
 							}
 
 						break;
-
+/*
 						case: 'analytics'
 
 							if (isset($_GET["graph-type"])) {
@@ -173,6 +165,7 @@
 						default:
 
 						break;
+*/
 					}
 				}
 				else{
@@ -183,6 +176,7 @@
 			}
 			else{
 				debug_echo ("auth token does not match to our record ... ");
+				break;
 			}
 
 		break;
