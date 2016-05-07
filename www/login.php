@@ -11,7 +11,7 @@
     <title>Login | LinkedIn</title>
 
 	<!-- Angular -->
-	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js></script>
+	<script type="text/javascript" src="bower_components/angular/angular.min.js"></script>
 	
     <!-- Bootstrap -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
@@ -68,7 +68,7 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
   </head>
-  <body ng-app="photoarchiving_app">
+  <body ng-app="linkedinApp">
 	  
   	<script type="text/javascript" src="js/controllers/loginController.js"></script>
   	
