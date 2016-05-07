@@ -112,7 +112,37 @@
 				
 				$p_id = $_GET["p_id"];
 				
-				debug_echo( "The p_id value was ($p_id)");
+				
+				//	Get the photo information for the p_id value
+				
+				$get_photo_sql = "SELECT * FROM photo WHERE p_id = ?";
+				
+				if(!($get_photo_stmt = $db_conn->prepare($get_photo_sql))) {
+					set_error_response( 0 , $db_conn->error );
+					break;
+				}
+				
+				if(!($get_photo_stmt->bind_param($p_id))) {
+					set_error_response( 0 , $db_conn->error );
+					break;
+				}
+				
+				if(!($get_photo_stmt->execute())) {
+					set_error_response( 0 , $db_conn->error );
+					break;
+				}
+				
+				if(!($result = $get_photo_stmt->get_result())) {
+					set_error_response( 0 , $db_conn->error );
+					break;
+				}
+				
+				if($result_row = $result->fetch_array(MYSQLI_ASSOC)) {
+					
+					debug_echo( json_encode($result_row) );
+					
+				}
+				
 				
 				
 				
