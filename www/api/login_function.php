@@ -191,7 +191,7 @@
 
 												// user is a regular user 
 
-												header ("Location: ../html/home.php");
+												header ("Location: ../html/admin.php");
 
 											}
 											if ($user_level == 1) {
