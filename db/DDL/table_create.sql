@@ -387,8 +387,8 @@ CREATE TABLE story_archive
 	recording_title		VARCHAR(200),
 	p_id				BIGINT UNSIGNED,
 	p_title				BIGINT UNSIGNED,
-	upload_date			TIMESTAMP,
-	archive_date		TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	upload_date			TIMESTAMP default '0000-00-00 00:00:00',
+	archive_date		TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 	PRIMARY KEY (sa_id)
 );
 
