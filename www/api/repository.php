@@ -45,7 +45,7 @@
 
 				$get_token_sql = "SELECT ps_id, access_token from user_auth_token where access_token = ?";
 				
-				$get_token_stmt = $db_conn->init();
+				$get_token_stmt = $db_conn->init_stmt();
 				
 				if(!$get_token_stmt->prepare($get_token_sql)){
 					set_error_response( 21 , "SQL statement could not prepare " . $db_conn->error);
