@@ -40,7 +40,7 @@ var app = angular.module('photoarchiving_app', [])
 		
 		$http.post( auth_url , post_body ).then( function successCallback( response ) {
 						
-			if (response.status == 200 || response.status == 500 ) {
+			if (response.status == 200 ) {
 				
 				var res_data = response.data;
 				
@@ -79,7 +79,7 @@ var app = angular.module('photoarchiving_app', [])
 			
 			var error_string = "There was some error posting the registration data";
 			
-			alert( error_string );
+			alert( error_string + response.data );
 			console.log( error_string );
 			
 		});
