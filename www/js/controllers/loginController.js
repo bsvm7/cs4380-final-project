@@ -45,6 +45,7 @@ var app = angular.module('photoarchiving_app', [])
 						
 			if (response.status == 200 ) {
 				
+				console.log(response);
 				//	Gather the response information
 				var res_ps_id 			= response.data.ps_id;
 				var res_username 		= response.data.username;
