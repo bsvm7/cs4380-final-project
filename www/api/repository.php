@@ -96,10 +96,97 @@
 
 							case 'user_repos':
 
+								if(isset($_GET['ps_id'])) {
+
+									$ps_id = $_GET['ps_id'];
+
+									$user_repo_request_sql= "SELECT R.r_id, R.name, R.description, R.date_created FROM user U, repository R, user_repo UR WHERE U.ps_id=UR.ps_id AND UR.r_id=R.r_id AND U.ps_id= ? ";
+
+
+									if(!($user_repo_request_stmt= $db_conn->prepare($user_repo_request_sql))){
+										set_error_response( 0 , $db_conn->error );
+										break;	
+									}
+
+									if(!($user_repo_request_stmt->bind_param("i", $ps_id))){
+										set_error_response( 0 , $db_conn->error );
+										break;		
+									}
+
+									if(!($user_repo_request_stmt->execute())) {
+										set_error_response( 0 , $db_conn->error );
+										break;	
+									}
+
+									if($result = $user_repo_request_stmt->get_result()) {
+
+										$all_repos = array();
+
+										while($result_row = $result->fetch_array(MYSQLI_ASSOC)){
+
+											array_push($all_repos, $result_row);
+
+										}
+										
+										http_response_code(200);
+										echo json_encode($all_repos);	
+
+									}
+									else{
+										set_error_response( 0 , "No repo is returned" . $user_repo_request_stmt->error );
+										break;
+									}
+
+								}
+
+								else{
+									set_error_response( 13, "ps_id can not be empty..."."\n");
+									debug_echo ("ps_id is empty...."."\n");
+									break;
+
+								}
 
 							break;
 
 							case 'all_repos':
+
+
+								$user_repo_request_sql= "SELECT * FROM repository";
+
+
+								if(!($user_repo_request_stmt= $db_conn->prepare($user_repo_request_sql))){
+									set_error_response( 0 , $db_conn->error );
+									break;	
+								}
+
+								if(!($user_repo_request_stmt->bind_param("i", $ps_id))){
+									set_error_response( 0 , $db_conn->error );
+									break;		
+								}
+
+								if(!($user_repo_request_stmt->execute())) {
+									set_error_response( 0 , $db_conn->error );
+									break;	
+								}
+
+								if($result = $user_repo_request_stmt->get_result()) {
+
+									$all_repos = array();
+
+									while($result_row = $result->fetch_array(MYSQLI_ASSOC)){
+
+										array_push($all_repos, $result_row);
+
+									}
+									
+									http_response_code(200);
+									echo json_encode($all_repos);	
+
+								}
+								else{
+									set_error_response( 0 , "No repo is returned" . $user_repo_request_stmt->error );
+									break;
+								}
 
 							break;
 
@@ -173,43 +260,13 @@
 								}
 
 							break;
-	/*
-							case: 'analytics'
-
-								if (isset($_GET["graph-type"])) {
-
-									$graph_type = $_GET["graph-type"];
+	
 							
-									switch ($graph_type) {
-										
-										case "top-visit-bar-chart":
-
-											// first get the rid of all the repositories
-
-
-
-
-
-											// then return the visit numbers 
-
-
-
-
-
-										break;
-
-									
-
-									}	
-
-								}		
-
-							break;
 
 							default:
 
 							break;
-	*/
+
 						}
 					}
 					else{
