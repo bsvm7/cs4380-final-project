@@ -16,19 +16,17 @@
 		
 		set_error_response( 400 , "I couldn't connect to the database -> " . $db_conn->connect_error);
 		debug_echo ("Could not connect to server"."\n");
-		echo  "server could not connect"."\n";
-
 		break;
 	}	
 
-	echo  "server connected successfully"."\n";
 	debug_echo ("server connected successfully"."\n");
+
 
 	$req_method = $_SERVER['REQUEST_METHOD'];	
 
 		
 	switch ($req_method) {
-		/*
+		
 		case 'GET':
 
 			debug_echo ("required method is GET "."\n");
@@ -105,12 +103,16 @@
 
 								$get_repo_info_sql= "SELECT * FROM repository R WHERE R.rid= ".$repo_id;
 
+								debug_echo ("rid is ".$repo_id."\n");
+
+
+
 								if($result= $db_conn->query($get_repo_info_sql)) {
 
 									if($result_row = $result->fetch_array(MYSQLI_ASSOC)){
 
 										http_response_code(200);
-										echo json_encode($result_row);
+										//echo json_encode($result_row);
 									}	
 									else{
 										set_error_response( 203, "SQL Error -> " . $db_conn->error);
@@ -188,7 +190,7 @@
 		default:
 
 		break;
-*/
+
 	}	
 
 
