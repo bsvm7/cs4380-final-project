@@ -118,22 +118,22 @@
 				$get_photo_sql = "SELECT * FROM photograph WHERE p_id = ?";
 				
 				if(!($get_photo_stmt = $db_conn->prepare($get_photo_sql))) {
-					set_error_response( 0 , $db_conn->error );
+					set_error_response( 0 , "1 " . $db_conn->error );
 					break;
 				}
 				
 				if(!($get_photo_stmt->bind_param($p_id))) {
-					set_error_response( 0 , $db_conn->error );
+					set_error_response( 0 , "2" . $db_conn->error );
 					break;
 				}
 				
 				if(!($get_photo_stmt->execute())) {
-					set_error_response( 0 , $db_conn->error );
+					set_error_response( 0 , "3" . $db_conn->error );
 					break;
 				}
 				
 				if(!($result = $get_photo_stmt->get_result())) {
-					set_error_response( 0 , $db_conn->error );
+					set_error_response( 0 , "4" . $db_conn->error );
 					break;
 				}
 				
