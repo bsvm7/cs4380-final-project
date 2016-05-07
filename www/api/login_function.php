@@ -147,6 +147,74 @@
 									if($insert_log_stmt->execute()) {
 
 // 										echo "login activity has been logged"."\n";
+
+
+										$user_level_check_sql = 'SELECT U.user_level FROM user U WHERE U.ps_id= ?';
+
+										$user_level_check_stmt = $db_conn->stmt_init();
+										
+										$user_level_check_stmt = prepare($user_level_check_sql);
+										
+										$user_level_check_stmt -> bind_param ("i", $result_ps_id);
+
+										if ($user_level_check_stmt->execute()) {
+
+											$user_level_check_result = $user_level_check_stmt->get_result();
+
+											if($user_level_check_result->num_rows > 1) {
+
+												set_error_response( 201, "SQL Error -> " . $user_level_check_stmt->error);	
+
+												break;
+
+											}
+
+											if($user_level_check_result->num_rows == 0) {
+
+												echo "user level check failed, please try again....."."\n";
+
+												break;
+
+											}
+
+
+											$row = $user_level_check_result->fetch_array(MYSQLI_NUM);
+
+											$user_level = $row[0];
+
+											if ($user_level == 0) {
+
+												// user is a regular user 
+
+												header ("location: ../home.php");
+
+
+
+
+											}
+											if ($user_level ==1) {
+
+												// user is an admin of some repository
+
+												header ("location: ../admin.php");
+
+												
+
+
+
+
+
+											}
+
+
+
+										}
+										else {
+
+											set_error_response( 201, "SQL Error -> " . $hash_retrieve_stmt->error);	
+											break;
+										}
+
 									}
 									else {
 
