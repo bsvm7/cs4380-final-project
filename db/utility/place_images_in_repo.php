@@ -165,6 +165,16 @@
 		
 		$repository_id = $last_rep_insert_id;
 		
+		/*
+			Make sure that you add the user repository relationship to the user_repo table
+		*/
+		
+		$user_repo_sql = "INSERT INTO user_repo ( ps_id , r_id , permission_level ) VALUES ( " . $user_info["ps_id"] . " , " . $repository_id . " , 1 )";
+		
+		if(!($db_conn->query($user_repo_sql))) {
+			custom_echo( "I couldn't insert the user repo relationship into the database");
+			exit(-1);
+		}
 		
 		//	Insert all the photographs into the repository
 		
@@ -205,6 +215,11 @@
 	/*
 		CUSTOM FUNCTIONS
 	*/
+	function custom_echo( $str ) {
+		
+		echo "\n$str\n";
+	}
+	
 	function error_string_for_param_bind( $sql_statement , $db_error ) {
 		
 		$error_str = "There was an error binding the parameters for the SQL statement -> ' " . $sql_statement . " ' ... SQL Error -> " . $db_error;
