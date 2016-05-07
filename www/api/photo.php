@@ -190,7 +190,46 @@
 						}
 					}
 					
-					debug_echo( "The number of rows was right!" );
+					
+					//	Now that we know the user belongs to the repository we can send back some photos
+					
+					$get_repo_photos_sql = 	"SELECT P.p_id, P.title, P.description, P.large_url, P.thumb_url, P.date_taken, P.date_conf, P.date_uploaded, P.uploaded_by "
+											. "FROM photograph P, photo_repo PR "
+											. "WHERE P.p_id = PR.p_id AND PR.r_id = ?";
+											
+					if(!($get_repo_photos_stmt = $db_conn->prepare($get_repo_photos_sql))) {
+						set_error_response( 0 , "I couldn't prepare the get photos repo statement -> " . $db_conn->error );
+						break;
+					}
+					
+					if(!($get_repo_photos_stmt->bind_param("i", $r_id))) {
+						set_error_response( 0, "I couldn't bind the parameters for the SQL statement ($get_repo_photos_sql) -> " . $db_conn->error );
+						break;
+					}
+					
+					if(!($get_repo_photos_stmt->execute())) {
+						set_error_response( 0 , "I could't execute the statement with the SQL ($get_repo_photos_sql) -> " . $db_conn->error);
+						break;
+					}
+					
+					if($result = $get_repo_photos_stmt->get_result()) {
+						
+						$all_repo_photos = array();
+						
+						while($result_row = $result->fetch_array(MYSQLI_ASSOC)) {
+							
+							array_push($all_repo_photos, $result_row);
+							
+						}
+						
+						http_response_code(200);
+						echo json_encode($all_repo_photos);
+					}
+					else {
+						set_error_response( 0 , "I couldn't get the result...");
+						break;
+					}
+					
 					
 				
 				break;
