@@ -183,7 +183,7 @@
 
 											$row = $user_level_check_result->fetch_array(MYSQLI_NUM);
 
-											$user_level = $row[0];
+											$user_level = '$row[0]';
 											
 											echo $user_level;
 
