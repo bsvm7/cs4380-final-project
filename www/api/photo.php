@@ -190,6 +190,7 @@
 						}
 					}
 					
+					debug_echo( "The number of rows was right!" );
 					
 				
 				break;
@@ -332,7 +333,7 @@
 
 	function debug_echo( $str ) {
 		
-		$echo_debug = false;
+		$echo_debug = true;
 		
 		if ($echo_debug) {
 			echo $str;
