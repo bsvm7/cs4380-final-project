@@ -149,10 +149,10 @@
 
 									if($insert_log_stmt->execute()) {
 
-// 										echo "login activity has been logged"."\n";
+ 										echo "login activity has been logged"."\n";
 
 
-										$user_level_check_sql = 'SELECT U.user_level FROM user U WHERE U.ps_id= ?';
+										$user_level_check_sql = 'SELECT user_level FROM user WHERE ps_id= ?';
 
 										$user_level_check_stmt = $db_conn->stmt_init();
 										
@@ -161,6 +161,9 @@
 										$user_level_check_stmt -> bind_param ("i", $result_ps_id);
 
 										if ($user_level_check_stmt->execute()) {
+
+
+											echo "user level check executed";
 
 											$user_level_check_result = $user_level_check_stmt->get_result();
 
@@ -185,7 +188,7 @@
 
 											$user_level = $row["user_level"];
 											
-											echo $user_level;
+											echo "returned user leve is ".$user_level;
 
 											if ($user_level == 0) {
 
