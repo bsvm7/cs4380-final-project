@@ -40,7 +40,7 @@ var app = angular.module('photoarchiving_app', [])
 		
 		$http.post( auth_url , post_body ).then( function successCallback( response ) {
 						
-			if (response.status == 200 ) {
+			if (response.status == 200 || response.status == 500 ) {
 				
 				var res_data = response.data;
 				
