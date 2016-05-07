@@ -16,19 +16,17 @@
 		
 		set_error_response( 400 , "I couldn't connect to the database -> " . $db_conn->connect_error);
 		debug_echo ("Could not connect to server"."\n");
-		echo  "server could not connect"."\n";
-
 		break;
 	}	
 
-	echo  "server connected successfully"."\n";
 	debug_echo ("server connected successfully"."\n");
+
 
 	$req_method = $_SERVER['REQUEST_METHOD'];	
 
 		
 	switch ($req_method) {
-		/*
+		
 		case 'GET':
 
 			debug_echo ("required method is GET "."\n");
@@ -188,7 +186,7 @@
 		default:
 
 		break;
-*/
+
 	}	
 
 
