@@ -95,7 +95,36 @@
 			
 			
 			
-			debug_echo( "Now I'm for sure the authentication token ($auth_token) is valid for the user with the id ($ps_id)" );
+			/*
+				Now we can switch on the request type
+			*/
+			
+			switch( $req_type ) {
+				
+				case 'photo-single':
+				
+				//	Make sure the p_id value is set
+				
+				if(!(isset($_GET["p_id"]))) {
+					set_error_response( 0 , "You didn't set the p_id value...");
+					break;
+				}
+				
+				$p_id = $_GET["p_id"];
+				
+				debug_echo( "The p_id value was ($p_id)");
+				
+				
+				
+				break;
+				
+				
+				
+				
+				
+				
+				
+			}
 			
 			
 			
