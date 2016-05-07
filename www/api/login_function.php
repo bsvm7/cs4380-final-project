@@ -187,17 +187,14 @@
 											
 											echo $user_level;
 
-											if ($user_level == '0') {
+											if ($user_level == 0) {
 
 												// user is a regular user 
 
 												header ("Location: ../html/home.php");
 
-
-
-
 											}
-											if ($user_level =='1') {
+											if ($user_level == 1) {
 
 												// user is an admin of some repository
 
