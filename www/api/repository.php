@@ -36,8 +36,6 @@
 			
 			if (isset($_GET['auth_token'])) {
 				
-				debug_echo ("auth_token received..."."\n");
-
 				//	Check to see if the auth token exists in the database
 				$auth_token = $_GET['auth_token'];
 				
@@ -45,9 +43,9 @@
 
 				$get_token_sql = "SELECT ps_id, access_token from user_auth_token where access_token = ?";
 				
-				$get_token_stmt = $db_conn->init_stmt();
 				
-				if(!($get_token_stmt->prepare($get_token_sql))){
+				
+				if(!($get_token_stmt = $db_conn->prepare($get_token_sql))){
 					set_error_response( 21 , "SQL statement could not prepare " . $db_conn->error);
 					break;
 
