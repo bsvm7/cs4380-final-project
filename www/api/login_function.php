@@ -14,7 +14,7 @@
 	//	First connect to the database using values from the included file
 	$db_conn = new mysqli($db_host, $db_user, $db_pass, $db_database);
 	
-	echo "database connected" . "\n";
+// 	echo "database connected" . "\n";
 
 
 	if ($db_conn->error_code) {
@@ -35,7 +35,7 @@
 			//	Get the raw post database
 			$json_raw = file_get_contents("php://input");
 			
-			echo $json_raw;
+// 			echo $json_raw;
 			
 			if ($decoded_json = json_decode($json_raw, true)) {	
 
@@ -317,6 +317,4 @@
 		http_response_code($error_code);
 		
 	}
-
-	echo "\n\n\n"."everything worked and now its time to close database and everything"."\n";
 ?>
