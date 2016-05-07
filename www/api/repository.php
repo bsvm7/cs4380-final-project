@@ -26,6 +26,7 @@
 		case 'GET':
 
 			$valid_auth_token = false;
+			$result_ps_id;
 			
 			if (isset($_GET['auth_token'])) {
 				
@@ -36,8 +37,9 @@
 				
 				if ($result = $db_conn->query($get_token_sql))
 				{
-					if ($result->num_rows > 0) {
+					if ($result->num_rows == 1) {
 						$valid_auth_token = true;
+						$result_ps_id = ($result->fetch_array(MYSQLI_ASSOC))["ps_id"];
 					}
 				}
 				else 
@@ -62,8 +64,27 @@
 					
 					switch ($req_type) {
 
-						case: 'repository_info' :
+						case: 'user_repos'
 
+
+
+
+
+
+
+
+						break;
+
+						case: 'all_repos'
+
+
+
+
+
+						break;
+
+
+						case: 'repo_info' :
 
 							if(isset($_GET["rid"])) {
 
