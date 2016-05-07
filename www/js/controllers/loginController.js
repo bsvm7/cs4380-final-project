@@ -50,7 +50,7 @@ var app = angular.module('photoarchiving_app', [])
 				var res_access_token 	= res_data.access_token;
 				var res_expires_in 		= res_data.expires_in;
 				var res_refresh_token 	= res_data.refresh_token;
-				
+				var res_user_level		= res_data.user_level;
 				
 				//	Store these values in session storage
 				store_value_for_key_in_session_storage( "ps_id" , res_ps_id );
@@ -58,11 +58,11 @@ var app = angular.module('photoarchiving_app', [])
 				store_value_for_key_in_session_storage( "access_token" , res_access_token );
 				store_value_for_key_in_session_storage( "expires_in" , res_expires_in );
 				store_value_for_key_in_session_storage( "refresh_token" , res_refresh_token );
-				
+				store_value_for_key_in_session_storage( "user_level" , res_user_level );
 				//	Create the redirect URL
 				var redirect_url = base_url + "home.php";
 				
-				$window.location.href = redirect_url;
+				$window.location.href = redirect_url;	
 			}
 			else {
 				
@@ -76,7 +76,7 @@ var app = angular.module('photoarchiving_app', [])
 				var res_access_token 	= res_data.access_token;
 				var res_expires_in 		= res_data.expires_in;
 				var res_refresh_token 	= res_data.refresh_token;
-				
+				var res_user_level		= res_data.user_level;
 				
 				//	Store these values in session storage
 				store_value_for_key_in_session_storage( "ps_id" , res_ps_id );
@@ -84,7 +84,7 @@ var app = angular.module('photoarchiving_app', [])
 				store_value_for_key_in_session_storage( "access_token" , res_access_token );
 				store_value_for_key_in_session_storage( "expires_in" , res_expires_in );
 				store_value_for_key_in_session_storage( "refresh_token" , res_refresh_token );
-				
+				store_value_for_key_in_session_storage( "user_level" , res_user_level );
 				//	Create the redirect URL
 				var redirect_url = base_url + "home.php";
 				
@@ -105,7 +105,7 @@ var app = angular.module('photoarchiving_app', [])
 				var res_access_token 	= res_data.access_token;
 				var res_expires_in 		= res_data.expires_in;
 				var res_refresh_token 	= res_data.refresh_token;
-				
+				var res_user_level		= res_data.user_level;
 				
 				//	Store these values in session storage
 				store_value_for_key_in_session_storage( "ps_id" , res_ps_id );
@@ -113,7 +113,7 @@ var app = angular.module('photoarchiving_app', [])
 				store_value_for_key_in_session_storage( "access_token" , res_access_token );
 				store_value_for_key_in_session_storage( "expires_in" , res_expires_in );
 				store_value_for_key_in_session_storage( "refresh_token" , res_refresh_token );
-				
+				store_value_for_key_in_session_storage( "user_level" , res_user_level );
 				//	Create the redirect URL
 				var redirect_url = base_url + "home.php";
 				
