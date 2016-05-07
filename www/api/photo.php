@@ -20,7 +20,40 @@
 		
 	debug_echo( "database connected" . "\n" );
 
-
+	$req_method = $_SERVER["REQUEST_METHOD"];
+	
+	switch( $req_method ) {
+		
+		case 'GET':
+		
+			debug_echo( "You chose the get method" );
+		
+		break;
+		
+		
+		
+		case 'POST':
+		
+			debug_echo( "You chose the POST method" );
+			
+		break;
+		
+		
+		case 'PUT':
+		
+			debug_echo( "You chose the PUT method" );
+			
+		break;
+		
+		
+		case 'DELETE':
+		
+			debug_echo( "You chose the DELETE method" );
+			
+		break;
+		
+		
+	}
 	
 	
 	
