@@ -20,14 +20,101 @@
 		
 	debug_echo( "database connected" . "\n" );
 
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	$req_method = $_SERVER["REQUEST_METHOD"];
 	
 	switch( $req_method ) {
 		
 		case 'GET':
-		
-			debug_echo( "You chose the get method" );
-		
+			
+			/*
+				Pull out all the query parameters
+			*/
+			if(!(isset($_GET["auth_token"]))) {
+				$error_str = "The auth token was not set"
+				set_error_response( 0 , $error_str );
+			}
+			
+			if(!(isset($_GET["ps_id"]))) {
+				$error_str = "The ps_id was not set";
+				set_error_response( 0 , $error_str );
+			}
+			
+			if(!(isset($_GET["req_typ"]))) {
+				$error_str = "You didn't set the request type";
+				set_error_response( 0 , $error_str );
+			}
+			
+			
+			$auth_token = $_GET["auth_token"];
+			$ps_id 		= $_GET["ps_id"];
+			$req_type 	= $_GET["request_type"];
+			
+			
+			
+			
+			
+			
+			
+			/*
+				Check to make sure the authentication token is valid
+			*/
+			$auth_token_check_sql = "SELECT * FROM user_auth_token WHERE ps_id = ? LIMIT 1";
+			
+			if (!($auth_token_check_stmt = $db_conn->prepare($auth_token_check_sql))) {
+				
+				$error_str = "I couldn't prepare the statement ->" . $db_conn->error;
+				
+				set_error_response( 0 , $error_str );
+			}
+	
+			if(!($auth_token_check_stmt->bind_param("i", $ps_id))) {
+				
+				$error_str = "I couldn't bind the parameters -> " . $db_conn->error;
+				set_error_response( 0 , $error_str );
+			}
+			
+			if(!($auth_token_check_stmt->execute())) {
+				set_error_response( 0, "I couldn't execute the statement -> " . $db_conn->error );
+			}
+			
+			if(!($result = $auth_token_check_stmt->get_result())) {
+				set_error_response( 0 , $db_conn->error );
+			}
+			
+			if ($result->num_rows != 1) {
+				set_error_response( 0 , "Auth token: The number of rows was off.");
+			}
+			
+			debug_echo( "Now I'm for sure the authentication token ($auth_token) is valid for the user with the id ($ps_id)" );
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
 		break;
 		
 		
@@ -148,7 +235,7 @@
 
 	function debug_echo( $str ) {
 		
-		$echo_debug = false;
+		$echo_debug = true;
 		
 		if ($echo_debug) {
 			echo $str;
