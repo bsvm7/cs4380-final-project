@@ -115,7 +115,7 @@
 				
 				//	Get the photo information for the p_id value
 				
-				$get_photo_sql = "SELECT * FROM photo WHERE p_id = ?";
+				$get_photo_sql = "SELECT * FROM photograph WHERE p_id = ?";
 				
 				if(!($get_photo_stmt = $db_conn->prepare($get_photo_sql))) {
 					set_error_response( 0 , $db_conn->error );
