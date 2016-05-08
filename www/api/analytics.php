@@ -98,12 +98,12 @@
 
 								$top_repo_request_sql= "SELECT R.name, VIEW_COUNT.view_count
 									FROM repository R, (SELECT r_id, COUNT(*) AS view_count 
-									            FROM activity_log 
-									            WHERE ac_type= 'repo-view' 
-									                AND time_logged >= (curdate() -31)
-									            GROUP BY r_id
-									            ORDER BY view_count DESC
-									            LIMIT 10) AS VIEW_COUNT
+											            FROM activity_log 
+											            WHERE ac_type= 'repo-view' 
+											                AND time_logged >= (curdate() -31)
+											            GROUP BY r_id
+											            ORDER BY view_count DESC
+											            LIMIT 10) AS VIEW_COUNT
 									WHERE R.r_id=VIEW_COUNT.r_id";
 
 
@@ -146,7 +146,7 @@
 									            FROM activity_log 
 									            WHERE time_logged >= (curdate() -31)
 									            GROUP BY r_id
-									            ORDER BY view_count DESC
+									            ORDER BY ac_count DESC
 									            LIMIT 5) AS ACTIVITY_COUNT
 									WHERE R.r_id = ACTIVITY_COUNT.r_id";
 
