@@ -310,6 +310,67 @@
 							
 						break;
 						
+						
+						
+						
+						case 'era':
+						
+							//	First make sure the era id is set
+							
+							if(!(isset($_GET["era_id"]))) {
+								set_error_response( 0 , "You didn't set the era id for this type of query...");
+								break;
+							}
+							
+							$era_id = $_GET["era_id"];
+							
+							//	Create the sql for this query
+							
+							$select_photos_in_era_sql = "SELECT P.p_id, P.title, P.description, P.large_url, P.thumb_url, P.date_taken, P.date_conf, P.date_uploaded, P.uploaded_by, R.r_id "
+														. "FROM photograph P, repository R, photo_repo PR"
+														. "WHERE P.p_id = PR.p_id AND PR.r_id = ? "
+														. "AND P.date_taken >= (SELECT start_date FROM era WHERE era_id = ?) "
+														. "AND P.date_taken <= (SELECT end_date FROM era WHERE era_id = ?) ";
+														
+							//	Now prepare the statement
+							if(!($select_photos_in_era_stmt = $db_conn->prepare($select_photos_in_era_sql))) {
+								set_error_response( 0 , "I couldn't prepare the statement with the SQL ($select_photos_in_era_sql) -> " . $db_conn->error);
+								break;
+							}
+							
+							//	Now bind the parameters
+							if(!($select_photos_in_era_stmt->bind_param("iii", $r_id, $era_id, $era_id))) {
+								set_error_response( 0 , "I couldn't bind the parameters for the SQL ($select_photos_in_era_sql) -> " . $db_conn->error);
+								break;
+							}
+							
+							//	Execute, collect results, respond
+							if(!($select_photos_in_era_stmt->execute())) {
+								set_error_response( 0 , "I couldn't execute the statement with the SQL ($select_photos_in_era_sql) -> " . $db_conn->error);
+								break;
+							}
+							
+							if($result = $select_photos_in_era_stmt->get_result()) {
+								
+								$photos_in_era = array();
+								
+								
+								while($result_row = $result->fetch_array(MYSQLI_ASSOC)) {
+									
+									array_push($photos_in_era, $result_row);
+								}
+								
+								http_response_code(200);
+								echo json_encode($photos_in_era);
+								
+							}
+							else {
+								set_error_response( 0 , "I couldn't get the result for the statement with the SQL ($select_photos_in_era_sql)");
+								break;
+							}
+							
+						
+						break;
 							
 					}
 					
