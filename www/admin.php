@@ -206,61 +206,70 @@ $(function () {
 //        accumulated column
         $(function () {
     $('#content3').highcharts({
-        // Create the chart
-    $('#container').highcharts({
         chart: {
             type: 'column'
         },
         title: {
-            text: 'Top 5 active repositories for the past month'
+            text: 'Instructor Activism Monitor'
         },
         xAxis: {
-            type: 'category'
+            categories: ['ins1', 'ins2', 'ins3', 'ins4', 'ins5']
         },
         yAxis: {
+            min: 0,
             title: {
-                text: 'Total percent activities participated'
-            }
-
-        },
-        legend: {
-            enabled: false
-        },
-        plotOptions: {
-            series: {
-                borderWidth: 0,
-                dataLabels: {
-                    enabled: true,
-                    format: '{point.y:.1f}%'
+                text: ''
+            },
+            stackLabels: {
+                enabled: true,
+                style: {
+                    fontWeight: 'bold',
+                    color: (Highcharts.theme && Highcharts.theme.textColor) || 'gray'
                 }
             }
         },
-
-        tooltip: {
-            headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
-            pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:.2f}%</b> of total<br/>'
+        legend: {
+            align: 'right',
+            x: -30,
+            verticalAlign: 'top',
+            y: 25,
+            floating: true,
+            backgroundColor: (Highcharts.theme && Highcharts.theme.background2) || 'white',
+            borderColor: '#CCC',
+            borderWidth: 1,
+            shadow: false
         },
-
+        tooltip: {
+            valueSuffix: '%',
+            headerFormat: '<b>{point.x}</b><br/>',
+           
+            pointFormat: '{series.name}: {point.percentage:.1f}%<br/>总量: {point.stackTotal}'
+        },
+        plotOptions: {
+            column: {
+                stacking: 'normal',
+                dataLabels: {
+                    enabled: true,
+                    color: (Highcharts.theme && Highcharts.theme.dataLabelsColor) || 'white',
+                    style: {
+                        textShadow: '0 0 3px black'
+                    }
+                }
+            }
+        },
         series: [{
-            name: 'Repositories',
-            colorByPoint: true,
-            data: [{
-                name: 'Columbia',
-                y: 56.33,
-            }, {
-                name: 'Community',
-                y: 24.03,
-            }, {
-                name: 'Jefferson',
-                y: 10.38,
-            }, {
-                name: 'Health Care Center',
-                y: 4.77,
-            }, {
-                name: 'Mizzou',
-                y: 0.91,
-            }]
-        }],
+            name: '# video submitted',
+            color: colorArr[0],
+            data: [300, 300, 40, 70, 200]
+        }, {
+            name: '# like&fav',
+            color:  colorArr[1],
+            data: [200, 400, 300, 200, 10]
+        }, {
+            name: '# comments',
+            color: colorArr[2],
+            data: [30, 200, 400, 200, 300]
+        }]
     });
 });
         
@@ -268,40 +277,35 @@ $(function () {
 $(function () {
     $('#content4').highcharts({
         chart: {
-            plotBackgroundColor: null,
-            plotBorderWidth: null,
-            plotShadow: false,
-            type: 'pie'
+            type: 'pie',
+            options3d: {
+                enabled: true,
+                alpha: 45
+            }
         },
+        colors: colorArr,
         title: {
-            text: 'count of new users broken down by gender'
+            text: 'instructor video post distribution(7 day ago)'
         },
-        tooltip: {
-            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+        subtitle: {
+            text: ''
         },
         plotOptions: {
             pie: {
-                allowPointSelect: true,
-                cursor: 'pointer',
-                dataLabels: {
-                    enabled: true,
-                    format: '<b>{point.name}</b>: {point.percentage:.1f} %',
-                    style: {
-                        color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
-                    }
-                }
+                 depth: 45
             }
         },
         series: [{
-            name: 'gender',
+            name: 'number',
             data: [
-                { name: 'Female', y: 453 },
-                { name: 'Male', y: 547 }
+                ['ins1',20],
+                ['ins2', 10],
+                ['ins3', 10],
+                ['ins4', 10]
             ]
         }]
     });
 });
-
 
 //fifth chart
    $(function () {
