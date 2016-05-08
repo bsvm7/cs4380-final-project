@@ -252,6 +252,16 @@
 						
 						case 'date':
 						
+							//	Make sure the date range is set
+							
+							if(!(isset($_GET["date_range"]))) {
+								set_error_response( 0 , "The date range wasn't set you idiot...");
+								break;
+							}
+							
+							$date_range = $_GET["date_range"];
+							
+							echo $date_range;
 						
 						
 						break;
