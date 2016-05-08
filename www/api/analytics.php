@@ -241,7 +241,7 @@
 											$user_age_range_sql= "SELECT Count(*) AS age_range
 																  FROM  user U, 
 																        person P 
-																  WHERE ( ((ABS(DATEDIFF(P.birthday, CURDATE())))/365) BETWEEN ? AND ?) 
+																  WHERE ( ((ABS(DATEDIFF(P.birthdate, CURDATE())))/365) BETWEEN ? AND ?) 
 																  		AND P.ps_id=U.ps_id 
 																  		AND U.ps_id IN (SELECT ps_id 
 														                	    	    FROM   user_repo 
