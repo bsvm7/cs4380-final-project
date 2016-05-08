@@ -420,27 +420,18 @@
 		$end_date;
 		
 		
-		if(strpos($range_str, "_")) {
-			debug_echo( "hi" );
-			$did_pull = false;
+		$dates_arr = explode("_", $range_str);
+		
+		if( count($dates_arr) == 2 ) {
+			
+			$start_date = $dates_arr[0];
+			$end_date 	= $dates_arr[1];
+			
 		}
 		else {
-			debug_echo( "hello" );
-			
-			//	Explode on the underscore
-			
-			$dates_arr = explode("_", $range_str);
-			
-			if( count($dates_arr) == 2 ) {
-				
-				$start_date = $dates_arr[0];
-				$end_date 	= $dates_arr[1];
-				
-			}
-			else {
-				$did_pull = false;
-			}
+			$did_pull = false;
 		}
+
 		
 		
 		
