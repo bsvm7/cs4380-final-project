@@ -241,12 +241,12 @@
 											$user_age_range_sql= "SELECT Count(*) AS age_range
 																  FROM  user U, 
 																        person P 
-																  WHERE ((Floor(( Cast (Getdate() AS INTEGER) - Cast(P.birthdate AS INTEGER))\/365.25) ) BETWEEN ? AND ?) 
+																  WHERE ((Floor(( Cast (Getdate() AS INTEGER) - Cast(P.birthdate AS INTEGER))/365.25) ) BETWEEN ? AND ?) 
 																  		AND P.ps_id=U.ps_id 
 																  		AND U.ps_id IN (SELECT ps_id 
 														                	    	    FROM   user_repo 
 														                    	    	WHERE  r_id = ?)"; 
-
+											echo $user_age_range_sql;
 
 											if(!($user_age_range_stmt= $db_conn->prepare($user_age_range_sql))){
 												set_error_response( 0 , $db_conn->error );
