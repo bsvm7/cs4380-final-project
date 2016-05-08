@@ -421,9 +421,11 @@
 		
 		
 		if(strpos($range_str, "_")) {
+			debug_echo( "hi" );
 			$did_pull = false;
 		}
 		else {
+			debug_echo( "hello" );
 			
 			//	Explode on the underscore
 			
