@@ -302,9 +302,6 @@ $(function () {
 //fifth chart
    $(function () {
     chart: {
-            plotBackgroundColor: null,
-            plotBorderWidth: null,
-            plotShadow: false,
             type: 'pie'
         },
         title: {
