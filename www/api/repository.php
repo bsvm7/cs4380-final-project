@@ -256,6 +256,57 @@
 
 							break;
 							
+							case 'top_10_repo'
+
+								$top_repo_request_sql= "SELECT R.name, VIEW_COUNT.view_count
+									FROM repository R, (SELECT r_id, COUNT(*) AS view_count 
+									            FROM activity_log 
+									            WHERE ac_type= 'repo-view' 
+									                AND time_logged >= (curdate() -31)
+									            GROUP BY r_id
+									            ORDER BY view_count DESC
+									            LIMIT 10) AS VIEW_COUNT
+									WHERE R.r_id=VIEW_COUNT.r_id";
+
+
+								if(!($top_repo_request_stmt= $db_conn->prepare($top_repo_request_sql))){
+									set_error_response( 0 , $db_conn->error );
+									break;	
+								}
+
+								if(!($top_repo_request_stmt->execute())) {
+									set_error_response( 0 , $db_conn->error );
+									break;	
+								}
+
+								if($result = $top_repo_request_stmt->get_result()) {
+
+									$top_repos = array();
+
+									while($result_row = $result->fetch_array(MYSQLI_ASSOC)){
+
+										array_push($top_repos, $result_row);
+
+									}
+									
+									http_response_code(200);
+									echo json_encode($top_repos);	
+
+								}
+								else{
+									set_error_response( 0 , "No repo is returned" . $top_repo_request_stmt->error );
+									break;
+								}
+
+
+
+
+
+
+
+
+
+							break;
 
 							default:
 
