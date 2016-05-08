@@ -361,31 +361,31 @@ $(function () {
                     <div class="btn-group" role="group">
                         <button type="button" id="stars" class="btn btn-primary" href="#tab1" data-toggle="tab">
                             <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-                                <div class="hidden-xs">Age Distribution</div>
+                                <div class="hidden-xs">Forsythe Family Logins</div>
                         </button>
                     </div>
                     <div class="btn-group" role="group">
                         <button type="button" id="favorites" class="btn btn-default" href="#tab2" data-toggle="tab">
                             <span class="glyphicon glyphicon-lock" aria-hidden="true"></span>
-                                <div class="hidden-xs">Traffic Trend</div>
+                                <div class="hidden-xs">Top 10 Popular Repositories</div>
                         </button>
                     </div>
                     <div class="btn-group" role="group">
                         <button type="button" id="following" class="btn btn-default" href="#tab3" data-toggle="tab">
                             <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
-                                <div class="hidden-xs">Instructor Activism</div>
+                                <div class="hidden-xs">Top 5 Active Repositories</div>
                         </button>
                     </div>
                     <div class="btn-group" role="group">
                         <button type="button" id="following" class="btn btn-default" href="#tab4" data-toggle="tab">
                             <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-                                <div class="hidden-xs">Instructor Participation</div>
+                                <div class="hidden-xs">New User Counts</div>
                         </button>
                     </div>
                     <div class="btn-group" role="group">
                         <button type="button" id="following" class="btn btn-default" href="#tab5" data-toggle="tab">
                             <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
-                                <div class="hidden-xs">Pop Videos Rank</div>
+                                <div class="hidden-xs">Age Distribution</div>
                         </button>
                     </div>
                 </div>
