@@ -410,16 +410,19 @@ CREATE TABLE activity_log
 								'photo-view', 
 								'repo-create', 
 								'repo-delete', 
+								'repo-update',
 								'repo-join', 
+								'repo-view',
 								'story-delete', 
 								'story-update', 
 								'story-view',
-								'story-upload'
+								'story-upload'								
 							),
 	s_id				BIGINT UNSIGNED,
 	p_id				BIGINT UNSIGNED,
 	r_id				BIGINT UNSIGNED,
 	time_logged			TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	source_type			varchar(100);
 	FOREIGN KEY (ps_id) REFERENCES person(ps_id) ON DELETE NO ACTION,
 	FOREIGN KEY (s_id) REFERENCES story(s_id) ON DELETE NO ACTION,
 	FOREIGN KEY (p_id) REFERENCES photograph(p_id) ON DELETE NO ACTION,
