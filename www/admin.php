@@ -101,6 +101,11 @@
       </div>
     </nav>  
  <script>
+ 
+		<script src="highcharts/highcharts.js"></script>
+        <script src="highcharts/exporting.js"></script>
+        <script src="highcharts/highcharts-more.js"></script>
+ 
             var colorArr = ["#ffcd00", "#009dd9",  "#ff8300", "#b21dac",  "#d70036", "#707276", "#aaaaaa", "#000000", "#218535", "#92d050","#c4efff"];
 // nannv chart
 $(function () {
