@@ -109,34 +109,36 @@
 
 $(function () {
     $('#content1').highcharts({
-        chart: {
-            type: 'pie',
-            options3d: {
-                enabled: true,
-                alpha: 45
-            }
+		chart: {
+            plotBackgroundColor: null,
+            plotBorderWidth: null,
+            plotShadow: false,
+            type: 'pie'
         },
-        colors: colorArr,
         title: {
-            text: 'Age distribution'
+            text: 'count of new users broken down by gender'
         },
-        subtitle: {
-            text: ''
+        tooltip: {
+            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
         },
         plotOptions: {
             pie: {
-                 depth: 45
+                allowPointSelect: true,
+                cursor: 'pointer',
+                dataLabels: {
+                    enabled: true,
+                    format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                    style: {
+                        color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                    }
+                }
             }
         },
         series: [{
-            name: 'number',
+            name: 'gender',
             data: [
-                ['10~20', 10],
-                ['21~30', 10],
-                ['31~40', 10],
-                ['41~50', 10],
-                ['51~60', 10],
-                ['60~above', 10]
+                { name: 'Female', y: 453 },
+                { name: 'Male', y: 547 }
             ]
         }]
     });
