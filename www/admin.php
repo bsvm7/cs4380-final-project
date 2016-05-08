@@ -18,9 +18,8 @@
 
 
 	<!-- Highcharts -->
-	<script src="http://code.highcharts.com/stock/highstock.src.js"></script>
-    <script src="bower_components/highcharts-ng/dist/highcharts-ng.min.js"></script>
-    
+	<script src="highcharts/highcharts.js"></script>
+        <script src="highcharts/exporting.js"></script>
     <!-- CUSTOM STYLES
     –––––––––––––––––––––––––––––––––––––––––––––––––– -->
     
@@ -104,7 +103,7 @@
       </div>
     </nav>  
 
-
+<script>
 
 $(function () {
     $('#content1').highcharts({
@@ -351,7 +350,7 @@ $(function () {
         }]
     });
 });
-        </script>
+ </script>
 
         <div class="col-sm-9 main_content" style = "padding-right:7%;">    
             <div class="main_body" >
