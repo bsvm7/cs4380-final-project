@@ -24,48 +24,42 @@ var app = angular.module('photoarchiving_app', ["highcharts-ng"])
 	        //This is the Main Highcharts chart config. Any Highchart options are valid here.
 	        //will be overriden by values specified below.
 	        chart: {
-	            type: 'bar'
+	            type: 'pie'
 	        },
 	        tooltip: {
-	            style: {
-	                padding: 10,
-	                fontWeight: 'bold'
-	            }
-	        }
-	    },
+	            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+        },
+        plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                dataLabels: {
+                    enabled: true,
+                    format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                    style: {
+                        color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                    }
+                }
+            }
+        },
 	    //The below properties are watched separately for changes.
 	
 	    //Series object (optional) - a list of series using normal Highcharts series options.
 	    series: [{
-	        data: []
+	        data: [
+				{ name: 'Female', y: 136 },
+                { name: 'Male', y: 250 }
+			]
 	    }],
 	    //Title configuration (optional)
 	    title: {
-	        text: 'Hello'
+	        text: 'count of new users broken down by gender'
 	    },
 	    //Boolean to control showing loading status on chart (optional)
 	    //Could be a string if you want to show specific loading text.
 	    loading: false,
 	    //Configuration for the xAxis (optional). Currently only one x axis can be dynamically controlled.
 	    //properties currentMin and currentMax provided 2-way binding to the chart's maximum and minimum
-	    xAxis: {
-	        currentMin: 0,
-	        currentMax: 1,
-	        title: {
-	            text: 'values'
-	        }
-	    },
-	    yAxis: {
-		    currentMin: 0,
-		    currentMax: 1
-	    },
-	    //Whether to use Highstocks instead of Highcharts (optional). Defaults to false.
-	    useHighStocks: false,
-	    //size (optional) if left out the chart will default to size of the div or something sensible.
-	    size: {
-	        width: 400,
-	        height: 300
-	    },
 	    //function (optional)
 	    func: function(chart) {
 	        //setup some logic for the chart
