@@ -18,10 +18,11 @@
 
 
 	<!-- Highcharts -->
-	<script src="highcharts/highcharts.js"></script>
+		<script src="highcharts/highcharts.js"></script>
         <script src="highcharts/exporting.js"></script>
         <script src="highcharts/highcharts-more.js"></script>
-    
+  
+
     <!-- CUSTOM STYLES
     –––––––––––––––––––––––––––––––––––––––––––––––––– -->
     
@@ -65,6 +66,9 @@
       margin-top: 30px;
     }
     
+	.highcharts-container{
+    width:100%;   
+}  
     </style>
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -130,7 +134,7 @@ $(function () {
         series: [{
             name: 'number',
             data: [
-                ['10~20', <?php echo $data; ?>],
+                ['10~20', 10],
                 ['21~30', 10],
                 ['31~40', 10],
                 ['41~50', 10],
@@ -441,7 +445,18 @@ $(function () {
                 </div> <!--/* main_body-->
              </div>
         </div>
-
+ <script>
+     //    start of tab animation
+$(document).ready(function() {
+    $(".btn-pref .btn").click(function () {
+        
+        $(".btn-pref .btn").removeClass("btn-primary").addClass("btn-default");
+        // $(".tab").addClass("active"); // instead of this do the below 
+        $(this).removeClass("btn-default").addClass("btn-primary");   
+    });
+});
+            
+</script>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
