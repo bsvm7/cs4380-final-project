@@ -131,7 +131,7 @@ $(function () {
         series: [{
             name: 'number',
             data: [
-                ['10~20', <?php echo $data; ?>],
+                ['10~20', 10],
                 ['21~30', 10],
                 ['31~40', 10],
                 ['41~50', 10],
@@ -282,7 +282,7 @@ $(function () {
         series: [{
             name: 'number',
             data: [
-                ['ins1', <?php echo $data; ?>],
+                ['ins1',20],
                 ['ins2', 10],
                 ['ins3', 10],
                 ['ins4', 10]
@@ -443,19 +443,6 @@ $(function () {
              </div>
         </div>
         
- <script>
-     //    start of tab animation
-$(document).ready(function() {
-    $(".btn-pref .btn").click(function () {
-        
-        $(".btn-pref .btn").removeClass("btn-primary").addClass("btn-default");
-        // $(".tab").addClass("active"); // instead of this do the below 
-        $(this).removeClass("btn-default").addClass("btn-primary");   
-    });
-});
-            
-</script>
-
 
 
 
