@@ -301,7 +301,10 @@ $(function () {
 });
 //fifth chart
    $(function () {
-    chart: {
+		chart: {
+            plotBackgroundColor: null,
+            plotBorderWidth: null,
+            plotShadow: false,
             type: 'pie'
         },
         title: {
