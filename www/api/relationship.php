@@ -99,6 +99,7 @@
 											. "WHERE PR.related_from = ? "
 											. "AND P.ps_id = PR.related_to";
 											
+			echo $get_all_relationships_sql;
 											
 			//	Now prepare the statement
 			
