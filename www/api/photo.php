@@ -261,7 +261,13 @@
 							
 							$date_range = $_GET["date_range"];
 							
-							echo $date_range;
+							$dr_clean = pull_date_range( $date_range );
+							
+							echo json_encode($dr_clean);
+							
+							
+							
+							
 						
 						
 						break;
@@ -407,7 +413,43 @@
 		return $ret_array;
 	}
 
-
+	function pull_date_range( $range_str ) {
+		
+		$did_pull = true;
+		$start_date;
+		$end_date;
+		
+		
+		if(strpos($range_str, "_")) {
+			$did_pull = false;
+		}
+		else {
+			
+			//	Explode on the underscore
+			
+			$dates_arr = explode("_", $range_str);
+			
+			if( count($dates_arr) == 2 ) {
+				
+				$start_date = $dates_arr[0];
+				$end_date 	= $dates_arr[1];
+				
+			}
+			else {
+				$did_pull = false;
+			}
+		}
+		
+		
+		
+		$result_dict = array(
+			"success"		=> $did_pull,
+			"start_date"	=> $start_date,
+			"end_date"		=> $end_date
+		);
+		
+		return $result_dict;
+	}
 	function debug_echo( $str ) {
 		
 		$echo_debug = false;
