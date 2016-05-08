@@ -156,6 +156,14 @@
 				
 				case 'repo-photos':
 				
+					//	Make sure the range type is set
+					if(!(isset($_GET["range_type"]))) {
+						set_error_response( 0 , "You didn't set the range type");
+						break;
+					}
+					
+					$range_type = $_GET["range_type"];
+					
 					//	Make sure the r_id value is set
 					if(!(isset($_GET["r_id"]))) {
 						set_error_response( 0 , "You didn't set the r_id value...");
@@ -163,75 +171,95 @@
 					}
 					
 					$r_id = $_GET["r_id"];
-					
-					
-					//	First make sure the user belongs to the repository
-					$user_repo_check_sql = "SELECT * FROM user_repo WHERE ps_id = ? AND r_id = ?";
-					
-					if(!($user_repo_check_stmt = $db_conn->prepare($user_repo_check_sql))) {
-						set_error_response( 0 , $db_conn->error );
-						break;
-					}
-					
-					if(!($user_repo_check_stmt->bind_param("ii", $ps_id, $r_id))) {
-						set_error_response( 0 , "I couldn't bind the params -> " . $db_conn->error );
-						break;
-					}
-					
-					if(!($user_repo_check_stmt->execute())) {
-						set_error_response( 0 , "I couldn't execute -> " . $db_conn->error );
-						break;
-					}
-					
-					if($result = $user_repo_check_stmt->get_result()) {
-						if($result->num_rows != 1) {
-							set_error_response( 0 , "User Repo Statement: The number of rows was off -> " . $user_repo_check_stmt->error );
-							break;
-						}
-					}
-					
-					
-					//	Now that we know the user belongs to the repository we can send back some photos
-					
-					$get_repo_photos_sql = 	"SELECT P.p_id, P.title, P.description, P.large_url, P.thumb_url, P.date_taken, P.date_conf, P.date_uploaded, P.uploaded_by "
-											. "FROM photograph P, photo_repo PR "
-											. "WHERE P.p_id = PR.p_id AND PR.r_id = ?";
-											
-					if(!($get_repo_photos_stmt = $db_conn->prepare($get_repo_photos_sql))) {
-						set_error_response( 0 , "I couldn't prepare the get photos repo statement -> " . $db_conn->error );
-						break;
-					}
-					
-					if(!($get_repo_photos_stmt->bind_param("i", $r_id))) {
-						set_error_response( 0, "I couldn't bind the parameters for the SQL statement ($get_repo_photos_sql) -> " . $db_conn->error );
-						break;
-					}
-					
-					if(!($get_repo_photos_stmt->execute())) {
-						set_error_response( 0 , "I could't execute the statement with the SQL ($get_repo_photos_sql) -> " . $db_conn->error);
-						break;
-					}
-					
-					if($result = $get_repo_photos_stmt->get_result()) {
+
+
+
+					switch($range_type) {
 						
-						$all_repo_photos = array();
+						case 'all':
 						
-						while($result_row = $result->fetch_array(MYSQLI_ASSOC)) {
 							
-							array_push($all_repo_photos, $result_row);
+							//	First make sure the user belongs to the repository
+							$user_repo_check_sql = "SELECT * FROM user_repo WHERE ps_id = ? AND r_id = ?";
 							
-						}
+							if(!($user_repo_check_stmt = $db_conn->prepare($user_repo_check_sql))) {
+								set_error_response( 0 , $db_conn->error );
+								break;
+							}
+							
+							if(!($user_repo_check_stmt->bind_param("ii", $ps_id, $r_id))) {
+								set_error_response( 0 , "I couldn't bind the params -> " . $db_conn->error );
+								break;
+							}
+							
+							if(!($user_repo_check_stmt->execute())) {
+								set_error_response( 0 , "I couldn't execute -> " . $db_conn->error );
+								break;
+							}
+							
+							if($result = $user_repo_check_stmt->get_result()) {
+								if($result->num_rows != 1) {
+									set_error_response( 0 , "User Repo Statement: The number of rows was off -> " . $user_repo_check_stmt->error );
+									break;
+								}
+							}
+							
+							
+							//	Now that we know the user belongs to the repository we can send back some photos
+							
+							$get_repo_photos_sql = 	"SELECT P.p_id, P.title, P.description, P.large_url, P.thumb_url, P.date_taken, P.date_conf, P.date_uploaded, P.uploaded_by "
+													. "FROM photograph P, photo_repo PR "
+													. "WHERE P.p_id = PR.p_id AND PR.r_id = ?";
+													
+							if(!($get_repo_photos_stmt = $db_conn->prepare($get_repo_photos_sql))) {
+								set_error_response( 0 , "I couldn't prepare the get photos repo statement -> " . $db_conn->error );
+								break;
+							}
+							
+							if(!($get_repo_photos_stmt->bind_param("i", $r_id))) {
+								set_error_response( 0, "I couldn't bind the parameters for the SQL statement ($get_repo_photos_sql) -> " . $db_conn->error );
+								break;
+							}
+							
+							if(!($get_repo_photos_stmt->execute())) {
+								set_error_response( 0 , "I could't execute the statement with the SQL ($get_repo_photos_sql) -> " . $db_conn->error);
+								break;
+							}
+							
+							if($result = $get_repo_photos_stmt->get_result()) {
+								
+								$all_repo_photos = array();
+								
+								while($result_row = $result->fetch_array(MYSQLI_ASSOC)) {
+									
+									array_push($all_repo_photos, $result_row);
+									
+								}
+								
+								http_response_code(200);
+								echo json_encode($all_repo_photos);
+							}
+							else {
+								set_error_response( 0 , "I couldn't get the result...");
+								break;
+							}
+
 						
-						http_response_code(200);
-						echo json_encode($all_repo_photos);
-					}
-					else {
-						set_error_response( 0 , "I couldn't get the result...");
 						break;
+						
+						
+						
+						
+						case 'date':
+						
+						
+						
+						break;
+						
+							
 					}
 					
-					
-				
+
 				break;
 				
 				
