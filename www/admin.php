@@ -402,7 +402,7 @@ $(function () {
 
         <div class="col-sm-9 main_content" style = "padding-right:7%;">    
             <div class="main_body" >
-                <div class="container" style="padding-top:30px;margin-left: 0px" id = "body">
+                <div class="container" style="padding-top:30px;margin-left: 30px" id = "body">
                        <div class="btn-pref btn-group btn-group-justified btn-group-lg top-btn-group" role="group" aria-label="..." style="margin-top: 10px;">
                     <div class="btn-group" role="group">
                         <button type="button" id="stars" class="btn btn-primary" href="#tab1" data-toggle="tab">
