@@ -255,7 +255,7 @@
 								}
 
 							break;
-							
+/*							
 							case 'top_10_repo'
 
 								$top_repo_request_sql= "SELECT R.name, VIEW_COUNT.view_count
@@ -307,7 +307,7 @@
 
 
 							break;
-
+*/
 							default:
 
 							break;
