@@ -391,7 +391,7 @@
 							//	Write the SQL to get all the photos with this person in them
 							
 							$get_single_tag_sql =	"SELECT P.p_id, P.title, P.description, P.large_url, P.thumb_url, P.date_taken, P.date_conf, P.date_uploaded, P.uploaded_by "
-													. "FROM photograph P, photo_tag PT, photo_repo PR"
+													. "FROM photograph P, photo_tag PT, photo_repo PR "
 													. "WHERE PT.p_id = P.p_id AND PT.ps_id = ? "
 													. "AND PR.p_id = P.p_id AND PR.r_id = ?";
 													
