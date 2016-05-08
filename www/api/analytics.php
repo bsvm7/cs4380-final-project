@@ -246,7 +246,7 @@
 																  		AND U.ps_id IN (SELECT ps_id 
 														                	    	    FROM   user_repo 
 														                    	    	WHERE  r_id = ?)"; 
-											echo $user_age_range_sql;
+											//echo $user_age_range_sql;
 
 											if(!($user_age_range_stmt= $db_conn->prepare($user_age_range_sql))){
 												set_error_response( 0 , $db_conn->error );
