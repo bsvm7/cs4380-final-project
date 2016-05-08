@@ -104,6 +104,8 @@
     </nav>  
 
 <script>
+   var colorArr = ["#ffcd00", "#009dd9",  "#ff8300", "#b21dac",  "#d70036", "#707276", "#aaaaaa", "#000000", "#218535", "#92d050","#c4efff"];
+
 $(function () {
     $('#content1').highcharts({
         chart: {
