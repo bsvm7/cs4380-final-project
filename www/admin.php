@@ -301,62 +301,53 @@ $(function () {
 });
 //fifth chart
    $(function () {
-    $('#content5').highcharts({
-        chart: {
-            type: 'column'
+    chart: {
+            plotBackgroundColor: null,
+            plotBorderWidth: null,
+            plotShadow: false,
+            type: 'pie'
         },
         title: {
-            text: 'Popular video Rank'
-        },
-        xAxis: {
-            categories: ['ins1', 'ins2', 'ins3', 'ins4', 'ins5']
-        },
-        yAxis: {
-            min: 0,
-            title: {
-                text: ''
-            },
-            stackLabels: {
-                enabled: true,
-                style: {
-                    fontWeight: 'bold',
-                    color: (Highcharts.theme && Highcharts.theme.textColor) || 'gray'
-                }
-            }
-        },
-        legend: {
-            align: 'right',
-            x: -30,
-            verticalAlign: 'top',
-            y: 25,
-            floating: true,
-            backgroundColor: (Highcharts.theme && Highcharts.theme.background2) || 'white',
-            borderColor: '#CCC',
-            borderWidth: 1,
-            shadow: false
+            text: 'Age Distribution'
         },
         tooltip: {
-            valueSuffix: '%',
-            headerFormat: '<b>{point.x}</b><br/>',
-           
-            pointFormat: '{series.name}: {point.percentage:.1f}%<br/>总量: {point.stackTotal}'
+            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
         },
         plotOptions: {
-            column: {
-                stacking: 'normal',
+            pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
                 dataLabels: {
                     enabled: true,
-                    color: (Highcharts.theme && Highcharts.theme.dataLabelsColor) || 'white',
+                    format: '<b>{point.name}</b>: {point.percentage:.1f} %',
                     style: {
-                        textShadow: '0 0 3px black'
+                        color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
                     }
                 }
             }
         },
         series: [{
-            name: '# video submitted',
-            color: colorArr[1],
-            data: [300, 200, 140, 70, 30]
+            name: 'Age Period',
+            colorByPoint: true,
+            data: [{
+                name: 'Age 60+',
+                y: 13.3
+            }, {
+                name: 'Age 50-60',
+                y: 10.5
+            }, {
+                name: 'Age 35-50',
+                y: 18.4
+            }, {
+                name: 'Age 25-35',
+                y: 36.8
+            }, {
+                name: 'Age 15-25',
+                y: 13.9
+            }, {
+                name: 'Age 0-15',
+                y: 7.1
+            }]
         }]
     });
 });
