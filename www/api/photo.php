@@ -372,6 +372,71 @@
 						
 						break;
 							
+							
+							
+							
+							
+						case 'single_tag':
+						
+						
+							//	First make sure the tag_id is set
+							if(!(isset($_GET["tag_id"]))) {
+								set_error_response( 0 , "You didn't set the tag_id for this type of query...");
+								break;
+							}
+							
+							$tag_id = $_GET["tag_id"];
+							
+							
+							//	Write the SQL to get all the photos with this person in them
+							
+							$get_single_tag_sql =	"SELECT P.p_id, P.title, P.description, P.large_url, P.thumb_url, P.date_taken, P.date_conf, P.date_uploaded, P.uploaded_by "
+													. "FROM photograph P, photo_tag PT, photo_repo PR"
+													. "WHERE PT.p_id = P.p_id AND PT.ps_id = ? "
+													. "AND PR.p_id = P.p_id AND PR.r_id = ?";
+													
+													
+							//	Now prepare the statement
+							
+							if(!($get_single_tag_stmt = $db_conn->prepare($get_single_tag_sql))) {
+								set_error_response( 0 , "I couldn't prepare the statement with the SQL ($get_single_tag_sql) -> " . $db_conn->error);
+								break;
+							}
+							
+							//	Now bind the parameters
+							if(!($get_single_tag_stmt->bind_param("ii", $tag_id , $r_id))) {
+								set_error_response( 0 , "I couldn't bind the parameters for the statement with the SQL ($get_single_tag_sql) -> " . $db_conn->error);
+								break;
+							}
+							
+							//	Now execute
+							if(!($get_single_tag_stmt->execute())) {
+								set_error_response( 0 , "I couldn't execute the statement with the SQL ($get_single_tag_sql)");
+								break;
+							}
+							
+							//	Now pull the results and send them back
+							
+							if($result = $get_single_tag_stmt->get_result()){
+								
+								$tagged_photos = array();
+								
+								while ($result_row = $result->fetch_array(MYSQLI_ASSOC)) {
+									
+									array_push($tagged_photos, $result_row);
+									
+								}
+								
+								http_response_code(200);
+								echo json_encode($tagged_photos);
+								
+							}
+							else {
+								set_error_response( 0 , "I couldn't get the result for the statement with the SQL ($get_single_tag_sql)");
+								break;
+							}
+							
+						break;
 					}
 					
 
