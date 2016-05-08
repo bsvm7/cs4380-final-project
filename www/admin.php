@@ -301,6 +301,7 @@ $(function () {
 });
 //fifth chart
    $(function () {
+	   $('#content5').highcharts({
 		chart: {
             plotBackgroundColor: null,
             plotBorderWidth: null,
