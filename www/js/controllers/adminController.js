@@ -63,7 +63,7 @@ var app = angular.module('photoarchiving_app', ["highcharts-ng"])
 	    //function (optional)
 	    func: function(chart) {
 	        //setup some logic for the chart
-	    }
+	    },
 	};
 
 

@@ -18,8 +18,8 @@
 
 
 	<!-- Highcharts -->
-	<script src="highcharts/highcharts.js"></script>
-        <script src="highcharts/exporting.js"></script>
+	<script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
     <!-- CUSTOM STYLES
     –––––––––––––––––––––––––––––––––––––––––––––––––– -->
     
@@ -104,7 +104,6 @@
     </nav>  
 
 <script>
-
 $(function () {
     $('#content1').highcharts({
         chart: {
