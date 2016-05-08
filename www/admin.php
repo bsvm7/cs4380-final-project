@@ -110,36 +110,73 @@
 $(function () {
     $('#content1').highcharts({
 		chart: {
-            plotBackgroundColor: null,
-            plotBorderWidth: null,
-            plotShadow: false,
-            type: 'pie'
+            type: 'column'
         },
         title: {
-            text: 'count of new users broken down by gender'
+            text: 'Forsythe Family Logins (April)'
+        },
+        subtitle: {
+            text: 'Logins by all Forsythe Family Members'
+        },
+        xAxis: {
+            categories: [
+                '1',
+                '2',
+                '3',
+                '4',
+                '5',
+                '6',
+                '7',
+                '8',
+                '9',
+                '10',
+                '11',
+                '12',
+                '13',
+                '14',
+                '15',
+                '16',
+                '17',
+                '18',
+                '19',
+                '20',
+                '21',
+                '22',
+                '23',
+                '24',
+                '25',
+                '26',
+                '27',
+                '28',
+                '29',
+                '30',
+            ],
+            crosshair: true
+        },
+        yAxis: {
+            min: 0,
+            title: {
+                text: 'Views'
+            }
         },
         tooltip: {
-            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+            headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+            pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                '<td style="padding:0"><b>{point.y:.1f} mm</b></td></tr>',
+            footerFormat: '</table>',
+            shared: true,
+            useHTML: true
         },
         plotOptions: {
-            pie: {
-                allowPointSelect: true,
-                cursor: 'pointer',
-                dataLabels: {
-                    enabled: true,
-                    format: '<b>{point.name}</b>: {point.percentage:.1f} %',
-                    style: {
-                        color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
-                    }
-                }
+            column: {
+                pointPadding: 0.2,
+                borderWidth: 0
             }
         },
         series: [{
-            name: 'gender',
-            data: [
-                { name: 'Female', y: 453 },
-                { name: 'Male', y: 547 }
-            ]
+            name: 'Forsythe Repository',
+            data: [23,64,28,12,10,75,56,55,51,31,8,7,22,83,3,17,45,30,18,64,24,68,22,14,11,10,8,9,3,2]
+
         }]
     });
 });
