@@ -10,9 +10,6 @@
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <title>Home | Photoarchiving</title>
 
-	<!-- Angular -->
-	<script type="text/javascript" src="bower_components/angular/angular.min.js"></script>
-	
     <!-- Bootstrap -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 
@@ -78,10 +75,7 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
   </head>
-  <body ng-app="photoarchiving_app" ng-controller="AdminController as adminCtrl">
-	  
-  	<script type="text/javascript" src="js/controllers/adminController.js"></script>
-  	
+ 
     <!-- NAVBAR
     –––––––––––––––––––––––––––––––––––––––––––––––––– -->
     <nav class="navbar navbar-inverse navbar-static-top">
