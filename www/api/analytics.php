@@ -254,7 +254,7 @@
 												break;	
 											}
 
-											if(!($user_age_range_stmt->bind_param("iii",$$repo_id) ) ){
+											if(!($user_age_range_stmt->bind_param("iii",$start_age,$end_age,$repo_id) ) ){
 												set_error_response( 0 , $db_conn->error );
 												debug_echo ("user age range stmt param bind failed ..."."\n");
 												break;	
