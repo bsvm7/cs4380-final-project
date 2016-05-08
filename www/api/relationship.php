@@ -99,8 +99,6 @@
 											. "WHERE PR.related_from = ? "
 											. "AND P.ps_id = PR.related_to";
 											
-			echo $get_all_relationships_sql;
-											
 			//	Now prepare the statement
 			
 			if(!($get_all_relationships_stmt = $db_conn->prepare($get_all_relationships_sql))) {
@@ -126,7 +124,7 @@
 				$relationships = array();
 				
 				while ($result_row = $result->fetch_array(MYSQLI_ASSOC)) {
-					array_push($result_row);
+					array_push($relationships, $result_row);
 				}
 				
 				http_response_code(200);
