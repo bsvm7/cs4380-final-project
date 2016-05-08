@@ -148,43 +148,57 @@ $(function () {
         
 //        line chart
  $(function () {
-    $('#content2').highcharts({
-        title: {
-            text: 'System Traffic Trend Monitor',
-            x: -20 //center
+		$('#content2').highcharts({
+        chart: {
+            type: 'bar'
         },
-        subtitle: {
-            text: '(09/03/2016 - 21/03/2016)',
-            x: -20
+        title: {
+            text: 'Top 10 most frequently visited repositories'
         },
         xAxis: {
-            categories: ['day1', 'day2', 'day3', 'day4', 'day5', 'day6',
-                'day7', 'day8', 'day9', 'day10', 'day11', 'day12']
+            categories: ['Mizzou','Health Care Center', 'Reacreation Center','Tom','Columbia','Jefferson','Ashland','Database','CSBA','Jingo'],
+            title: {
+                text: null
+            }
         },
         yAxis: {
+            min: 0,
             title: {
-                text: '# of login'
+                text: 'Visitors',
+                align: 'high'
             },
-            plotLines: [{
-                value: 0,
-                width: 1,
-                color: '#808080'
-            }]
+            labels: {
+                overflow: 'justify'
+            }
         },
         tooltip: {
-            valueSuffix: '#'
+            valueSuffix: ''
+        },
+        plotOptions: {
+            bar: {
+                dataLabels: {
+                    enabled: true
+                }
+            }
         },
         legend: {
             layout: 'vertical',
             align: 'right',
-            verticalAlign: 'middle',
-            borderWidth: 0
+            verticalAlign: 'top',
+            x: -40,
+            y: 80,
+            floating: true,
+            borderWidth: 1,
+            backgroundColor: ((Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'),
+            shadow: true
+        },
+        credits: {
+            enabled: false
         },
         series: [{
-            color: colorArr[1],
-            name: 'Traffic',
-            data: [7.0, 6.9, 9.5, 14.5, 18.2, 21.5, 25.2, 26.5, 23.3, 18.3, 13.9, 9.6]
-        },]
+            name: 'Past Month',
+            data: [107, 31,635,203,2,70,95,1250,345,503]
+        }]
     });
 });
         
