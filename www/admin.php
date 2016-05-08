@@ -64,6 +64,9 @@
       margin-top: 30px;
     }
     
+.highcharts-container{
+    width:100%;   
+}
     </style>
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -103,18 +106,354 @@
 
 
 
+$(function () {
+    $('#content1').highcharts({
+        chart: {
+            type: 'pie',
+            options3d: {
+                enabled: true,
+                alpha: 45
+            }
+        },
+        colors: colorArr,
+        title: {
+            text: 'Age distribution'
+        },
+        subtitle: {
+            text: ''
+        },
+        plotOptions: {
+            pie: {
+                 depth: 45
+            }
+        },
+        series: [{
+            name: 'number',
+            data: [
+                ['10~20', <?php echo $data; ?>],
+                ['21~30', 10],
+                ['31~40', 10],
+                ['41~50', 10],
+                ['51~60', 10],
+                ['60~above', 10]
+            ]
+        }]
+    });
+});
 
+        var width = $("#tab2").width();
+        
+//        line chart
+ $(function () {
+    $('#content2').highcharts({
+        title: {
+            text: 'System Traffic Trend Monitor',
+            x: -20 //center
+        },
+        subtitle: {
+            text: '(09/03/2016 - 21/03/2016)',
+            x: -20
+        },
+        xAxis: {
+            categories: ['day1', 'day2', 'day3', 'day4', 'day5', 'day6',
+                'day7', 'day8', 'day9', 'day10', 'day11', 'day12']
+        },
+        yAxis: {
+            title: {
+                text: '# of login'
+            },
+            plotLines: [{
+                value: 0,
+                width: 1,
+                color: '#808080'
+            }]
+        },
+        tooltip: {
+            valueSuffix: '#'
+        },
+        legend: {
+            layout: 'vertical',
+            align: 'right',
+            verticalAlign: 'middle',
+            borderWidth: 0
+        },
+        series: [{
+            color: colorArr[1],
+            name: 'Traffic',
+            data: [7.0, 6.9, 9.5, 14.5, 18.2, 21.5, 25.2, 26.5, 23.3, 18.3, 13.9, 9.6]
+        },]
+    });
+});
+        
+        
+//        accumulated column
+        $(function () {
+    $('#content3').highcharts({
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: 'Instructor Activism Monitor'
+        },
+        xAxis: {
+            categories: ['ins1', 'ins2', 'ins3', 'ins4', 'ins5']
+        },
+        yAxis: {
+            min: 0,
+            title: {
+                text: ''
+            },
+            stackLabels: {
+                enabled: true,
+                style: {
+                    fontWeight: 'bold',
+                    color: (Highcharts.theme && Highcharts.theme.textColor) || 'gray'
+                }
+            }
+        },
+        legend: {
+            align: 'right',
+            x: -30,
+            verticalAlign: 'top',
+            y: 25,
+            floating: true,
+            backgroundColor: (Highcharts.theme && Highcharts.theme.background2) || 'white',
+            borderColor: '#CCC',
+            borderWidth: 1,
+            shadow: false
+        },
+        tooltip: {
+            valueSuffix: '%',
+            headerFormat: '<b>{point.x}</b><br/>',
+           
+            pointFormat: '{series.name}: {point.percentage:.1f}%<br/>总量: {point.stackTotal}'
+        },
+        plotOptions: {
+            column: {
+                stacking: 'normal',
+                dataLabels: {
+                    enabled: true,
+                    color: (Highcharts.theme && Highcharts.theme.dataLabelsColor) || 'white',
+                    style: {
+                        textShadow: '0 0 3px black'
+                    }
+                }
+            }
+        },
+        series: [{
+            name: '# video submitted',
+            color: colorArr[0],
+            data: [300, 300, 40, 70, 200]
+        }, {
+            name: '# like&fav',
+            color:  colorArr[1],
+            data: [200, 400, 300, 200, 10]
+        }, {
+            name: '# comments',
+            color: colorArr[2],
+            data: [30, 200, 400, 200, 300]
+        }]
+    });
+});
+        
+//fourth chart        
+$(function () {
+    $('#content4').highcharts({
+        chart: {
+            type: 'pie',
+            options3d: {
+                enabled: true,
+                alpha: 45
+            }
+        },
+        colors: colorArr,
+        title: {
+            text: 'instructor video post distribution(7 day ago)'
+        },
+        subtitle: {
+            text: ''
+        },
+        plotOptions: {
+            pie: {
+                 depth: 45
+            }
+        },
+        series: [{
+            name: 'number',
+            data: [
+                ['ins1', <?php echo $data; ?>],
+                ['ins2', 10],
+                ['ins3', 10],
+                ['ins4', 10]
+            ]
+        }]
+    });
+});
 
-	<div class="row">
-		<div class="span9">
-			<div class="row">
-				<highchart class="chart" config="chartConfig" class="span9" ></highchart>
-			</div>
-		</div>
-	</div>
+//fifth chart
+   $(function () {
+    $('#content5').highcharts({
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: 'Popular video Rank'
+        },
+        xAxis: {
+            categories: ['ins1', 'ins2', 'ins3', 'ins4', 'ins5']
+        },
+        yAxis: {
+            min: 0,
+            title: {
+                text: ''
+            },
+            stackLabels: {
+                enabled: true,
+                style: {
+                    fontWeight: 'bold',
+                    color: (Highcharts.theme && Highcharts.theme.textColor) || 'gray'
+                }
+            }
+        },
+        legend: {
+            align: 'right',
+            x: -30,
+            verticalAlign: 'top',
+            y: 25,
+            floating: true,
+            backgroundColor: (Highcharts.theme && Highcharts.theme.background2) || 'white',
+            borderColor: '#CCC',
+            borderWidth: 1,
+            shadow: false
+        },
+        tooltip: {
+            valueSuffix: '%',
+            headerFormat: '<b>{point.x}</b><br/>',
+           
+            pointFormat: '{series.name}: {point.percentage:.1f}%<br/>总量: {point.stackTotal}'
+        },
+        plotOptions: {
+            column: {
+                stacking: 'normal',
+                dataLabels: {
+                    enabled: true,
+                    color: (Highcharts.theme && Highcharts.theme.dataLabelsColor) || 'white',
+                    style: {
+                        textShadow: '0 0 3px black'
+                    }
+                }
+            }
+        },
+        series: [{
+            name: '# video submitted',
+            color: colorArr[1],
+            data: [300, 200, 140, 70, 30]
+        }]
+    });
+});
+        </script>
 
+        <div class="col-sm-9 main_content" style = "padding-right:7%;">    
+            <div class="main_body" >
+                <div class="container" style="padding-top:30px;margin-left: 0px;" id = "body">
+                       <div class="btn-pref btn-group btn-group-justified btn-group-lg top-btn-group" role="group" aria-label="..." style="margin-top: 10px;">
+                    <div class="btn-group" role="group">
+                        <button type="button" id="stars" class="btn btn-primary" href="#tab1" data-toggle="tab">
+                            <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                                <div class="hidden-xs">Age Distribution</div>
+                        </button>
+                    </div>
+                    <div class="btn-group" role="group">
+                        <button type="button" id="favorites" class="btn btn-default" href="#tab2" data-toggle="tab">
+                            <span class="glyphicon glyphicon-lock" aria-hidden="true"></span>
+                                <div class="hidden-xs">Traffic Trend</div>
+                        </button>
+                    </div>
+                    <div class="btn-group" role="group">
+                        <button type="button" id="following" class="btn btn-default" href="#tab3" data-toggle="tab">
+                            <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                                <div class="hidden-xs">Instructor Activism</div>
+                        </button>
+                    </div>
+                    <div class="btn-group" role="group">
+                        <button type="button" id="following" class="btn btn-default" href="#tab4" data-toggle="tab">
+                            <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                                <div class="hidden-xs">Instructor Participation</div>
+                        </button>
+                    </div>
+                    <div class="btn-group" role="group">
+                        <button type="button" id="following" class="btn btn-default" href="#tab5" data-toggle="tab">
+                            <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                                <div class="hidden-xs">Pop Videos Rank</div>
+                        </button>
+                    </div>
+                </div>
+            
+                <div class="well">
+                    <div class="tab-content">
+                 <!--          start of tab1-->
+                        <div class="tab-pane fade in active" id="tab1">
+                            <div class="panel panel-default info_panel" >
+                                 <div class="container"  style="height: 60vh;" id = "content1">
+                                
+                                </div>
+                          </div> 
+                        </div>
+                        
+                <!-- end tab1-->
+                        
+                        <div class="tab-pane fade in active" id="tab2">
+                             <div class="panel panel-default info_panel container">
+                                     <div id = "content2" style="height: 60vh;">
+                                     </div>
+                             </div> 
+                          </div>
 
+                        <div class="tab-pane fade in active" id="tab3">
+                             <div class="panel panel-default info_panel">
+                                 <div class="container" >
+                                    <div id = "content3" style="height: 60vh;">
+                                     </div>
+                                </div>
+                            </div> 
+                         </div>
+                        
+                         <div class="tab-pane fade in active" id="tab4">
+                             <div class="panel panel-default info_panel">
+                                 <div class="container" >
+                                    <div id = "content4" style="height: 60vh;">
+                                     </div>
+                                </div>
+                            </div> 
+                         </div>
+                        
+                         <div class="tab-pane fade in active" id="tab5">
+                             <div class="panel panel-default info_panel">
+                                 <div class="container" >
+                                    <div id = "content5" style="height: 60vh;">
+                                     </div>
+                                </div>
+                            </div> 
+                         </div>
 
+                      </div>
+
+                </div> <!--/* main_body-->
+             </div>
+        </div>
+        
+ <script>
+     //    start of tab animation
+$(document).ready(function() {
+    $(".btn-pref .btn").click(function () {
+        
+        $(".btn-pref .btn").removeClass("btn-primary").addClass("btn-default");
+        // $(".tab").addClass("active"); // instead of this do the below 
+        $(this).removeClass("btn-default").addClass("btn-primary");   
+    });
+});
+            
+</script>
 
 
 
