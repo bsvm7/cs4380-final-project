@@ -263,13 +263,51 @@
 							
 							$dr_clean = pull_date_range( $date_range );
 							
-							echo json_encode($dr_clean);
 							
+							//	Create the SQL to pull the dates from this repo within this date range
+							$pull_photos_in_range_sql = 	"SELECT * FROM photograph P, photo_repo PR "
+															. "WHERE P.p_id = PR.p_id AND PR.r_id = ? "
+															. "AND P.date_taken >= ? AND P.date_taken <= ? "
+															. "ORDER BY P.date_taken DESC";
+															
+							//	Now prepare a statement using the SQL
+							if(!($pull_photos_in_range_stmt = $db_conn->prepare($pull_photos_in_range_sql))) {
+								set_error_response( 0 , "I couldn't prepare the statement with the SQL ($pull_photos_in_range_sql) -> " . $db_conn->error);
+								break;
+							}
 							
+							//	Now bind the parameters
+							if(!($pull_photos_in_range_stmt->bind_param("iss", $r_id , $dr_clean["start_date"], $dr_clean["end_date"]))) {
+								set_error_response( 0 , "I couldn't bind the parameters with the SQL ($pull_photos_in_range_sql) -> " . $db_conn->error);
+								break;
+							}
 							
+							//	Now execute and return values
+							if($pull_photos_in_range_stmt->execute()) {
+								
+								if($result = $pull_photos_in_range_stmt->get_result()) {
+									
+									$photos_in_date_range = array();
+									
+									while($result_row = $result->fetch_array(MYSQLI_ASSOC)) {
+										
+										array_push($photos_in_date_range, $result_row);
+										
+									}
+									
+									http_response_code(200);
+									echo json_encode($photos_in_date_range);
+								}
+								else {
+									set_error_response( 0 , "I couldn't get the result from the statement with the SQL ($pull_photos_in_range_sql) -> " . $db_conn->error);
+									break;
+								}
+							}
+							else {
+								set_error_response( 0 , "I couldn't execute the statement with the SQL ($pull_photos_in_range_sql) -> " . $db_conn->error);
+								break;
+							}
 							
-						
-						
 						break;
 						
 							
