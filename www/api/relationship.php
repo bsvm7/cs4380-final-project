@@ -121,7 +121,7 @@
 			}
 			
 			//	Now collect and return all the relationships
-			if($result = $get_all_relationships_stmt->execute()) {
+			if($result = $get_all_relationships_stmt->get_result()) {
 				
 				$relationships = array();
 				
