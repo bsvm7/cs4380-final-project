@@ -256,7 +256,7 @@
 
 							break;
 						
-							case 'top_repos':
+							case 'top_viewed_repos':
 
 								$top_repo_request_sql= "SELECT R.name, VIEW_COUNT.view_count
 									FROM repository R, (SELECT r_id, COUNT(*) AS view_count 
@@ -299,6 +299,51 @@
 								}
 								
 							break;
+
+
+							case 'top_active_repos':
+
+								$top_active_repos_sql= "SELECT R.name, ACTIVITY_COUNT.ac_count
+									FROM repository R, (SELECT r_id, COUNT(*) AS ac_count 
+									            FROM activity_log 
+									            WHERE time_logged >= (curdate() -31)
+									            GROUP BY r_id
+									            ORDER BY view_count DESC
+									            LIMIT 5) AS ACTIVITY_COUNT
+									WHERE R.r_id = ACTIVITY_COUNT.r_id";
+
+
+								if(!($top_active_repos_stmt= $db_conn->prepare($top_active_repos_sql))){
+									set_error_response( 0 , $db_conn->error );
+									break;	
+								}
+
+								if(!($top_active_repos_stmt->execute())) {
+									set_error_response( 0 , $db_conn->error );
+									break;	
+								}
+
+								if($result = $top_active_repos_stmt->get_result()) {
+
+									$top_active_repos = array();
+
+									while($result_row = $result->fetch_array(MYSQLI_ASSOC)){
+
+										array_push($top_active_repos, $result_row);
+
+									}
+									
+									http_response_code(200);
+									echo json_encode($top_active_repos);	
+
+								}
+								else{
+									set_error_response( 0 , "No repo is returned" . $top_active_repos_stmt->error );
+									break;
+								}
+								
+							break;
+
 
 							default:
 
