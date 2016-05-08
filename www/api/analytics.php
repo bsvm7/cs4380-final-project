@@ -241,7 +241,7 @@
 											$user_age_range_sql= "SELECT Count(*) AS age_range
 																  FROM   user U, 
 																         person P 
-																  WHERE  (Floor(( Cast (Getdate() AS INTEGER) - Cast(P.birthdate AS INTEGER))/365.25) ) BETWEEN ? AND ? 
+																  WHERE  ((Floor(( Cast (Getdate() AS INTEGER) - Cast(P.birthdate AS INTEGER))/365.25) ) BETWEEN ? AND ?) 
 																  AND U.ps_id IN (SELECT UR.ps_id 
 														                          FROM   user_repo UR 
 														                          WHERE  UR.r_id = ?)"; 
