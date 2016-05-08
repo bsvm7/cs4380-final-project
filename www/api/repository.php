@@ -255,8 +255,8 @@
 								}
 
 							break;
-/*							
-							case 'top_10_repo'
+						
+							case 'top_repos':
 
 								$top_repo_request_sql= "SELECT R.name, VIEW_COUNT.view_count
 									FROM repository R, (SELECT r_id, COUNT(*) AS view_count 
@@ -297,17 +297,9 @@
 									set_error_response( 0 , "No repo is returned" . $top_repo_request_stmt->error );
 									break;
 								}
-
-
-
-
-
-
-
-
-
+								
 							break;
-*/
+
 							default:
 
 							break;
