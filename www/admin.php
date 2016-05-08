@@ -67,9 +67,7 @@
     <![endif]-->
   </head>
   <body ng-app="photoarchiving_app" ng-controller="AdminController as adminCtrl">
-	  
-  	<script type="text/javascript" src="js/controllers/adminController.js"></script>
-  	
+	    	
     <!-- NAVBAR
     –––––––––––––––––––––––––––––––––––––––––––––––––– -->
     <nav class="navbar navbar-inverse navbar-static-top">
@@ -155,27 +153,6 @@ $(function () {
 });
 
 </script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
