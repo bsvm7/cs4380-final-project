@@ -10,6 +10,11 @@ var app = angular.module('photoarchiving_app', [])
 		"date_created" : ""
 	};
 	
+	$scope.eraData = {
+		"selectedEra" : -1,
+		"availableEras" : []
+	};
+	
 	$scope.query_params_set = false;
 	$scope.query_params = {};
 	$scope.user_auth_info_set = false;
@@ -68,20 +73,42 @@ var app = angular.module('photoarchiving_app', [])
 				var error_string = "There was an error processing the request";
 				console.log( error_string );
 			});
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
 		}
 	}
 	
+	function get_eras() {
+		
+		if ($scope.query_params_set && $scope.user_auth_info_set) {
+			
+			var auth_info = $scope.user_auth_info;
+			var query_params = $scope.query_params;
+			
+			
+			var req_url = 	base_url + "api/era.php?"
+							+ "ps_id=" + auth_info["ps_id"] + "&"
+							+ "auth_token=" + auth_info["access_token"];
+							
+			console.log(req_url);
+							
+			
+			$http({
+				method	:	'GET',
+				url		:	req_url
+			}).then( function successCallback( response ) {
+				
+				var res_data = response.data;
+				
+				$scope.eraData.availableEras = res_data;
+				
+				
+			}, function errorCallback( response ) {
+				
+				var error_string = "There was an error processing the request";
+				console.log( error_string );
+			});
+		}
+
+	}
 	function get_base_url() {
 		
 		if (use_main_url) {
