@@ -405,13 +405,13 @@ $(function () {
                 <div class="container" style="padding-top:30px;margin-left: 30px" id = "body">
                        <div class="btn-pref btn-group btn-group-justified btn-group-lg top-btn-group" role="group" aria-label="..." style="margin-top: 10px;">
                     <div class="btn-group" role="group">
-                        <button type="button" id="stars" class="btn btn-primary" href="#tab1" data-toggle="tab">
+                        <button type="button" id="following" class="btn btn-primary" href="#tab1" data-toggle="tab">
                             <span class="glyphicon glyphicon-menu-down" aria-hidden="true"></span>
                                 <div class="hidden-xs">Forsythe Family Logins</div>
                         </button>
                     </div>
                     <div class="btn-group" role="group">
-                        <button type="button" id="favorites" class="btn btn-primary" href="#tab2" data-toggle="tab">
+                        <button type="button" id="following" class="btn btn-primary" href="#tab2" data-toggle="tab">
                             <span class="glyphicon glyphicon-menu-down" aria-hidden="true"></span>
                                 <div class="hidden-xs">Top 10 Popular Repositories</div>
                         </button>

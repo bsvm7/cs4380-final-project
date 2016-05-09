@@ -102,26 +102,16 @@
 
 	<div class="container">
 		<div class="row">
-			<h1>{{ repo_info.title }}</h1>
-		</div>	
-		
-		
-		<div class="row">
-			<h1>Put the search controls here</h1>
+			<h1>Photo</h1>
 			
-				<form name="myForm">
-					<label for="eraSelect"> Era Select: </label>
-					<select name="eraSelect" id="eraSelect" ng-model="eraData.selectedEra">
-						<option ng-repeat="era in eraData.availableEras" value="{{era.era_id}}">{{era.name}}</option>
-					</select>
-					<button type="submit" class="btn btn-primary btn-block btn-lg create-button" ng-click="updatePhotos()">Update Photos</button>
-				</form>
-				
-				<h1>{{ eraData.selectedEra }}</h1>
-		</div>
-		
+			<!-- Image links -->
+			
+		</div>	
+
 		<div class="row">
-			<h1>Put the results here</h1>
+			 <button type="button" id="following" class="btn btn-primary">
+                           <!-- edit story-->
+             </button>
 		</div>
 	</div>
 	
