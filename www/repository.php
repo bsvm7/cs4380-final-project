@@ -61,6 +61,7 @@
     
     .image-list-container {
 	    width: 75%;
+	    background-color: #8c2020;
     }
     
     </style>
