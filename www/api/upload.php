@@ -14,13 +14,13 @@
 	if ($db_conn->error_code) {
 			
 		debug_echo( "database connection error ..." . "\n" );
-
+		echo "database connection error ...";
 		set_error_response( 400 , "I couldn't connect to the database -> " . $db_conn->connect_error);
 		die("The connection to the database failed: " . $db_conn->connect_error);
 	}
 		
 	debug_echo( "database connected" . "\n" );
-
+	echo "database connected ...";
 	
 	$req_method = $_SERVER['REQUEST_METHOD'];		
 		
@@ -29,11 +29,11 @@
 		case 'POST':
 
 			//	Get the raw post data
-			$json_raw = file_get_contents("php://input");
+			//$json_raw = file_get_contents("php://input");
 			
- 			echo $json_raw;
+ 			//echo $json_raw;
 			
-			if ($decoded_json = json_decode($json_raw, true)) {	
+			//if ($decoded_json = json_decode($json_raw, true)) {	
 
 				//$fileToUpload = $decoded_json['image'];
 
@@ -126,13 +126,14 @@
 		                }
 		            }
 		        }
+		    /*
 		    }
 			else{
 				set_error_response( 201, "SQL Error -> " . $hash_retrieve_stmt->error);	
 				debug_echo ("input data can not be decoded.....");
 				break;
 			}				
-
+*/
 			$db_conn->close(); 
 			debug_echo ("database has been closed successfully.....");
 	      
@@ -143,7 +144,7 @@
 
 		break;
 
-
+	}	
 
 
 
