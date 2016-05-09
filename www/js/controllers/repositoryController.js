@@ -15,6 +15,11 @@ var app = angular.module('photoarchiving_app', [])
 		"availableEras" : []
 	};
 	
+	$scope.relationsData {
+		"selectedRelation" : -1,
+		"availableRelations" : []
+	}
+	
 	$scope.photographs = [];
 	
 	
@@ -28,7 +33,9 @@ var app = angular.module('photoarchiving_app', [])
 	load_query_params();
 	load_user_authentication_information();
 	get_repo_information();
+	
 	get_eras();
+	get_relations();
 	get_photos_initial();
 	
 	/*
@@ -148,7 +155,39 @@ var app = angular.module('photoarchiving_app', [])
 		
 	}
 	
-	
+	function get_relations() {
+		
+		if ($scope.query_params_set && $scope.user_auth_info_set) {
+			
+			var auth_info = $scope.user_auth_info;
+			var query_params = $scope.query_params;
+			
+			
+			var req_url = 	base_url + "api/relationship.php?"
+							+ "ps_id=" + auth_info["ps_id"] + "&"
+							+ "auth_token=" + auth_info["access_token"];
+							
+			console.log(req_url);
+							
+			
+			$http({
+				method	:	'GET',
+				url		:	req_url
+			}).then( function successCallback( response ) {
+				
+				var res_data = response.data;
+				
+				$scope.relationsData.availableRelations = response.data;
+				
+				
+			}, function errorCallback( response ) {
+				
+				var error_string = "There was an error processing the request";
+				console.log( error_string );
+			});
+		}
+		
+	}
 	function get_base_url() {
 		
 		if (use_main_url) {
