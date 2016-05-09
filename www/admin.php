@@ -65,9 +65,20 @@
       margin-top: 30px;
     }
     
-.highcharts-container{
-    width:100%;   
-}
+	.highcharts-container{
+		width:100%;   
+	}
+
+	.well {
+		min-height: 20px;
+		padding: 0;
+		margin-bottom: 20px;
+		background-color: #f5f5f5;
+		border: 1px solid #e3e3e3;
+		border-radius: 4px;
+		-webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.05);
+		box-shadow: inset 0 1px 1px rgba(0,0,0,.05);
+	}
     </style>
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -105,8 +116,6 @@
     </nav>  
 
 <script>
-   var colorArr = ["#ffcd00", "#009dd9",  "#ff8300", "#b21dac",  "#d70036", "#707276", "#aaaaaa", "#000000", "#218535", "#92d050","#c4efff"];
-
 $(function () {
     $('#content1').highcharts({
 		chart: {
@@ -162,7 +171,7 @@ $(function () {
         tooltip: {
             headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
             pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-                '<td style="padding:0"><b>{point.y:.1f} mm</b></td></tr>',
+                '<td style="padding:0"><b>{point.y:.1f} views</b></td></tr>',
             footerFormat: '</table>',
             shared: true,
             useHTML: true
@@ -393,35 +402,35 @@ $(function () {
 
         <div class="col-sm-9 main_content" style = "padding-right:7%;">    
             <div class="main_body" >
-                <div class="container" style="padding-top:30px;margin-left: 0px;" id = "body">
+                <div class="container" style="padding-top:30px;margin-left: 30px" id = "body">
                        <div class="btn-pref btn-group btn-group-justified btn-group-lg top-btn-group" role="group" aria-label="..." style="margin-top: 10px;">
                     <div class="btn-group" role="group">
                         <button type="button" id="stars" class="btn btn-primary" href="#tab1" data-toggle="tab">
-                            <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                            <span class="glyphicon glyphicon-menu-down" aria-hidden="true"></span>
                                 <div class="hidden-xs">Forsythe Family Logins</div>
                         </button>
                     </div>
                     <div class="btn-group" role="group">
-                        <button type="button" id="favorites" class="btn btn-default" href="#tab2" data-toggle="tab">
-                            <span class="glyphicon glyphicon-lock" aria-hidden="true"></span>
+                        <button type="button" id="favorites" class="btn btn-primary" href="#tab2" data-toggle="tab">
+                            <span class="glyphicon glyphicon-menu-down" aria-hidden="true"></span>
                                 <div class="hidden-xs">Top 10 Popular Repositories</div>
                         </button>
                     </div>
                     <div class="btn-group" role="group">
-                        <button type="button" id="following" class="btn btn-default" href="#tab3" data-toggle="tab">
-                            <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                        <button type="button" id="following" class="btn btn-primary" href="#tab3" data-toggle="tab">
+                            <span class="glyphicon glyphicon-menu-down" aria-hidden="true"></span>
                                 <div class="hidden-xs">Top 5 Active Repositories</div>
                         </button>
                     </div>
                     <div class="btn-group" role="group">
-                        <button type="button" id="following" class="btn btn-default" href="#tab4" data-toggle="tab">
-                            <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                        <button type="button" id="following" class="btn btn-primary" href="#tab4" data-toggle="tab">
+                            <span class="glyphicon glyphicon-menu-down" aria-hidden="true"></span>
                                 <div class="hidden-xs">New User Counts</div>
                         </button>
                     </div>
                     <div class="btn-group" role="group">
-                        <button type="button" id="following" class="btn btn-default" href="#tab5" data-toggle="tab">
-                            <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                        <button type="button" id="following" class="btn btn-primary" href="#tab5" data-toggle="tab">
+                            <span class="glyphicon glyphicon-menu-down" aria-hidden="true"></span>
                                 <div class="hidden-xs">Age Distribution</div>
                         </button>
                     </div>
