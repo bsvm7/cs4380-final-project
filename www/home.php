@@ -83,20 +83,21 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="cs4380/home.php">Photoarchiving</a>
+          <a class="navbar-brand" href="home.php">Photoarchiving</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
           </ul>
           <ul class="nav navbar-nav navbar-right">
-	          <li ng-show="{{ user_info.user_level == 1 }}"><a href="cs4380/admin.php">Admin</a></li>
+	          <li ng-show="{{ user_info.user_level == 1 }}"><a href="admin.php">Admin</a></li>
             <li><a href="cs4380/logout.php">Logout</a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
     </nav>  
 
-
+	<a href="http://40.86.85.30/cs4380/repository.php?r_id=1">Forsythe Family Repository</a>
+	
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
