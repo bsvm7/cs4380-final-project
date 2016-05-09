@@ -36,7 +36,7 @@ var app = angular.module('photoarchiving_app', [])
 			"refresh_token"	: ""
 		};
 		
-		console.log(post_body)
+		console.log(post_body);
 		
 		$http.post( auth_url , post_body ).then( function successCallback( response ) {
 						
