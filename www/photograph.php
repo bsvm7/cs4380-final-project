@@ -122,7 +122,12 @@
 			
 			<div ng-repeat="story in stories">
 				<div class="media">
-					{{ story.title }}
+					<ul>
+						<li>Title: {{story.title}}</li>
+						<li>Description: {{story.description}}</li>
+					</ul>
+					<audio ng-src="{{story.recording_url}}" controls>
+					</audio>
 				</div>
 			</div>
 			
