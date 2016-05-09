@@ -59,6 +59,7 @@ var app = angular.module('photoarchiving_app', [])
 				url		:	req_url
 			}).then( function successCallback( response ) {
 								
+				$scope.photo_info = response.data;
 				
 			}, function errorCallback( response ) {
 				
@@ -88,7 +89,7 @@ var app = angular.module('photoarchiving_app', [])
 				url		:	req_url
 			}).then( function successCallback( response ) {
 					
-				console.log(response.data);
+				$scope.stories = response.data;
 				
 			}, function errorCallback( response ) {
 				
