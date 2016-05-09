@@ -90,7 +90,7 @@
 		                        else{
 
 									//Insert into database.Just use this particular variable "$image_name" when you are inserting into database
-	    						    $insert_image_sql="INSERT INTO photograph (   , ) VALUES (   , ? )"; 
+	    						    $insert_image_sql="INSERT INTO photograph (large_url) VALUES ( ? )"; 
 
 	    						    if(!($insert_image_stmt=$db_conn->prepare($insert_image_sql))) {
 
