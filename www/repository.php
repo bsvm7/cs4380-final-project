@@ -101,11 +101,20 @@
     </nav>
 
 	<div class="container">
-		<div class="row" style="background-color: blue;">
-			<p> Hello </p>
+		<div class="row">
+			<h1>Put the title of the repository here</h1>
 		</div>	
+		
+		
+		<div class="row">
+			<h1>Put the search controls here</h1>
+		</div>
+		
+		<div class="row">
+			<h1>Put the results here</h1>
+		</div>
 	</div>
-
+	
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
