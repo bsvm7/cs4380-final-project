@@ -92,10 +92,9 @@
 		                        debug_echo ("new Image name url ".$newname."\n");	
 
 		                        //we verify if the image has been uploaded, and print error instead                                                     
-		                        //$copied = copy($_FILES['your_photo']['tmp_name'], $newname);                                                        
+		                       	$copied = copy($_FILES['your_photo']['tmp_name'], $newname);                                                        
 
-		                        $copied = copy($image, $newname);
-
+		                       
 		                        if (!$copied)                                                       
 		                        {                                                       
 		                            debug_echo ("Sorry, The Photo Upload was unsuccessfull!"."\n");                                                          
@@ -103,6 +102,8 @@
 		                        }
 		                        else{
 
+		                        	debug_echo ("file uploaded successfull!"."\n"); 
+/*
 									//Insert into database.Just use this particular variable "$image_name" when you are inserting into database
 	    						    $insert_image_sql="INSERT INTO photograph (large_url) VALUES ( ? )"; 
 
@@ -127,7 +128,7 @@
 										debug_echo ("photo has been successfully uploaded... "."\n");                                                          
 		                            	break;  
 									}
-
+*/
 		                        }
 
 		                    }                                               
