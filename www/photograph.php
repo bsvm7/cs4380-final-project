@@ -118,9 +118,18 @@
 			</div>
 			<div class="col-sm-4">
 			<h1>Story</h1>
-			 <button type="button" id="following" class="btn btn-primary">
+			<table class="table">
+			<thead>
+			</thead>
+			<tbody>
+		<tr>
+			<button type="button" id="following" class="btn btn-primary">
                       <div class="hidden-xs">Edit</div>     
              </button>
+		</tr>
+		</tbody>
+		</table>		
+			 
 			</div>
 		</div>
 	</div>
