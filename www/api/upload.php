@@ -12,7 +12,9 @@
 	$db_conn = new mysqli($db_host, $db_user, $db_pass, $db_database);
 	
 	if ($db_conn->error_code) {
-		
+			
+		debug_echo( "database connection error ..." . "\n" );
+
 		set_error_response( 400 , "I couldn't connect to the database -> " . $db_conn->connect_error);
 		die("The connection to the database failed: " . $db_conn->connect_error);
 	}
@@ -163,5 +165,5 @@
 			echo $str;
 		}
 	}
-	
+
 ?>
