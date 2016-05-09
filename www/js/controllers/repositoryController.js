@@ -44,7 +44,7 @@ var app = angular.module('photoarchiving_app', [])
 			
 			
 			var req_url = 	base_url + "api/repository.php?"
-							+ "req_type=repo_infop&"
+							+ "req_type=repo_info&"
 							+ "rid=" + query_params["r_id"] + "&"
 							+ "auth_token=" + auth_info["access_token"];
 							
