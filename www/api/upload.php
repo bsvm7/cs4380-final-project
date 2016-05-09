@@ -52,13 +52,13 @@
 					debug_echo ('Your image is '.$image);
 
 					$image_check = getimagesize($image);
-					
+					/*
 					if($image_check==false){
 						debug_echo ('Not a valid Image...');
 				  	 	break;	
 					}
 					else{
-
+	*/
 						define ("MAX_SIZE","100"); 
 
 			            $file_name= stripslashes($_FILES['your_photo']['name']);
@@ -126,7 +126,7 @@
 		                      	break;                           
 		                    }   
 		                }
-		            }
+		           // }
 		            $db_conn->close(); 
 					debug_echo ("database has been closed successfully.....");
 		        }
