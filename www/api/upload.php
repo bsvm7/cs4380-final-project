@@ -47,6 +47,8 @@
 
 				else{
 					
+					debug_echo ('Your image is '.$_FILES['your_photo']."\n");
+					
 					$image= $_FILES['your_photo']['name'];
 
 					debug_echo ('Your image is '.$image."\n");
