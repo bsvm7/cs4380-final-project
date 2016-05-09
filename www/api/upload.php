@@ -51,7 +51,7 @@
 
 					debug_echo ('Your original image is '.$image."\n");
 
-					$image_check = getimagesize($image);
+					$image_check = filesize($image);
 
 					debug_echo ("original image size is ".$$_FILES['your_photo']['tmp_name']."\n");
 					
