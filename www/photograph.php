@@ -103,12 +103,13 @@
 	<div class="container">
 		<div class="row">
 			<h1>Photo</h1>
-			
+			<img src="/content/images/arch-main-1.jpeg">
 			<!-- Image links -->
 			
 		</div>	
 
-		<div class="row">
+		<div class="row" style="align:right">
+			<h1>Story<h1>
 			 <button type="button" id="following" class="btn btn-primary">
                            <!-- edit story-->
              </button>
