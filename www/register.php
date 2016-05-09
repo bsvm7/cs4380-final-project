@@ -14,7 +14,12 @@
 		
 		<script type="text/javascript" src="js/controllers/registerController.js"></script>
 
+<<<<<<< HEAD
 		 <!-- CUSTOM STYLES -->
+=======
+		 <!-- CUSTOM STYLES
+    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+>>>>>>> origin/master
     <style type="text/css">
     
     body, html {
@@ -65,9 +70,14 @@
     </style>
 	</head>
 	
-	<body ng-app="linkedinApp">
+	<body ng-app="photoarchiving_app">
 		
+<<<<<<< HEAD
 		 <!-- NAVBAR -->
+=======
+		 <!-- NAVBAR
+    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+>>>>>>> origin/master
     <nav class="navbar navbar-inverse navbar-static-top" style="margin-bottom:0px">
       <div class="container">
         <div class="navbar-header">
@@ -89,7 +99,12 @@
       </div>
     </nav>
 
+<<<<<<< HEAD
     <!-- REGISTER -->
+=======
+    <!-- REGISTER
+    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+>>>>>>> origin/master
     <div class="container-fluid" style="background-image: url('http://40.86.85.30/cs4380/image/revised_collage_thing_dark.jpg');
     background-size: cover;padding-top:20px;" ng-controller="RegistrationController as regCtrl">
       <div class="row">
