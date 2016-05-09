@@ -374,7 +374,7 @@
 	
 	function debug_echo( $str ) {
 		
-		$echo_debug = false;
+		$echo_debug = true;
 		
 		if ($echo_debug) {
 			echo $str;
