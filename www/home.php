@@ -90,7 +90,7 @@
           </ul>
           <ul class="nav navbar-nav navbar-right">
 	          <li ng-show="{{ user_info.user_level == 1 }}"><a href="admin.php">Admin</a></li>
-            <li><a href="logout.php">Logout</a></li>
+            <li><a href="cs4380/logout.php">Logout</a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
