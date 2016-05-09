@@ -139,9 +139,7 @@
 			</thead>
 			<tbody>
 		<tr>
-			<button type="button" id="following" class="btn btn-primary">
-                      <div class="hidden-xs">Edit</div>     
-             </button>
+			
 		</tr>
 		</tbody>
 		</table>		
