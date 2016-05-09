@@ -115,11 +115,14 @@
 					<select name="eraSelect" id="eraSelect" ng-model="eraData.selectedEra">
 						<option ng-repeat="era in eraData.availableEras" value="{{era.era_id}}">{{era.name}}</option>
 					</select>
+					<button type="submit" class="btn btn-primary btn-block btn-sm create-button" ng-click="updatePhotosEra()">Update Photos</button>
+				</form>
+				<form name="myForm">
 					<label for="relativeSelect"> Relative Select: </label>
 					<select name="relativeSelect" id="relativeSelect" ng-model="relationsData.selectedRelation">
 						<option ng-repeat="relation in relationsData.availableRelations" value="{{relation.related_to}}"> {{relation.relation}}: {{relation.related_to_fname}}</option>
 					</select>
-					<button type="submit" class="btn btn-primary btn-block btn-sm create-button" ng-click="updatePhotos()">Update Photos</button>
+					<button type="submit" class="btn btn-primary btn-block btn-sm create-button" ng-click="updatePhotosRelation()">Update Photos</button>
 				</form>
 			</div>
 		</div>
@@ -140,7 +143,6 @@
 						<li>Date Taken: {{photo.date_taken}}</li>
 						<li>Description: {{photo.description}}</li>
 					</ul>
-					<small>Just some basic info about this employee</small>
 				</div>
 			</div>
 		</div>
