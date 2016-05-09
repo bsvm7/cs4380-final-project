@@ -108,16 +108,11 @@
 			<thead>
 			</thead>
 			<tbody>
-				<tr>
-			<td>
-			<b>Photo</b>
-			</td>
-		</tr>
 		<tr>
 			<td><img src="http://40.86.85.30/cs4380/content/images/arch-main-22.jpeg" /></td>
 		</tr>
-	</tbody>
-</table>
+		</tbody>
+		</table>
 			
 			
 			</div>
