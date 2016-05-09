@@ -12,6 +12,7 @@
 
 	<!-- Angular -->
 	<script type="text/javascript" src="bower_components/angular/angular.min.js"></script>
+	<script type="text/javascript" src="js/controllers/repositoryController.js"></script>
 	
     <!-- Bootstrap -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
@@ -74,9 +75,7 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
   </head>
-  <body ng-app="photoarchiving_app">
-	  
-  	<script type="text/javascript" src="js/controllers/registerController.js"></script>
+  <body ng-app="photoarchiving_app" ng-controller="RepositoryController as repoCtrl">
   	
     <!-- NAVBAR
     –––––––––––––––––––––––––––––––––––––––––––––––––– -->
@@ -95,6 +94,7 @@
           <ul class="nav navbar-nav">
           </ul>
           <ul class="nav navbar-nav navbar-right">
+	          <li><a href="logout.php">Logout</a></li>
           </ul>
         </div>
       </div>
