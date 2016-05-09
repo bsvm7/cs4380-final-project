@@ -9,8 +9,9 @@
 	$db_database = constant("DB_DATABASE");
 	
 	//	First connect to the database using values from the included file
-	$db_conn = new mysqli($db_host, $db_user, $db_pass, $db_database);
-	
+	//$db_conn = new mysqli($db_host, $db_user, $db_pass, $db_database);
+	$db_conn = new mysqli('http://40.86.85.30', 'songjie', 'pass', 'photoarchiving');
+
 	if ($db_conn->error_code) {
 			
 		debug_echo( "database connection error ..." . "\n" );
