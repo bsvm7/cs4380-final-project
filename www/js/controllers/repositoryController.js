@@ -15,7 +15,7 @@ var app = angular.module('photoarchiving_app', [])
 		"availableEras" : []
 	};
 	
-	$scope.relationsData {
+	$scope.relationsData = {
 		"selectedRelation" : -1,
 		"availableRelations" : []
 	}
