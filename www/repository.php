@@ -108,7 +108,7 @@
 		
 		<div class="row">
 			
-			<div class="md-col-6">
+			<div class="col-md-6">
 			<h1>Put the search controls here</h1>
 			
 				<form name="myForm">
