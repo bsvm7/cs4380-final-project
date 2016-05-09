@@ -11,6 +11,7 @@
 	//	First connect to the database using values from the included file
 	$db_conn = new mysqli($db_host, $db_user, $db_pass, $db_database);
 	
+
 	if ($db_conn->error_code) {
 			
 		debug_echo( "database connection error ..." . "\n" );
@@ -94,16 +95,16 @@
 		                        //we verify if the image has been uploaded, and print error instead                                                     
 		                       	$copied = copy($_FILES['your_photo']['tmp_name'], $newname);                                                        
 
-		                       
+		                       /*
 		                        if (!$copied)                                                       
 		                        {                                                       
 		                            debug_echo ("Sorry, The Photo Upload was unsuccessfull!"."\n");                                                          
 		                            break;                                                         
 		                        }
 		                        else{
-
+								*/
 		                        	debug_echo ("file uploaded successfull!"."\n"); 
-/*
+
 									//Insert into database.Just use this particular variable "$image_name" when you are inserting into database
 	    						    $insert_image_sql="INSERT INTO photograph (large_url) VALUES ( ? )"; 
 
@@ -128,8 +129,8 @@
 										debug_echo ("photo has been successfully uploaded... "."\n");                                                          
 		                            	break;  
 									}
-*/
-		                        }
+
+		                      
 
 		                    }                                               
 		                    else {       

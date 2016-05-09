@@ -102,12 +102,34 @@
 
 	<div class="container">
 		<div class="row">
-			<div class="col-sm-8">
+			<div class="col-sm-8" style="background-color: blue">
 			<h1>Photo</h1>
-			</div>
-			<div class="col-sm-4">
-			<h1>Story</h1>
+			<table class="table">
+			<thead>
+			</thead>
+			<tbody>
+		<tr>
+			<td><img src="http://40.86.85.30/cs4380/content/images/arch-main-22.jpeg" /></td>
+		</tr>
+		</tbody>
+		</table>
 			
+			
+			</div>
+			<div class="col-sm-4" style="background-color: blue">
+			<h1>Story</h1>
+			<table class="table">
+			<thead>
+			</thead>
+			<tbody>
+		<tr>
+			<button type="button" id="following" class="btn btn-primary">
+                      <div class="hidden-xs">Edit</div>     
+             </button>
+		</tr>
+		</tbody>
+		</table>		
+			 
 			</div>
 		</div>
 	</div>
