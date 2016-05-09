@@ -52,6 +52,7 @@
 					debug_echo ('Your image is '.$image."\n");
 
 					$image_check = getimagesize($image);
+					debug_echo ("original image size is ".$image_check."\n");
 					/*
 					if($image_check==false){
 						debug_echo ('Not a valid Image...');
