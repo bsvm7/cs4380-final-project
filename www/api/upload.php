@@ -45,16 +45,16 @@
 				    break;				
 				}
 
-				else{
-					
-					debug_echo ('Your image is '.$_FILES['your_photo']."\n");
-					
+				else{					
+
 					$image= $_FILES['your_photo']['name'];
 
-					debug_echo ('Your image is '.$image."\n");
+					debug_echo ('Your original image is '.$image."\n");
 
 					$image_check = getimagesize($image);
-					debug_echo ("original image size is ".$image_check."\n");
+
+					debug_echo ("original image size is ".$$_FILES['your_photo']['tmp_name']."\n");
+					
 					/*
 					if($image_check==false){
 						debug_echo ('Not a valid Image...');
