@@ -48,7 +48,7 @@ var app = angular.module('photoarchiving_app', [])
 				//	Gather the response information
 				var res_ps_id 			= res_data.ps_id;
 				var res_username 		= res_data.username;
-				var res_access_token 	= res_data.auth_token;
+				var res_access_token 	= res_data.access_token;
 				var res_expires_in 		= res_data.expires_in;
 				var res_refresh_token 	= res_data.refresh_token;
 				var res_user_level		= res_data.user_level;

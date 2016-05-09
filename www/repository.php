@@ -126,7 +126,7 @@
 			<div class="media">
 				<div class="media-left">
 					<a href="#">
-						<img class="media-object" src="http://i.imgur.com/JDatwND.png?2">
+						<img class="media-object" ng-src="{{photo.thumb_url}}">
 					</a>
 				</div>
 				<div class="media-body">
