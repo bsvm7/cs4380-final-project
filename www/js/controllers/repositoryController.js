@@ -274,6 +274,51 @@ var app = angular.module('photoarchiving_app', [])
 	
 	$scope.updatePhotosEra = function() {
 		
+		if ($scope.relationsData.selectedRelation != -1 ) {
+			
+			if ($scope.query_params_set && $scope.user_auth_info_set) {
+			
+				var auth_info = $scope.user_auth_info;
+				var query_params = $scope.query_params;
+				
+				
+				var req_url = 	base_url + "api/photo.php?"
+								+ "ps_id=" + auth_info["ps_id"] + "&"
+								+ "request_type=repo-photos&"
+								+ "range_type=single_tag&"
+								+ "relationship_to=" + $scope.relationsData.selectedRelation + "&"
+								+ "r_id=" + query_params["r_id"] + "&"
+								+ "auth_token=" + auth_info["access_token"];
+								
+				console.log(req_url);
+								
+				
+				$http({
+					method	:	'GET',
+					url		:	req_url
+				}).then( function successCallback( response ) {
+					
+					$scope.photographs = response.data;
+					
+					
+				}, function errorCallback( response ) {
+					
+					var error_string = "There was an error processing the request";
+					console.log( error_string );
+				});
+			}
+			
+			
+			
+			
+		}
+		
+		
+		
+		
+	}
+	
+	$scope.updatePhotosRelation = function() {
 		if ($scope.eraData.selectedEra != -1 ) {
 			
 			if ($scope.query_params_set && $scope.user_auth_info_set) {
@@ -312,9 +357,7 @@ var app = angular.module('photoarchiving_app', [])
 			
 			
 		}
-		
-		
-		
+
 		
 	}
 /*
