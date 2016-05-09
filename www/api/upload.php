@@ -41,7 +41,7 @@
 				//$target_file = $target_dir.basename($_FILES['your_photo']['name']);
 */
 				if(!isset($_FILES['your_photo'])) {
-				    debug_echo ('Please select an Image');
+				    debug_echo ('Please select an Image'."\n");
 				    break;				
 				}
 
@@ -49,7 +49,7 @@
 					
 					$image= $_FILES['your_photo']['name'];
 
-					debug_echo ('Your image is '.$image);
+					debug_echo ('Your image is '.$image."\n");
 
 					$image_check = getimagesize($image);
 					/*
@@ -67,25 +67,26 @@
 
 			            if (($extension != "jpg") && ($extension != "jpeg") && ($extension != "png") && ($extension != "gif")) {           
 		                    
-		                    debug_echo ("Sorry! Unknown extension. Please JPG,JPEG,PNG and GIF only ");
+		                    debug_echo ("Sorry! Unknown extension. Please JPG,JPEG,PNG and GIF only "."\n");
 		                    break;
 		                }
 
 		                else {
 
 		                	debug_echo ("Image extension is good at ".$extension);
-		                	$size=filesize($_FILES['your_photo']['tmp_name']);      
-							debug_echo ("Image size is ".$size);
+		                	$size=filesize($_FILES['your_photo']['tmp_name']);
+		                	 debug_echo ("temp image is is ".$_FILES['your_photo']['tmp_name']."\n");     
+							debug_echo ("Image size is ".$size."\n");
 
 		                	if ($size < MAX_SIZE*1024) {
 
 		                        //we will give an unique name, for example the time in unix time format
 		                        $image_name=time().'.'.$extension;
-		                        debug_echo ("temp Image name is ".$image_name);	
+		                        debug_echo ("temp Image name is ".$image_name."\n");	
 
 		                        //the new name will be containing the full path where will be stored (images folder)                                                        
 		                        $newname="http://40.86.85.30/cs4380/content/images/".$image_name;                                                     
-		                        debug_echo ("new Image name url ".$newname);	
+		                        debug_echo ("new Image name url ".$newname."\n");	
 
 		                        //we verify if the image has been uploaded, and print error instead                                                     
 		                        //$copied = copy($_FILES['your_photo']['tmp_name'], $newname);                                                        
@@ -94,7 +95,7 @@
 
 		                        if (!$copied)                                                       
 		                        {                                                       
-		                            debug_echo ("Sorry, The Photo Upload was unsuccessfull!");                                                          
+		                            debug_echo ("Sorry, The Photo Upload was unsuccessfull!"."\n");                                                          
 		                            break;                                                         
 		                        }
 		                        else{
@@ -104,23 +105,23 @@
 
 	    						    if(!($insert_image_stmt=$db_conn->prepare($insert_image_sql))) {
 
-	    						    	debug_echo ("Sorry, insert image stmt prepare failed ... ");                                                          
+	    						    	debug_echo ("Sorry, insert image stmt prepare failed ... "."\n");                                                          
 		                            	break;  
 	    						    }
 
 	    						    if(!($insert_image_stmt->bind_param("s", $newname))) {
-	    						    	debug_echo ("Sorry, insert image stmt bind param failed ...!");                                                          
+	    						    	debug_echo ("Sorry, insert image stmt bind param failed ...!"."\n");                                                          
 		                           		 break;  
 
 	    						    }
 
 	    						    if(!($insert_image_stmt->execute()) ) {
-	    						    	debug_echo ("Sorry, insert image stmt execute failed ...!");                                                          
+	    						    	debug_echo ("Sorry, insert image stmt execute failed ...!"."\n");                                                          
 		                            	break;  
 									
 									}
 									else{
-										debug_echo ("photo has been successfully uploaded... ");                                                          
+										debug_echo ("photo has been successfully uploaded... "."\n");                                                          
 		                            	break;  
 									}
 
@@ -128,13 +129,13 @@
 
 		                    }                                               
 		                    else {       
-		                        debug_echo ("You Have Exceeded The Photo Size Limit");          
+		                        debug_echo ("You Have Exceeded The Photo Size Limit"."\n");          
 		                      	break;                           
 		                    }   
 		                }
 		           // }
 		            $db_conn->close(); 
-					debug_echo ("database has been closed successfully.....");
+					debug_echo ("database has been closed successfully....."."\n");
 		        }
 		    /*
 		    }
