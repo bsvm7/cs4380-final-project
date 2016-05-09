@@ -15,7 +15,7 @@
 		<script type="text/javascript" src="js/controllers/registerController.js"></script>
 
 		 <!-- CUSTOM STYLES
-    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    â€“â€“â€“â€“â€“â€“â€“â€“â€“â€“â€“â€“â€“â€“â€“â€“â€“â€“â€“â€“â€“â€“â€“â€“â€“â€“â€“â€“â€“â€“â€“â€“â€“â€“â€“â€“â€“â€“â€“â€“â€“â€“â€“â€“â€“â€“â€“â€“â€“â€“ -->
     <style type="text/css">
     
     body, html {
@@ -66,10 +66,10 @@
     </style>
 	</head>
 	
-	<body ng-app="linkedinApp">
+	<body ng-app="photoarchiving_app">
 		
 		 <!-- NAVBAR
-    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    â€“â€“â€“â€“â€“â€“â€“â€“â€“â€“â€“â€“â€“â€“â€“â€“â€“â€“â€“â€“â€“â€“â€“â€“â€“â€“â€“â€“â€“â€“â€“â€“â€“â€“â€“â€“â€“â€“â€“â€“â€“â€“â€“â€“â€“â€“â€“â€“â€“â€“ -->
     <nav class="navbar navbar-inverse navbar-static-top" style="margin-bottom:0px">
       <div class="container">
         <div class="navbar-header">
@@ -92,7 +92,7 @@
     </nav>
 
     <!-- REGISTER
-    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    â€“â€“â€“â€“â€“â€“â€“â€“â€“â€“â€“â€“â€“â€“â€“â€“â€“â€“â€“â€“â€“â€“â€“â€“â€“â€“â€“â€“â€“â€“â€“â€“â€“â€“â€“â€“â€“â€“â€“â€“â€“â€“â€“â€“â€“â€“â€“â€“â€“â€“ -->
     <div class="container-fluid" style="background-image: url('http://40.86.85.30/cs4380/image/revised_collage_thing_dark.jpg');
     background-size: cover;padding-top:20px;" ng-controller="RegistrationController as regCtrl">
       <div class="row">
