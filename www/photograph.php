@@ -75,8 +75,8 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
   </head>
-  <body ng-app="photoarchiving_app" ng-controller="RepositoryController as repoCtrl">
-  	<script type="text/javascript" src="js/controllers/repositoryController.js"></script>
+  <body ng-app="photoarchiving_app" ng-controller="PhotographController as photoCtrl">
+  	<script type="text/javascript" src="js/controllers/photoController.js"></script>
     <!-- NAVBAR
     –––––––––––––––––––––––––––––––––––––––––––––––––– -->
     <nav class="navbar navbar-inverse navbar-static-top">
@@ -109,7 +109,7 @@
 			</thead>
 			<tbody>
 		<tr>
-			<td><img style="max-width:100%; max-height:100%" src="http://40.86.85.30/cs4380/content/images/arch-main-22.jpeg" /></td>
+			<td><img style="max-width:100%; max-height:100%" ng-src="{{ photo_info.large_url }}" /></td>
 		</tr>
 		</tbody>
 		</table>
@@ -118,6 +118,17 @@
 			</div>
 			<div class="col-sm-4">
 			<h1>Story</h1>
+			
+			
+			<div ng-repeat="story in stories">
+				<div class="media">
+					{{ story.title }}
+				</div>
+			
+			
+			
+			
+			
 			<table class="table">
 			<thead>
 			</thead>
