@@ -82,11 +82,15 @@
 		                        //we will give an unique name, for example the time in unix time format
 		                        $image_name=time().'.'.$extension;
 		                        debug_echo ("temp Image name is ".$image_name);	
+
 		                        //the new name will be containing the full path where will be stored (images folder)                                                        
 		                        $newname="http://40.86.85.30/cs4380/content/images/".$image_name;                                                     
 		                        debug_echo ("new Image name url ".$newname);	
+
 		                        //we verify if the image has been uploaded, and print error instead                                                     
-		                        $copied = copy($_FILES['your_photo']['tmp_name'], $newname);                                                        
+		                        //$copied = copy($_FILES['your_photo']['tmp_name'], $newname);                                                        
+
+		                        $copied = copy($image, $newname);
 
 		                        if (!$copied)                                                       
 		                        {                                                       
