@@ -115,6 +115,8 @@
 						<option ng-repeat="era in eraData.availableEras" value="{{era.era_id}}">{{era.name}}</option>
 					</select>
 				</form>
+				
+				<h1>{{ eraData.selectedEra }}</h1>
 		</div>
 		
 		<div class="row">
