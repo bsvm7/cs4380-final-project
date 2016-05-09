@@ -12,32 +12,34 @@
 	$db_conn = new mysqli($db_host, $db_user, $db_pass, $db_database);
 	
 	if ($db_conn->error_code) {
-		
+			
+		debug_echo( "database connection error ..." . "\n" );
 		set_error_response( 400 , "I couldn't connect to the database -> " . $db_conn->connect_error);
 		die("The connection to the database failed: " . $db_conn->connect_error);
 	}
 		
 	debug_echo( "database connected" . "\n" );
-
 	
+
+	/*
 	$req_method = $_SERVER['REQUEST_METHOD'];		
-		
+
 	switch ($req_method) {
 		
 		case 'POST':
 
 			//	Get the raw post data
-			$json_raw = file_get_contents("php://input");
+			//$json_raw = file_get_contents("php://input");
 			
- 			echo $json_raw;
+ 			//echo $json_raw;
 			
-			if ($decoded_json = json_decode($json_raw, true)) {	
+			//if ($decoded_json = json_decode($json_raw, true)) {	
 
 				//$fileToUpload = $decoded_json['image'];
 
 				//$target_dir= "http://40.86.85.30/cs4380/content/images/";
 				//$target_file = $target_dir.basename($_FILES['your_photo']['name']);
-
+*/
 				if(!isset($_FILES['your_photo'])) {
 				    debug_echo ('Please select an Image');
 				    break;				
@@ -123,26 +125,28 @@
 		                    }   
 		                }
 		            }
+		            $db_conn->close(); 
+					debug_echo ("database has been closed successfully.....");
 		        }
+		    /*
 		    }
 			else{
 				set_error_response( 201, "SQL Error -> " . $hash_retrieve_stmt->error);	
 				debug_echo ("input data can not be decoded.....");
 				break;
 			}				
-
-			$db_conn->close(); 
-			debug_echo ("database has been closed successfully.....");
+*/
+			
 	      
-
+/*
 		break;
 
 		default:
 
 		break;
 
-
-
+	}	
+*/
 
 
     function getExtension($str) {   
@@ -154,5 +158,14 @@
         $ext = substr($str,$i+1,$l);
         return $ext; 
     }
+
+	function debug_echo( $str ) {
+		
+		$echo_debug = true;
+		
+		if ($echo_debug) {
+			echo $str;
+		}
+	}
 
 ?>
