@@ -102,7 +102,7 @@
 
 	<div class="container">
 		<div class="row">
-			<div class="col-sm-8" style="background-color: blue">
+			<div class="col-sm-8">
 			<h1>Photo</h1>
 			<table class="table">
 			<thead>
@@ -116,7 +116,7 @@
 			
 			
 			</div>
-			<div class="col-sm-4" style="background-color: blue">
+			<div class="col-sm-4">
 			<h1>Story</h1>
 			<table class="table">
 			<thead>
