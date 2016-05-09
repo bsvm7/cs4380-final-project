@@ -49,6 +49,8 @@
 					
 					$image= $_FILES['your_photo']['name'];
 
+					debug_echo ('Your image is '.$image);
+
 					$image_check = getimagesize($_FILES['your_photo']['name']);
 					
 					if($image_check==false){
