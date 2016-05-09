@@ -104,6 +104,22 @@
 		<div class="row">
 			<div class="col-sm-8">
 			<h1>Photo</h1>
+			<table class="table">
+			<thead>
+			</thead>
+			<tbody>
+				<tr>
+			<td>
+			<b>Photo</b>
+			</td>
+		</tr>
+		<tr>
+			<td><img src="http://40.86.85.30/cs4380/content/images/arch-main-22.jpeg" /></td>
+		</tr>
+	</tbody>
+</table>
+			
+			
 			</div>
 			<div class="col-sm-4">
 			<h1>Story</h1>
