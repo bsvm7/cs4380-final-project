@@ -7,7 +7,7 @@ var app = angular.module('photoarchiving_app', [])
 	$scope.repo_info = {
 		"title"		: "untitled",
 		"description" : "description",
-		""
+		"date_created" : ""
 	};
 	
 	$scope.query_params_set = false;
@@ -16,11 +16,11 @@ var app = angular.module('photoarchiving_app', [])
 	$scope.user_auth_info = {};
 	
 	$scope.repository_id = -1;
-	
+	/*
 	load_query_params();
 	load_user_authentication_information();
 	get_repo_information();
-	
+	*/
 	/*
 		Initializaiton Functions
 	*/
