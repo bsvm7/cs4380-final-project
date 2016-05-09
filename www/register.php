@@ -79,7 +79,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">LinkedIn</a>
+          <a class="navbar-brand" href="#">Photoarchiving</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
@@ -93,11 +93,11 @@
 
     <!-- REGISTER
     –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-    <div class="container-fluid" style="background-image: url('http://www.hdwallpapera.com/wp-content/uploads/wallpaper/dmhdwallpapers/wallpapers-005/Beautiful%20City%20Background%20Hd.jpg');
+    <div class="container-fluid" style="background-image: url('http://40.86.85.30/cs4380/image/revised_collage_thing_dark.jpg');
     background-size: cover;padding-top:20px;" ng-controller="RegistrationController as regCtrl">
       <div class="row">
         <div class="col-md-6 text-center col-md-offset-3 box">
-          <h1 class="company-name">LinkedIn</h1>
+          <h1 class="company-name">Photoarchiving</h1>
           <h2 class="lead location">Register</h2>
           
           <div class="col-md-10 col-md-offset-1 text-left">
