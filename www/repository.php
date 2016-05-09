@@ -112,7 +112,7 @@
 				<form name="myForm">
 					<label for="eraSelect"> Era Select: </label>
 					<select name="eraSelect" id="eraSelect" ng-model="eraData.selectedEra">
-						<option ng-repeat="era in data.availableEras" value="{{era.era_id}}">{{option.name}}</option>
+						<option ng-repeat="era in eraData.availableEras" value="{{era.era_id}}">{{option.name}}</option>
 					</select>
 				</form>
 		</div>
