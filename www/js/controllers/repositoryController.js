@@ -15,6 +15,9 @@ var app = angular.module('photoarchiving_app', [])
 		"availableEras" : []
 	};
 	
+	$scope.photographs = [];
+	
+	
 	$scope.query_params_set = false;
 	$scope.query_params = {};
 	$scope.user_auth_info_set = false;
@@ -26,6 +29,7 @@ var app = angular.module('photoarchiving_app', [])
 	load_user_authentication_information();
 	get_repo_information();
 	get_eras();
+	get_photos_initial();
 	
 	/*
 		Initializaiton Functions
@@ -110,6 +114,44 @@ var app = angular.module('photoarchiving_app', [])
 		}
 
 	}
+	function get_photos_initial() {
+		
+		if ($scope.query_params_set && $scope.user_auth_info_set) {
+			
+			var auth_info = $scope.user_auth_info;
+			var query_params = $scope.query_params;
+			
+			
+			var req_url = 	base_url + "api/photo.php?"
+							+ "ps_id=" + auth_info["ps_id"] + "&"
+							+ "r_id=" + query_params["r_id"] + "&"
+							+ "request_type=repo_photos&"
+							+ "range_type=all"
+							+ "auth_token=" + auth_info["access_token"];
+							
+			console.log(req_url);
+							
+			
+			$http({
+				method	:	'GET',
+				url		:	req_url
+			}).then( function successCallback( response ) {
+				
+				var res_data = response.data;
+				
+				$scope.eraData.availableEras = res_data;
+				
+				
+			}, function errorCallback( response ) {
+				
+				var error_string = "There was an error processing the request";
+				console.log( error_string );
+			});
+		}
+		
+	}
+	
+	
 	function get_base_url() {
 		
 		if (use_main_url) {

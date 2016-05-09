@@ -109,17 +109,17 @@
 		<div class="row">
 			
 			<div class="col-md-6">
-			<h1>Put the search controls here</h1>
-			
+			<h1>Search Modifiers</h1>
 				<form name="myForm">
 					<label for="eraSelect"> Era Select: </label>
 					<select name="eraSelect" id="eraSelect" ng-model="eraData.selectedEra">
 						<option ng-repeat="era in eraData.availableEras" value="{{era.era_id}}">{{era.name}}</option>
 					</select>
-					<button type="submit" class="btn btn-primary btn-block btn-lg create-button" ng-click="updatePhotos()">Update Photos</button>
+					<button type="submit" class="btn btn-primary btn-block btn-sm create-button" ng-click="updatePhotos()">Update Photos</button>
 				</form>
 				
 				<h1>{{ eraData.selectedEra }}</h1>
+				
 			</div>
 		</div>
 		
