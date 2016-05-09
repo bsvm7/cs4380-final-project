@@ -109,7 +109,7 @@
 			</thead>
 			<tbody>
 		<tr>
-			<td><img src="http://40.86.85.30/cs4380/content/images/arch-main-22.jpeg" /></td>
+			<td><img style="max-width:100%; max-height:100%" src="http://40.86.85.30/cs4380/content/images/arch-main-22.jpeg" /></td>
 		</tr>
 		</tbody>
 		</table>
