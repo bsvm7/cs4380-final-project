@@ -126,7 +126,7 @@ var app = angular.module('photoarchiving_app', [])
 							+ "ps_id=" + auth_info["ps_id"] + "&"
 							+ "r_id=" + query_params["r_id"] + "&"
 							+ "request_type=repo_photos&"
-							+ "range_type=all"
+							+ "range_type=all&"
 							+ "auth_token=" + auth_info["access_token"];
 							
 			console.log(req_url);
