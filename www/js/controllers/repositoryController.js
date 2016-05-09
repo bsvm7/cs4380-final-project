@@ -333,7 +333,8 @@ var app = angular.module('photoarchiving_app', [])
 								+ "ps_id=" + auth_info["ps_id"] + "&"
 								+ "request_type=repo-photos&"
 								+ "range_type=single_tag&"
-								+ "relationship_to=" + $scope.relationsData.selectedRelation + "&"
+								+ "relationship_to=" + auth_info["ps_id"] + "&"
+								+ "tag_id=" + $scope.relationsData.selectedRelation + "&"
 								+ "r_id=" + query_params["r_id"] + "&"
 								+ "auth_token=" + auth_info["access_token"];
 								
