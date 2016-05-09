@@ -101,7 +101,7 @@
     </nav>
 
 	
-	<div class="image-list-container">
+	<div class="row" style="background-color: blue;">
 		
 	</div>
 	
