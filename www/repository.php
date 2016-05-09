@@ -107,6 +107,8 @@
 		
 		
 		<div class="row">
+			
+			<div class="md-col-6">
 			<h1>Put the search controls here</h1>
 			
 				<form name="myForm">
@@ -118,6 +120,7 @@
 				</form>
 				
 				<h1>{{ eraData.selectedEra }}</h1>
+			</div>
 		</div>
 		
 		<div class="row">
