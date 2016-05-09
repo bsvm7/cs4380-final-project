@@ -319,7 +319,7 @@ var app = angular.module('photoarchiving_app', [])
 	}
 	
 	$scope.updatePhotosRelation = function() {
-		if ($scope.eraData.selectedEra != -1 ) {
+		if ($scope.relationsData.selectedEra != -1 ) {
 			
 			if ($scope.query_params_set && $scope.user_auth_info_set) {
 			
