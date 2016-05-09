@@ -12,7 +12,7 @@
 
 	<!-- Angular -->
 	<script type="text/javascript" src="bower_components/angular/angular.min.js"></script>
-	<script type="text/javascript" src="js/controllers/repositoryController.js"></script>
+	
 	
     <!-- Bootstrap -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
@@ -76,7 +76,7 @@
     <![endif]-->
   </head>
   <body ng-app="photoarchiving_app" ng-controller="RepositoryController as repoCtrl">
-  	
+  	<script type="text/javascript" src="js/controllers/repositoryController.js"></script>
     <!-- NAVBAR
     –––––––––––––––––––––––––––––––––––––––––––––––––– -->
     <nav class="navbar navbar-inverse navbar-static-top">
