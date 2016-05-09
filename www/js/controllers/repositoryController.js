@@ -136,11 +136,8 @@ var app = angular.module('photoarchiving_app', [])
 				method	:	'GET',
 				url		:	req_url
 			}).then( function successCallback( response ) {
-				
-				var res_data = response.data;
-				
-				$scope.eraData.availableEras = res_data;
-				
+								
+				$scope.photographs = response.data;
 				
 			}, function errorCallback( response ) {
 				
@@ -231,7 +228,30 @@ var app = angular.module('photoarchiving_app', [])
 		return params;
 		
 	}
-	
+/*
+	function add_urls_to_photographs( photos ) {
+		
+		var i = 0;
+		
+		
+		for( i = 0; i < photos.length; i++) {
+			
+			var photograph = photos[i];
+			
+			var photo_id = photograph["p_id"];
+			
+			
+			var photo_url = base_url + "photograph.php?p_id" + photo_id;
+			
+			photograph["url"] = photo_url;
+			
+		}
+		
+		
+		return photos;
+		
+	}
+*/
 	function get_session_information() {
 		
 		var ret_dict;

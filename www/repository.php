@@ -117,14 +117,28 @@
 					</select>
 					<button type="submit" class="btn btn-primary btn-block btn-sm create-button" ng-click="updatePhotos()">Update Photos</button>
 				</form>
-				
-				<h1>{{ eraData.selectedEra }}</h1>
-				
 			</div>
 		</div>
 		
 		<div class="row">
-			<h1>Put the results here</h1>
+			<h1>Results</h1>
+			<div ng-repeat="photo in photographs">
+			<div class="media">
+				<div class="media-left">
+					<a href="#">
+						<img class="media-object" src="http://i.imgur.com/JDatwND.png?2">
+					</a>
+				</div>
+				<div class="media-body">
+					<h4 class="media-heading"> {{ photo.title }} </h4>
+					<a ng-href="http://40.86.85.30/cs4380/photograph.php?p_id={{photo.p_id}}">Link</a>
+					<ul>
+						<li>Date Taken: {{photo.date_taken}}</li>
+						<li>Description: {{photo.description}}</li>
+					</ul>
+					<small>Just some basic info about this employee</small>
+				</div>
+			</div>
 		</div>
 	</div>
 	
