@@ -97,7 +97,8 @@
 
     <!-- REGISTER
     –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-    <div class="container" ng-controller="LoginController as loginctrl">
+    <div class="container" style="background-image: url('http://40.86.85.30/cs4380/image/revised_collage_thing_dark.jpg');
+    background-size: cover;padding-top:20px;" ng-controller="LoginController as loginctrl">
       <div class="row">
         <div class="col-md-6 text-center col-md-offset-3 box">
           <h1 class="company-name">Photoarchiving</h1>
