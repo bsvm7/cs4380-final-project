@@ -283,6 +283,7 @@ var app = angular.module('photoarchiving_app', [])
 				
 				
 				var req_url = 	base_url + "api/photo.php?"
+								+ "ps_id=" + auth_info["ps_id"] + "&"
 								+ "request_type=repo-photos&"
 								+ "range_type=era&"
 								+ "era_id=" + $scope.eraData.selectedEra + "&"
