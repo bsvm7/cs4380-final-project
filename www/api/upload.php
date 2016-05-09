@@ -51,7 +51,7 @@
 
 					debug_echo ('Your image is '.$image);
 
-					$image_check = getimagesize($_FILES['your_photo']['name']);
+					$image_check = getimagesize($image);
 					
 					if($image_check==false){
 						debug_echo ('Not a valid Image...');
