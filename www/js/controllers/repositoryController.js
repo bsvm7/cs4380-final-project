@@ -25,7 +25,8 @@ var app = angular.module('photoarchiving_app', [])
 	load_query_params();
 	load_user_authentication_information();
 	get_repo_information();
-
+	get_eras();
+	
 	/*
 		Initializaiton Functions
 	*/
