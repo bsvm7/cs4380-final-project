@@ -326,7 +326,7 @@
 							
 							//	Create the sql for this query
 							
-							$select_photos_in_era_sql = "SELECT P.p_id, P.title, P.description, P.large_url, P.thumb_url, P.date_taken, P.date_conf, P.date_uploaded, P.uploaded_by, R.r_id "
+							$select_photos_in_era_sql = "SELECT DISTINCT P.p_id, P.title, P.description, P.large_url, P.thumb_url, P.date_taken, P.date_conf, P.date_uploaded, P.uploaded_by, R.r_id "
 														. "FROM photograph P, repository R, photo_repo PR "
 														. "WHERE P.p_id = PR.p_id AND PR.r_id = ? "
 														. "AND P.date_taken >= (SELECT start_date FROM era WHERE era_id = ?) "
