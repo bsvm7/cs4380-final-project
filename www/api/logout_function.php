@@ -36,7 +36,7 @@
 
 				$access_token=$decoded_json['access_token'];
 
-				echo "access token you entered is ".$access_token."\n";
+				//echo "access token you entered is ".$access_token."\n";
 
 				if (empty($access_token)) {
 
