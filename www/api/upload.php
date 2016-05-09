@@ -14,16 +14,16 @@
 	if ($db_conn->error_code) {
 			
 		debug_echo( "database connection error ..." . "\n" );
-		echo "database connection error ...";
 		set_error_response( 400 , "I couldn't connect to the database -> " . $db_conn->connect_error);
 		die("The connection to the database failed: " . $db_conn->connect_error);
 	}
 		
 	debug_echo( "database connected" . "\n" );
-	echo "database connected ...";
 	
+
+	/*
 	$req_method = $_SERVER['REQUEST_METHOD'];		
-		
+
 	switch ($req_method) {
 		
 		case 'POST':
@@ -39,7 +39,7 @@
 
 				//$target_dir= "http://40.86.85.30/cs4380/content/images/";
 				//$target_file = $target_dir.basename($_FILES['your_photo']['name']);
-
+*/
 				if(!isset($_FILES['your_photo'])) {
 				    debug_echo ('Please select an Image');
 				    break;				
@@ -125,6 +125,8 @@
 		                    }   
 		                }
 		            }
+		            $db_conn->close(); 
+					debug_echo ("database has been closed successfully.....");
 		        }
 		    /*
 		    }
@@ -134,10 +136,9 @@
 				break;
 			}				
 */
-			$db_conn->close(); 
-			debug_echo ("database has been closed successfully.....");
+			
 	      
-
+/*
 		break;
 
 		default:
@@ -145,7 +146,7 @@
 		break;
 
 	}	
-
+*/
 
 
     function getExtension($str) {   
