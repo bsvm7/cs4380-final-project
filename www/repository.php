@@ -102,7 +102,7 @@
 
 	<div class="container">
 		<div class="row">
-			<h1>Put the title of the repository here</h1>
+			<h1>{{ repo_info.title }}</h1>
 		</div>	
 		
 		
