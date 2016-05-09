@@ -91,7 +91,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="cs4380/home.php">Photoarchiving</a>
+          <a class="navbar-brand" href="/home.php">Photoarchiving</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
