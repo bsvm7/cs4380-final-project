@@ -199,7 +199,7 @@
 
 									
 									if(!($get_repo_info_stmt = $db_conn->prepare($get_repo_info_sql))){
-										set_error_response( 21 , "SQL statement could not prepare " . $db_conn->error);
+										set_error_response( 11 , "SQL statement could not prepare " . $db_conn->error);
 										break;
 
 									}
