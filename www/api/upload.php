@@ -155,4 +155,13 @@
         return $ext; 
     }
 
+	function debug_echo( $str ) {
+		
+		$echo_debug = true;
+		
+		if ($echo_debug) {
+			echo $str;
+		}
+	}
+	
 ?>
