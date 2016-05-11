@@ -21,7 +21,7 @@ var app = angular.module('photoarchiving_app', [])
 			"access_token" : session_dict.access_token
 		};
 		
-		var logout_api_url = base_url + "logout_function.php";
+		var logout_api_url = base_url + "api/logout_function.php";
 		
 		$http.post( logout_api_url , post_body ).then( function successCallback( response ) {
 						
