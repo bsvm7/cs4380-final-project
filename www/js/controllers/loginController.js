@@ -16,7 +16,7 @@ var app = angular.module('photoarchiving_app', [])
 		
 		if (typeof(Storage) !== "undefined") {
 			
-			if (sessionStorage.auth_token) {
+			if (sessionStorage.access_token) {
 				$window.location.href = base_url + "home.php";
 			}
 		}
