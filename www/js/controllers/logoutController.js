@@ -70,6 +70,7 @@ var app = angular.module('photoarchiving_app', [])
 			
 		}, function errorCallback( response ) {
 			
+			console.log( response );
 			
 		});
 		
