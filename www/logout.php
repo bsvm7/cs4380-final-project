@@ -68,9 +68,9 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
   </head>
-  <body ng-app="photoarchiving_app">
+  <body ng-app="photoarchiving_app" ng-controller="LogoutController">
 	  
-  	<script type="text/javascript" src="js/controllers/loginController.js"></script>
+  	<script type="text/javascript" src="js/controllers/logoutController.js"></script>
   	
     <!-- NAVBAR
     –––––––––––––––––––––––––––––––––––––––––––––––––– -->
