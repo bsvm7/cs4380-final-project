@@ -13,6 +13,9 @@ var app = angular.module('photoarchiving_app', [])
 		"refresh_token" : ""
 	};
 	
+	$scope.raw_user_repos		= [];
+	$scope.clean_user_repoes	= [];
+	
 	
 	//checkIfLoggedIn();
 	gather_user_information();
@@ -21,7 +24,42 @@ var app = angular.module('photoarchiving_app', [])
 	
 	
 	
+	/*
+		REST API -> GET Functions
+	*/
+	function get_user_repos() {
+		
+		//	Form the request URL
+		var req_url = 	base_url + "api/repository.php?"
+						+ "req_type=user_repos&"
+						+ "ps_id=" + $scope.ps_id + "&"
+						+ "auth_token=" + $scope.auth_token;
+						
+		
+		$http({
+				method	:	'GET',
+				url		:	req_url
+			}).then( function successCallback( response ) {
+				
+				var res_data = response.data;
+				
+				console.log(res_data);
+				
+			}, function errorCallback( response ) {
+				
+				var error_string = "There was an error processing the request";
+				console.log( error_string );
+			});
 
+		
+	}
+	
+	
+	
+	
+	
+	
+	
 	function gather_user_information() {
 		
 		$scope.user_info.ps_id		= get_value_for_session_key( "ps_id" );
