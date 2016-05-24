@@ -24,9 +24,9 @@ var app = angular.module('photoarchiving_app', [])
 
 	function gather_user_information() {
 		
-		$scope.user_info.ps_id = get_value_for_session_key( "ps_id" );
-		$scope.user_info.username = get_value_for_session_key( "username" );
-		$scope.user_info.auth_token = get_value_for_session_key( "auth_token" );
+		$scope.user_info.ps_id		= get_value_for_session_key( "ps_id" );
+		$scope.user_info.username 	= get_value_for_session_key( "username" );
+		$scope.user_info.auth_token = get_value_for_session_key( "access_token" );
 		
 		
 		var user_level_val = get_value_for_session_key( "user_level" );
