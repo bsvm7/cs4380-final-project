@@ -19,6 +19,7 @@ var app = angular.module('photoarchiving_app', [])
 	
 	//checkIfLoggedIn();
 	gather_user_information();
+	get_user_repos();
 	
 	console.log( $scope.user_info );
 	
