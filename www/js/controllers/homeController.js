@@ -14,14 +14,13 @@ var app = angular.module('photoarchiving_app', [])
 	};
 	
 	$scope.raw_user_repos		= [];
-	$scope.clean_user_repoes	= [];
+	$scope.clean_user_repos		= [];
 	
 	
 	//checkIfLoggedIn();
 	gather_user_information();
 	get_user_repos();
 	
-	console.log( $scope.user_info );
 	
 	
 	
@@ -53,13 +52,63 @@ var app = angular.module('photoarchiving_app', [])
 			});
 
 		
+		clean_user_repos();
+		
+		console.log($scope.clean_user_repos);
 	}
 	
 	
 	
 	
 	
-	
+	/*
+		Utility Functions
+	*/
+	function clean_user_repos() {
+		
+		//	First empty the 'clean_user_repos' array
+		$scope.clean_user_repos = [];
+		
+		
+		//	Now process the 'raw_user_repos' array and load into 'clean_user_repos'
+		var raw_user_repo_lenth = $scope.raw_user_repos.length;
+		
+		for( var i = 0 ; i < raw_user_repo_length ; i++ ) {
+			
+			var curr = $scope.raw_user_repos[i];
+			
+			//	Variable Declaration
+			var r_title;
+			var r_url;
+			var r_id;
+			var r_description;
+			var r_date_created;
+			var r_name;
+			
+			r_title 		= curr.title;
+			r_id 			= curr.r_id;
+			r_name 			= curr.name;
+			r_description 	= curr.description;
+			r_date_created 	= curr.date_created;
+			
+			//	Create the url for the repository
+			r_url =	base_url + "repository.php?"
+					+ "r_id=" + r_id;
+					
+			//	Set all in object
+			var clean_user_repo = {
+				"title"			: r_title,
+				"r_id" 			: r_id,
+				"name" 			: r_name,
+				"description" 	: r_description,
+				"date_created" 	: r_date_created,
+				"url"			: r_url
+			};
+			
+			$scope.clean_user_repos.push(clean_user_repo);
+		}
+		
+	}
 	
 	function gather_user_information() {
 		
