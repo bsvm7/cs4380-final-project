@@ -33,8 +33,8 @@ var app = angular.module('photoarchiving_app', [])
 		//	Form the request URL
 		var req_url = 	base_url + "api/repository.php?"
 						+ "req_type=user_repos&"
-						+ "ps_id=" + $scope.ps_id + "&"
-						+ "auth_token=" + $scope.auth_token;
+						+ "ps_id=" + $scope.user_info.ps_id + "&"
+						+ "auth_token=" + $scope.user_info.auth_token;
 						
 		
 		$http({
