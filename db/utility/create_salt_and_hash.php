@@ -5,16 +5,16 @@
 		echo "\nYou didn't pass in the right number of arguments...\n";
 		exit(200);
 		
-	if(!string_is_valid( $argv[1], 5, 20)) {
+	if(!string_is_valid( $argv[0], 5, 20)) {
 		echo "\nThat string isn't valid...\n";
 		exit(300);
 	}
 	
 	$salt = sha1( mt_rand() );
-	$hash = sha1( $argv[1] . $salt );
+	$hash = sha1( $argv[0] . $salt );
 	
 	
-	echo $argv[1];
+	echo $argv[0];
 		
 	
 	/*
