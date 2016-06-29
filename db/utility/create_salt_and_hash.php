@@ -1,21 +1,22 @@
 <?php
 	//	First make sure there is at least one argument passed to the script
 	
-	if($argc != 2)
+	if($argc != 2) {
 		echo "\nYou didn't pass in the right number of arguments...\n";
 		exit(200);
+	}
 		
-	if(!string_is_valid( $argv[0], 5, 20)) {
+	if(!string_is_valid( $argv[1], 5, 20)) {
 		echo "\nThat string isn't valid...\n";
 		exit(300);
 	}
 	
 	$salt = sha1( mt_rand() );
-	$hash = sha1( $argv[0] . $salt );
+	$hash = sha1( $argv[1] . $salt );
 	
 	
-	echo $argv[0];
-		
+	echo "\n\nSalt\t:\t" . $salt . "\nHash\t:\t" . $hash . "\n";
+	
 	
 	/*
 		CUSTOM FUNCTIONS
