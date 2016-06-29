@@ -14,7 +14,7 @@
 	$hash = sha1( $argv[1] . $salt );
 	
 	
-	echo "\n\nSalt\t:\t$salt\nHash\t:\t$hash\n";
+	echo "\n\nSalt\t:\t" . $salt . "\nHash\t:\t" . $hash . "\n";
 	
 	
 	/*
