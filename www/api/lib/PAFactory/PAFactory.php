@@ -34,47 +34,45 @@ class PARegistrationInfo {
 								"email",		//	7
 								"username"		//	8
 							];
+	
 
 	function __construct( $input_array ) {
 		
-		if(!(validate_input_array( $input_array ))) {
-			$this->$isValid = false;
+		$valid_keys = $this-valid_keys;
+		
+		if(!($this->validate_input_array( $valid_keys , $input_array ))) {
+			$this->isValid = false;
 		}
 		else {
 			
 			//	Set all the values
-			$this->$first_name = 	get_dictionary_value_with_key_index( $input_array, 0);
-			$this->$middle_name = 	get_dictionary_value_with_key_index( $input_array, 2);
-			$this->$last_name = 	get_dictionary_value_with_key_index( $input_array, 1);
-			$this->$maiden_name = 	get_dictionary_value_with_key_index( $input_array, 3);
-			$this->$birthdate = 	get_dictionary_value_with_key_index( $input_array, 4);
-			$this->$gender = 		get_dictionary_value_with_key_index( $input_array, 5);
-			$this->$password = 		get_dictionary_value_with_key_index( $input_array, 6);
-			$this->$email = 		get_dictionary_value_with_key_index( $input_array, 7);
-			$this->$username = 		get_dictionary_value_with_key_index( $input_array, 8);
-			$this->$isValid = true;
+			//var_dump($input_array);
+			//var_dump($valid_keys);
+			
+			$this->first_name = 	$this->get_dictionary_value_with_key_index( $input_array, $valid_keys , 0);
+			$this->middle_name = 	$this->get_dictionary_value_with_key_index( $input_array, $valid_keys , 2);
+			$this->last_name = 	$this->get_dictionary_value_with_key_index( $input_array, $valid_keys , 1);
+			$this->maiden_name = 	$this->get_dictionary_value_with_key_index( $input_array, $valid_keys , 3);
+			$this->birthdate = 	$this->get_dictionary_value_with_key_index( $input_array, $valid_keys , 4);
+			$this->gender = 		$this->get_dictionary_value_with_key_index( $input_array, $valid_keys , 5);
+			$this->password = 		$this->get_dictionary_value_with_key_index( $input_array, $valid_keys , 6);
+			$this->email = 		$this->get_dictionary_value_with_key_index( $input_array, $valid_keys , 7);
+			$this->username = 		$this->get_dictionary_value_with_key_index( $input_array, $valid_keys , 8);
+			$this->isValid = true;
 		}
 	}
 	
 	public function print_values() {
 		
-		print_single_value( "First Name" , $this->$first_name );
-		print_single_value( "Middle Name" , $this->$middle_name );
-		print_single_value( "Last Name" , $this->$last_name );
-		print_single_value( "Birthdate" , $this->$birthdate );
-		print_single_value( "Gender" , $this->$gender );
-		print_single_value( "Password" , $this->$password );
-		print_single_value( "Username" , $this->$username );
+		$this->print_single_value( "First Name" , $this->first_name );
+		$this->print_single_value( "Middle Name" , $this->middle_name );
+		$this->print_single_value( "Last Name" , $this->last_name );
+		$this->print_single_value( "Birthdate" , $this->birthdate );
+		$this->print_single_value( "Gender" , $this->gender );
+		$this->print_single_value( "Password" , $this->password );
+		$this->print_single_value( "Username" , $this->username );
 		
 	}
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	
 	private function print_single_value( $title , $val ) {
@@ -82,31 +80,20 @@ class PARegistrationInfo {
 	}
 	
 	
-	private function get_dictionary_value_with_key_index( $dict , $key_index ) {
-		return $dict[$this->valid_keys[$key_index]];
+	private function get_dictionary_value_with_key_index( $dict, $keys , $key_index ) {
+		$key_val = $keys[$key_index];
+		
+		$dict_val = $dict[$key_val];
+		
+		return $dict_val;
 	}
 	
-	private function validate_input_array( $input_array ) {
+	private function validate_input_array( $keys , $input_array ) {
 		
 		$valid = true;
 		
-		foreach ($valid_keys as $key_name) {
-			
-			if (!(array_key_exists($key_name, $input_array))) {
-				$valid = false;
-				break;
-			}
-		}
-		
-		
-		
 		return $valid;
 	}
-}
-
-/*
-	The main factory class
-*/	
-	
+}	
 	
 ?>
