@@ -55,6 +55,7 @@
 				
 				if ($registration_info->isValid) {
 					$registration_info->print_values();
+					echo var_dump($registration_info);
 				}
 				else {
 					echo "\nThe registration info couldn't be created...\n";
