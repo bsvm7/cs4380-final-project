@@ -51,9 +51,9 @@
 				$req_email		 = $decoded_json["email"];
 				$req_username	 = $decoded_json["username"];
 
-				$registration_info = PARegistrationInfo($decoded_json);
+				$registration_info = new PARegistrationInfo($decoded_json);
 				
-				if ($registration_info->$isValid) {
+				if ($registration_info->isValid) {
 					$registration_info->print_values();
 				}
 				else {
