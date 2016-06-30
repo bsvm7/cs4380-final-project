@@ -38,19 +38,14 @@ class PARegistrationInfo {
 
 	function __construct( $input_array ) {
 		
-		$valid_keys = $this-valid_keys;
+		$valid_keys = $this->valid_keys;
 		
 		if(!($this->validate_input_array( $valid_keys , $input_array ))) {
 			$this->isValid = false;
 		}
 		else {
 			
-			//	Set all the values
-			//var_dump($input_array);
-			//var_dump($valid_keys);
-
 			$this->first_name = 	$this->get_dictionary_value_with_key_index( $input_array, $valid_keys , 0);
-			$this->first_name = "Why hi there.";
 			$this->middle_name = 	$this->get_dictionary_value_with_key_index( $input_array, $valid_keys , 2);
 			$this->last_name = 	$this->get_dictionary_value_with_key_index( $input_array, $valid_keys , 1);
 			$this->maiden_name = 	$this->get_dictionary_value_with_key_index( $input_array, $valid_keys , 3);
