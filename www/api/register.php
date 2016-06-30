@@ -3,6 +3,8 @@
 	
 	//	Include reference to sensitive databse information
 	include("../../../db_security/security.php");
+	include("./lib/PAFactory/PAFactory.php");
+	
 	
 	$db_user = constant("DB_USER");
 	$db_host = constant("DB_HOST");
@@ -49,6 +51,14 @@
 				$req_email		 = $decoded_json["email"];
 				$req_username	 = $decoded_json["username"];
 
+				$registration_info = PARegistrationInfo($decoded_json);
+				
+				if ($registration_info->$isValid) {
+					$registration_info->print_values();
+				}
+				else {
+					echo "\nThe registration info couldn't be created...\n";
+				}
 				//	Clean birthdate data
 				
 				$clean_birthdate_info = clean_date( $birthdate );
