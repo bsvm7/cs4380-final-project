@@ -51,6 +51,7 @@
 				$req_email		 = $decoded_json["email"];
 				$req_username	 = $decoded_json["username"];
 
+/*
 				$registration_info = PARegistrationInfo($decoded_json);
 				
 				if ($registration_info->$isValid) {
@@ -59,6 +60,7 @@
 				else {
 					echo "\nThe registration info couldn't be created...\n";
 				}
+*/
 				//	Clean birthdate data
 				
 				$clean_birthdate_info = clean_date( $birthdate );
