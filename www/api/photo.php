@@ -640,10 +640,10 @@
 	    
 	    return true; 
 	}
-	function does_user_belong_to_repo( &$db_handle , $user_id , $repo_id ) {
+	function does_user_belong_to_repo( $db_handle , $user_id , $repo_id ) {
 		
 		$exists_query = "SELECT * FROM user_repo WHERE p_id = ? AND r_id = ?";
-		
+		echo var_dump($db_handle);
 		if(!($exists_stmt = $db_handle->prepare($exists_query)))
 			return false;
 			
