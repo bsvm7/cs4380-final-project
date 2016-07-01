@@ -45,7 +45,17 @@
 					set_error_response( 205, $registration_info->error);
 				}
 				
-				echo var_dump($registration_info->birth_date());
+				var $test_arr = array();
+				
+				array_push($test_arr, $registration_info->birth_date());
+				array_push($test_arr, $registration_info->first_name());
+				array_push($test_arr, $registration_info->middle_name());
+				array_push($test_arr, $registration_info->maiden_name());
+				array_push($test_arr, $registration_info->username());
+				array_push($test_arr, $registration_info->password());
+				array_push($test_arr, $registration_info->email());
+				
+				echo var_dump($test_arr);
 /*
 			
 				//PULL AND CLEAN ALL DATA FROM JSON POST
