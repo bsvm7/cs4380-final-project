@@ -465,7 +465,7 @@
 			if(!isset($post_data["uploader_id"]))
 				set_generic_error_response( "No uploader id set");
 				
-			if(!isset($post_data["photo_repo"]))
+			if(!isset($post_data["r_id"]))
 				set_generic_error_response( "No photo repo set" );
 				
 			if(!isset($post_data["transfer_format"]))
