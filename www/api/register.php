@@ -53,7 +53,7 @@
 				array_push($test_arr, $registration_info->maiden_name()); //
 				array_push($test_arr, $registration_info->username()); //
 				array_push($test_arr, $registration_info->password());
-				//array_push($test_arr, $registration_info->email());
+				array_push($test_arr, $registration_info->email());
 				
 				echo var_dump($test_arr);
 /*

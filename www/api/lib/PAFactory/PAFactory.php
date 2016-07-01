@@ -148,6 +148,22 @@ class PARegistrationInfo {
 			$this->pull_and_clean_values( $input_array );
 		}
 	}
+	
+	public function first_name() {
+		
+		$k = "firstname";
+		
+		$p = $this->kvStore->getKeyValuePair( $k );
+		
+		if(!isset($p)) {
+			$this->error = "I couldn't find the kv pair for " . $k ;
+			return;
+		}
+		
+		return $p->value;
+		
+	}
+
 	public function maiden_name() {
 		
 		$k = "maiden_name";
@@ -156,7 +172,7 @@ class PARegistrationInfo {
 		
 		if(!isset($p)) {
 			$this->error = "I couldn't find the kv pair for " . $k ;
-			return "";
+			return;
 		}
 		
 		return $p->value;
