@@ -44,64 +44,6 @@
 				if (!$registration_info->isValid) {
 					set_error_response( 205, $registration_info->error);
 				}
-				
-								
-				
-/*
-				
-				// check to see if the person is already in the person table
-				$person_name_check_sql = 'SELECT * FROM person where person.fname= ? AND person.mname= ? AND person.lname= ?';
-
-				if (!($person_name_check_stmt = $db_conn->prepare($person_name_check_sql))) {
-					set_error_response( 201, "SQL Error -> " . $person_name_check_stmt->error);
-
-					break;
-				}	
-
-
-				if (!($person_name_check_stmt->bind_param("sss", $registration_info->first_name(), $registration_info->middle_name(), $registration_info->last_name()))) {
-					set_error_response( 201, "SQL Error -> " . $person_name_check_stmt->error);
-					break;
-				}
-
-				$person_name_is_valid = true;
-				
-
-				if ($person_name_check_stmt->execute()) {
-
-	
-					if($person_name_check_result = $person_name_check_stmt->get_result()) {
-	
-						if($person_name_check_result->num_rows > 0) {
-	
-							$person_name_is_valid = false;
-	
-						}
-	
-					}
-	
-					else {
-							
-							set_error_response( 201, "SQL Error -> " . $person_name_check_stmt->error);
-					}	
-				}	
-	
-				else {
-						
-						set_error_response( 201, "SQL Error -> " . $db_conn->error);
-						break;
-				}
-	
-				$person_name_check_stmt->close();
-	
-				if (!$person_name_is_valid) {
-					
-					set_error_response( 203 , "The person with the same name already exists in the database, sorry!"."\n");
-					break;
-				}
-				
-*/
-				echo "why";
 	
 				//	Check to see if the username is already taken
 				
@@ -151,19 +93,6 @@
 					set_error_response( 203 , "The username is already taken, please try another one.......");
 					break;
 				}
-				echo "username valid";
-
-				$first = $registration_info->first_name();
-				echo "got first";
-				$middle = $registration_info->middle_name();
-				echo "got middle";
-				$last = $registration_info->last_name();
-				echo "got last";
-				$gender = $registration_info->gender();
-				echo "got gender";
-				$bday = $registration_info->birth_date();
-				echo "got birthdate";
-				
 				
 				//	If the information is valid then enter it into the database
 			
@@ -206,8 +135,6 @@
 								
 
 				$saved_last_insert_id = $last_insert_id;
-	
-				echo "wowzers";
 				
 				//insert the user information into user table						
 				$insert_new_user_sql = "INSERT INTO user (ps_id, username, email) VALUES (?, ? , ? )";
@@ -239,28 +166,10 @@
 					
 					$hash = sha1( $req_password.$salt );
 					
-					/* bad programming here
-					$insert_user_auth_sql = "INSERT INTO user_auth (ps_id , pass_hash, pass_salt) VALUES ('$saved_last_insert_id' , '$hash' , '$salt' )";
-					if ($db_conn->query($insert_user_auth_sql)) {
-						if ($db_conn->affected_rows == 1) {							
-						}
-						else {
-							set_error_response( 201, "SQL Error 2 -> " . $db_conn->error);
-							break;
-						}						
-					}
-					else {
-						set_error_response( 201, "SQL Error 1 -> " . $db_conn->error);
-						break;
-					}
-					*/
 
 					$insert_user_auth_sql = "INSERT INTO user_auth (ps_id , pass_hash, pass_salt) VALUES (?, ?, ?)";
-											echo "user auth sql worked "."\n"; 
 
 					$insert_user_auth_stmt = $db_conn->stmt_init();
-					
-						echo "user auth sql worked "."\n"; 
 
 					if(!$insert_user_auth_stmt->prepare($insert_user_auth_sql)){
 						
@@ -269,15 +178,13 @@
 						break;
 
 					}
-						echo "user auth stmt prepare worked "."\n"; 
 
 					if(!$insert_user_auth_stmt->bind_param("iss", $last_insert_id, $hash, $salt)){
 
 						set_error_response( 201, "SQL Error -> " . $insert_user_auth_stmt->error);
 
 						break;
-					}
-						echo "user auth stmt param bind worked "."\n"; 
+					} 
 
 					if(!$insert_user_auth_stmt->execute()){
 						
@@ -287,49 +194,35 @@
 
 					}
 
-						echo "user auth stmt execution worked "."\n"; 
+					$insert_user_auth_stmt->close();
 
-					/*
-					if ($db_conn->affected_rows == 1) {							
+
+					// record register information into activity log table
+
+					$insert_log_sql = "INSERT INTO activity_log (ps_id, ac_type) VALUES (?, ?)";
+
+					$insert_log_stmt = $db_conn->stmt_init();
+
+					$insert_log_stmt->prepare($insert_log_sql);
+
+					$ac_type= "user-register";
+
+					$insert_log_stmt->bind_param("is", $last_insert_id, $ac_type);
+
+					if($insert_log_stmt->execute()) {
+
+						echo "registration activity has been logged"."\n";
+
 					}
+
 					else {
-						set_error_response( 201, "SQL Error 2 -> " . $db_conn->error);
-						break;
-					}						
-					*/
 
-						
-						echo $registration_info->getJSONString();
+						set_error_response( 201, "SQL Error -> " . $insert_log_stmt->error);
 
-						$insert_user_auth_stmt->close();
+					}
 
-						// record register information into activity log table
-
-						echo "last insert_id is ".$last_insert_id; 
-
-						$insert_log_sql = "INSERT INTO activity_log (ps_id, ac_type) VALUES (?, ?)";
-
-						$insert_log_stmt = $db_conn->stmt_init();
-
-						$insert_log_stmt->prepare($insert_log_sql);
-
-						$ac_type= "user-register";
-
-						$insert_log_stmt->bind_param("is", $last_insert_id, $ac_type);
-
-						if($insert_log_stmt->execute()) {
-
-							echo "registration activity has been logged"."\n";
-
-						}
-
-						else {
-
-							set_error_response( 201, "SQL Error -> " . $insert_log_stmt->error);
-
-						}
-
-					
+					http_response_code(200);
+					echo $registration_info->getJSONString();
 
 				}
 	
