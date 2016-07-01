@@ -44,6 +44,8 @@
 				if (!$registration_info->isValid) {
 					set_error_response( 205, $registration_info->error);
 				}
+				
+				echo var_dump($registration_info);
 /*
 			
 				//PULL AND CLEAN ALL DATA FROM JSON POST
