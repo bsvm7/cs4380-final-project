@@ -45,7 +45,7 @@
 					set_error_response( 205, $registration_info->error);
 				}
 				
-				echo var_dump($registration_info);
+				echo var_dump($registration_info->birth_date());
 /*
 			
 				//PULL AND CLEAN ALL DATA FROM JSON POST
