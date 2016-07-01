@@ -121,8 +121,7 @@
 				}
 
 				$username_is_valid = true;
-				echo "username valid";
-				
+								
 				if ($username_check_stmt->execute()) {
 					
 
@@ -146,13 +145,14 @@
 
 
 				$username_check_stmt->close();
-	
+				
 				if (!$username_is_valid) {
 				
 					set_error_response( 203 , "The username is already taken, please try another one.......");
 					break;
 				}
-				
+				echo "username valid";
+
 
 				//	If the information is valid then enter it into the database
 			
