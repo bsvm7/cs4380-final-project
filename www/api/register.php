@@ -175,7 +175,7 @@
 					set_error_response( 201, "SQL Error -> " . $insert_new_person_stmt->error);
 					break;
 				}
-				$maiden = "hello";
+				$maiden = $registration_info->maiden_name();
 				
 				if (!($insert_new_person_stmt->bind_param("ssssss", $first , $middle , $last , $maiden , $gender , $bday))) {
 					set_error_response( 201, "SQL Error -> " . $insert_new_person_stmt->error);
