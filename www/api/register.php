@@ -42,9 +42,10 @@
 				$registration_info = new PARegistrationInfo($decoded_json);
 				
 				if (!$registration_info->isValid) {
+					echo "hi";
 					set_error_response( 205, $registration_info->error);
 				}
-				
+				echo "no";
 
 	
 				//	Check to see if the username is already taken
@@ -161,22 +162,6 @@
 					$salt = sha1( mt_rand() );
 					
 					$hash = sha1( $req_password.$salt );
-					
-					/* bad programming here
-					$insert_user_auth_sql = "INSERT INTO user_auth (ps_id , pass_hash, pass_salt) VALUES ('$saved_last_insert_id' , '$hash' , '$salt' )";
-					if ($db_conn->query($insert_user_auth_sql)) {
-						if ($db_conn->affected_rows == 1) {							
-						}
-						else {
-							set_error_response( 201, "SQL Error 2 -> " . $db_conn->error);
-							break;
-						}						
-					}
-					else {
-						set_error_response( 201, "SQL Error 1 -> " . $db_conn->error);
-						break;
-					}
-					*/
 
 					$insert_user_auth_sql = "INSERT INTO user_auth (ps_id , pass_hash, pass_salt) VALUES (?, ?, ?)";
 											echo "user auth sql worked "."\n"; 
@@ -210,16 +195,6 @@
 
 					}
 
-						echo "user auth stmt execution worked "."\n"; 
-
-					/*
-					if ($db_conn->affected_rows == 1) {							
-					}
-					else {
-						set_error_response( 201, "SQL Error 2 -> " . $db_conn->error);
-						break;
-					}						
-					*/
 
 						
 						echo $registration_info->getJSONString();
