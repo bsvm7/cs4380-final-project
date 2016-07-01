@@ -326,7 +326,7 @@
 							
 							//	Create the sql for this query
 							
-							$select_photos_in_era_sql = "SELECT DISTINCT P.p_id, P.title, P.description, P.large_url, P.thumb_url, P.date_taken, P.date_conf, P.date_uploaded, P.uploaded_by"
+							$select_photos_in_era_sql = "SELECT P.p_id, P.title, P.description, P.large_url, P.thumb_url, P.date_taken, P.date_conf, P.date_uploaded, P.uploaded_by"
 														. "FROM photograph P INNER JOIN photo_repo PR "
 														. "ON P.p_id = PR.p_id "
 														. "WHERE PR.r_id = ? "
