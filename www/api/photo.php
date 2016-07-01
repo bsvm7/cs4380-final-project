@@ -656,7 +656,7 @@
 		
 		if(!($exists_result = $exists_stmt->get_result()))
 			return false;
-			
+			echo "hi";
 		if($exists_result->num_rows != 1)
 			return false;
 		
