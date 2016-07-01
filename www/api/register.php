@@ -121,6 +121,7 @@
 				}
 
 				$username_is_valid = true;
+				echo "username valid";
 				
 				if ($username_check_stmt->execute()) {
 					
