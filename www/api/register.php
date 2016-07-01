@@ -183,7 +183,7 @@
 																$registration_info->last_name() , 
 																$registration_info->maiden_name() , 
 																$registration_info->gender() , 
-																$registration_info->birth_date();))) 
+																$registration_info->birth_date()))) 
 				{
 					set_error_response( 201, "SQL Error -> " . $insert_new_person_stmt->error);
 					break;
