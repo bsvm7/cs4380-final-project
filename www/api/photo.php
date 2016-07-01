@@ -503,10 +503,6 @@
 			
 			if(isset($post_data["date_conf"]))
 				$photo_info["date_conf"] = $post_data["date_conf"];
-				
-			echo "user-> $p_id ... repod -> $r_id";
-			
-// 			var_dump($db_conn);
 			
 			if(!does_user_belong_to_repo( $db_conn, $p_id, $r_id))
 				set_generic_error_response( "The user doesn't belong to the repo" );
@@ -644,27 +640,25 @@
 	}
 	function does_user_belong_to_repo( $db_handle , $user_id , $repo_id ) {
 		
-		$exists_query = "SELECT * FROM user_repo WHERE p_id = ? AND r_id = ?";
-// 		echo var_dump($db_handle);
-		echo "1";
+		$exists_query = "SELECT * FROM user_repo WHERE ps_id = ? AND r_id = ?";
+		
 		if(!($exists_stmt = $db_handle->prepare($exists_query))) {
-			echo $db_handle->error;
-			
+			echo $db_handle->error;			
 			return false;
 		}
-			
-			echo "2";
+		
 		if(!($exists_stmt->bind_param("ii", $user_id, $repo_id)))
 			return false;
 			
-		echo "3";
+		
 		if(!($exists_stmt->execute()))
 			return false;
 		
-		echo "4";
+		
 		if(!($exists_result = $exists_stmt->get_result()))
 			return false;
-			echo "hi";
+		
+		
 		if($exists_result->num_rows != 1)
 			return false;
 		
