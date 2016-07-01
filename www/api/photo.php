@@ -512,23 +512,23 @@
 				
 				case "base64": 
 					
-					echo " <-> ";
+					
 					$image_name_short = generate_random_string_of_length( 20 );
 					$image_name = $image_name_short . "." . $image_type;
 					$image_path = build_path_with_image_name( $image_name );
 					$image_url = build_url_for_image( $image_name );
-					echo " <-> ";
+					
 					if(!base64_to_jpeg($payload, $image_path))
 						set_generic_error_response( "I couldn't convert the base64");
 						
-					echo " <-> ";
+					
 					//	Add this photograph to the photograph table
 					
 					$insert_photo_sql = "INSERT INTO photograph( title, description , large_url , date_taken , date_conf , date_uploaded, uploaded_by ) VALUES ( ? , ? , ? , ? , ? , ? , ? )";
-					echo " <-> ";
+					
 					if(!($insert_photo_stmt = $db_conn->prepare($insert_photo_sql)))
 						set_generic_error_response( "Could not prepare statement ... " . $insert_photo_sql );
-					echo " <-> ";
+					
 					if(!($insert_photo_stmt->bind_param("ssssdsi", 	$photo_info["title"],
 																	$photo_info["description"],
 																	$image_url,
@@ -551,7 +551,29 @@
 						$photo_insert_id = $insert_photo_stmt->insert_id;	
 					}
 					
-					echo "I inserted the photo with id -> $photo_insert_id";
+					//	Add the photograph to the repository
+					
+					$insert_photo_repo_sql = "INSERT INTO photo_repo( p_id , r_id ) VALUES ( ? , ? )";
+					
+					if(!($insert_photo_repo_stmt = $db_conn->prepare($insert_photo_repo_sql)))
+						set_generic_error_response( "I couldn't prepare the statement -> " . $insert_photo_repo_sql);
+						
+					if(!($insert_photo_repo_stmt->bind_param("ii", $photo_insert_id, $r_id)))
+						set_generic_error_response( "I couldn't bind the params -> " . $insert_photo_repo_sql);
+					
+					if(!($insert_photo_repo_stmt->execute()))
+						set_generic_error_response( "I couldn't execute the statement -> " . $insert_photo_repo_sql);
+						
+					http_response_code(200);
+					
+					$resp_array = [
+						"status" => "success",
+						"new_photo_id" => $photo_insert_id,
+						"repository_id" => $r_id
+					];
+					
+					echo json_encode($resp_array);
+					
 				
 				break;
 				
@@ -627,7 +649,6 @@
 	    
 	    
 	    if(!($ifp = fopen($output_file, "wb"))) {
-		    echo "I couldn't open the file...";
 	    	return false; 
 	    }
 
@@ -638,7 +659,6 @@
 	    }
 	
 	    if(!(fwrite($ifp, base64_decode($data[1])))) {
-		    echo "I couldn't write to the file...";
 		    fclose($ifp);
 		    return false;
 	    }
