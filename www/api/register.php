@@ -46,6 +46,7 @@
 					set_error_response( 205, $registration_info->error);
 				}
 				echo "no";
+				echo var_dump($registration_info);
 
 	
 				//	Check to see if the username is already taken
