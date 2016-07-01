@@ -21,15 +21,6 @@
 	debug_echo( "database connected" . "\n" );
 
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	$req_method = $_SERVER["REQUEST_METHOD"];
 	
 	switch( $req_method ) {
@@ -464,7 +455,107 @@
 		
 		case 'POST':
 		
-			debug_echo( "You chose the POST method" );
+			$json_raw = file_get_contents("php://input");
+			
+			if(!($post_data = json_decode($json_raw, true))) {
+				set_error_response( 500, "Could not decode json");
+			}
+			
+			//	Validate parameters
+			if(!isset($post_data["uploader_id"]))
+				set_generic_error_response( "No uploader id set");
+				
+			if(!isset($post_data["photo_repo"]))
+				set_generic_error_response( "No photo repo set" );
+				
+			if(!isset($post_data["transfer_format"]))
+				set_generic_error_response( "You didn't set the transfer format");
+				
+			if(!isset($post_data["payload"]))
+				set_generic_error_response( "You didn't set the payload");
+				
+			if(!isset($post_data["image_type"]))
+				set_generic_error_response( "You didn't set the image type");
+
+			
+			$p_id = $post_data["uploader_id"];
+			$r_id = $post_data["r_id"];
+			$format = $post_data["transfer_format"];
+			$payload = $post_data["payload"];
+			$image_type = $post_data["image_type"];
+			
+			$photo_info = array();
+			
+			$photo_info["title"] = 'NULL';
+			$photo_info["description"] = 'NULL';
+			$photo_info["date_taken"] = 'NULL';
+			$photo_info["date_conf"] = 0;
+			$photo_info["date_uploaded"] = get_sql_current_date();
+			
+			if(isset($post_data["title"]))
+				$photo_info["title"] = $post_data["title"];
+			
+			if(isset($post_data["description"]))
+				$photo_info["description"] = $post_data["description"];
+			
+			if(isset($post_data["date_taken"]))
+				$photo_info["date_taken"] = $post_data["date_taken"];
+			
+			if(isset($post_data["date_conf"]))
+				$photo_info["date_conf"] = $post_data["date_conf"];
+				
+			
+			if(!does_user_belong_to_repo( $db_conn, $p_id, $r_id))
+				set_generic_error_response( "The user doesn't belong to the repo" );
+				
+			switch ($format) {
+				
+				case "base64": 
+					
+					$image_name = generate_random_string_of_length( 20 ) . "." . $image_type;
+					$image_path = build_path_with_random_image_name( $image_name );
+					$image_url = build_url_for_image( $image_name );
+					
+					if(!base64_to_jpeg($payload, $image_path))
+						set_generic_error_response( "I couldn't convert the base64");
+						
+					
+					//	Add this photograph to the photograph table
+					
+					$insert_photo_sql = "INSERT INTO photograph( title, description , large_url , date_taken , date_conf , date_uploaded, uploaded_by ) VALUES ( ? , ? , ? , ? , ? , ? , ? )";
+					
+					if(!($insert_photo_stmt = $db_conn->prepare($insert_photo_sql)))
+						set_generic_error_response( "Could not prepare statement ... " . $insert_photo_sql );
+					
+					if(!($insert_photo_stmt->bind_param("ssssdsi", 	$photo_info["title"],
+																	$photo_info["description"],
+																	$image_url,
+																	$photo_info["date_taken"],
+																	$photo_info["date_conf"],
+																	$photo_info["date_uploaded"],
+																	$p_id
+																	)))
+					{
+						set_generic_error_response( "Couldn't bind params for stmt -> " . $insert_photo_sql);
+					}
+					
+					$photo_insert_id;
+					
+					if(!($insert_photo_stmt->execute())) {
+						set_generic_error_response( "Couldn't execute the stmt -> " . $insert_photo_sql);
+					}
+					else
+					{
+						$photo_insert_id = $insert_photo_stmt->insert_id;	
+					}
+					
+					echo "I inserted the photo with id -> $photo_insert_id";
+				
+				break;
+				
+				
+			}
+			
 			
 		break;
 		
@@ -502,6 +593,102 @@
 	/*
 		UTILITY FUNCTIONS
 	*/
+	function get_sql_current_date() {
+		
+		$format_string = "Y-m-d H:i:s";
+		
+		return date($format_string);
+	}
+	function build_url_for_image( $image_name ) {
+		
+		$base_path = "http://40.86.85.30/cs4380/content/images/" . $image_name;
+		
+		return $base_path;
+	}
+	function build_path_with_image_name( $image_name ) {
+		
+		$image_path = base_path_for_photographs();
+		
+		$image_path = $image_path . $image_name;
+		
+		return $image_path;
+	}
+	function base_path_for_photographs() {
+		
+		$path = "/var/www/html/cs4380/content/images/";
+		
+		return $path;
+	}
+	function base64_to_jpeg($base64_string, $output_file) {
+	    
+	    
+	    if(!($ifp = fopen($output_file, "wb")))
+	    	return false; 
+	
+	    if(!($data = explode(',', $base64_string))) {
+		    fclose($ifp);
+		    return false;
+	    }
+	
+	    if(!(fwrite($ifp, base64_decode($data[1])))) {
+		    fclose($ifp);
+		    return false;
+	    }
+	    
+	    fclose($ifp); 
+	    
+	    return true; 
+	}
+	function does_user_belong_to_repo( $db_handle , $user_id , $repo_id ) {
+		
+		$exists_query = "SELECT * FROM user_repo WHERE p_id = ? AND r_id = ?";
+		
+		if(!($exists_stmt = $db_handle->prepare($exists_query)))
+			return false;
+			
+		if(!($exists_stmt->bind_param("ii", $user_id, $repo_id)))
+			return false;
+			
+		
+		if(!($exists_stmt->execute()))
+			return false;
+		
+		if(!($exists_result = $exists_stmt->get_result()))
+			return false;
+			
+		if($exists_result->num_rows != 1)
+			return false;
+		
+		return true;
+
+	}
+	function does_user_exist( $db_handle , $user_id ) {
+		
+		if(!is_numeric($user_id))
+			return false;
+			
+		$exists_query = "SELECT * FROM user WHERE p_id = ?";
+		
+		if(!($exists_stmt = $db_handle->prepare($exists_query)))
+			return false;
+			
+		if(!($exists_stmt->bind_param("i", $user_id)))
+			return false;
+			
+		
+		if(!($exists_stmt->execute()))
+			return false;
+		
+		if(!($exists_result = $exists_stmt->get_result()))
+			return false;
+			
+		if($exists_result->num_rows != 1)
+			return false;
+		
+		return true;
+		
+		
+	}
 	function clean_date( $date_string ) {
 		
 		$is_valid_date = true;
@@ -616,7 +803,9 @@
 			echo $str;
 		}
 	}
-	
+	function set_generic_error_response( $error_message ) {
+		set_error_response( 500, $error_message);
+	}
 	function set_error_response( $error_code , $error_message ) {
 		
 		
@@ -631,5 +820,16 @@
 		
 	}
 	
+	function generate_random_string_of_length( $len ) {
+		
+		
+		$characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+	    $charactersLength = strlen($characters);
+	    $randomString = '';
+	    for ($i = 0; $i < $len ; $i++) {
+	        $randomString .= $characters[rand(0, $charactersLength - 1)];
+	    }
+	    return $randomString;
+	}
 	
 ?>
