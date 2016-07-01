@@ -506,7 +506,7 @@
 				
 			echo "user-> $p_id ... repod -> $r_id";
 			
-			var_dump($db_conn);
+// 			var_dump($db_conn);
 			
 			if(!does_user_belong_to_repo( $db_conn, $p_id, $r_id))
 				set_generic_error_response( "The user doesn't belong to the repo" );
@@ -645,9 +645,11 @@
 	function does_user_belong_to_repo( $db_handle , $user_id , $repo_id ) {
 		
 		$exists_query = "SELECT * FROM user_repo WHERE p_id = ? AND r_id = ?";
-		echo var_dump($db_handle);
+// 		echo var_dump($db_handle);
 		echo "1";
 		if(!($exists_stmt = $db_handle->prepare($exists_query))) {
+			echo $db_handle->error;
+			
 			return false;
 		}
 			
