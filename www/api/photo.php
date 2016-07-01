@@ -504,6 +504,7 @@
 			if(isset($post_data["date_conf"]))
 				$photo_info["date_conf"] = $post_data["date_conf"];
 				
+			echo "user-> $p_id ... repod -> $r_id";
 			
 			if(!does_user_belong_to_repo( $db_conn, $p_id, $r_id))
 				set_generic_error_response( "The user doesn't belong to the repo" );
