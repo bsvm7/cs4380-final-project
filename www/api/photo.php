@@ -506,6 +506,8 @@
 				
 			echo "user-> $p_id ... repod -> $r_id";
 			
+			var_dump($db_conn);
+			
 			if(!does_user_belong_to_repo( $db_conn, $p_id, $r_id))
 				set_generic_error_response( "The user doesn't belong to the repo" );
 				
