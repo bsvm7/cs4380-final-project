@@ -507,6 +507,7 @@
 			if(!does_user_belong_to_repo( $db_conn, $p_id, $r_id))
 				set_generic_error_response( "The user doesn't belong to the repo" );
 				
+				echo "hello";
 			switch ($format) {
 				
 				case "base64": 
