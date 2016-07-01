@@ -38,7 +38,14 @@
 			
 			if ($decoded_json = json_decode($json_raw, true)) {
 				
-								
+				
+				$registration_info = new PARegistrationInfo($decoded_json);
+				
+				if (!$registration_info->isValid) {
+					set_error_response( 205, $registration_info->error);
+				}
+/*
+			
 				//PULL AND CLEAN ALL DATA FROM JSON POST
 				
 				$req_fname 		 = $decoded_json["firstname"];
@@ -51,16 +58,7 @@
 				$req_email		 = $decoded_json["email"];
 				$req_username	 = $decoded_json["username"];
 
-				$registration_info = new PARegistrationInfo($decoded_json);
-				
-				if ($registration_info->isValid) {
-					$registration_info->print_values();
-					echo var_dump($registration_info);
-				}
-				else {
-					echo "\nThe registration info couldn't be created...\n";
-				}
-				//	Clean birthdate data
+								//	Clean birthdate data
 				
 				$clean_birthdate_info = clean_date( $birthdate );
 				
@@ -71,6 +69,7 @@
 				else {
 					$birthdate = $clean_birthdate_info["validDateString"];
 				}
+*/
 				
 				// check to see if the person is already in the person table
 				$person_name_check_sql = 'SELECT * FROM person where person.fname= ? AND person.mname= ? AND person.lname= ?';
@@ -82,7 +81,7 @@
 				}	
 
 
-				if (!($person_name_check_stmt->bind_param("sss", $req_fname, $req_mname, $rea_lname))) {
+				if (!($person_name_check_stmt->bind_param("sss", $registration_info->first_name(), $registration_info->middle_name(), $registration_info->last_name()))) {
 					set_error_response( 201, "SQL Error -> " . $person_name_check_stmt->error);
 					break;
 				}
@@ -136,7 +135,7 @@
 					break;
 				}
 
-				if (!($username_check_stmt->bind_param("s",  $req_username))) {
+				if (!($username_check_stmt->bind_param("s",  $registration_info->username()))) {
 					set_error_response( 201, "SQL Error -> " . $username_check_stmt->error);
 					break;
 				}
@@ -185,7 +184,7 @@
 					break;
 				}
 
-				if (!($insert_new_person_stmt->bind_param("ssssss", $req_fname, $req_mname, $req_lname, $req_maiden_name, $req_gender, $req_birthdate))) {
+				if (!($insert_new_person_stmt->bind_param("ssssss", $registration_info->first_name(), $registration_info->middle_name(), $registration_info->last_name(), $registration_info->maiden_name(), $registration_info->gender() , $registration_info->birth_date()))) {
 					set_error_response( 201, "SQL Error -> " . $insert_new_person_stmt->error);
 					break;
 				}
@@ -214,7 +213,7 @@
 									
 				$insert_new_user_stmt = $db_conn->prepare($insert_new_user_sql);
 				
-				$insert_new_user_stmt->bind_param("iss" , $last_insert_id, $req_username , $req_email);
+				$insert_new_user_stmt->bind_param("iss" , $last_insert_id, $registration_info->username() , $registration_info->email());
 	
 				if (!($insert_new_user_stmt = $db_conn->prepare($insert_new_user_sql))) {
 					
@@ -223,7 +222,7 @@
 					break;
 				}
 					
-				if (!($insert_new_user_stmt->bind_param("iss" , $last_insert_id, $req_username , $req_email))) {
+				if (!($insert_new_user_stmt->bind_param("iss" , $last_insert_id, $registration_info->username() , $registration_info->email()))) {
 					
 					set_error_response( 201, "SQL Error -> " . $insert_new_user_stmt->error);
 					
@@ -298,20 +297,8 @@
 					}						
 					*/
 
-						$ret_user_info = array(
-							
-							"ps_id" => $saved_last_insert_id,
-							"username" => $req_username,
-							"email" => $req_email,
-							"first_name" => $req_fname,
-							"middle_name" => $req_mname,
-							"last_name" => $req_lname,
-							"maiden_name" => $req_maiden_name,
-							"birth_date" => $req_birthdate,
-							"gender" => $req_gender
-						);
-
-						echo json_encode($ret_user_info)."\n";	
+						
+						echo $registration_info->getJSONString();
 
 						$insert_user_auth_stmt->close();
 
