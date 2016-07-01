@@ -48,8 +48,8 @@
 				var $test_arr = array();
 				
 				array_push($test_arr, $registration_info->birth_date()); //
-				//array_push($test_arr, $registration_info->first_name());
-				array_push($test_arr, $registration_info->middle_name());
+				array_push($test_arr, $registration_info->first_name()); //
+				//array_push($test_arr, $registration_info->middle_name());
 				array_push($test_arr, $registration_info->maiden_name()); //
 				array_push($test_arr, $registration_info->username());
 				array_push($test_arr, $registration_info->password());
