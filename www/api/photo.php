@@ -513,8 +513,9 @@
 				case "base64": 
 					
 					echo " <-> ";
-					$image_name = generate_random_string_of_length( 20 ) . "." . $image_type;
-					$image_path = build_path_with_random_image_name( $image_name );
+					$image_name_short = generate_random_string_of_length( 20 );
+					$image_name = $image_name_short . "." . $image_type;
+					$image_path = build_path_with_image_name( $image_name );
 					$image_url = build_url_for_image( $image_name );
 					echo " <-> ";
 					if(!base64_to_jpeg($payload, $image_path))
