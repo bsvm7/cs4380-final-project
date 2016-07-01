@@ -626,8 +626,11 @@
 	function base64_to_jpeg($base64_string, $output_file) {
 	    
 	    
-	    if(!($ifp = fopen($output_file, "wb")))
+	    if(!($ifp = fopen($output_file, "wb"))) {
+		    echo "I couldn't open the file...";
 	    	return false; 
+	    }
+
 	
 	    if(!($data = explode(',', $base64_string))) {
 		    fclose($ifp);
@@ -635,6 +638,7 @@
 	    }
 	
 	    if(!(fwrite($ifp, base64_decode($data[1])))) {
+		    echo "I couldn't write to the file...";
 		    fclose($ifp);
 		    return false;
 	    }
