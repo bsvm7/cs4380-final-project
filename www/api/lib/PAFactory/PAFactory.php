@@ -146,6 +146,7 @@ class PARegistrationInfo {
 			
 			$this->kvStore = new PAKeyValueStore();
 			$this->pull_and_clean_values( $input_array );
+			
 		}
 	}
 	
@@ -157,7 +158,7 @@ class PARegistrationInfo {
 		
 		if(!isset($p)) {
 			$this->error = "I couldn't find the kv pair for " . $k ;
-			return;
+			return "";
 		}
 		
 		return $p->value;
@@ -172,7 +173,7 @@ class PARegistrationInfo {
 		
 		if(!isset($p)) {
 			$this->error = "I couldn't find the kv pair for " . $k ;
-			return;
+			return "";
 		}
 		
 		return $p->value;
@@ -186,7 +187,7 @@ class PARegistrationInfo {
 		
 		if(!isset($p)) {
 			$this->error = "I couldn't find the kv pair for " . $k ;
-			return;
+			return "";
 		}
 		
 		return $p->value;
@@ -200,7 +201,7 @@ class PARegistrationInfo {
 		
 		if(!isset($p)) {
 			$this->error = "I couldn't find the kv pair for " . $k ;
-			return;
+			return "";
 		}
 		
 		return $p->value;
@@ -215,7 +216,7 @@ class PARegistrationInfo {
 		
 		if(!isset($p)) {
 			$this->error = "I couldn't find the kv pair for " . $k ;
-			return;
+			return "";
 		}
 		
 		return $p->value;
@@ -229,7 +230,7 @@ class PARegistrationInfo {
 		
 		if(!isset($p)) {
 			$this->error = "I couldn't find the kv pair for " . $k ;
-			return;
+			return "";
 		}
 		
 		return $p->value;
@@ -243,7 +244,7 @@ class PARegistrationInfo {
 		
 		if(!isset($p)) {
 			$this->error = "I couldn't find the kv pair for " . $k ;
-			return;
+			return "";
 		}
 		
 		return $p->value;
@@ -257,7 +258,7 @@ class PARegistrationInfo {
 		
 		if(!isset($p)) {
 			$this->error = "I couldn't find the kv pair for " . $k ;
-			return;
+			return "";
 		}
 		
 		return $p->value;
@@ -271,7 +272,7 @@ class PARegistrationInfo {
 		
 		if(!isset($p)) {
 			$this->error = "I couldn't find the kv pair for " . $k ;
-			return;
+			return "";
 		}
 		
 		return $p->value;
@@ -308,14 +309,16 @@ class PARegistrationInfo {
 					$this->shouldBreak = true;
 					$this->isValid = false;
 					$this->error = "Not a valid date string";
-					break;
 				}
 				
 				$this->kvStore->addKeyValuePair( $k , $clean_birthdate["validDateString"]);
 				
 			}
+			else {
+				$this->kvStore->addKeyValuePair( $k , $v );	
+			}
 			
-			$this->kvStore->addKeyValuePair( $k , $v );
+			
 			
 		}
 	}
