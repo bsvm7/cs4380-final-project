@@ -45,8 +45,7 @@
 					set_error_response( 205, $registration_info->error);
 				}
 				
-				var $test_arr = array();
-				
+								
 				
 				
 				echo var_dump($registration_info->first_name());
