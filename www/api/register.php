@@ -199,7 +199,8 @@
 
 				$saved_last_insert_id = $last_insert_id;
 	
-	
+				echo "wowzers";
+				
 				//insert the user information into user table						
 				$insert_new_user_sql = "INSERT INTO user (ps_id, username, email) VALUES (?, ? , ? )";
 									
