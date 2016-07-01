@@ -153,13 +153,24 @@
 				}
 				echo "username valid";
 
-
+				$first = $registration_info->first_name();
+				echo "got first";
+				$middle = $registration_info->middle_name();
+				echo "got middle";
+				$last = $registration_info->last_name();
+				echo "got last";
+				$gender = $registration_info->gender();
+				echo "got gender";
+				$bday = $registration_info->birth_date();
+				echo "got birthdate";
+				
+				
 				//	If the information is valid then enter it into the database
 			
 				// insert the person into person table first
 				$insert_new_person_sql = 'INSERT INTO person (fname, mname,	lname, maiden_name, gender, birthdate) VALUES (?, ?, ?, ?, ?, ?)';
 	
-	
+				
 				if (!($insert_new_person_stmt = $db_conn->prepare($insert_new_person_sql))) {
 					set_error_response( 201, "SQL Error -> " . $insert_new_person_stmt->error);
 					break;
