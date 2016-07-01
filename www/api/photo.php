@@ -512,22 +512,22 @@
 				
 				case "base64": 
 					
-					echo " <-> "
+					echo " <-> ";
 					$image_name = generate_random_string_of_length( 20 ) . "." . $image_type;
 					$image_path = build_path_with_random_image_name( $image_name );
 					$image_url = build_url_for_image( $image_name );
-					echo " <-> "
+					echo " <-> ";
 					if(!base64_to_jpeg($payload, $image_path))
 						set_generic_error_response( "I couldn't convert the base64");
 						
-					echo " <-> "
+					echo " <-> ";
 					//	Add this photograph to the photograph table
 					
 					$insert_photo_sql = "INSERT INTO photograph( title, description , large_url , date_taken , date_conf , date_uploaded, uploaded_by ) VALUES ( ? , ? , ? , ? , ? , ? , ? )";
-					echo " <-> "
+					echo " <-> ";
 					if(!($insert_photo_stmt = $db_conn->prepare($insert_photo_sql)))
 						set_generic_error_response( "Could not prepare statement ... " . $insert_photo_sql );
-					echo " <-> "
+					echo " <-> ";
 					if(!($insert_photo_stmt->bind_param("ssssdsi", 	$photo_info["title"],
 																	$photo_info["description"],
 																	$image_url,
