@@ -647,8 +647,10 @@
 		$exists_query = "SELECT * FROM user_repo WHERE p_id = ? AND r_id = ?";
 		echo var_dump($db_handle);
 		echo "1";
-		if(!($exists_stmt = $db_handle->prepare($exists_query)))
+		if(!($exists_stmt = $db_handle->prepare($exists_query))) {
 			return false;
+		}
+			
 			echo "2";
 		if(!($exists_stmt->bind_param("ii", $user_id, $repo_id)))
 			return false;
