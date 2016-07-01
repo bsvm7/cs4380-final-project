@@ -19,8 +19,6 @@
 		set_error_response( 400 , "I couldn't connect to the database -> " . $db_conn->connect_error);
 		die("The connection to the database failed: " . $db_conn->connect_error);
 	}
-		
-	echo "database connected" . "\n";
 
 
 	/*
@@ -210,8 +208,6 @@
 					$insert_log_stmt->bind_param("is", $last_insert_id, $ac_type);
 
 					if($insert_log_stmt->execute()) {
-
-						echo "registration activity has been logged"."\n";
 
 					}
 
