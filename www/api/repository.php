@@ -128,6 +128,36 @@
 
 										}
 										
+										
+										$get_min_max_year_sql = 	"SELECT MAX(P.date_taken) as 'max_date', MIN(P.date_taken) as 'min_date', R.r_id "
+										 							. "FROM repository R INNER JOIN photo_repo PR ON R.r_id = PR.r_id JOIN photograph P ON P.p_id = PR.p_id "
+										 							. "WHERE R.r_id = ?";
+										
+										if(!($get_min_max_year_stmt = $db_conn->prepare($get_min_max_year_sql)))
+										{
+											set_error_response( 0, $db_conn->error);
+											break;
+										}
+										
+										foreach( $all_repos as $repo)
+										{
+											$repo_id = $repo["r_id"];
+											
+											$get_min_max_year_stmt->bind_param("i", $repo_id);
+											
+											$get_min_max_year_stmt->execute();
+											
+											$min_max_result = $get_min_max_year_stmt->get_result()->fetch_assoc();
+											
+											$repo["min_year"] = $min_max_result["min_date"];
+											$repo["max_year"] = $min_max_result["max_date"];
+											
+											
+										}
+										
+										$get_min_max_year_stmt->close();
+										
+										
 										http_response_code(200);
 										echo json_encode($all_repos);	
 
