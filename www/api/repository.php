@@ -152,7 +152,7 @@
 											$repo["min_year"] = $min_max_result["min_date"];
 											$repo["max_year"] = $min_max_result["max_date"];
 											
-											
+											echo json_encode($repo);
 										}
 										
 										$get_min_max_year_stmt->close();
