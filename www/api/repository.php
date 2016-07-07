@@ -139,6 +139,8 @@
 											break;
 										}
 										
+										$good_repos = array();
+										
 										foreach( $all_repos as $repo)
 										{
 											$repo_id = $repo["r_id"];
@@ -152,14 +154,14 @@
 											$repo["min_year"] = $min_max_result["min_date"];
 											$repo["max_year"] = $min_max_result["max_date"];
 											
-											echo json_encode($repo);
+											$good_repos[] = $repo;
 										}
 										
 										$get_min_max_year_stmt->close();
 										
 										
 										http_response_code(200);
-										echo json_encode($all_repos);	
+										echo json_encode($good_repos);	
 
 									}
 									else{
