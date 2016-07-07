@@ -151,8 +151,8 @@
 											
 											$min_max_result = $get_min_max_year_stmt->get_result()->fetch_assoc();
 											
-											$repo["min_year"] = $min_max_result["min_date"];
-											$repo["max_year"] = $min_max_result["max_date"];
+											$repo["min_date"] = $min_max_result["min_date"];
+											$repo["max_date"] = $min_max_result["max_date"];
 											
 											$good_repos[] = $repo;
 										}
