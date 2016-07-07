@@ -187,7 +187,7 @@
 								set_error_response( 0 , "I couldn't execute -> " . $db_conn->error );
 								break;
 							}
-							echo "hello";
+							
 							if($result = $user_repo_check_stmt->get_result()) {
 								if($result->num_rows != 1) {
 									set_error_response( 0 , "User Repo Statement: The number of rows was off -> " . $user_repo_check_stmt->error );
