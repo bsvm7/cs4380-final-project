@@ -97,7 +97,7 @@
 
     <!-- REGISTER
     –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-    <div class="container-fluid" style="background-image: url('http://40.86.85.30/cs4380/image/revised_collage_thing_dark.jpg');
+    <div class="container-fluid" style="background-image: url('http://13.89.34.220/photoarchiving/image/revised_collage_thing_dark.jpg');
     background-size: cover;padding-top:20px;" ng-controller="LoginController as loginctrl">
       <div class="row">
         <div class="col-md-6 text-center col-md-offset-3 box">
