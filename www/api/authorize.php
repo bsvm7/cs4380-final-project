@@ -14,7 +14,11 @@
 	//	First connect to the database using values from the included file
 	$db_conn = new mysqli($db_host, $db_user, $db_pass, $db_database);
 	
-	echo "database connected" . "\n";
+	if(!$db_conn || $db_conn->error)
+	{
+		echo "Error connecting to the database";
+		exit();
+	}
 
 
 	if ($db_conn->error_code) {
