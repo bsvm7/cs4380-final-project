@@ -2,7 +2,7 @@ var app = angular.module('photoarchiving_app', [])
   .controller('PhotographController', function($scope, $http, $window) {
   	
 	//	CONSTANTS
-	var base_url = "http://40.86.85.30/cs4380/";
+	var base_url = "http://13.89.34.220/photoarchiving/";
 	
 	$scope.photo_info = {
 		"title" : "untitled",
