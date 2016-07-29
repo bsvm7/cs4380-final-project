@@ -1,7 +1,7 @@
 <?php
 
 	//	Include reference to sensitive databse information
-	include("../../../db_security/security.php");
+	include("../../../../../db_security/security.php");
 	
 	$db_user = constant("DB_USER");
 	$db_host = constant("DB_HOST");

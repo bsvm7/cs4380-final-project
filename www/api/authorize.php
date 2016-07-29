@@ -150,7 +150,6 @@
 
 									if($insert_log_stmt->execute()) {
 
-										echo "login activity has been logged"."\n";
 									}
 									else {
 
@@ -321,6 +320,4 @@
 		http_response_code($error_code);
 		
 	}
-
-	echo "\n\n\n"."everything worked and now its time to close database and everything"."\n";
 ?>
