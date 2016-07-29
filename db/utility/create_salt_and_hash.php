@@ -12,7 +12,7 @@
 	}
 	
 	$salt = sha1( mt_rand() );
-	$hash = sha1( $argv[1] . $salt );
+	$hash = sha1( $salt . $argv[1] );
 	
 	
 	echo "\n\nSalt\t:\t" . $salt . "\nHash\t:\t" . $hash . "\n";
