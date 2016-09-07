@@ -2,10 +2,10 @@
 	//	Include reference to sensitive databse information
 	include("../../../db_security/security.php");
 	
-	$db_user 		= constant("DB_USER");
-	$db_host 		= constant("DB_HOST");
-	$db_pass 		= constant("DB_PASS");
-	$db_database 	= constant("DB_DATABASE");
+	$db_user 		= "db_user";
+	$db_host 		= "localhost";
+	$db_pass 		= "pass";
+	$db_database 	= "photoarchiving";
 	
 	//	First connect to the database using values from the included file
 	$db_conn = new mysqli($db_host, $db_user, $db_pass, $db_database);

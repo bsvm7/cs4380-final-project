@@ -6,11 +6,12 @@
 	include("./lib/PAFactory/PAFactory.php");
 	
 	
-	$db_user = constant("DB_USER");
-	$db_host = constant("DB_HOST");
-	$db_pass = constant("DB_PASS");
-	$db_database = constant("DB_DATABASE");
+	$db_user = "db_user";
+	$db_host = "localhost";
+	$db_pass = "pass";
+	$db_database = "photoarchiving";
 	
+
 	//	First connect to the database using values from the included file
 	$db_conn = new mysqli($db_host, $db_user, $db_pass, $db_database);
 	
@@ -55,7 +56,7 @@
 					break;
 				}
 
-				if (!($username_check_stmt->bind_param("s",  $registration_info->username()))) {
+				if (!($username_check_stmt->bind_param("s",  $decoded_json["username"]))) {
 					set_error_response( 201, "SQL Error -> " . $username_check_stmt->error);
 					break;
 				}
@@ -105,12 +106,12 @@
 				$maiden = $registration_info->maiden_name();
 				
 				if (!($insert_new_person_stmt->bind_param(		"ssssss", 	
-																$registration_info->first_name() , 
-																$registration_info->middle_name() , 
-																$registration_info->last_name() , 
-																$registration_info->maiden_name() , 
-																$registration_info->gender() , 
-																$registration_info->birth_date()))) 
+																$decoded_json["firstname"] , 
+																$decoded_json["middlename"] , 
+																$decoded_json["lastname"],
+																$decoded_json["birthdate"] , 
+																$decoded_json["gender"] , 
+																$decoded_json["birthdate"]))) 
 				{
 					set_error_response( 201, "SQL Error -> " . $insert_new_person_stmt->error);
 					break;
@@ -139,7 +140,7 @@
 									
 				$insert_new_user_stmt = $db_conn->prepare($insert_new_user_sql);
 				
-				$insert_new_user_stmt->bind_param("iss" , $last_insert_id, $registration_info->username() , $registration_info->email());
+				$insert_new_user_stmt->bind_param("iss" , $last_insert_id, $decoded_json["username"] , $decoded_json["email"]);
 	
 				if (!($insert_new_user_stmt = $db_conn->prepare($insert_new_user_sql))) {
 					
@@ -148,7 +149,7 @@
 					break;
 				}
 					
-				if (!($insert_new_user_stmt->bind_param("iss" , $last_insert_id, $registration_info->username() , $registration_info->email()))) {
+				if (!($insert_new_user_stmt->bind_param("iss" , $last_insert_id, $decoded_json["username"] , $decoded_json["email"]))) {
 					
 					set_error_response( 201, "SQL Error -> " . $insert_new_user_stmt->error);
 					
@@ -162,7 +163,7 @@
 
 					$salt = sha1( mt_rand() );
 					
-					$hash = sha1( $req_password.$salt );
+					$hash = sha1( $decoded_json["password"].$salt );
 					
 
 					$insert_user_auth_sql = "INSERT INTO user_auth (ps_id , pass_hash, pass_salt) VALUES (?, ?, ?)";

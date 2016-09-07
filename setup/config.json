@@ -1,0 +1,19 @@
+{
+	"ip_address" : "52.88.225.107",
+	"group_name" : "capstone_members",
+	"root_folder_name" : "project_source",
+	"users" : [
+		{
+			"first_name" : "Anthony",
+			"last_name" : "Forsythe",
+			"username" : "forsythetony"
+		},
+		{
+			"first_name" : "Eric",
+			"last_name" : "Song",
+			"username" : "songeric"
+		}
+	],
+	"default_user_pass" : "default_pass",
+	"default_mysql_pass" : "default_pass"
+}
